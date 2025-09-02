@@ -1,0 +1,242 @@
+/* =============================================================================
+   Jambys Brand Integration
+   ============================================================================= */
+
+/* Typography Overrides */
+body {
+  font-family: var(--font-body--family);
+  color: var(--jambys-text-primary);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading--family);
+  color: var(--jambys-text-primary);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Heading specific styles */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--jambys-primary);
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Button Styles */
+.button,
+.btn,
+button[type="submit"],
+input[type="submit"] {
+  font-family: var(--font-body--family);
+  font-weight: 500;
+  border-radius: 37px;
+  transition: all 0.2s ease;
+}
+
+.button--primary,
+.btn--primary,
+button[type="submit"],
+input[type="submit"] {
+  background: var(--jambys-primary);
+  color: white;
+  border: 1px solid var(--jambys-primary);
+}
+
+.button--primary:hover,
+.btn--primary:hover,
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+  background: var(--jambys-primary-hover);
+  border-color: var(--jambys-primary-hover);
+}
+
+.button--secondary,
+.btn--secondary {
+  background: white;
+  color: var(--jambys-primary);
+  border: 1px solid var(--jambys-primary);
+}
+
+.button--secondary:hover,
+.btn--secondary:hover {
+  background: var(--jambys-secondary);
+}
+
+/* Link Styles */
+a {
+  color: var(--jambys-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--jambys-primary-hover);
+}
+
+/* Form Elements */
+input,
+textarea,
+select {
+  font-family: var(--font-body--family);
+  border: 1px solid var(--jambys-border);
+  border-radius: 4px;
+  padding: 0.75rem;
+  transition: border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--jambys-primary);
+  box-shadow: 0 0 0 2px rgba(54, 64, 154, 0.1);
+}
+
+/* Product Cards */
+.product-card {
+  border: 1px solid var(--jambys-border);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.product-card:hover {
+  border-color: var(--jambys-primary);
+  box-shadow: 0 4px 12px rgba(54, 64, 154, 0.1);
+}
+
+.product-card__title {
+  font-family: var(--font-heading--family);
+  color: var(--jambys-text-primary);
+}
+
+.product-card__price {
+  color: var(--jambys-primary);
+  font-weight: 600;
+}
+
+/* Navigation */
+.header,
+nav {
+  background: white;
+  border-bottom: 1px solid var(--jambys-border);
+}
+
+.header__menu-item,
+nav a {
+  font-family: var(--font-body--family);
+  color: var(--jambys-text-primary);
+  font-weight: 500;
+}
+
+.header__menu-item:hover,
+nav a:hover {
+  color: var(--jambys-primary);
+}
+
+/* Footer */
+.footer {
+  background: var(--jambys-secondary);
+  border-top: 1px solid var(--jambys-border);
+}
+
+.footer__heading {
+  font-family: var(--font-heading--family);
+  color: var(--jambys-text-primary);
+}
+
+/* Utility Classes */
+.text-primary {
+  color: var(--jambys-primary) !important;
+}
+
+.text-secondary {
+  color: var(--jambys-text-secondary) !important;
+}
+
+.bg-primary {
+  background-color: var(--jambys-primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--jambys-secondary) !important;
+}
+
+.bg-accent {
+  background-color: var(--jambys-accent) !important;
+}
+
+.border-primary {
+  border-color: var(--jambys-primary) !important;
+}
+
+.border-secondary {
+  border-color: var(--jambys-border) !important;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: more) {
+  .button--primary,
+  .btn--primary,
+  button[type="submit"],
+  input[type="submit"] {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+  }
+
+  .button--secondary,
+  .btn--secondary {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #000000;
+    box-shadow: 0 0 0 3px #000000;
+  }
+}
+
+/* Responsive Typography */
+@media screen and (max-width: 749px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.375rem;
+  }
+}
+
