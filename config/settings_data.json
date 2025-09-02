@@ -10,10 +10,8 @@
 {
   "current": {
     "logo": "shopify://shop_images/Jambys_Logo_Blue.svg",
-    "type_body_font": "sofia_pro_n4",
-    "type_subheading_font": "sofia_pro_n4", 
-    "type_heading_font": "new_kansas_n4",
-    "type_accent_font": "sofia_pro_n4",
+    "use_adobe_fonts": true,
+    "adobe_project_id": "hxg4nit",
     "type_size_paragraph": "14",
     "type_font_h1": "heading",
     "type_line_height_h1": "display-tight",

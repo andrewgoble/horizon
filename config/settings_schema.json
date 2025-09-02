@@ -353,6 +353,24 @@
       },
       {
         "type": "header",
+        "content": "Custom Adobe Fonts"
+      },
+      {
+        "type": "text",
+        "id": "adobe_project_id",
+        "label": "Adobe Project ID",
+        "info": "Enter your Adobe Typekit project ID (e.g., hxg4nit) to use custom fonts. Leave blank to use theme default fonts.",
+        "default": "hxg4nit"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_adobe_fonts",
+        "label": "Use Adobe Fonts",
+        "info": "Enable to override theme fonts with Adobe Typekit fonts",
+        "default": true
+      },
+      {
+        "type": "header",
         "content": "t:content.text_presets"
       },
       {
