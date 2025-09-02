@@ -19,8 +19,8 @@
           "static": true,
           "settings": {
             "hide_logo_on_home_page": false,
-            "custom_height": 12,
-            "custom_height_mobile": 12,
+            "custom_height": 29,
+            "custom_height_mobile": 30,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
