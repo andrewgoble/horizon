@@ -10,8 +10,8 @@
 {
   "current": {
     "logo": "shopify://shop_images/Jambys_Logo_Blue.svg",
-    "use_adobe_fonts": true,
     "adobe_project_id": "hxg4nit",
+    "use_adobe_fonts": true,
     "type_size_paragraph": "14",
     "type_font_h1": "heading",
     "type_line_height_h1": "display-tight",
@@ -23,7 +23,7 @@
     "type_line_height_h3": "heading-tight",
     "type_letter_spacing_h3": "heading-tight",
     "type_case_h3": "none",
-    "type_size_h5": "14",
+    "type_size_h5": "18",
     "type_size_h6": "14",
     "page_width": "normal",
     "badge_position": "top-left",
