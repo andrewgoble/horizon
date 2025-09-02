@@ -37,7 +37,9 @@
             "featured_products_aspect_ratio": "4 / 5",
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 0,
-            "color_scheme": "",
+            "product_title_case": "default",
+            "collection_title_case": "default",
+            "color_scheme": "scheme-1",
             "menu_font_style": "inverse",
             "type_font_primary_link": "primary",
             "type_font_primary_size": "0.875rem",
@@ -46,11 +48,11 @@
             "type_case_secondary_link": "none",
             "type_font_tertiary_link": "secondary",
             "type_case_tertiary_link": "none",
-            "navigation_bar": false,
+            "navigation_bar": true,
             "color_scheme_navigation_bar": "",
-            "drawer_accordion": false,
-            "drawer_accordion_expand_first": false,
-            "drawer_dividers": false
+            "drawer_accordion": true,
+            "drawer_accordion_expand_first": true,
+            "drawer_dividers": true
           },
           "blocks": {}
         }
