@@ -3,6 +3,7 @@
 [Getting started](#getting-started) |
 [Staying up to date with Horizon changes](#staying-up-to-date-with-horizon-changes) |
 [Developer tools](#developer-tools) |
+[Jambys developer onboarding](#jambys-developer-onboarding) |
 [Contributing](#contributing) |
 [License](#license)
 
@@ -12,6 +13,46 @@ Horizon is the flagship of a new generation of first party Shopify themes. It in
 - **Lean, fast, and reliable:** Functionality and design defaults to “no” until it meets this requirement. Code ships on quality. Themes must be built with purpose. They shouldn’t support each and every feature in Shopify.
 - **Server-rendered:** HTML must be rendered by Shopify servers using Liquid. Business logic and platform primitives such as translations and money formatting don’t belong on the client. Async and on-demand rendering of parts of the page is OK, but we do it sparingly as a progressive enhancement.
 - **Functional, not pixel-perfect:** The Web doesn’t require each page to be rendered pixel-perfect by each browser engine. Using semantic markup, progressive enhancement, and clever design, we ensure that themes remain functional regardless of the browser.
+
+## Jambys developer onboarding
+
+This section orients new developers to the Jambys fork of Horizon.
+
+### 1) Summary of development standards
+
+- Follow the centralized guide in `horizon/DEVELOPMENT-STANDARDS-REFERENCE.md`. Key points:
+  - CSS: BEM naming, minimal specificity, no hardcoded colors; use semantic variables and design tokens; accessibility-first focus (focus indicators, reduced motion, dark mode readiness).
+  - JavaScript: Zero external dependencies, `async/await`, early returns, component framework with custom elements and typed CustomEvents; AbortController for cancellable work; URL/URLSearchParams for state.
+  - Liquid: Clean syntax, co-locate component-specific `{% stylesheet %}` and `{% javascript %}`, and leverage settings via scoped CSS variables on sections/blocks.
+  - Accessibility: Enforce WCAG 2.2 color contrast and component patterns (accordions, modals, carousels, tabs, etc.).
+  - Workflow: Read relevant rules before edits, test contrast, document changes, and keep living docs updated.
+
+### 2) Summary of updates to the Horizon fork
+
+- Brand color system aligned to Jambys:
+  - Primary `#36409a` (Jambys blue); hover `#2a2f7a`; backgrounds `#f5f5f5`; borders `#e6e6e6`.
+  - Replaced legacy colors (old blue `#000f9f`, black in primary roles) across `config/settings_data.json` with accessible equivalents.
+  - Standardized hover/contrast relationships per WCAG 2.2.
+- Fonts & colors migration (V1) completed; preview file `horizon-font-color-preview.html` documents typography and palette usage.
+- Theme structure fixes and missing assets/snippets added for GitHub integration; brand stylesheet introduced at `horizon/assets/jambys-brand.css`.
+- Settings data protection guidelines established; always pull from Shopify before editing `settings_data.json` and document modifications in `horizon/HORIZON-DEVELOPMENT-LOG.md`.
+
+See `horizon/HORIZON-DEVELOPMENT-LOG.md` for dated commits and details.
+
+### 3) Cursor references and rules
+
+- Color contrast enforcement (WCAG 2.2 1.4.3/1.4.11) across `.css/.js/.ts/.liquid/.html` with guidance and examples.
+- CSS standards: variables over literals, BEM, scoped variables on section/block `style`, container queries, cascade layers, logical properties.
+- JavaScript standards: component framework, event-driven communication, defensive programming, debouncing, optimistic UI.
+- Liquid and sections/blocks/theme-settings standards; localization/locales best practices.
+- Living docs: Keep `.cursor/prompts` and `.cursor/references` updated with new patterns and pitfalls.
+
+### 4) Quick links to key docs
+
+- Development Standards Reference: `horizon/DEVELOPMENT-STANDARDS-REFERENCE.md`
+- Horizon Replatform Guide: `horizon/jambys-horizon-replatform-guide.md`
+- V1 Migration Summary (Fonts & Colors): `horizon/jambys-v1-migration-summary-fonts-colors.md`
+- Developer Handoff: `Jambys-Theme-Developer-Handoff.md`
 
 ## Getting started
 
