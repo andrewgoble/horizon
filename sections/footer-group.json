@@ -18,10 +18,13 @@
           "type": "group",
           "name": "Join the club",
           "settings": {
+            "link": "",
+            "open_in_new_tab": false,
             "content_direction": "row",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-end",
+            "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 24,
@@ -40,6 +43,11 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
+            "placeholder": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -50,10 +58,13 @@
               "type": "group",
               "name": "t:names.group",
               "settings": {
+                "link": "",
+                "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
+                "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
                 "gap": 8,
@@ -72,6 +83,11 @@
                 "border_width": 1,
                 "border_opacity": 100,
                 "border_radius": 0,
+                "placeholder": "",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -82,7 +98,7 @@
                   "type": "text",
                   "name": "Heading",
                   "settings": {
-                    "text": "<h2>Join the club</h2>",
+                    "text": "<h2>Join the JamFam!</h2>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -93,11 +109,16 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
-                  }
+                  },
+                  "blocks": {}
                 },
                 "text_HafH7P": {
                   "type": "text",
@@ -114,11 +135,16 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -133,6 +159,8 @@
                 "width": "custom",
                 "custom_width": 50,
                 "inherit_color_scheme": true,
+                "heading": "",
+                "heading_preset": "h3",
                 "color_scheme": "scheme-1",
                 "border_style": "all",
                 "border_width": 1,
@@ -147,7 +175,8 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
-              }
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -164,8 +193,28 @@
             "padding-block-end": 0
           },
           "blocks": {
+            "copyright": {
+              "type": "_footer-copyright",
+              "static": true,
+              "settings": {
+                "show_powered_by": false,
+                "font_size": "0.75rem",
+                "case": "none"
+              },
+              "blocks": {}
+            },
+            "policy_list": {
+              "type": "_footer-policy-list",
+              "static": true,
+              "settings": {
+                "font_size": "0.75rem",
+                "case": "none"
+              },
+              "blocks": {}
+            },
             "social_icons": {
               "type": "_footer-social-icons",
+              "disabled": true,
               "static": true,
               "settings": {},
               "blocks": {
@@ -174,35 +223,40 @@
                   "name": "Instagram",
                   "settings": {
                     "link": "https://www.instagram.com/shopify"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "social_link_threads": {
                   "type": "_social-link",
                   "name": "Threads",
                   "settings": {
                     "link": "https://www.threads.net/@shopify"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "social_link_tiktok": {
                   "type": "_social-link",
                   "name": "TikTok",
                   "settings": {
                     "link": "https://www.tiktok.com/@shopify"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "social_link_twitter": {
                   "type": "_social-link",
                   "name": "Twitter",
                   "settings": {
                     "link": "https://www.twitter.com/shopify"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "social_link_youtube": {
                   "type": "_social-link",
                   "name": "YouTube",
                   "settings": {
                     "link": "https://www.youtube.com/shopify"
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -213,7 +267,8 @@
                 "social_link_youtube"
               ]
             }
-          }
+          },
+          "block_order": []
         }
       },
       "block_order": [
@@ -226,12 +281,13 @@
         "vertical_on_mobile": true,
         "horizontal_alignment": "center",
         "vertical_alignment": "center",
+        "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
         "gap": 64,
         "section_width": "page-width",
         "section_height": "",
-        "color_scheme": "scheme-5",
+        "color_scheme": "scheme-1",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
