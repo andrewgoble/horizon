@@ -60,6 +60,22 @@
     "badge_padding_inline": 8,
     "variant_button_style": "variant-button-style-outline",
     "content_for_index": [],
+    "blocks": {
+      "733389323033596483": {
+        "type": "shopify://apps/okendo/blocks/theme-settings/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+        "disabled": true,
+        "settings": {
+          "show_preview_data": true
+        }
+      },
+      "16017602894386113438": {
+        "type": "shopify://apps/junip/blocks/junip-store-key/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
+        "disabled": true,
+        "settings": {
+          "enablePreviewMode": true
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -297,7 +313,7 @@
       },
       "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7": {
         "settings": {
-          "background": "#36409a08",
+          "background": "#f3f4fa",
           "foreground_heading": "#36409a",
           "foreground": "#36409a",
           "primary": "#36409a",
