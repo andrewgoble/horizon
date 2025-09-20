@@ -59,7 +59,7 @@
       },
       "settings": {
         "logo_position": "left",
-        "menu_position": "left",
+        "menu_position": "center",
         "menu_row": "top",
         "show_search": false,
         "search_position": "right",
