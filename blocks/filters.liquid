@@ -78,7 +78,7 @@
       style="{% render 'spacing-style', settings: block_settings %}{% if block_settings.text_label_case == 'uppercase' %} --facet-label-transform: uppercase;{% endif %}"
     >
       {% if block_settings.enable_filtering %}
-        <h4 class="facets--filters-title">{{ 'content.filters' | t }}</h4>
+        <p class="facets--filters-title">{{ 'content.filters' | t }}</p>
       {% endif %}
 
       <div class="products-count-wrapper">
@@ -927,6 +927,10 @@
     text-decoration-thickness: 0.075em;
     text-underline-offset: 0.125em;
     transition: text-decoration-color var(--animation-speed) var(--animation-easing);
+  }
+
+  .facets__label {
+    font-size: 16px;
   }
 
   .facets__label,
