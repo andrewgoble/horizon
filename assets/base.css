@@ -762,7 +762,7 @@ body,
 h1,
 .h1.h1,
 .text-block.h1 > * {
-  font-family: var(--font-h1--family);
+  font-family: "sofia-pro", sans-serif;
   font-style: var(--font-h1--style);
   font-weight: var(--font-h1--weight);
   font-size: var(--font-h1--size);
@@ -783,7 +783,7 @@ h1,
 h2,
 .h2.h2,
 .text-block.h2 > * {
-  font-family: var(--font-h2--family);
+  font-family: "sofia-pro", sans-serif;
   font-style: var(--font-h2--style);
   font-weight: var(--font-h2--weight);
   font-size: var(--font-h2--size);
@@ -826,7 +826,7 @@ h3,
 h4,
 .h4.h4,
 .text-block.h4 > * {
-  font-family: var(--font-h4--family);
+  font-family: "sofia-pro", sans-serif;
   font-style: var(--font-h4--style);
   font-weight: var(--font-h4--weight);
   font-size: var(--font-h4--size);
@@ -847,7 +847,7 @@ h4,
 h5,
 .h5.h5,
 .text-block.h5 > * {
-  font-family: var(--font-h5--family);
+  font-family: "sofia-pro", sans-serif;
   font-style: var(--font-h5--style);
   font-weight: var(--font-h5--weight);
   font-size: var(--font-h5--size);
@@ -4263,3 +4263,27 @@ text-component {
     font-size: max(1rem, 100%);
   }
 }
+
+/* =============================== */
+/* Custom CSS */
+/* =============================== */
+
+@media screen and (max-width: 749px) {
+  .jambys-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .jambys-hero-content {
+    order: 2;
+  }
+
+  .jambys-hero-image {
+    order: 1;
+  }
+}
+
+.logo-ticker .icon-block__media {
+  border-radius: 15px;
+}
+

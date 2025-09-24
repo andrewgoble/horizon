@@ -49,7 +49,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "css_class": "jambys-hero-content"
           },
           "blocks": {
             "text_QEqxjn": {
@@ -141,7 +142,8 @@
                 "padding-block-start": 10,
                 "padding-block-end": 10,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "css_class": ""
               },
               "blocks": {
                 "group_tCWCjz": {
@@ -181,7 +183,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "css_class": ""
                   },
                   "blocks": {
                     "icon_Jej7Pz": {
@@ -285,7 +288,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "css_class": ""
                   },
                   "blocks": {
                     "text_JYmqpT": {
@@ -385,7 +389,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "css_class": "jambys-hero-image"
           },
           "blocks": {
             "image_YrgnHR": {
@@ -447,7 +452,8 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "css_class": "jambys-hero"
       }
     },
     "section_zyWqr3": {
@@ -509,7 +515,8 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 40,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "css_class": ""
       }
     },
     "marquee_M7xeYc": {
@@ -615,7 +622,8 @@
         "color_scheme": "",
         "padding-block-start": 24,
         "padding-block-end": 24,
-        "gap_between_elements": 50
+        "gap_between_elements": 50,
+        "css_class": ""
       }
     },
     "collection_list_MHBAL7": {
@@ -658,7 +666,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "css_class": ""
           },
           "blocks": {
             "text_C96xmL": {
@@ -1109,7 +1118,8 @@
         "color_scheme": "scheme-a22c3a6c-f560-40e0-9448-c4525188419e",
         "padding-block-start": 24,
         "padding-block-end": 24,
-        "gap_between_elements": 24
+        "gap_between_elements": 24,
+        "css_class": "logo-ticker"
       }
     },
     "section_CGJPDK": {
@@ -1173,7 +1183,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "css_class": ""
           },
           "blocks": {
             "text_JGkiFK": {
@@ -1306,7 +1317,8 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-end": 40,
+        "css_class": ""
       }
     },
     "section_VAzpAm": {
@@ -1348,7 +1360,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "css_class": ""
           },
           "blocks": {
             "group_cAmH6q": {
@@ -1388,7 +1401,8 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "css_class": ""
               },
               "blocks": {
                 "icon_khQ46h": {
@@ -1444,7 +1458,8 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "css_class": ""
               },
               "blocks": {
                 "text_BfhdQb": {
@@ -1546,7 +1561,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "css_class": ""
           },
           "blocks": {
             "group_CMJ9aH": {
@@ -1586,7 +1602,8 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "css_class": ""
               },
               "blocks": {
                 "icon_rejaGG": {
@@ -1642,7 +1659,8 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "css_class": ""
               },
               "blocks": {
                 "text_KdGGmw": {
@@ -1744,7 +1762,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "css_class": ""
           },
           "blocks": {
             "group_Vg7xtL": {
@@ -1784,7 +1803,8 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "css_class": ""
               },
               "blocks": {
                 "icon_KDKk8X": {
@@ -1840,7 +1860,8 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "css_class": ""
               },
               "blocks": {
                 "text_bK3E78": {
@@ -1938,7 +1959,8 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-end": 48,
+        "css_class": ""
       }
     }
   },

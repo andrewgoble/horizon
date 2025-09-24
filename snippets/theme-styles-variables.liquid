@@ -82,7 +82,7 @@
 
     /* Font families - Jambys Brand Typography */
     {%- if settings.use_adobe_fonts -%}
-      --font-body--family: "sofia-pro", {{ settings.type_body_font.fallback_families }};
+      --font-body--family: "sofia-pro", {{ settings.type_body_font.fallback_families }}; 
       --font-body--style: {{ settings.type_body_font.style }};
       --font-body--weight: {{ settings.type_body_font.weight }};
       --font-subheading--family: "kansasnew", {{ settings.type_subheading_font.fallback_families }};
@@ -95,7 +95,7 @@
       --font-accent--style: {{ settings.type_accent_font.style }};
       --font-accent--weight: {{ settings.type_accent_font.weight }};
     {%- else -%}
-      --font-body--family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+      --font-body--family: "sofia-pro", {{ settings.type_body_font.fallback_families }}; 
       --font-body--style: {{ settings.type_body_font.style }};
       --font-body--weight: {{ settings.type_body_font.weight }};
       --font-subheading--family: "kansasnew", {{ settings.type_subheading_font.fallback_families }};
