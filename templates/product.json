@@ -283,7 +283,7 @@
               "type": "product-description",
               "name": "Product description",
               "settings": {
-                "text": "{{ closest.product.description }}",
+                "text": "",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",

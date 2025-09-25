@@ -15,7 +15,7 @@
     "type_heading_font": "sofia_sans_n7",
     "type_accent_font": "sofia_sans_n7",
     "adobe_project_id": "hxg4nit",
-    "use_adobe_fonts": false,
+    "use_adobe_fonts": true,
     "type_size_paragraph": "16",
     "type_font_h1": "heading",
     "type_size_h1": "48",
