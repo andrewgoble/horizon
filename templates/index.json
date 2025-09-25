@@ -83,7 +83,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Luxurious unisex loungewear engineered for your maximum relaxation</p>",
+                "text": "<h6>Luxurious unisex loungewear engineered for your maximum relaxation</h6>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
