@@ -83,11 +83,11 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Luxurious unisex loungewear engineered for your maximum relaxation</p>",
+                "text": "<h6>Luxurious unisex loungewear engineered for your maximum relaxation</h6>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
-                "type_preset": "custom",
+                "type_preset": "h6",
                 "font": "var(--font-body--family)",
                 "font_size": "1.125rem",
                 "line_height": "normal",
@@ -100,8 +100,8 @@
                 "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-start": 15,
+                "padding-inline-end": 15
               },
               "blocks": {}
             },
@@ -300,7 +300,7 @@
                         "width": "fit-content",
                         "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "custom",
+                        "type_preset": "paragraph",
                         "font": "var(--font-body--family)",
                         "font_size": "0.875rem",
                         "line_height": "tight",
