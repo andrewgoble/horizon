@@ -83,13 +83,13 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h6>Luxurious unisex loungewear engineered for your maximum relaxation</h6>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
+                "text": "<p>Luxurious unisex loungewear engineered for your maximum relaxation</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "1rem",
+                "font_size": "1.125rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -367,10 +367,10 @@
             "vertical_alignment_flex_direction_column": "center",
             "gap": 31,
             "width": "custom",
-            "custom_width": 55,
+            "custom_width": 40,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
-            "height": "fit",
+            "height": "custom",
             "custom_height": 100,
             "inherit_color_scheme": true,
             "color_scheme": "",
@@ -435,7 +435,7 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 60,
+        "gap": 20,
         "section_width": "page-width",
         "section_height": "small",
         "section_height_custom": 50,
@@ -1003,7 +1003,7 @@
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
-        "columns_gap": 20,
+        "columns_gap": 40,
         "rows_gap": 24,
         "icons_style": "arrow",
         "icons_shape": "circle",
@@ -1024,7 +1024,7 @@
           "settings": {
             "icon": "price_tag",
             "image_upload": "shopify://shop_images/Jambys_UserImages_31_300x300_crop_center_3842677c-45f7-47f5-93f5-0463fe17826b.avif",
-            "width": 190,
+            "width": 150,
             "link": "",
             "open_in_new_tab": false
           },
@@ -1036,7 +1036,7 @@
           "settings": {
             "icon": "price_tag",
             "image_upload": "shopify://shop_images/Jambys_UserImages_35_300x300_crop_center_4e841589-3b40-4855-b23e-0f6c50043082.avif",
-            "width": 190,
+            "width": 150,
             "link": "",
             "open_in_new_tab": false
           },
@@ -1048,7 +1048,7 @@
           "settings": {
             "icon": "price_tag",
             "image_upload": "shopify://shop_images/Jambys_UserImages_56_300x300_crop_center_f205b38a-8ef6-4372-84e0-255715605ea3.avif",
-            "width": 190,
+            "width": 150,
             "link": "",
             "open_in_new_tab": false
           },
@@ -1060,7 +1060,7 @@
           "settings": {
             "icon": "price_tag",
             "image_upload": "shopify://shop_images/jambys_ugc2_300x300_crop_center_7e9e3201-27cb-481d-ab17-3c852694ade5.avif",
-            "width": 190,
+            "width": 150,
             "link": "",
             "open_in_new_tab": false
           },
@@ -1072,7 +1072,7 @@
           "settings": {
             "icon": "price_tag",
             "image_upload": "shopify://shop_images/jambys_ugc4_300x300_crop_center_4567b618-8477-446f-aa1e-4b4613e0f284.avif",
-            "width": 190,
+            "width": 150,
             "link": "",
             "open_in_new_tab": false
           },
@@ -1084,7 +1084,7 @@
           "settings": {
             "icon": "price_tag",
             "image_upload": "shopify://shop_images/jambys_ugc6_300x300_crop_center_5001c54a-956e-4355-b06a-5f804b421c81.avif",
-            "width": 190,
+            "width": 150,
             "link": "",
             "open_in_new_tab": false
           },
@@ -1096,7 +1096,7 @@
           "settings": {
             "icon": "price_tag",
             "image_upload": "shopify://shop_images/jambys_ugc7_300x300_crop_center_6defda3d-c68d-45bc-99d1-a725e372461b.avif",
-            "width": 190,
+            "width": 150,
             "link": "",
             "open_in_new_tab": false
           },
@@ -1937,7 +1937,7 @@
       "settings": {
         "content_direction": "row",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
+        "horizontal_alignment": "space-between",
         "vertical_alignment": "flex-start",
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
