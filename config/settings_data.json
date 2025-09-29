@@ -74,7 +74,7 @@
     "variant_swatch_height": 42,
     "variant_swatch_radius": 30,
     "variant_button_border_width": 1,
-    "variant_button_radius": 4,
+    "variant_button_radius": 8,
     "variant_button_width": "default-width-buttons",
     "page_transition_type": "dissolve",
     "badge_padding_block": 2,
