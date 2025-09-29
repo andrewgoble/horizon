@@ -69,6 +69,8 @@
     "mobile_quick_add": false,
     "quick_add_color_scheme": "scheme-1",
     "empty_state_collection": "all-products",
+    "product_corner_radius": 8,
+    "card_corner_radius": 8,
     "show_variant_image": false,
     "variant_swatch_width": 42,
     "variant_swatch_height": 42,
