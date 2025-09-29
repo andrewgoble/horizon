@@ -464,8 +464,8 @@
         "section_width": "page-width",
         "gap": 20,
         "color_scheme": "scheme-1",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-start": 16,
+        "padding-block-end": 16
       }
     },
     "175836978583d1f44f": {
@@ -475,7 +475,7 @@
           "type": "shopify://apps/junip/blocks/junip-product-review/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
           "settings": {
             "product": "{{product}}",
-            "title": "Customer reviews",
+            "title": "Customer Reviews",
             "alignment": "center"
           }
         }
