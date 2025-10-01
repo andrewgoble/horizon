@@ -454,7 +454,7 @@
         "recommendation_type": "complementary",
         "layout_type": "carousel",
         "carousel_on_mobile": true,
-        "max_products": 7,
+        "max_products": 4,
         "columns": 5,
         "mobile_columns": "2",
         "columns_gap": 8,
