@@ -258,6 +258,7 @@
                 "review_zUU3LJ": {
                   "type": "review",
                   "name": "t:names.product_review_stars",
+                  "disabled": true,
                   "settings": {
                     "stars_style": "shaded",
                     "show_number": true,
