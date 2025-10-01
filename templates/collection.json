@@ -107,9 +107,9 @@
           "static": true,
           "settings": {
             "enable_filtering": true,
-            "filter_style": "vertical",
-            "filter_width": "centered",
-            "text_label_case": "default",
+            "filter_style": "horizontal",
+            "filter_width": "full-width",
+            "text_label_case": "uppercase",
             "show_swatch_label": true,
             "show_filter_label": true,
             "enable_sorting": true,
