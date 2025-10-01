@@ -33,10 +33,10 @@
           "static": true,
           "settings": {
             "menu": "horizon-menu",
-            "menu_style": "text",
+            "menu_style": "featured_collections",
             "featured_products_aspect_ratio": "adapt",
             "featured_collections_aspect_ratio": "1 / 1",
-            "image_border_radius": 0,
+            "image_border_radius": 8,
             "product_title_case": "default",
             "collection_title_case": "default",
             "color_scheme": "scheme-1",
