@@ -10,6 +10,8 @@
 {
   "current": {
     "logo": "shopify://shop_images/Jambys_Logo_Blue.svg",
+    "logo_inverse": "shopify://shop_images/Jambys_Logo_White_2551a6b8-6166-45e1-9602-2839169dc70c.svg",
+    "favicon": "shopify://shop_images/Jambys_Favicon.png",
     "type_body_font": "sofia_sans_n4",
     "type_subheading_font": "sofia_sans_n7",
     "type_heading_font": "sofia_sans_n7",
@@ -55,6 +57,7 @@
     "pills_border_radius": 8,
     "cart_type": "drawer",
     "auto_open_cart_drawer": true,
+    "show_add_discount_code": false,
     "show_accelerated_checkout_buttons": false,
     "cart_thumbnail_border_radius": 8,
     "icon_stroke": "thin",
@@ -65,7 +68,7 @@
     "currency_code_enabled_product_pages": false,
     "currency_code_enabled_product_cards": false,
     "currency_code_enabled_cart_items": false,
-    "currency_code_enabled_cart_total": true,
+    "currency_code_enabled_cart_total": false,
     "mobile_quick_add": false,
     "quick_add_color_scheme": "scheme-1",
     "empty_state_collection": "all-products",
