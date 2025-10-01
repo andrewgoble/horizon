@@ -72,7 +72,7 @@
         "localization_position": "right",
         "localization_row": "top",
         "section_width": "page-width",
-        "section_height": "standard",
+        "section_height": "compact",
         "enable_sticky_header": "scroll-up",
         "divider_width": 0,
         "divider_size": "page-width",
