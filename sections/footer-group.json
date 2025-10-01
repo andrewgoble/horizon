@@ -51,7 +51,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "css_class": ""
           },
           "blocks": {
             "email_signup_cHUJJX": {
@@ -167,7 +168,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "css_class": ""
           },
           "blocks": {
             "group_TwfRJd": {
@@ -207,7 +209,8 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "css_class": ""
               },
               "blocks": {
                 "text_pF6rVi": {
@@ -408,8 +411,8 @@
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
-        "padding-block-start": 64,
-        "padding-block-end": 16
+        "padding-block-start": 48,
+        "padding-block-end": 8
       }
     }
   },
