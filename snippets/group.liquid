@@ -20,6 +20,7 @@
     spacing-style
     size-style
     {% if settings.inherit_color_scheme == false %} color-{{ settings.color_scheme }}{% endif %}
+     {{ settings.css_class }}
     {{ class }}
   "
   style="
@@ -28,7 +29,7 @@
     {% render 'size-style', settings: settings %}
     {{ style }}
   "
-  {{ shopify_attributes }}
+  {{ shopify_attributes }} 
   data-testid="group-block"
 >
   {%- if settings.link != blank -%}

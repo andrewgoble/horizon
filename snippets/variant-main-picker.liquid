@@ -105,7 +105,7 @@
                     mode: 'unscaled'
                   %}
                 {% else %}
-                  <span class="variant-option__button-label__text">{{ product_option_value | escape }}</span>
+                  <span class="variant-option__button-label__text">{{ product_option_value | strip | replace: 'Extra Small', 'XS' | replace: 'Small', 'S' | replace: 'Medium', 'M' | replace: 'Large', 'L' | replace: 'Extra L', 'XL' | replace: 'Extra XL', 'XXL'  }}</span>
                 {% endif %}
                 {% render 'strikethrough-variant', product_option: product_option_value %}
               </label>

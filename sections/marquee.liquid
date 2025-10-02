@@ -6,9 +6,9 @@
 
 {% assign gap_between_elements = section.settings.gap_between_elements %}
 
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div class="section-background color-{{ section.settings.color_scheme }} "></div>
 <marquee-component
-  class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
+  class="section spacing-style gap-style color-{{ section.settings.color_scheme }} {{ section.settings.css_class }}"
   style="
     {%- render 'spacing-style', settings: section.settings %};
     {% render 'gap-style', value: gap_between_elements, name: 'marquee-gap' %}
@@ -161,6 +161,12 @@
       "step": 1,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS class",
+      "info": "optional"
     }
   ],
   "presets": [

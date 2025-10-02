@@ -1,6 +1,11 @@
 {%- doc -%}
   Display an image of a collection inside a collection card.
   Intended for collection-card.liquid block.
+  
+  Image priority order:
+  1. Override image (if set in block settings)
+  2. Collection featured image
+  3. First product's featured image from collection
 
   @param {string} parent_block_id - The block.id of the collection-card block
 
@@ -14,7 +19,11 @@
 -%}
 
 {% liquid
-  assign image_source = collection.image
+  # Prioritize override image, then collection image, then first product image
+  assign image_source = block_settings.override_image
+  if image_source == blank
+    assign image_source = collection.image
+  endif
   if image_source == blank
     assign image_source = collection.products.first.featured_image
   endif
@@ -79,9 +88,9 @@
       image_source
       | image_url: width: 3840
       | image_tag:
-        width: block_settings.image.width,
+        width: image_source.width,
         widths: widths,
-        height: block_settings.image.height,
+        height: image_source.height,
         class: 'image-block__image',
         sizes: sizes,
         loading: loading
@@ -133,6 +142,12 @@
   "name": "t:names.collection_card_image",
   "tag": null,
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "override_image",
+      "label": "Override Image",
+      "info": "Override the collection image with a custom image"
+    },
     {
       "type": "paragraph",
       "content": "t:content.resource_reference_collection_card_image"

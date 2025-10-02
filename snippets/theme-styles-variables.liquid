@@ -20,7 +20,7 @@
     {{ settings.type_subheading_font | font_face: font_display: 'swap' }}
     {{ secondary_font_bold | font_face: font_display: 'swap' }}
     {{ secondary_font_italic | font_face: font_display: 'swap' }}
-    {{ secondary_font_bold_italic | font_face: font_display: 'swap' }}
+    {{ secondary_font_bold_italic | font_face: font_display: 'swap' }} 
   {% endif %}
 
   {% if settings.type_heading_font != settings.type_body_font and settings.type_heading_font != settings.type_subheading_font %}
@@ -82,12 +82,12 @@
 
     /* Font families - Jambys Brand Typography */
     {%- if settings.use_adobe_fonts -%}
-      --font-body--family: "sofia-pro", {{ settings.type_body_font.fallback_families }};
+      --font-body--family: "sofia-pro", {{ settings.type_body_font.fallback_families }}; 
       --font-body--style: {{ settings.type_body_font.style }};
       --font-body--weight: {{ settings.type_body_font.weight }};
-      --font-subheading--family: "sofia-pro", {{ settings.type_subheading_font.fallback_families }};
+      --font-subheading--family: "kansasnew", {{ settings.type_subheading_font.fallback_families }};
       --font-subheading--style: {{ settings.type_subheading_font.style }};
-      --font-subheading--weight: {{ settings.type_subheading_font.weight }};
+      --font-subheading--weight: 700;
       --font-heading--family: "new-kansas", {{ settings.type_heading_font.fallback_families }};
       --font-heading--style: {{ settings.type_heading_font.style }};
       --font-heading--weight: {{ settings.type_heading_font.weight }};
@@ -95,12 +95,12 @@
       --font-accent--style: {{ settings.type_accent_font.style }};
       --font-accent--weight: {{ settings.type_accent_font.weight }};
     {%- else -%}
-      --font-body--family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+      --font-body--family: "sofia-pro", {{ settings.type_body_font.fallback_families }}; 
       --font-body--style: {{ settings.type_body_font.style }};
       --font-body--weight: {{ settings.type_body_font.weight }};
-      --font-subheading--family: {{ settings.type_subheading_font.family }}, {{ settings.type_subheading_font.fallback_families }};
+      --font-subheading--family: "kansasnew", {{ settings.type_subheading_font.fallback_families }};
       --font-subheading--style: {{ settings.type_subheading_font.style }};
-      --font-subheading--weight: {{ settings.type_subheading_font.weight }};
+      --font-subheading--weight: 700;
       --font-heading--family: {{ settings.type_heading_font.family }}, {{ settings.type_heading_font.fallback_families }};
       --font-heading--style: {{ settings.type_heading_font.style }};
       --font-heading--weight: {{ settings.type_heading_font.weight }};
@@ -484,8 +484,8 @@
     --button-size-sm: 30px;
     --button-size-md: 36px;
     --button-size: var(--minimum-touch-target);
-    --button-padding-inline: 24px;
-    --button-padding-block: 16px;
+    --button-padding-inline: 30px; 
+    --button-padding-block: 18px;
 
     /* Button font-family */
     --button-font-family-primary: var(--font-{{ settings.type_font_button_primary }}--family);

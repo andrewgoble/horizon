@@ -69,7 +69,7 @@
         {% comment %} Used by payment_terms web component {% endcomment %}
         data-cart-subtotal
       >
-        {{ total_price }}
+        {{ total_price | remove: '.00' }}
       </text-component>
     </span>
     {% if settings.show_installments %}
