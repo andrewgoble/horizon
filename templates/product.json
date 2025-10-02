@@ -64,7 +64,7 @@
             "padding-block-start": 20,
             "padding-block-end": 20,
             "padding-inline-start": 0,
-            "padding-inline-end": 20
+            "padding-inline-end": 10
           },
           "blocks": {
             "group": {
