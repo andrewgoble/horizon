@@ -18,6 +18,10 @@
   endif
 %}
 
+{% liquid
+  assign mobile_linklist = block_settings.mobile_menu | default: block_settings.menu
+%}
+
 {% case variant %}
   {% when 'mobile' %}
     <div
@@ -28,7 +32,7 @@
     >
       {% render 'header-drawer',
         class: 'header__drawer--mobile',
-        linklist: block_settings.menu,
+        linklist: mobile_linklist,
         data_header_drawer_type: 'mobile-drawer'
       %}
     </div>
@@ -44,7 +48,7 @@
             class="menu-list__list list-unstyled"
             role="list"
           >
-            {% for link in block_settings.menu.links %}
+            {% for link in mobile_linklist.links %}
               <li>
                 <a
                   href="{{ link.url }}"
@@ -613,6 +617,13 @@
       "type": "link_list",
       "id": "menu",
       "label": "t:settings.menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "mobile_menu",
+      "label": "Mobile menu",
+      "info": "If no mobile menu is set, the main menu will be used.",
       "default": "main-menu"
     },
     {
