@@ -168,6 +168,11 @@
         "type": "shopify://apps/alia/blocks/customer-app-frame/51f1d398-3e41-44da-b81e-defd5804b292",
         "disabled": false,
         "settings": {}
+      },
+      "2786716548061469553": {
+        "type": "shopify://apps/axon/blocks/app-embed/baa0f014-62ea-462f-a8aa-a94befb1cbad",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
