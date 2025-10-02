@@ -77,7 +77,7 @@
     "show_variant_image": true,
     "variant_swatch_width": 50,
     "variant_swatch_height": 50,
-    "variant_swatch_radius": 0,
+    "variant_swatch_radius": 8,
     "variant_swatch_border_style": "solid",
     "variant_button_border_width": 1,
     "variant_button_radius": 8,
