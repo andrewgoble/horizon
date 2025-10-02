@@ -678,6 +678,7 @@
       "block_order": [
         "text_tenMgb"
       ],
+      "disabled": true,
       "name": "t:names.pull_quote",
       "settings": {
         "content_direction": "column",
