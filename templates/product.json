@@ -359,7 +359,7 @@
                 "accordion_row_NYxFGV": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Shipping + Free Returns",
+                    "heading": "Shipping + Returns",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -368,7 +368,7 @@
                     "text_wxpdtk": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Our job is to make you the most comfortable you've ever been — and that means a no-stress free returns and exchange process. Our<a href=\"https://returns.jambys.com/#/\">Returns Portal </a>makes it easy to process your returns hassle-free.</p>",
+                        "text": "<p>We're in the business of relaxing, and that means a stress-free shipping + returns process. Wear your Jambys for 77 days, and if they aren't your softest clothing, return them for free. (You guessed it: we don't get a lot of returns.)</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -397,6 +397,7 @@
                 },
                 "accordion_row_bHzQkY": {
                   "type": "_accordion-row",
+                  "disabled": true,
                   "settings": {
                     "heading": "77-Day Comfiest Guarantee",
                     "open_by_default": false,
