@@ -1474,6 +1474,12 @@
         "default": "scheme-5"
       },
       {
+        "type": "color_scheme",
+        "id": "badge_custom_color_scheme",
+        "label": "Custom Badge Color Scheme",
+        "default": "scheme-5"
+      },
+      {
         "type": "header",
         "content": "t:names.typography"
       },

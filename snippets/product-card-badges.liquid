@@ -15,7 +15,16 @@
     --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
   "
 >
-  {%- if product.available == false or product.compare_at_price > product.price and product.available -%}
+  {%- comment -%} Only one badge at a time; metafield overrides sale/sold-out {%- endcomment -%}
+  {%- if product.metafields.badge.text != blank or product.metafields.badge.text.value != blank -%}
+    <div
+      class="
+        product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_custom_color_scheme }}
+      "
+    >
+      {{ product.metafields.badge.text.value | default: product.metafields.badge.text }}
+    </div>
+  {%- elsif product.available == false or product.compare_at_price > product.price and product.available -%}
     <div
       class="
         product-badges__badge product-badges__badge--rectangle
