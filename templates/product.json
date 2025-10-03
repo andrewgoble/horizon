@@ -64,7 +64,7 @@
             "padding-block-start": 20,
             "padding-block-end": 20,
             "padding-inline-start": 0,
-            "padding-inline-end": 20
+            "padding-inline-end": 10
           },
           "blocks": {
             "group": {
@@ -268,44 +268,6 @@
               },
               "block_order": []
             },
-            "divider": {
-              "type": "_divider",
-              "name": "t:names.divider",
-              "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "width_percent": 100,
-                "padding-block-start": 0,
-                "padding-block-end": 0
-              },
-              "blocks": {}
-            },
-            "text": {
-              "type": "product-description",
-              "name": "Product description",
-              "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "accordion_wdcG69": {
               "type": "accordion",
               "name": "t:names.accordion",
@@ -397,7 +359,7 @@
                 "accordion_row_NYxFGV": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Shipping + Free Returns",
+                    "heading": "Shipping + Returns",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -406,7 +368,7 @@
                     "text_wxpdtk": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Our job is to make you the most comfortable you've ever been — and that means a no-stress free returns and exchange process. Our<a href=\"https://returns.jambys.com/#/\">Returns Portal </a>makes it easy to process your returns hassle-free.</p>",
+                        "text": "<p>We're in the business of relaxing, and that means a stress-free shipping + returns process. Wear your Jambys for 77 days, and if they aren't your softest clothing, return them for free. (You guessed it: we don't get a lot of returns.)</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -435,6 +397,7 @@
                 },
                 "accordion_row_bHzQkY": {
                   "type": "_accordion-row",
+                  "disabled": true,
                   "settings": {
                     "heading": "77-Day Comfiest Guarantee",
                     "open_by_default": false,
@@ -485,8 +448,6 @@
             "group",
             "variant_picker",
             "buy_buttons",
-            "divider",
-            "text",
             "accordion_wdcG69"
           ]
         }
@@ -718,6 +679,7 @@
       "block_order": [
         "text_tenMgb"
       ],
+      "disabled": true,
       "name": "t:names.pull_quote",
       "settings": {
         "content_direction": "column",
