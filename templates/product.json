@@ -296,24 +296,15 @@
                     "width": 20
                   },
                   "blocks": {
-                    "text_mCpbck": {
-                      "type": "text",
+                    "page_mCfamk": {
+                      "type": "page",
+                      "name": "t:names.page",
                       "settings": {
-                        "text": "{{ metaobjects.product_basics_accordion[\"product-basics-accordion-jambys\"].basics_text | metafield_tag }}",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "var(--color-foreground)",
+                        "page": "{{ closest.product.metafields.product.basics_page.value }}",
+                        "inherit_color_scheme": true,
+                        "color_scheme": "",
                         "background": false,
                         "background_color": "#00000026",
-                        "corner_radius": 0,
                         "padding-block-start": 0,
                         "padding-block-end": 0,
                         "padding-inline-start": 0,
@@ -323,7 +314,7 @@
                     }
                   },
                   "block_order": [
-                    "text_mCpbck"
+                    "page_mCfamk"
                   ]
                 },
                 "accordion_row_tUHfpb": {

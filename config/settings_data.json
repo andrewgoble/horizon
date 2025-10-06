@@ -46,6 +46,7 @@
     "badge_corner_radius": 8,
     "badge_sale_color_scheme": "scheme-a99acf1b-13f3-45f0-af8a-303e8c20ff81",
     "badge_sold_out_color_scheme": "scheme-a99acf1b-13f3-45f0-af8a-303e8c20ff81",
+    "badge_custom_color_scheme": "scheme-3",
     "badge_text_transform": "uppercase",
     "primary_button_border_width": 0,
     "button_border_radius_primary": 16,
