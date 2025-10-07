@@ -350,7 +350,7 @@
                 "accordion_row_NYxFGV": {
                   "type": "_accordion-row",
                   "settings": {
-                    "heading": "Shipping + Returns",
+                    "heading": "How to Redeem GQ Box Coupon",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -359,7 +359,7 @@
                     "text_wxpdtk": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>We're in the business of relaxing, and that means a stress-free shipping + returns process. Wear your Jambys for 77 days, and if they aren't your softest clothing, return them for free. (You guessed it: we don't get a lot of returns.)</p>",
+                        "text": "<ol><li>Select your size and add to cart.</li><li>At checkout, enter your unique discount code found on the promotional card in your GQ Box.</li><li>Your Jambys Lightweight House Hoodie will now appear as free. Shipping and tax are also included.</li><li>Finalize your order.</li></ol>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
