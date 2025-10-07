@@ -138,7 +138,7 @@
                 "css_class": ""
               },
               "blocks": {
-                "image_yrXF8b": {
+                "image_gqrnbD": {
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
@@ -155,7 +155,7 @@
                     "border_opacity": 100,
                     "border_radius": 0,
                     "padding-block-start": 0,
-                    "padding-block-end": 0,
+                    "padding-block-end": 5,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
                   },
@@ -268,7 +268,7 @@
                 }
               },
               "block_order": [
-                "image_yrXF8b",
+                "image_gqrnbD",
                 "text_xrnftG",
                 "group_8B3NLh"
               ]
