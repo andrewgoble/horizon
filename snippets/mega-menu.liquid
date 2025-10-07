@@ -3,9 +3,10 @@
   When more menu links are present a duplicate instance of each submenu is also rendered.
 
   @param {object} [section] - The section object.
+  @param {object} [block] - The block object.
   @param {linklist} [parent_link] - The linklist to render
   @param {string} [id] - Unique ID to assign ul in markup
-  @param {string} [menu_content_type] - The type of content to render, options: ['featured_products', 'featured_collections', 'collection_images', 'text'] (default: 'text')
+  @param {string} [menu_content_type] - The type of content to render, options: ['featured_products', 'featured_collections', 'collection_images', 'featured_content', 'text'] (default: 'text')
   @param {number} [content_aspect_ratio] - The aspect ratio to display the content if applicable
   @param {number} [image_border_radius] - The border radius used for the content images
 {%- enddoc -%}
@@ -19,6 +20,7 @@
       parent_link: parent_link,
       id: id,
       section: section,
+      block_settings: block.settings,
       grid_columns_count: 6,
       grid_columns_count_tablet: 4,
       grid_columns_count_collection_images: 8,

@@ -6,13 +6,14 @@
   @param {number} [grid_columns_count] - Number of grid columns for the mega menu.
   @param {number} [grid_columns_count_tablet] - Number of grid columns for the mega menu on tablets.
   @param {number} [grid_columns_count_collection_images] - Number of grid columns when `menu_content_type` is 'collection_images'.
-  @param {string} [menu_content_type] - Type of content: 'featured_products', 'featured_collections', 'collection_images', or 'text'.
+  @param {string} [menu_content_type] - Type of content: 'featured_products', 'featured_collections', 'collection_images', 'featured_content', or 'text'.
   @param {number} [content_aspect_ratio] - Aspect ratio for content images.
   @param {number} [image_border_radius] - Border radius for content images.
   @param {object} [section] - The section object.
+  @param {object} [block_settings] - The block settings object (required for featured_content menu_content_type).
 
   @example
-  {% render 'mega-menu-list', parent_link: link, id: 'MegaMenuList-1', grid_columns_count: 6, menu_content_type: 'featured_products' %}
+  {% render 'mega-menu-list', parent_link: link, id: 'MegaMenuList-1', grid_columns_count: 6, menu_content_type: 'featured_products', block_settings: block.settings %}
 {%- enddoc -%}
 
 {% liquid
@@ -70,6 +71,10 @@
       assign menu_content_type = 'text'
     endif
   endif
+
+  comment
+    Featured content uses nested theme blocks that need to be rendered via content_for
+  endcomment
 %}
 <ul
   data-menu-list-id="{{ id }}"
@@ -242,6 +247,16 @@
     assign max_featured_collections_tablet = 1
     assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_collection_columns_tablet
   endif
+
+  if menu_content_type == 'featured_content'
+    # Reserve 2 columns for featured content items (desktop)
+    assign max_content_columns = 2
+    assign max_menu_columns = max_menu_columns | minus: max_content_columns
+
+    # tablet breakpoint - also 2 columns
+    assign max_content_columns_tablet = 2
+    assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_content_columns_tablet
+  endif
 %}
 
 {% style %}
@@ -300,6 +315,70 @@
           {% endpaginate %}
         {% endif %}
       </ul>
+    </span>
+  {% when 'featured_content' %}
+    <span
+      class="mega-menu__content mega-menu__content--featured-content"
+      style="
+        --menu-content-columns-desktop: {{ max_content_columns }};
+        --menu-content-columns-tablet: {{ max_content_columns_tablet }};
+        --menu-image-border-radius: {{ image_border_radius }}px;
+        --featured-content-image-height: {{ block_settings.featured_content_image_height }}px;
+        --featured-content-title-font-family: var(--font-{{ block_settings.featured_content_title_font }}--family);
+        --featured-content-title-font-style: var(--font-{{ block_settings.featured_content_title_font }}--style);
+        --featured-content-title-font-weight: var(--font-{{ block_settings.featured_content_title_font }}--weight);
+        --featured-content-title-font-size: {{ block_settings.featured_content_title_size }};
+        --featured-content-title-font-line-height: var(--font-{{ block_settings.featured_content_title_font }}--line-height);
+        --featured-content-title-font-case: var(--font-{{ block_settings.featured_content_title_font }}--case);
+        --featured-content-body-font-family: var(--font-{{ block_settings.featured_content_body_font }}--family);
+        --featured-content-body-font-style: var(--font-{{ block_settings.featured_content_body_font }}--style);
+        --featured-content-body-font-weight: var(--font-{{ block_settings.featured_content_body_font }}--weight);
+        --featured-content-body-font-size: {{ block_settings.featured_content_body_size }};
+        --featured-content-body-font-line-height: var(--font-{{ block_settings.featured_content_body_font }}--line-height);
+        --featured-content-body-font-case: var(--font-{{ block_settings.featured_content_body_font }}--case);
+      "
+    >
+      <div class="mega-menu__featured-content-grid">
+        {% if block_settings.featured_item_1_title or block_settings.featured_item_1_image %}
+          <div class="mega-menu__featured-content-item">
+            <a href="{{ block_settings.featured_item_1_link }}" class="mega-menu__featured-content-link">
+              {% if block_settings.featured_item_1_image %}
+                <div class="mega-menu__featured-content-image">
+                  {{ block_settings.featured_item_1_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block_settings.featured_item_1_title, style: 'border-radius: var(--menu-image-border-radius, 0px);' }}
+                </div>
+              {% endif %}
+              <div class="mega-menu__featured-content-text">
+                {% if block_settings.featured_item_1_title %}
+                  <h4 class="mega-menu__featured-content-title">{{ block_settings.featured_item_1_title }}</h4>
+                {% endif %}
+                {% if block_settings.featured_item_1_body %}
+                  <p class="mega-menu__featured-content-body">{{ block_settings.featured_item_1_body }}</p>
+                {% endif %}
+              </div>
+            </a>
+          </div>
+        {% endif %}
+        
+        {% if block_settings.featured_item_2_title or block_settings.featured_item_2_image %}
+          <div class="mega-menu__featured-content-item">
+            <a href="{{ block_settings.featured_item_2_link }}" class="mega-menu__featured-content-link">
+              {% if block_settings.featured_item_2_image %}
+                <div class="mega-menu__featured-content-image">
+                  {{ block_settings.featured_item_2_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block_settings.featured_item_2_title, style: 'border-radius: var(--menu-image-border-radius, 0px);' }}
+                </div>
+              {% endif %}
+              <div class="mega-menu__featured-content-text">
+                {% if block_settings.featured_item_2_title %}
+                  <h4 class="mega-menu__featured-content-title">{{ block_settings.featured_item_2_title }}</h4>
+                {% endif %}
+                {% if block_settings.featured_item_2_body %}
+                  <p class="mega-menu__featured-content-body">{{ block_settings.featured_item_2_body }}</p>
+                {% endif %}
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      </div>
     </span>
   {% when 'featured_collections' %}
     {% assign collection_handles = collection_handles | split: ',' | uniq %}

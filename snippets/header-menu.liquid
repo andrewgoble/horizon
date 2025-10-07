@@ -56,6 +56,7 @@
             {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
             {% render 'mega-menu',
               section: section,
+              block: block,
               parent_link: link,
               id: list_id,
               menu_content_type: menu_content_type,
