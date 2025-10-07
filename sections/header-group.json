@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Shop our latest arrivals! second",
+            "text": "As Seen in: GQ, NYT WSJ",
             "link": "",
             "font": "var(--font-body--family)",
             "font_size": "0.75rem",
@@ -31,7 +31,7 @@
         "announcement_T4f8H9": {
           "type": "_announcement",
           "settings": {
-            "text": "Shop our latest arrivals!",
+            "text": "Free Shipping Orders $85+, Free Returns Always",
             "link": "",
             "font": "var(--font-body--family)",
             "font_size": "0.75rem",
