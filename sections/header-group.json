@@ -99,7 +99,7 @@
             "drawer_accordion": true,
             "drawer_accordion_expand_first": true,
             "drawer_dividers": true,
-            "featured_content_image_height": 250,
+            "featured_content_image_height": 180,
             "featured_content_title_font": "subheading",
             "featured_content_title_size": "1.25rem",
             "featured_content_body_font": "body",
