@@ -104,14 +104,14 @@
             "featured_content_title_size": "1.25rem",
             "featured_content_body_font": "body",
             "featured_content_body_size": "0.875rem",
-            "featured_item_1_link": "shopify://collections",
-            "featured_item_1_image": "shopify://shop_images/floofsocks-navymint3.png",
-            "featured_item_1_title": "testing title",
-            "featured_item_1_body": "testing body",
-            "featured_item_2_link": "shopify://products/black-floof-crew",
+            "featured_item_1_link": "shopify://products/navy-mint",
+            "featured_item_1_image": "shopify://shop_images/jambys-navy-mint-couple-2_c20d1bda-7f43-498e-b0d0-14f88052988e.jpg",
+            "featured_item_1_title": "Boxers with Pockets",
+            "featured_item_1_body": "The house shorts that made us famous.",
+            "featured_item_2_link": "shopify://collections/bestselling-housefits",
             "featured_item_2_image": "shopify://shop_images/Jambys_Image_413e337d-4396-413c-9f2f-91483d8d3cb5.webp",
-            "featured_item_2_title": "Testing title 2",
-            "featured_item_2_body": "testing body 2"
+            "featured_item_2_title": "Housefits",
+            "featured_item_2_body": "Match it up and relax in peak comfort."
           },
           "blocks": {}
         }
