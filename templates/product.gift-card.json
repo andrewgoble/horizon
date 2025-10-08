@@ -16,7 +16,7 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
+            "media_presentation": "carousel",
             "media_columns": "two",
             "image_gap": 4,
             "large_first_image": false,
@@ -25,7 +25,7 @@
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "bottom",
             "thumbnail_width": 48,
-            "aspect_ratio": "1/1.25",
+            "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "cover",
             "media_radius": 8,
@@ -319,6 +319,7 @@
                 },
                 "accordion_row_tUHfpb": {
                   "type": "_accordion-row",
+                  "disabled": true,
                   "settings": {
                     "heading": "Sizing",
                     "open_by_default": false,
@@ -349,6 +350,7 @@
                 },
                 "accordion_row_NYxFGV": {
                   "type": "_accordion-row",
+                  "disabled": true,
                   "settings": {
                     "heading": "Shipping + Returns",
                     "open_by_default": false,
@@ -610,6 +612,7 @@
       "block_order": [
         "junip_junip_product_review_eRzWMk"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -807,257 +810,6 @@
         "gap_between_elements": 50,
         "css_class": ""
       }
-    },
-    "section_WeJpHM": {
-      "type": "section",
-      "blocks": {
-        "text_YEf8PC": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h3>FAQ</h3>",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "accordion_mKLxbB": {
-          "type": "accordion",
-          "name": "t:names.accordion",
-          "settings": {
-            "icon": "caret",
-            "dividers": true,
-            "type_preset": "h5",
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "accordion_row_c7J3yH": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "{{ metaobjects.faqs[\"where-are-jambys-made\"].question.value }}",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_6Ua37i": {
-                  "type": "text",
-                  "settings": {
-                    "text": "{{ metaobjects.faqs[\"where-are-jambys-made\"].answers | metafield_tag }}",
-                    "width": "100%",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_6Ua37i"
-              ]
-            },
-            "accordion_row_RdctMc": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "{{ metaobjects.faqs[\"where-do-you-ship-to\"].question.value }}",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_d3aHBL": {
-                  "type": "text",
-                  "settings": {
-                    "text": "{{ metaobjects.faqs[\"where-do-you-ship-to\"].answers | metafield_tag }}",
-                    "width": "100%",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_d3aHBL"
-              ]
-            },
-            "accordion_row_GNQpjw": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_dash_row",
-              "settings": {
-                "heading": "{{ metaobjects.faqs[\"question-2\"].question.value }}",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_bw3Ckj": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "{{ metaobjects.faqs[\"question-2\"].answers | metafield_tag }}",
-                    "width": "100%",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_bw3Ckj"
-              ]
-            },
-            "accordion_row_TtKh3J": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_dash_row",
-              "settings": {
-                "heading": "{{ metaobjects.faqs[\"question-1\"].question.value }}",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_6agXbG": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "{{ metaobjects.faqs[\"question-1\"].answers | metafield_tag }}",
-                    "width": "100%",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_6agXbG"
-              ]
-            }
-          },
-          "block_order": [
-            "accordion_row_c7J3yH",
-            "accordion_row_RdctMc",
-            "accordion_row_GNQpjw",
-            "accordion_row_TtKh3J"
-          ]
-        }
-      },
-      "block_order": [
-        "text_YEf8PC",
-        "accordion_mKLxbB"
-      ],
-      "name": "t:names.faq_section",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 32,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 48,
-        "padding-block-end": 48,
-        "css_class": ""
-      }
     }
   },
   "order": [
@@ -1065,7 +817,6 @@
     "product-recommendations",
     "175836978583d1f44f",
     "section_R6VfKV",
-    "marquee_M4Mtib",
-    "section_WeJpHM"
+    "marquee_M4Mtib"
   ]
 }
