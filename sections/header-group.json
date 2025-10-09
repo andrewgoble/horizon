@@ -93,13 +93,13 @@
           "settings": {
             "menu": "horizon-menu",
             "mobile_menu": "horizon-menu-mobile",
-            "menu_style": "text",
+            "menu_style": "featured_content",
             "featured_products_aspect_ratio": "4 / 5",
             "featured_collections_aspect_ratio": "adapt",
             "image_border_radius": 8,
             "product_title_case": "default",
             "collection_title_case": "default",
-            "color_scheme": "scheme-1",
+            "color_scheme": "scheme-3",
             "menu_font_style": "inverse",
             "type_font_primary_link": "body",
             "type_font_primary_size": "1rem",
@@ -112,7 +112,20 @@
             "color_scheme_navigation_bar": "",
             "drawer_accordion": true,
             "drawer_accordion_expand_first": true,
-            "drawer_dividers": true
+            "drawer_dividers": true,
+            "featured_content_image_height": 180,
+            "featured_content_title_font": "subheading",
+            "featured_content_title_size": "1.25rem",
+            "featured_content_body_font": "body",
+            "featured_content_body_size": "0.875rem",
+            "featured_item_1_link": "shopify://products/navy-mint",
+            "featured_item_1_image": "shopify://shop_images/jambys-navy-mint-couple-2_c20d1bda-7f43-498e-b0d0-14f88052988e.jpg",
+            "featured_item_1_title": "Boxers with Pockets",
+            "featured_item_1_body": "The house shorts that made us famous.",
+            "featured_item_2_link": "shopify://collections/bestselling-housefits",
+            "featured_item_2_image": "shopify://shop_images/Jambys_Image_413e337d-4396-413c-9f2f-91483d8d3cb5.webp",
+            "featured_item_2_title": "Housefits",
+            "featured_item_2_body": "Match it up and relax in peak comfort."
           },
           "blocks": {}
         }

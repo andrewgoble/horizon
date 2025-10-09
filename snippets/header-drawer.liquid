@@ -634,6 +634,71 @@
           </ul>
         </div>
       {% endif %}
+
+      {%- comment -%} Featured Content for mobile menu {%- endcomment -%}
+      {% if block_settings.menu_style == 'featured_content' %}
+        <div
+          class="menu-drawer__featured-content menu-drawer__featured-content--custom"
+          style="
+            --menu-drawer-animation-index: {{ linklist.links.size | plus: 1 }};
+            --featured-content-image-height: {{ block_settings.featured_content_image_height }}px;
+            --featured-content-title-font-family: var(--font-{{ block_settings.featured_content_title_font }}--family);
+            --featured-content-title-font-style: var(--font-{{ block_settings.featured_content_title_font }}--style);
+            --featured-content-title-font-weight: var(--font-{{ block_settings.featured_content_title_font }}--weight);
+            --featured-content-title-font-size: {{ block_settings.featured_content_title_size }};
+            --featured-content-title-font-line-height: var(--font-{{ block_settings.featured_content_title_font }}--line-height);
+            --featured-content-title-font-case: var(--font-{{ block_settings.featured_content_title_font }}--case);
+            --featured-content-body-font-family: var(--font-{{ block_settings.featured_content_body_font }}--family);
+            --featured-content-body-font-style: var(--font-{{ block_settings.featured_content_body_font }}--style);
+            --featured-content-body-font-weight: var(--font-{{ block_settings.featured_content_body_font }}--weight);
+            --featured-content-body-font-size: {{ block_settings.featured_content_body_size }};
+            --featured-content-body-font-line-height: var(--font-{{ block_settings.featured_content_body_font }}--line-height);
+            --featured-content-body-font-case: var(--font-{{ block_settings.featured_content_body_font }}--case);
+          "
+        >
+          <div class="menu-drawer__featured-content-grid">
+            {% if block_settings.featured_item_1_title or block_settings.featured_item_1_image %}
+              <div class="menu-drawer__featured-content-item">
+                <a href="{{ block_settings.featured_item_1_link }}" class="menu-drawer__featured-content-link">
+                  {% if block_settings.featured_item_1_image %}
+                    <div class="menu-drawer__featured-content-image">
+                      {{ block_settings.featured_item_1_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block_settings.featured_item_1_title }}
+                    </div>
+                  {% endif %}
+                  <div class="menu-drawer__featured-content-text">
+                    {% if block_settings.featured_item_1_title %}
+                      <h4 class="menu-drawer__featured-content-title">{{ block_settings.featured_item_1_title }}</h4>
+                    {% endif %}
+                    {% if block_settings.featured_item_1_body %}
+                      <p class="menu-drawer__featured-content-body">{{ block_settings.featured_item_1_body }}</p>
+                    {% endif %}
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+            
+            {% if block_settings.featured_item_2_title or block_settings.featured_item_2_image %}
+              <div class="menu-drawer__featured-content-item">
+                <a href="{{ block_settings.featured_item_2_link }}" class="menu-drawer__featured-content-link">
+                  {% if block_settings.featured_item_2_image %}
+                    <div class="menu-drawer__featured-content-image">
+                      {{ block_settings.featured_item_2_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block_settings.featured_item_2_title }}
+                    </div>
+                  {% endif %}
+                  <div class="menu-drawer__featured-content-text">
+                    {% if block_settings.featured_item_2_title %}
+                      <h4 class="menu-drawer__featured-content-title">{{ block_settings.featured_item_2_title }}</h4>
+                    {% endif %}
+                    {% if block_settings.featured_item_2_body %}
+                      <p class="menu-drawer__featured-content-body">{{ block_settings.featured_item_2_body }}</p>
+                    {% endif %}
+                  </div>
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
     </div>
     <div
       class="menu-drawer__backdrop"
