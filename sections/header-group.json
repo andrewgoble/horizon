@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "As Seen in: GQ, NYT WSJ",
+            "text": "<a href=\"https://www.jambys.com/collections/sale\" title=\"Sale Collection\"><strong>Shop the Fall Sale! Save 20% Sitewide</strong></a>",
             "link": "",
             "font": "var(--font-body--family)",
             "font_size": "0.75rem",
