@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Shop our latest arrivals! second",
+            "text": "<a href=\"https://www.jambys.com/collections/sale\" title=\"Sale Collection\"><strong>Shop the Fall Sale! Save 20% Sitewide</strong></a>",
             "link": "",
             "font": "var(--font-body--family)",
             "font_size": "0.75rem",
@@ -31,7 +31,20 @@
         "announcement_T4f8H9": {
           "type": "_announcement",
           "settings": {
-            "text": "Shop our latest arrivals!",
+            "text": "Free Shipping Orders $85+, Free Returns Always",
+            "link": "",
+            "font": "var(--font-body--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "announcement_438RQH": {
+          "type": "_announcement",
+          "settings": {
+            "text": "10,000 5-Star Reviews",
             "link": "",
             "font": "var(--font-body--family)",
             "font_size": "0.75rem",
@@ -44,13 +57,14 @@
       },
       "block_order": [
         "announcement_qBdVqN",
-        "announcement_T4f8H9"
+        "announcement_T4f8H9",
+        "announcement_438RQH"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
         "section_width": "page-width",
-        "color_scheme": "",
+        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
         "divider_width": 0,
         "padding-block-start": 10,
         "padding-block-end": 10
@@ -99,13 +113,13 @@
             "drawer_accordion": true,
             "drawer_accordion_expand_first": true,
             "drawer_dividers": true,
-            "featured_content_image_height": 180,
+            "featured_content_image_height": 170,
             "featured_content_title_font": "subheading",
             "featured_content_title_size": "1.25rem",
             "featured_content_body_font": "body",
             "featured_content_body_size": "0.875rem",
             "featured_item_1_link": "shopify://products/navy-mint",
-            "featured_item_1_image": "shopify://shop_images/jambys-navy-mint-couple-2_c20d1bda-7f43-498e-b0d0-14f88052988e.jpg",
+            "featured_item_1_image": "shopify://shop_images/jambys-navy-mint-couple-2_27614681-6326-4f1d-ae4d-2add22f77e26.jpg",
             "featured_item_1_title": "Boxers with Pockets",
             "featured_item_1_body": "The house shorts that made us famous.",
             "featured_item_2_link": "shopify://collections/bestselling-housefits",

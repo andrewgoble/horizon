@@ -174,6 +174,11 @@
         "type": "shopify://apps/axon/blocks/app-embed/baa0f014-62ea-462f-a8aa-a94befb1cbad",
         "disabled": false,
         "settings": {}
+      },
+      "10384935893930344104": {
+        "type": "shopify://apps/seoant-redirects/blocks/brokenlink-404/cc7b1996-e567-42d0-8862-356092041863",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
