@@ -129,6 +129,33 @@
         -%}
     {% endcase %}
   {% endunless %}
+
+  {% if media.alt contains "wear" and media.alt contains "modelsizing" %} 
+    <div class="product-media__model-sizes">
+      {% assign models_sizing = media.alt | split: ' | '  %}
+      {% assign counter = 0 %}
+      {% for sizing in models_sizing %}
+        {% if sizing contains "first" %}
+          {% assign counter = counter | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      {% assign sizes_length = models_sizing.size | minus:counter %}
+      {% for sizing in models_sizing %}
+        {% if sizes_length <= 1 %}
+          {% unless sizing contains "first:" %}
+            <p class="only-sizing-item">{{ sizing | split: ':' | last}}</p>
+          {% endunless %}
+        {% else %}
+          {% unless sizing contains "first:" %}
+            {% if sizing contains 'type' %}
+            {% else %}
+              <p class="many-sizing-items">{{ sizing | split: ':' | last}}</p>
+          {% endif %}
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
 </div>
 
 {% stylesheet %}
@@ -136,6 +163,7 @@
     aspect-ratio: var(--gallery-aspect-ratio, var(--ratio));
     min-height: 0;
     min-width: 0;
+    position: relative;
   }
 
   /*** Media border-radius feature ****/
@@ -204,5 +232,24 @@
   ::view-transition-old(gallery-item),
   ::view-transition-new(gallery-item) {
     animation-duration: 0ms;
+  }
+
+ .product-media__model-sizes {
+    background-color: #EBE8F9;
+    padding: 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    opacity: 0.9;
+    text-align: center;
+    border-radius: 0 0 8px 8px !important;
+  }
+
+  .many-sizing-items {
+    margin: 0;
   }
 {% endstylesheet %}
