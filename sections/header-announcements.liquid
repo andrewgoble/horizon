@@ -66,6 +66,7 @@
 
   .announcement-bar__slide {
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    position: relative; /* ensure overlay link is scoped to slide */
 
     &[aria-hidden='true'] {
       opacity: 0;
@@ -112,6 +113,7 @@
 
   .announcement-bar__text:first-child {
     margin: 0;
+    text-align: center;
   }
 
   .announcement-bar__link {

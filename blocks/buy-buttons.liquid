@@ -109,6 +109,12 @@
       </button>
     </div>
   {%- endif -%}
+
+  {% if product.metafields.global.specialMessage %}
+    <div class="product-form-special-message">
+      {{ product.metafields.global.specialMessage }}
+    </div>
+  {% endif %}
 </span>
 
 {% if block_settings.show_pickup_availability %}
@@ -377,6 +383,11 @@
   .pickup-location__close-button {
     top: calc(var(--padding-2xl) - (var(--icon-size-xs) / 2));
     right: calc(var(--padding-2xl) - var(--icon-size-xs));
+  }
+  .product-form-special-message {
+    width: 100%; 
+    text-align: center;
+    padding-top: 10px;
   }
 {% endstylesheet %}
 

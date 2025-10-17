@@ -20,11 +20,16 @@
           "settings": {
             "text": "<a href=\"https://www.jambys.com/collections/sale\" title=\"Sale Collection\"><strong>Shop the Fall Sale! Save 20% Sitewide</strong></a>",
             "link": "",
-            "font": "var(--font-body--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
+            "desktop_font": "var(--font-body--family)",
+            "desktop_font_size": "1rem",
+            "desktop_weight": "",
+            "desktop_letter_spacing": "tight",
+            "desktop_case": "none",
+            "mobile_font": "var(--font-body--family)",
+            "mobile_font_size": "0.625rem",
+            "mobile_weight": "",
+            "mobile_letter_spacing": "tight",
+            "mobile_case": "none"
           },
           "blocks": {}
         },
@@ -33,11 +38,16 @@
           "settings": {
             "text": "Free Shipping Orders $85+, Free Returns Always",
             "link": "",
-            "font": "var(--font-body--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
+            "desktop_font": "var(--font-body--family)",
+            "desktop_font_size": "1rem",
+            "desktop_weight": "",
+            "desktop_letter_spacing": "normal",
+            "desktop_case": "none",
+            "mobile_font": "var(--font-body--family)",
+            "mobile_font_size": "",
+            "mobile_weight": "",
+            "mobile_letter_spacing": "tight",
+            "mobile_case": "none"
           },
           "blocks": {}
         },
@@ -46,11 +56,16 @@
           "settings": {
             "text": "10,000 5-Star Reviews",
             "link": "",
-            "font": "var(--font-body--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
+            "desktop_font": "var(--font-body--family)",
+            "desktop_font_size": "1rem",
+            "desktop_weight": "",
+            "desktop_letter_spacing": "normal",
+            "desktop_case": "none",
+            "mobile_font": "var(--font-body--family)",
+            "mobile_font_size": "",
+            "mobile_weight": "",
+            "mobile_letter_spacing": "tight",
+            "mobile_case": "none"
           },
           "blocks": {}
         }
@@ -64,7 +79,7 @@
       "settings": {
         "speed": 5,
         "section_width": "page-width",
-        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+        "color_scheme": "scheme-1eaaf9ef-65e7-4ca6-8607-57715fdb3e61",
         "divider_width": 0,
         "padding-block-start": 10,
         "padding-block-end": 10
