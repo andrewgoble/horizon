@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<span style=\"text-decoration:underline\">Psst: Shop our Biggest Sale of the Year Early!</span>",
+            "text": "<a href=\"https://www.jambys.com/collections/all-products\" title=\"https://www.jambys.com/collections/all-products\"><span style=\"text-decoration:underline\">Early Access: Shop our Biggest Sale of the Year Early!</span></a>",
             "link": "",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
