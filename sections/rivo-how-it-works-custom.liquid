@@ -1,0 +1,259 @@
+{% comment %}
+  Rivo – How It Works (row: number + title, caption underneath)
+  - All classes start with "rivo" and use hyphens
+  - Single block type "rivo-step"
+{% endcomment %}
+
+<section
+  id="rivo-how-{{ section.id }}"
+  class="rivo-content-wrapper rivo-how-it-works-custom rivo-how {% case section.settings.vertical_align %}{% when 'top' %}rivo-valign-top{% when 'bottom' %}rivo-valign-bottom{% else %}rivo-valign-center{% endcase %} {% if section.settings.show_borders %}rivo-has-borders{% endif %} rivo-{{ section.settings.text_align }}"
+  aria-labelledby="rivo-how-title-{{ section.id }}"
+  style="
+    --rivo-text: {{ section.settings.text_color }};
+    --rivo-muted: {{ section.settings.muted_color }};
+    --rivo-accent: {{ section.settings.accent_color }};
+    --rivo-bg: {{ section.settings.bg_color }};
+    --rivo-max-w: {{ section.settings.max_width }}px;
+    --rivo-pad-top: {{ section.settings.pad_top }}px;
+    --rivo-pad-bottom: {{ section.settings.pad_bottom }}px;
+  "
+>
+  {%- assign rivo_heading = section.settings.heading -%}
+  {%- if section.settings.highlight != blank -%}
+    {%- assign rivo_hl = '<span class="rivo-highlight">' | append: section.settings.highlight | append: '</span>' -%}
+    {%- assign rivo_heading = rivo_heading | replace_first: section.settings.highlight, rivo_hl -%}
+  {%- endif -%}
+
+  <div class="rivo-how-wrap">
+    <h2 id="rivo-how-title-{{ section.id }}" class="rivo-how-title rivo-reveal">
+      {{ rivo_heading }}
+    </h2>
+
+    <ol class="rivo-steps-list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="rivo-step-item rivo-reveal" {{ block.shopify_attributes }}>
+          <!-- Top row: number + title -->
+          <div class="rivo-step-row">
+            <div class="rivo-step-number">{{ forloop.index }}</div>
+            <div class="rivo-step-title-box">
+              <h3 class="rivo-step-title">{{ block.settings.title | replace: '\n', '<br>' }}</h3>
+            </div>
+          </div>
+
+          <!-- Caption under both -->
+          {%- if block.settings.caption != blank -%}
+            <p class="rivo-step-caption">{{ block.settings.caption }}</p>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+
+  <style>
+    /* ===== scope to this section ===== */
+    #rivo-how-{{ section.id }}{
+      background: var(--rivo-bg);
+      color: var(--rivo-text);
+      padding-block: var(--rivo-pad-top) var(--rivo-pad-bottom);
+      isolation: isolate;
+    }
+    #rivo-how-{{ section.id }}.rivo-has-borders{
+      border-block: 1px solid color-mix(in srgb, var(--rivo-text) 10%, transparent);
+    }
+
+    /* wrapper & alignment */
+    #rivo-how-{{ section.id }} .rivo-how-wrap{
+      max-width: var(--rivo-max-w);
+      margin-inline: auto;
+      padding-inline: clamp(20px, 4vw, 48px);
+    }
+    #rivo-how-{{ section.id }}.rivo-left  .rivo-how-wrap{ text-align: left; }
+    #rivo-how-{{ section.id }}.rivo-center.rivo-content-wrapper .rivo-how-wrap{ text-align: center; }
+    #rivo-how-{{ section.id }}.rivo-right .rivo-how-wrap{ text-align: right; }
+
+    /* title */
+    #rivo-how-{{ section.id }} .rivo-how-title{
+      font-family: "kansasnew", sans-serif;
+      margin: 0 0 clamp(24px, 4vw, 56px);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      word-spacing: 0.05em;
+      line-height: 1.5;
+      font-size: 28px;
+    }
+    #rivo-how-{{ section.id }} .rivo-highlight{
+  position: relative;
+  display: inline;           
+  background: none;         
+  padding: 0 .06em;          
+  z-index: 0;
+}
+
+/* the pink bar */
+#rivo-how-{{ section.id }} .rivo-highlight::before{
+  content: "";
+  position: absolute;
+  left: -.12em;              
+  right: -.12em;
+  bottom: 0;                 
+  height: var(--rivo-hl-height, 25px);   
+  background: var(--rivo-accent);
+  z-index: -1;
+  transform: translateY(var(--rivo-hl-shift, -4px)); 
+}
+
+    /* steps grid */
+    #rivo-how-{{ section.id }} .rivo-steps-list{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(28px, 4vw, 42px);
+    }
+    @media (min-width: 580px){
+      #rivo-how-{{ section.id }} .rivo-steps-list { 
+        grid-template-columns: repeat(3, 1fr); 
+      }
+    }
+
+    /* each step */
+    #rivo-how-{{ section.id }} .rivo-step-item{
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    /* row = number + title */
+    #rivo-how-{{ section.id }} .rivo-step-row{
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    @media (max-width: 580px){
+    .rivo-step-row {
+        flex-direction: column;
+        gap: 16px !important;
+        align-items: center !important;
+      }
+    }
+
+    #rivo-how-{{ section.id }} .rivo-step-number{
+        font-family: "kansasnew", sans-serif;
+      flex: 0 0 auto;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: .85;
+      font-size: clamp(80px, 10vw, 180px);
+      color: var(--rivo-text);
+    }
+    #rivo-how-{{ section.id }} .rivo-step-title-box{
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    #rivo-how-{{ section.id }} .rivo-step-title{
+      margin: 0;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      line-height: 1.05;
+      /* Big, but smaller than number */
+      font-size: 24px;
+      word-break: break-word;
+      padding-bottom: 10px;
+      text-align: left;
+    }
+
+    /* caption under both */
+    #rivo-how-{{ section.id }} .rivo-step-caption{
+      margin: clamp(10px, 1.2vw, 16px) 0 0;
+      color: var(--rivo-muted);
+      font-size: 14px;
+      text-align: center; /* sits under both number + title */
+    }
+
+    /* subtle reveal */
+    #rivo-how-{{ section.id }} .rivo-reveal{ opacity: 0; transform: translateY(12px); transition: .5s ease; }
+    #rivo-how-{{ section.id }} .rivo-inview{ opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce){
+      #rivo-how-{{ section.id }} .rivo-reveal{ opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+
+  <script>
+    (function(){
+      var root = document.getElementById('rivo-how-{{ section.id }}');
+      if(!root) return;
+      var els = root.querySelectorAll('.rivo-reveal');
+      var show = function(el){ el.classList.add('rivo-inview'); };
+      if('IntersectionObserver' in window){
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting){ show(e.target); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12 });
+        els.forEach(function(el){ io.observe(el); });
+      } else {
+        els.forEach(show);
+      }
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Rivo How It Works",
+  "tag": "section",
+  "class": "rivo-how-root",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "LET'S GET STARTED – IT'S AS EASY AS OUR LASHES." },
+    { "type": "text", "id": "highlight", "label": "Word to highlight (first match)", "default": "EASY" },
+
+    { "type": "select", "id": "text_align", "label": "Text alignment", "default": "center", "options": [
+      { "label": "Left", "value": "left" },
+      { "label": "Center", "value": "center" },
+      { "label": "Right", "value": "right" }
+    ]},
+    { "type": "select", "id": "vertical_align", "label": "Vertical alignment token (for consistency)", "default": "center", "options": [
+      { "label": "Top", "value": "top" },
+      { "label": "Center", "value": "center" },
+      { "label": "Bottom", "value": "bottom" }
+    ]},
+
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" },
+    { "type": "color", "id": "muted_color", "label": "Muted text color", "default": "#6b6b6b" },
+    { "type": "color", "id": "accent_color", "label": "Highlight background", "default": "#F6DDEC" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
+
+    { "type": "range", "id": "max_width", "label": "Content max width", "min": 720, "max": 1400, "step": 10, "unit": "px", "default": 1160 },
+    { "type": "checkbox", "id": "show_borders", "label": "Show top & bottom borders", "default": true },
+    { "type": "range", "id": "pad_top", "label": "Padding top", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "pad_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "rivo-step",
+      "name": "Step",
+      "settings": [
+        { "type": "textarea", "id": "title", "label": "Title (supports line breaks)", "default": "Sign up,\nit’s free!" },
+        { "type": "text", "id": "caption", "label": "Caption", "default": "30 points for creating an account" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Rivo How It Works",
+      "category": "Rivo",
+      "blocks": [
+        { "type": "rivo-step", "settings": { "title": "Sign up,\nit’s free!", "caption": "30 points for creating an account" } },
+        { "type": "rivo-step", "settings": { "title": "Collect\npoints", "caption": "Countless ways easily earn points" } },
+        { "type": "rivo-step", "settings": { "title": "Treat\nyourself", "caption": "Exclusive rewards, promos, and content." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
