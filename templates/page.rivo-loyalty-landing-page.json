@@ -12,10 +12,738 @@
     "rivo-loyalty-landing-page": {
       "type": "rivo-loyalty-landing-page",
       "settings": {
+        "primary_color": "#36409a",
+        "secondary_color": "#f3f4fa",
+        "page_background_color": "",
+        "rivo_icon_color": "#000000",
+        "title_font_style": "inherit",
+        "title_font_family": "\"kansasnew\", sans-serif",
+        "subtitle_font_family": "\"sofia-pro\", sans-serif",
+        "section_title_font_color": "#36409a",
+        "section_subtitle_font_color": "#36409a",
+        "page_max_width": 960,
+        "section_title_font_size": 32,
+        "section_title_font_weight": 600,
+        "section_subtitle_font_size": 18,
+        "section_subtitle_font_weight": 400,
+        "section_padding": 40,
+        "card_background_color": "#36409a",
+        "card_font_color": "#f3f4fa",
+        "card_title_font_size": 18,
+        "card_title_font_weight": 600,
+        "card_subtitle_font_size": 16,
+        "card_subtitle_font_weight": 500,
+        "card_icon_size": 100,
+        "card_container_max_width": 960,
+        "card_order": "stacked",
+        "corner_type": "rounded",
+        "modal_background_color": "#ffffff",
+        "modal_font_color": "#000000",
+        "modal_icon_color": "#000000",
+        "modal_icon_position_top": 15,
+        "modal_icon_position_right": 15,
+        "modal_login_title_font_size": 22,
+        "modal_title_font_size": 22,
+        "modal_subtitle_font_size": 16,
+        "modal_body_font_size": 16,
+        "modal_icon_size": 44,
+        "vip_desktop_progress_bar_width": 50,
+        "vip_table_tier_td_border_top": "none",
+        "custom_css": "div:has(> .rivo-content-wrapper) {\n  width: 100%;\n}\n\n/* === ROOT TOKENS === */\n:root {\n  /* neutrals *\n  --rivo-white: #ffffff;\n  --rivo-grey-100: #f2f5f4;\n  --rivo-grey-300: #f4f4f4;\n  --rivo-grey-400: #b0bfbc;\n\n  /* accents */\n  --rivo-vip-bg: #e5e5ff;\n  --rivo-faq-bg: #e5e5ff;\n  --rivo-zebra-even: #e5e5ff;\n  --rivo-zebra-odd: #f2f2ff;\n  --rivo-card-border: #3d4852;\n\n  /* define in theme */\n  /* --rivo-primary-color: ...; */\n  /* --rivo-secondary-color: ...; */\n}\n\n/* === BUTTONS === */\n.rivo-button,\n.rivo-modal-button {\n  background: #36409a;\n  color: var(--rivo-secondary-color);\n  display: flex;\n  justify-content: center;\n  min-width: 200px;\n  min-height: 50px;\n  padding: 10px;\n  border: none;\n  border-radius: 4px;\n  line-height: 2;\n}\n\n.rivo-button:hover,\n.rivo-modal-button:hover {\n  opacity: 0.9;\n}\n\n.rivo-hero-buttons > .rivo-button:nth-of-type(2) {\n}\n\n.rivo-hero-buttons > .rivo-button:nth-of-type(2):hover {\n}\n\n.rivo-success-button {\n  color: transparent !important;\n}\n\n.rivo-success-button:after {\n  display: none;\n}\n\n.rivo-copy-button.rivo-success-button::before, button[aria-label=\"Copy coupon code\"]::before {\n\n}\n\n.rivo-add-shipping-address,\n.rivo-logout-link {\n  display: flex;\n}\n\n.rivo-add-shipping-address a,\n.rivo-logout-link a,\n.rivo-form-row button[type=submit] {\n  width: 100%;\n  padding: 10px;\n  text-align: center;\n  border-radius: 6px;\n}\n\n/* copy-code placeholder */\n.rivo-copy-button.rivo-success-button::before,\nbutton[aria-label=\"Copy coupon code\"]::before {\n}\n\n/* load-more */\n.rivo-points-table-load-more-button {\n  background: var(--rivo-primary-color);\n  color: var(--rivo-white);\n  padding: 10px;\n  border: 0;\n  border-radius: 4px;\n  font-size: 16px;\n  text-decoration: none;\n}\n\n/* form inputs */\ninput.rivo-coupon-code,\n.rivo-multiplier-input .rivo-form-input,\ninput.rivo-form-input {\n  border: 1px solid var(--rivo-primary-color);\n  font-size: 16px !important;\n  border-radius: 5px;\n}\n\n/* modal links */\n.rivo-modal-p a {\n  text-decoration: underline;\n}\n\n.rivo-modal-p a::after {\n  content: \".\";\n}\n\n/* === HERO === */\ndiv:has(> #rivo-lp-header) {\n  width: 100%;\n  padding: 40px;\n}\n.rivo-hero-banner-wrapper {\n  max-width: 1500px;\n}\n\nh1.rivo-hero-title {\n  display: flex;\n  flex-direction: column;\n  gap: 24px;\n}\n\n.rivo-span {\n  font-weight: 400;\n  font-size: 16px;\n  color: #e0a580;\n  letter-spacing: 0.25em;\n  text-transform: capitalize;\n}\n\n#rivo-ways-to-earn.rivo-content-wrapper {\n  border-top-right-radius: 12px;\n  border-top-left-radius: 12px;\n}\n\n#rivo-ways-to-redeem.rivo-content-wrapper {\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n}\n\n.rivo-hero-banner-text {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  align-self: center;\n  min-width: auto;\n  padding: 0;\n}\n\n.rivo-hero-description {\n  padding: 30px 0;\n  max-width: 400px;\n  font-family: var(--rivo-subtitle-font-family), sans-serif;\n  letter-spacing: 0.43px;\n  line-height: 20px;\n}\n\n.rivo-desktop-justify-right {\n  justify-content: center;\n}\n\n#rivo-lp-header {\n  display: flex;\n  max-width: 1200px;\n  margin: 0 auto;\n}\n\n.rivo-hero-banner-media {\n  position: relative;\n  max-height: 500px;\n  margin: auto;\n  border-radius: 12px;\n  order: 2;\n}\n\n.rivo-hero-banner-media img {\n  object-position: center;\n}\n\n.rivo-lp-section-subtitle {\n  width: 100%;\n  padding: 20px 0;\n}\n\n.rivo-hero-banner-wrapper {\n  padding: 0;\n}\n\n/* === TITLES === */\n#rivo-how-it-works {\n  width: 100%;\n}\n\n.rivo-section-label {\n  display: block;\n  font-size: 24px;\n  color: var(--rivo-secondary-color);\n  font-weight: 600;\n}\n\n/* === How it works === */\n\n.rivo-step-item {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n/* === CARDS === */\n.rivo-card {\n  flex-basis: 23%;\n}\n\n.rivo-card-title {\n  text-transform: capitalize;\n}\n\n.rivo-card-description {\n  padding-top: 0;\n}\n\n.rivo-card-body {\n  max-width: 95%;\n  margin: 0 auto;\n}\n\n#rivo-ways-to-redeem .rivo-card {\n  background: transparent;\n}\n\n#rivo-ways-to-redeem .rivo-card  .rivo-card-body {\n  color: #36409a;\n}\n\n#rivo-ways-to-earn .rivo-card {\n}\n\n#rivo-ways-to-earn .rivo-card.completed:hover {\n}\n\n/* === FAQS === */\nspan.rivo-lp-section-subheading {\n  text-transform: uppercase;\n  font-weight: 500 !important;\n  font-size: 14px !important;\n  letter-spacing: 0.3em;\n}\n\n.rivo-faq-item {\n  margin: 10px 0 !important;\n  border: 1px solid var(--rivo-secondary-color);\n  background: var(--rivo-faq-bg);\n  border-radius: 6px;\n  color: var(--rivo-card-border);\n  padding: 0 20px;\n}\n\n/* --- VIP Tiers --- */\n.rivo-vip-tier-container {\n  max-width: 100%;\n  overflow: auto;\n}\n\ntable.rivo-vip-tier-table {\n  border-collapse: separate;\n  border-spacing: 10px 0;\n  background: transparent;\n}\n\n.rivo-vip-tier-table-thead-tier-cell {\n  border: 1px solid;\n  border-color: var(--rivo-secondary-color);\n  color: var(--rivo-btn-hover-bg);\n  border-bottom: none;\n  border-top-left-radius: 12px;\n  border-top-right-radius: 12px;\n  padding-bottom: 16px;\n}\n\n.rivo-vip-tier-table-thead-tier-cell.rivo-tier-column-1 {\n  background: #fff;\n}\n\n.rivo-vip-tier-table-thead-tier-cell.rivo-tier-column-2 {\n  background: #ECEBFF;\n  border-color: #ECEBFF;\n}\n\n.rivo-vip-tier-table-thead-tier-cell.rivo-tier-column-3 {\n  background: #36409a;\n  color: var(--rivo-secondary-color);\n}\n\ntr.rivo-vip-tier-table-tbody-row td.rivo-tier-column-3 {\n  color: var(--rivo-secondary-color);\n}\nspan.rivo-th-tier-threshold {\n  max-width: 200px;\n  margin: 0 auto;\n  padding: 6px 10px;\n  border-radius: 12px;\n   background: #36409a;\n  color: #fff;\n}\n\n.rivo-tier-column-3 .rivo-th-cell-content span.rivo-th-tier-threshold {\n  background: var(--rivo-secondary-color);\n  color: #36409a;\n}\n\n.rivo-vip-tier-table tbody > .rivo-vip-tier-table-tbody-row:last-child .rivo-vip-tier-table-row-perk-value  {\n  border-bottom-right-radius: 12px;\n  border-bottom-left-radius: 12px;\n}\n\n.rivo-vip-tier-table .rivo-vip-tier-table-tbody-row .rivo-vip-tier-table-row-perk-value {\n  border: 1px solid var(--rivo-secondary-color);\n  border-top: none;\n  border-bottom: none;\n  text-align: center;\n}\nth.rivo-vip-tier-table-thead-tier-cell .rivo-th-cell-content.rivo-th-cell-content {\n  text-align: center;\n  padding: 0;\n}\nspan.rivo-th-tier-image svg {\n  display: none;\n}\nspan.rivo-th-tier-name {\n  color: var(--rivo-btn-hover-bg);\n}\n\ntd.rivo-vip-tier-table-row-perk-name,\nth.rivo-vip-tier-table-thead-first-cell {\n  display: none;\n}\n\n.rivo-vip-tier-table-tbody td {\n  border: none;\n}\n\n@media (max-width: 767px) {\n  .rivo-vip-tier-container {\n    width: 100%;\n    max-width: 100vw;\n    overflow-x: auto;\n    overflow-y: hidden;\n    -webkit-overflow-scrolling: touch;\n    /* optional: some bottom space to avoid hiding last row behind scrollbar */\n    padding-bottom: 8px;\n  }\n\n  /* Make the table wider than the viewport so it can scroll */\n  .rivo-vip-tier-container .rivo-vip-tier-table {\n    width: auto;\n    min-width: 720px; /* adjust if you need more room for your columns */\n    display: table;\n    table-layout: auto;\n  }\n\n  /* Prevent the page itself from creating horizontal scrollbars */\n  .rivo-vip-tier-container * {\n    max-width: none;\n  }\n}\n\n/* === VIP PROGRESS BAR === */\n.rivo-vip-tier-progress-container {\n  width: 50%;\n}\n\n@media (max-width: 768px) {\n  .rivo-vip-tier-progress-container {\n    width: 95%;\n  }\n}\n\n.rivo-account-progress-container {\n  background: var(--rivo-grey-300);\n}\n\n.rivo-account-progress-bar {\n  background: var(--rivo-primary-color);\n}\n\n.rivo-progress-current-tier-label,\n.rivo-progress-next-tier-label {\n  text-transform: uppercase;\n}\n\n/* === ACTIVITY / LOGS === */\n.rivo-points-expiry {\n  padding: 10px;\n  color: var(--rivo-primary-color);\n  font-weight: 900;\n  font-size: 14px;\n  margin: 16px auto 0;\n  width: fit-content;\n}\n\n#points-logs-activity thead th {\n  background: var(--rivo-primary-color);\n  color: var(--rivo-secondary-color);\n  font-weight: 500;\n}\n\n#points-logs-activity td {\n  color: var(--rivo-primary-color);\n}\n\n/* === SCROLLBARS === */\n.rivo-lp-cards-container::-webkit-scrollbar,\n.rivo-vip-tier-container::-webkit-scrollbar {\n  width: 10px;\n  height: 8px;\n}\n\n.rivo-lp-cards-container::-webkit-scrollbar-track,\n.rivo-vip-tier-container::-webkit-scrollbar-track {\n  background: var(--rivo-vip-bg);\n  border-radius: 10px;\n}\n\n.rivo-lp-cards-container::-webkit-scrollbar-thumb,\n.rivo-vip-tier-container::-webkit-scrollbar-thumb {\n  background: var(--rivo-secondary-color);\n  border-radius: 10px;\n}\n\n/* === MOBILE ≤768px === */\n@media (max-width: 768px) {\n  .rivo-hero-banner-text {\n    padding: 40px;\n  }\n\n  .rivo-content-wrapper {\n    padding: 40px 0;\n  }\n\n  .rivo-modal-button {\n    background: var(--rivo-primary-color);\n  }\n\n  .rivo-section-label {\n    font-size: 16px;\n  }\n\n  .rivo-card-title {\n    font-size: 16px;\n  }\n\n  .rivo-card-description {\n    font-size: 14px;\n  }\n  \n  .rivo-vip-tier-container {\n    padding-bottom: 20px;\n  }\n  \n  table.rivo-vip-tier-table {\n    padding-bottom: 20px;\n  }\n\n  table.rivo-vip-tier-table th,\n  table.rivo-vip-tier-table td {\n    width: 200px;\n    height: 60px;\n  }\n}"
+      }
+    },
+    "1761920635ee939b6d": {
+      "type": "_blocks",
+      "blocks": {
+        "rivo_loyalty_rewards_referrals_lp_header_AEH44J": {
+          "type": "shopify://apps/rivo-loyalty-rewards-referrals/blocks/lp-header/580e9665-b2cd-4dbc-b6ba-6445ac9e6871",
+          "settings": {
+            "rivo_hero_image": "shopify://shop_images/Shop_All.png",
+            "rivo_hero_background_color_enabled": false,
+            "background_color": "",
+            "rivo_banner_desktop_height": 500,
+            "rivo_banner_text_container_desktop_padding_top": 100,
+            "rivo_banner_text_container_desktop_max_width": 100,
+            "rivo_banner_text_container_desktop_button_gap": 10,
+            "rivo_hero_banner_text_padding": 15,
+            "rivo_banner_image_desktop_brightness": 100,
+            "rivo_banner_text_container_desktop_background_color": "#ffffff",
+            "rivo_banner_text_container_desktop_font_color": "#36409a",
+            "rivo_banner_title_desktop_font_size": 32,
+            "rivo_banner_subtitle_desktop_font_size": 16,
+            "rivo_banner_card_desktop_position": "left",
+            "rivo_banner_desktop_text_align": "left",
+            "rivo_banner_mobile_height": 400,
+            "rivo_banner_text_container_mobile_padding_top": 50,
+            "rivo_banner_image_mobile_brightness": 100,
+            "rivo_banner_mobile_text_container_position": "stacked",
+            "rivo_banner_text_container_mobile_background_color": "#ffffff",
+            "rivo_banner_text_container_mobile_font_color": "#000000",
+            "rivo_banner_text_container_mobile_button_gap": 10,
+            "rivo_banner_title_mobile_font_size": 32,
+            "rivo_banner_subtitle_mobile_font_size": 16,
+            "rivo_banner_card_mobile_position": "left",
+            "rivo_banner_mobile_text_align": "left"
+          }
+        },
+        "rivo_loyalty_rewards_referrals_lp_how_it_works_MUpX8k": {
+          "type": "shopify://apps/rivo-loyalty-rewards-referrals/blocks/lp-how-it-works/580e9665-b2cd-4dbc-b6ba-6445ac9e6871",
+          "settings": {
+            "background_color": "",
+            "section_title_font_color": "#36409a",
+            "section_subtitle_font_color": "",
+            "step_number_title_font_size": 26,
+            "step_number_subtitle_font_size": 16,
+            "step_font_color": "",
+            "step_number_type": "border",
+            "step_image_height": 200
+          }
+        }
+      },
+      "block_order": [
+        "rivo_loyalty_rewards_referrals_lp_header_AEH44J",
+        "rivo_loyalty_rewards_referrals_lp_how_it_works_MUpX8k"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "rivo_how_it_works_custom_JmJtF9": {
+      "type": "rivo-how-it-works-custom",
+      "blocks": {
+        "rivo_step_bwBa4h": {
+          "type": "rivo-step",
+          "settings": {
+            "title": "Sign up,\nit’s free!",
+            "caption": "30 points for creating an account"
+          }
+        },
+        "rivo_step_a647ik": {
+          "type": "rivo-step",
+          "settings": {
+            "title": "Collect\npoints",
+            "caption": "Countless ways easily earn points"
+          }
+        },
+        "rivo_step_VcXE7R": {
+          "type": "rivo-step",
+          "settings": {
+            "title": "Treat\nyourself",
+            "caption": "Exclusive rewards, promos, and content."
+          }
+        }
+      },
+      "block_order": [
+        "rivo_step_bwBa4h",
+        "rivo_step_a647ik",
+        "rivo_step_VcXE7R"
+      ],
+      "name": "Rivo How It Works",
+      "settings": {
+        "heading": "How it Works",
+        "highlight": "",
+        "text_align": "center",
+        "vertical_align": "center",
+        "text_color": "#36409a",
+        "muted_color": "#36409a",
+        "accent_color": "#f6ddec",
+        "bg_color": "#ffffff",
+        "max_width": 1160,
+        "show_borders": true,
+        "pad_top": 56,
+        "pad_bottom": 56
+      }
+    },
+    "17619222543082f7c4": {
+      "type": "_blocks",
+      "blocks": {
+        "rivo_loyalty_rewards_referrals_lp_ways_to_earn_V4bc34": {
+          "type": "shopify://apps/rivo-loyalty-rewards-referrals/blocks/lp-ways-to-earn/580e9665-b2cd-4dbc-b6ba-6445ac9e6871",
+          "settings": {
+            "background_color": "#f3f4fa",
+            "section_title_font_color": "",
+            "section_subtitle_font_color": ""
+          }
+        },
+        "rivo_loyalty_rewards_referrals_lp_ways_to_redeem_qVQ8jh": {
+          "type": "shopify://apps/rivo-loyalty-rewards-referrals/blocks/lp-ways-to-redeem/580e9665-b2cd-4dbc-b6ba-6445ac9e6871",
+          "settings": {
+            "background_color": "#f3f4fa",
+            "section_title_font_color": "",
+            "section_subtitle_font_color": ""
+          }
+        },
+        "rivo_loyalty_rewards_referrals_lp_vip_tiers_DRjCcG": {
+          "type": "shopify://apps/rivo-loyalty-rewards-referrals/blocks/lp-vip-tiers/580e9665-b2cd-4dbc-b6ba-6445ac9e6871",
+          "settings": {
+            "background_color": "#f3f4fa",
+            "section_title_font_color": "",
+            "section_subtitle_font_color": "",
+            "progress_bar_enabled": true,
+            "progress_bar_style": "single_column",
+            "progress_bar_label_style": "below",
+            "vip_table_perk_background_color": "",
+            "vip_table_perk_font_color": "",
+            "vip_table_first_tier_column_background_color": "#ffffff",
+            "vip_table_second_tier_column_background_color": "#ecebff",
+            "vip_table_third_tier_column_background_color": "#36409a",
+            "vip_table_active_tier_column_background_color": "",
+            "vip_table_th_background_color_enabled": false,
+            "vip_table_active_tier_background_color_enabled": false,
+            "vip_table_tier_icon_size": 50,
+            "vip_table_tier_name_font_size": 22,
+            "vip_table_tier_threshold_font_size": 14,
+            "vip_table_tier_body_font_size": 14,
+            "vip_table_body_padding": 15,
+            "vip_table_padding_top": 60,
+            "vip_table_tier_thead_padding_top": 20,
+            "vip_table_tier_thead_padding_bottom": 20,
+            "vip_table_tier_name_padding": 10,
+            "vip_table_tier_td_border_bottom": "1px solid #000000"
+          }
+        },
+        "rivo_loyalty_rewards_referrals_lp_referral_campaign_JHr8gd": {
+          "type": "shopify://apps/rivo-loyalty-rewards-referrals/blocks/lp-referral-campaign/580e9665-b2cd-4dbc-b6ba-6445ac9e6871",
+          "settings": {
+            "background_color": "",
+            "referral_campaign_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "rivo_loyalty_rewards_referrals_lp_ways_to_earn_V4bc34",
+        "rivo_loyalty_rewards_referrals_lp_ways_to_redeem_qVQ8jh",
+        "rivo_loyalty_rewards_referrals_lp_vip_tiers_DRjCcG",
+        "rivo_loyalty_rewards_referrals_lp_referral_campaign_JHr8gd"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "custom_liquid_TJJGAq": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "{% if customer %}\n  <style>\n    #rivo-how-it-works { display: block !important; }\n    .rivo-how-it-works-custom { display: none !important; }\n  </style>\n{% else %}\n  <style>\n    #rivo-how-it-works,\n #rivo-lp-explainer { display: none !important; }\n    .rivo-how-it-works-custom { display: block !important; }\n  </style>\n{% endif %}",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_kmQfAt": {
+      "type": "section",
+      "blocks": {
+        "text_mp6r4g": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h3>FAQ</h3>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "accordion_aez6LD": {
+          "type": "accordion",
+          "name": "t:names.accordion",
+          "settings": {
+            "icon": "caret",
+            "dividers": true,
+            "type_preset": "h5",
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "accordion_row_ByGBRQ": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "How do I join the loyalty program?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_RTDWYc": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Simply sign up to create your account and start earning rewards!</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_RTDWYc"
+              ]
+            },
+            "accordion_row_kaYj8w": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "How can I earn points?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_hh84pE": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Earn points by signing up, making purchases, and more! Check out the “Ways to Earn” section for details.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_hh84pE"
+              ]
+            },
+            "accordion_row_c7ATGK": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_dash_row",
+              "settings": {
+                "heading": "How do I redeem my points?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_6bckmt": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Log in, visit your dashboard, and visit the “Ways to Redeem” section to redeem your points for rewards.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_6bckmt"
+              ]
+            },
+            "accordion_row_XbUMRx": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_dash_row",
+              "settings": {
+                "heading": "Where can I see my points balance?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_bPG3Kw": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Log in to your account! Your points balance will be highlighted at the top of the page.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_bPG3Kw"
+              ]
+            },
+            "accordion_row_DzYUUU": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_dash_row",
+              "settings": {
+                "heading": "Do my points expire?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_cNhtHL": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Points will expire after one year if there isn't any account activity.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_cNhtHL"
+              ]
+            },
+            "accordion_row_erKNtR": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Do my rewards expire?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_niebxq": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Rewards will not expire once they are activated in the account.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_niebxq"
+              ]
+            },
+            "accordion_row_LD9H6p": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "What happens to my points if I return a purchase?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_QYpM76": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>If you return a purchase, the points you earned for that purchase will be deducted from your account.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_QYpM76"
+              ]
+            },
+            "accordion_row_qBcKea": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "When do I get my birthday gift?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_eHEPAb": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>On your birthday! The only instance in which birthday points will be delayed until next year is if your birthday is within 30 days from the day you entered it.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_eHEPAb"
+              ]
+            },
+            "accordion_row_VLFbkK": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "I forgot to use my points at Checkout, can I apply them retroactively?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_jTKLzP": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>No, unfortunately points cannot be redeemed on an order after the purchase has been completed</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_jTKLzP"
+              ]
+            }
+          },
+          "block_order": [
+            "accordion_row_ByGBRQ",
+            "accordion_row_kaYj8w",
+            "accordion_row_c7ATGK",
+            "accordion_row_XbUMRx",
+            "accordion_row_DzYUUU",
+            "accordion_row_erKNtR",
+            "accordion_row_LD9H6p",
+            "accordion_row_qBcKea",
+            "accordion_row_VLFbkK"
+          ]
+        }
+      },
+      "block_order": [
+        "text_mp6r4g",
+        "accordion_aez6LD"
+      ],
+      "custom_css": [],
+      "name": "t:names.faq_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 48,
+        "padding-block-end": 48,
+        "css_class": ""
       }
     }
   },
   "order": [
-    "rivo-loyalty-landing-page"
+    "rivo-loyalty-landing-page",
+    "1761920635ee939b6d",
+    "rivo_how_it_works_custom_JmJtF9",
+    "17619222543082f7c4",
+    "custom_liquid_TJJGAq",
+    "section_kmQfAt"
   ]
 }
