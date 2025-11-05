@@ -107,7 +107,7 @@
           "static": true,
           "settings": {
             "enable_filtering": true,
-            "filter_style": "vertical",
+            "filter_style": "horizontal",
             "filter_width": "centered",
             "text_label_case": "uppercase",
             "show_swatch_label": true,
@@ -116,8 +116,8 @@
             "enable_grid_density": true,
             "inherit_color_scheme": true,
             "color_scheme": "",
-            "padding-block-start": 8,
-            "padding-block-end": 8,
+            "padding-block-start": 12,
+            "padding-block-end": 12,
             "padding-inline-start": 0,
             "padding-inline-end": 0,
             "facets_margin_bottom": 8,
@@ -169,7 +169,7 @@
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 4,
+                "gap": 2,
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -258,7 +258,6 @@
                 "review_zUU3LJ": {
                   "type": "review",
                   "name": "t:names.product_review_stars",
-                  "disabled": true,
                   "settings": {
                     "stars_style": "shaded",
                     "show_number": true,
@@ -285,7 +284,7 @@
       },
       "settings": {
         "layout_type": "grid",
-        "product_card_size": "medium",
+        "product_card_size": "small",
         "mobile_product_card_size": "small",
         "product_grid_width": "centered",
         "full_width_on_mobile": true,
