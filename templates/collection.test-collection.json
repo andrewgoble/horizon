@@ -284,7 +284,7 @@
       },
       "settings": {
         "layout_type": "grid",
-        "product_card_size": "small",
+        "product_card_size": "medium",
         "mobile_product_card_size": "small",
         "product_grid_width": "centered",
         "full_width_on_mobile": true,
