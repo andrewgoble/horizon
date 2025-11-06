@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<a href=\"https://www.jambys.com/collections/all-products\" title=\"https://www.jambys.com/collections/all-products\"><span style=\"text-decoration:underline\">Early Access: Shop our Biggest Sale of the Year Early!</span></a>",
+            "text": "<a href=\"https://www.jambys.com/collections/all-products\" title=\"https://www.jambys.com/collections/all-products\"><span style=\"text-decoration:underline\"><strong>Early Access: Shop our Biggest Sale of the Year Early!</strong></span></a>",
             "link": "",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
@@ -36,7 +36,7 @@
         "announcement_T4f8H9": {
           "type": "_announcement",
           "settings": {
-            "text": "Free Shipping Orders $85+, Free Returns Always",
+            "text": "<strong>Free Shipping $85+ & Free Returns Always</strong>",
             "link": "",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
@@ -54,7 +54,7 @@
         "announcement_438RQH": {
           "type": "_announcement",
           "settings": {
-            "text": "10,000 5-Star Reviews",
+            "text": "<a href=\"/pages/reviews\" title=\"Reviews\"><strong>10,000 5-Star Reviews</strong></a>",
             "link": "",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
