@@ -18,7 +18,7 @@
     "type_accent_font": "sofia_sans_n7",
     "adobe_project_id": "hxg4nit",
     "use_adobe_fonts": false,
-    "type_size_paragraph": "14",
+    "type_size_paragraph": "16",
     "type_font_h1": "heading",
     "type_size_h1": "40",
     "type_line_height_h1": "display-tight",
@@ -89,13 +89,6 @@
     "variant_button_style": "variant-button-style-outline",
     "content_for_index": [],
     "blocks": {
-      "733389323033596483": {
-        "type": "shopify://apps/okendo/blocks/theme-settings/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
-        "disabled": true,
-        "settings": {
-          "show_preview_data": false
-        }
-      },
       "16017602894386113438": {
         "type": "shopify://apps/junip/blocks/junip-store-key/dc14f5a8-ed15-41b1-ad08-cfba23f9789b",
         "disabled": false,
