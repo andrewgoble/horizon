@@ -478,13 +478,53 @@
                   "block_order": [
                     "text_BPjrHN"
                   ]
+                },
+                "accordion_row_p3FQ94": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "GQ Members: Save Extra 25% Sitewide",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_8GAcnF": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>It's our biggest sale of the year, and you can save 25% extra with code <strong>GQ25</strong> at checkout! Add some of these matching items below to your cart.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_8GAcnF"
+                  ]
                 }
               },
               "block_order": [
                 "accordion_row_DgAWBc",
                 "accordion_row_tUHfpb",
                 "accordion_row_NYxFGV",
-                "accordion_row_bHzQkY"
+                "accordion_row_bHzQkY",
+                "accordion_row_p3FQ94"
               ]
             }
           },
