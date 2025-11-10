@@ -345,7 +345,7 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Basics",
-                    "open_by_default": false,
+                    "open_by_default": true,
                     "icon": "none",
                     "width": 20
                   },
@@ -442,10 +442,9 @@
                 },
                 "accordion_row_bHzQkY": {
                   "type": "_accordion-row",
-                  "disabled": true,
                   "settings": {
-                    "heading": "77-Day Comfiest Guarantee",
-                    "open_by_default": false,
+                    "heading": "Final Sale",
+                    "open_by_default": true,
                     "icon": "none",
                     "width": 20
                   },
@@ -453,7 +452,7 @@
                     "text_BPjrHN": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>It's easy to say you make the \"most comfortable clothing.\" We back it up. You can wash and wear your new Jambys for 77 whole days. (11 lazy Sundays for those counting at home.) If they aren't your most comfortable clothing, we'll let you return or exchange them for free. How can we do that? Just check the reviews.</p>",
+                        "text": "<p>All orders are final sale. If you have an issue with your shipment, give us a shout at hello@jambys.com and we'd be happy to help.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",

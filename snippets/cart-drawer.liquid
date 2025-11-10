@@ -53,7 +53,8 @@
             </button>
           </div>
             <!-- Intelligems shipping progress bar -->
-            <ig-shipping-progress-container></ig-shipping-progress-container>
+           
+            <ig-volume-progress-bar-widget data-skip-node-update data-skip-subtree-update></ig-volume-progress-bar-widget>
           <div
             class="cart-drawer__content motion-reduce"
             aria-label="{{ 'accessibility.cart' | t }}"
@@ -93,7 +94,8 @@
             aria-label="{{ 'accessibility.cart' | t }}"
             style="--header-height: 60px;"
           >
-            <ig-shipping-progress-container></ig-shipping-progress-container>
+            
+            <ig-shipping-progress-container data-skip-node-update data-skip-subtree-update></ig-shipping-progress-container>
             <scroll-hint
               class="cart-drawer__items"
             >

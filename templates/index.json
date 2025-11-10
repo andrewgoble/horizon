@@ -57,9 +57,9 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>Performance <em>Inactivewear</em></h1>",
+                "text": "<h1>The Black Friday Sale</h1>",
                 "width": "100%",
-                "max_width": "narrow",
+                "max_width": "normal",
                 "alignment": "center",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
@@ -83,7 +83,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h6>Luxurious unisex loungewear engineered for your maximum relaxation</h6>",
+                "text": "<h6>Shop the biggest sale of the year early and <strong>save up to 70%</strong> on your new favorite loungewear</h6>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
