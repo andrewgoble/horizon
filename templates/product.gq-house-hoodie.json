@@ -554,7 +554,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h4>Pair it With</h4>",
+            "text": "<h4>Pairs Well With</h4>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
