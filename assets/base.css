@@ -4287,3 +4287,6 @@ text-component {
   border-radius: 15px;
 }
 
+.ig-progress-bar {
+  max-width: 335px !important;
+}
