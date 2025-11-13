@@ -1,0 +1,105 @@
+{%- doc -%}
+  Renders a carousel of products with add to cart forms for the cart drawer.
+  Shows 3 products at a time.
+
+  @param {object} products - Product list object
+  @param {number} max_products - Maximum number of products to show
+{%- enddoc -%}
+
+{% liquid
+  assign max_products = max_products | default: 9
+  assign slide_count = 0
+  
+  # products parameter contains ProductDrop objects from product_list setting (not handles)
+  # Build array of slide HTML strings
+  assign list_items = blank
+  if products != blank
+    # Iterate directly over product objects
+    for product in products limit: max_products
+      if product != blank
+        assign slide_count = slide_count | plus: 1
+        capture slide_html
+          echo '<div class="cart-upsells__product">'
+          render 'cart-upsells-product-card', product: product
+          echo '</div>'
+        endcapture
+        
+        if list_items == blank
+          assign list_items = slide_html
+        else
+          assign list_items = list_items | append: '<!--@list/split-->' | append: slide_html
+        endif
+      endif
+    endfor
+  endif
+%}
+
+{% liquid
+  # Create an array from the list items to be used in the carousel
+  if list_items != blank
+    assign slides_array = list_items | strip | split: '<!--@list/split-->'
+  else
+    assign slides_array = blank
+  endif
+%}
+
+{% capture slides %}
+  {% if slides_array != blank %}
+    {% for item in slides_array %}
+      {% render 'slideshow-slide',
+        index: forloop.index0,
+        children: item,
+        class: 'resource-list__slide cart-upsells__slide'
+      %}
+    {% endfor %}
+  {% endif %}
+{% endcapture %}
+
+{% capture slideshow_arrows %}
+  {% if slide_count > 3 %}
+    {% render 'slideshow-arrows', icon_style: 'chevron', icon_shape: 'none' %}
+  {% endif %}
+{% endcapture %}
+
+<div
+  class="cart-upsells__carousel resource-list__carousel"
+  style="--gutter-slide-width: var(--padding-md); --slide-width-max: calc((100% - (2 * var(--gutter-slide-width))) / 3); --column-count: 3; --resource-list-column-gap: var(--gap-md);"
+>
+  {% render 'slideshow',
+    ref: 'cartUpsellsCarousel',
+    class: 'resource-list__carousel',
+    slides: slides,
+    slideshow_arrows: slideshow_arrows,
+    auto_hide_controls: false,
+    infinite: false,
+    initial_slide: 0,
+    slide_count: slide_count,
+    slideshow_gutters: 'start end'
+  %}
+</div>
+
+{% stylesheet %}
+  .cart-upsells__carousel {
+    --slide-width-max: calc((100% - (2 * var(--gutter-slide-width))) / 3);
+    --column-count: 3;
+    --resource-list-column-gap: var(--gap-md);
+  }
+
+  .cart-upsells__carousel .cart-upsells__slide {
+    min-width: 0;
+  }
+
+  @container resource-list-carousel (max-width: 749px) {
+    .cart-upsells__carousel {
+      --slide-width-max: calc(100% - (2 * var(--gutter-slide-width)));
+      --column-count: 1;
+    }
+  }
+
+  .cart-upsells__product {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+{% endstylesheet %}
+

@@ -126,7 +126,7 @@
             "navigation_bar": false,
             "color_scheme_navigation_bar": "",
             "drawer_accordion": true,
-            "drawer_accordion_expand_first": true,
+            "drawer_accordion_expand_first": false,
             "drawer_dividers": true,
             "featured_content_image_height": 170,
             "featured_content_title_font": "subheading",

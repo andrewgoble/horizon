@@ -1,0 +1,26 @@
+{% comment %}
+  Section for rendering cart upsells via Section Rendering API
+  This section is used by the cart-upsells.js component
+{% endcomment %}
+
+{% liquid
+  # The recommendations object is populated by Shopify's product recommendations API
+  # when the section is rendered via the Section Rendering API
+  if recommendations.performed and recommendations.products_count > 0
+    assign products = recommendations.products
+  else
+    # Fallback: if no recommendations, show some products from catalog
+    assign products = collections.all.products
+  endif
+%}
+
+{% if products != blank %}
+  {% for product in products limit: 9 %}
+    {% render 'resource-card',
+      resource: product,
+      resource_type: 'product',
+      image_aspect_ratio: '4 / 5'
+    %}
+  {% endfor %}
+{% endif %}
+

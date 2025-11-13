@@ -130,12 +130,13 @@ export default class VariantPicker extends Component {
       }
     }
 
-    // If variant-picker is a child of quick-add-component or swatches-variant-picker-component, we need to append section_id=section-rendering-product-card to the URL
-    if (this.closest('quick-add-component') || this.closest('swatches-variant-picker-component')) {
+    // If variant-picker is a child of quick-add-component or swatches-variant-picker-component, or has data-section-id, we need to append section_id to the URL
+    const sectionId = this.dataset.sectionId || (this.closest('quick-add-component') || this.closest('swatches-variant-picker-component') ? 'section-rendering-product-card' : null);
+    if (sectionId) {
       if (productUrl?.includes('?')) {
         productUrl = productUrl.split('?')[0];
       }
-      return `${productUrl}?section_id=section-rendering-product-card&${params.join('&')}`;
+      return `${productUrl}?section_id=${sectionId}&${params.join('&')}`;
     }
     return `${productUrl}?${params.join('&')}`;
   }

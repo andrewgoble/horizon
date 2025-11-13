@@ -15,8 +15,11 @@
   assign compare_at_price = selected_variant.compare_at_price
 
   assign show_compare_price = false
+  assign saving_percent = 0
   if compare_at_price > price
     assign show_compare_price = true
+    assign price_difference = compare_at_price | minus: price
+    assign saving_percent = price_difference | times: 10000 | divided_by: compare_at_price | divided_by: 100
   endif
 
   if product_resource == blank
@@ -41,11 +44,12 @@
   endif
 -%}
 
-<div ref="priceContainer">
+<div ref="priceContainer" class="price-container">
   {% if show_sale_price_first == false and show_compare_price %}
     <span role="group">
       <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
       <span class="compare-at-price">{{- compare_at_price -}}</span>
+      <span class="saving-percent">{{ 'content.price_saving_percent' | t: percent: saving_percent }}</span>
     </span>
   {% endif %}
 
@@ -62,6 +66,7 @@
     <span role="group">
       <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
       <span class="compare-at-price">{{- compare_at_price -}}</span>
+      <span class="saving-percent">{{ 'content.price_saving_percent' | t: percent: saving_percent }}</span>
     </span>
   {% endif %}
   {%- if selected_variant.unit_price and show_unit_price %}

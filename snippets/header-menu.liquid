@@ -36,7 +36,7 @@
       <a
         href="{{ link.url }}"
         data-skip-node-update="true"
-        class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+        class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}{% if link.links != blank %} menu-list__link--has-megamenu{% endif %}"
         {%- if link.links != blank -%}
           aria-controls="submenu-{{ forloop.index }}"
           aria-haspopup="true"
@@ -45,6 +45,11 @@
         ref="menuitem"
       >
         <span class="menu-list__link-title">{{- link.title -}}</span>
+        {%- if link.links != blank -%}
+          <span class="menu-list__link-arrow svg-wrapper icon-caret" aria-hidden="true">
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        {%- endif -%}
       </a>
       {%- if link.links != blank -%}
         <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
