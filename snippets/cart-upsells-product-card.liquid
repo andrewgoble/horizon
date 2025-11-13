@@ -1,52 +1,23 @@
 {%- doc -%}
   Renders a compact product card with add to cart form for cart upsells.
-  Includes variant selector icon button that opens a popup.
+  Uses quick-add-component to open the quick-add-dialog for variant selection.
 
   @param {object} product - The product object
 {%- enddoc -%}
 
-{% liquid
-  assign product_form_id = 'CartUpsells-ProductForm-' | append: product.id
-  assign dialog_id = 'CartUpsells-VariantDialog-' | append: product.id
-  # Use selected_or_first_available_variant to ensure form is enabled
-  assign variant_to_use = product.selected_or_first_available_variant
-  if variant_to_use == blank
-    assign variant_to_use = product.selected_or_first_variant
-  endif
-  
-  # Get selected size for display
-  assign selected_size = blank
-  for option in product.options_with_values
-    assign option_name_lower = option.name | downcase
-    if option_name_lower == 'size'
-      for value in option.values
-        if value.selected
-          assign selected_size = value
-          break
-        endif
-      endfor
-      break
-    endif
-  endfor
-  if selected_size == blank and product.options_with_values.size > 0
-    assign first_size_option = product.options_with_values | first
-    assign option_name_lower = first_size_option.name | downcase
-    if option_name_lower == 'size'
-      for value in first_size_option.values
-        if value.available
-          assign selected_size = value
-          break
-        endif
-      endfor
-    endif
-  endif
-%}
-
-<div class="cart-upsells-product-card">
+<product-card
+  class="product-card cart-upsells-product-card"
+  data-product-id="{{ product.id }}"
+  data-product-variants-size="{{ product.variants.size }}"
+>
   <a
     href="{{ product.url }}"
-    class="cart-upsells-product-card__link"
+    class="cart-upsells-product-card__link product-card__link"
+    ref="productCardLink"
   >
+    <span class="visually-hidden">
+      {{ product.title }}
+    </span>
     <div class="cart-upsells-product-card__media">
       {% if product.featured_image %}
       {% liquid
@@ -54,7 +25,7 @@
       %}
       {{
         product.featured_image
-        | image_url: width: 120
+        | image_url: width: 80
         | image_tag: loading: 'lazy', alt: image_alt, class: 'cart-upsells-product-card__image'
       }}
       {% endif %}
@@ -80,429 +51,14 @@
     </div>
   </a>
 
-  <div class="cart-upsells-product-card__form">
-    {%- if product.variants.size > 1 -%}
-      <div class="cart-upsells-product-form__variant-selector">
-        <button
-          type="button"
-          class="cart-upsells-product-form__variant-button"
-          aria-label="Choose options"
-          data-dialog-id="{{ dialog_id }}"
-          onclick="event.preventDefault(); event.stopPropagation(); event.stopImmediatePropagation(); const d = document.getElementById('{{ dialog_id }}'); if (d) { const dc = d.closest('dialog-component'); if (dc && dc.showDialog) { dc.showDialog(); } } return false;"
-        >
-          <span class="svg-wrapper">
-            {{- 'icon-filter.svg' | inline_asset_content -}}
-          </span>
-          <span class="cart-upsells-product-form__variant-label">choose<br>options</span>
-        </button>
-      </div>
-
-      <dialog-component>
-            <dialog
-              id="{{ dialog_id }}"
-              ref="dialog"
-              class="cart-upsells-variant-dialog"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="{{ dialog_id }}-title"
-            >
-              <div class="cart-upsells-variant-dialog__content">
-                <div class="cart-upsells-variant-dialog__header">
-                  <h2 id="{{ dialog_id }}-title" class="cart-upsells-variant-dialog__title">
-                    {{ product.title | escape }}
-                  </h2>
-                  <button
-                    type="button"
-                    class="cart-upsells-variant-dialog__close"
-                    aria-label="{{ 'actions.close' | t | default: 'Close' }}"
-                    onclick="this.closest('dialog-component')?.closeDialog()"
-                  >
-                    <span class="svg-wrapper">
-                      {{- 'icon-close.svg' | inline_asset_content -}}
-                    </span>
-                  </button>
-                </div>
-
-                <div class="cart-upsells-variant-dialog__body">
-                  <variant-picker
-                    data-product-id="{{ product.id }}"
-                    data-product-url="{{ product.url }}"
-                    data-section-id="section-rendering-product-card"
-                    class="variant-picker variant-picker--dropdowns"
-                  >
-                    {%- for product_option in product.options_with_values -%}
-                      {%- liquid
-                        assign option_name_lower = product_option.name | downcase
-                        if option_name_lower == 'size'
-                          assign show_option = true
-                        else
-                          assign show_option = false
-                        endif
-                      -%}
-                      {%- if show_option -%}
-                        <fieldset class="variant-option variant-option--buttons">
-                          <legend>
-                            {{ product_option.name | escape }}:
-                          </legend>
-                          <div class="variant-option__buttons">
-                            {%- for product_option_value in product_option.values -%}
-                              <label class="variant-option__button-label">
-                                <input
-                                  type="radio"
-                                  name="options[{{ product_option.name | escape }}]"
-                                  value="{{ product_option_value | escape }}"
-                                  form="{{ product_form_id }}"
-                                  aria-label="{{ product_option_value | escape }}"
-                                  data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
-                                  data-option-value-id="{{ product_option_value.id }}"
-                                  data-option-available="{{ product_option_value.available }}"
-                                  {% if product_option_value.variant.id %}
-                                    data-variant-id="{{ product_option_value.variant.id }}"
-                                  {% endif %}
-                                  {% if product_option_value.selected %}
-                                    checked
-                                  {% endif %}
-                                  {% if product_option_value.available == false %}
-                                    disabled
-                                  {% endif %}
-                                >
-                                <span>{{ product_option_value | escape }}</span>
-                                {% if product_option_value.available == false %}
-                                  <span class="variant-option__sold-out"> - {{ 'products.product.sold_out' | t }}</span>
-                                {% endif %}
-                              </label>
-                            {%- endfor -%}
-                          </div>
-                        </fieldset>
-                      {%- else -%}
-                        <fieldset class="variant-option variant-option--dropdown variant-option--hidden">
-                          <label for="{{ dialog_id }}-{{ product_option.position }}" class="visually-hidden">
-                            {{ product_option.name | escape }}:
-                          </label>
-                          <select
-                            id="{{ dialog_id }}-{{ product_option.position }}"
-                            name="options[{{ product_option.name | escape }}]"
-                            form="{{ product_form_id }}"
-                            class="variant-option__select"
-                            data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
-                            tabindex="-1"
-                            aria-hidden="true"
-                          >
-                            {%- liquid
-                              assign default_selected = true
-                            -%}
-                            {%- for product_option_value in product_option.values -%}
-                              {%- liquid
-                                assign should_select = false
-                                if default_selected and product_option_value.available
-                                  assign should_select = true
-                                  assign default_selected = false
-                                elsif product_option_value.selected
-                                  assign should_select = true
-                                endif
-                              -%}
-                              <option
-                                value="{{ product_option_value | escape }}"
-                                {% if should_select %}
-                                  selected
-                                {% endif %}
-                                {% if product_option_value.available == false %}
-                                  disabled
-                                {% endif %}
-                                data-option-value-id="{{ product_option_value.id }}"
-                                data-variant-id="{{ product_option_value.variant.id }}"
-                                data-option-available="{{ product_option_value.available }}"
-                              >
-                                {{ product_option_value | escape }}
-                              </option>
-                            {%- endfor -%}
-                          </select>
-                        </fieldset>
-                      {%- endif -%}
-                    {%- endfor -%}
-
-                    <script type="application/json">
-                      {{ product.selected_or_first_variant | json }}
-                    </script>
-                  </variant-picker>
-                </div>
-
-                <div class="cart-upsells-variant-dialog__footer">
-                  <button
-                    type="button"
-                    class="button button--primary"
-                    onclick="this.closest('dialog-component')?.closeDialog()"
-                  >
-                    {{ 'actions.close' | t | default: 'Done' }}
-                  </button>
-                </div>
-              </div>
-            </dialog>
-          </dialog-component>
-
-          <script>
-            // Initialize variant and update label when variant changes
-            (function() {
-              const dialogId = '{{ dialog_id }}';
-              
-              // Prevent anchored-popover-component errors by ensuring they have required refs
-              // Check for any anchored-popover-components without required refs and remove them
-              function removeInvalidPopovers(container) {
-                if (!container) return;
-                // Use querySelectorAll with :not() to find elements that don't have the required children
-                // But we can't do that, so we'll check all and remove invalid ones
-                const popovers = container.querySelectorAll('anchored-popover-component');
-                popovers.forEach(function(popover) {
-                  // Check if it's already connected (initialized)
-                  const isConnected = popover.isConnected;
-                  const trigger = popover.querySelector('[ref="trigger"]');
-                  const popoverEl = popover.querySelector('[ref="popover"]');
-                  if (!trigger || !popoverEl) {
-                    console.warn('Removing anchored-popover-component without required refs');
-                    // If already connected, we need to disconnect it first
-                    if (isConnected && popover.parentNode) {
-                      popover.parentNode.removeChild(popover);
-                    } else if (popover.parentNode) {
-                      popover.parentNode.removeChild(popover);
-                    } else {
-                      popover.remove();
-                    }
-                  }
-                });
-              }
-              
-              // Intercept anchored-popover-component initialization to prevent errors
-              function interceptPopoverInitialization() {
-                // Wait for the custom element to be defined if it's not already
-                if (!customElements.get('anchored-popover-component')) {
-                  customElements.whenDefined('anchored-popover-component').then(function() {
-                    interceptPopoverInitialization();
-                  });
-                  return;
-                }
-                
-                const AnchoredPopoverComponent = customElements.get('anchored-popover-component');
-                if (!AnchoredPopoverComponent) return;
-                
-                // Check if we've already wrapped it
-                if (AnchoredPopoverComponent.prototype._originalConnectedCallback) return;
-                
-                // Wrap the connectedCallback to check for refs before initialization
-                const originalConnectedCallback = AnchoredPopoverComponent.prototype.connectedCallback;
-                AnchoredPopoverComponent.prototype._originalConnectedCallback = originalConnectedCallback;
-                
-                AnchoredPopoverComponent.prototype.connectedCallback = function() {
-                  const trigger = this.querySelector('[ref="trigger"]');
-                  const popover = this.querySelector('[ref="popover"]');
-                  if (!trigger || !popover) {
-                    console.warn('Preventing anchored-popover-component initialization - missing required refs');
-                    // Remove the element to prevent further errors
-                    if (this.parentNode) {
-                      this.parentNode.removeChild(this);
-                    }
-                    return;
-                  }
-                  // Call original if refs are present
-                  return originalConnectedCallback.call(this);
-                };
-              }
-              
-              // Run interception immediately and also wait for definition
-              interceptPopoverInitialization();
-              if (customElements.get('anchored-popover-component')) {
-                interceptPopoverInitialization();
-              } else {
-                customElements.whenDefined('anchored-popover-component').then(interceptPopoverInitialization);
-              }
-              
-              // Also check the entire document for invalid popovers that might affect the dialog
-              function removeInvalidPopoversGlobally() {
-                const allPopovers = document.querySelectorAll('anchored-popover-component');
-                allPopovers.forEach(function(popover) {
-                  // Only remove if it's inside or related to our dialog
-                  const dialog = document.getElementById(dialogId);
-                  if (dialog && (dialog.contains(popover) || popover.closest('.cart-upsells-product-card'))) {
-                    const trigger = popover.querySelector('[ref="trigger"]');
-                    const popoverEl = popover.querySelector('[ref="popover"]');
-                    if (!trigger || !popoverEl) {
-                      console.warn('Removing invalid anchored-popover-component');
-                      if (popover.parentNode) {
-                        popover.parentNode.removeChild(popover);
-                      }
-                    }
-                  }
-                });
-              }
-              
-              const dialog = document.getElementById(dialogId);
-              if (dialog) {
-                // Remove any invalid popovers immediately
-                removeInvalidPopovers(dialog);
-                removeInvalidPopoversGlobally();
-                
-                // Also watch for new ones being added
-                const observer = new MutationObserver(function(mutations) {
-                  mutations.forEach(function(mutation) {
-                    mutation.addedNodes.forEach(function(node) {
-                      if (node.nodeType === 1) {
-                        if (node.tagName === 'ANCHORED-POPOVER-COMPONENT') {
-                          const trigger = node.querySelector('[ref="trigger"]');
-                          const popoverEl = node.querySelector('[ref="popover"]');
-                          if (!trigger || !popoverEl) {
-                            console.warn('Removing anchored-popover-component without required refs');
-                            // Use removeChild to ensure proper cleanup
-                            if (node.parentNode) {
-                              node.parentNode.removeChild(node);
-                            } else {
-                              node.remove();
-                            }
-                          }
-                        } else if (node.querySelectorAll) {
-                          // Also check children
-                          removeInvalidPopovers(node);
-                        }
-                      }
-                    });
-                  });
-                });
-                
-                observer.observe(dialog, { childList: true, subtree: true });
-                
-                // Also observe the document for any popovers being added that might affect us
-                const globalObserver = new MutationObserver(function(mutations) {
-                  removeInvalidPopoversGlobally();
-                });
-                globalObserver.observe(document.body, { childList: true, subtree: true });
-              }
-              
-              if (!dialog) return;
-              
-              const dialogComponent = dialog.closest('dialog-component');
-              const productForm = dialog.closest('.cart-upsells-product-card__form')?.querySelector('product-form-component');
-              const variantButton = document.querySelector('.cart-upsells-product-form__variant-button[data-dialog-id="' + dialogId + '"]');
-              const variantLabel = variantButton?.querySelector('.cart-upsells-product-form__variant-label');
-              const variantPicker = dialog.querySelector('variant-picker');
-              
-              if (!variantPicker || !productForm) return;
-              
-              // Add event listener with highest priority (keep inline onclick as backup)
-              if (variantButton && dialogComponent) {
-                // Add event listener in capture phase - this runs BEFORE other handlers
-                variantButton.addEventListener('click', function(e) {
-                  console.log('Variant button click event fired');
-                  e.preventDefault();
-                  e.stopPropagation();
-                  e.stopImmediatePropagation();
-                  
-                  // Remove any invalid anchored-popover-components before opening dialog
-                  removeInvalidPopovers(dialog);
-                  
-                  console.log('Dialog component:', dialogComponent);
-                  console.log('showDialog method:', typeof dialogComponent.showDialog);
-                  
-                  if (dialogComponent && typeof dialogComponent.showDialog === 'function') {
-                    console.log('Calling showDialog');
-                    dialogComponent.showDialog();
-                  } else {
-                    console.error('Dialog component or showDialog not found');
-                  }
-                  
-                  return false;
-                }, true); // Capture phase - runs BEFORE bubbling phase
-              } else {
-                console.error('Variant button or dialog component not found', {
-                  variantButton: !!variantButton,
-                  dialogComponent: !!dialogComponent
-                });
-              }
-              
-              // Trigger initial variant update
-              function initializeVariant() {
-                const jsonScript = variantPicker.querySelector('script[type="application/json"]');
-                if (!jsonScript) return;
-                
-                try {
-                  const variant = JSON.parse(jsonScript.textContent);
-                  if (!variant || !variant.id) return;
-                  
-                  const productId = variantPicker.dataset.productId || '{{ product.id }}';
-                  const event = new CustomEvent('variant:update', {
-                    bubbles: true,
-                    detail: {
-                      resource: variant,
-                      sourceId: variant.id,
-                      data: {
-                        html: document,
-                        productId: productId,
-                        newProduct: null
-                      }
-                    }
-                  });
-                  
-                  const target = productForm.closest('.shopify-section, dialog') || productForm;
-                  target.dispatchEvent(event);
-                } catch (e) {
-                  console.error('Error initializing variant:', e);
-                }
-              }
-              
-              // Keep label as "choose options" - no need to update it when variant changes
-              
-              // Initialize on load
-              if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initializeVariant);
-              } else {
-                setTimeout(initializeVariant, 0);
-              }
-            })();
-          </script>
-      </dialog-component>
-    {%- endif -%}
-
-    <product-form-component
-      data-section-id="section-rendering-product-card"
-      data-product-id="{{ product.id }}"
-      on:submit="/handleSubmit"
-      class="cart-upsells-product-form"
-    >
-      <div
-        class="visually-hidden"
-        aria-live="assertive"
-        role="status"
-        aria-atomic="true"
-        ref="liveRegion"
-      ></div>
-      
-      <div class="cart-upsells-product-form__actions">
-        {%- form 'product', product, id: product_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-          <input
-            type="hidden"
-            name="id"
-            ref="variantId"
-            value="{{ variant_to_use.id }}"
-            {% if variant_to_use.available == false %}
-              disabled
-            {% endif %}
-          >
-          <input
-            type="hidden"
-            name="quantity"
-            value="1"
-          >
-
-          <div class="cart-upsells-product-form__button">
-            {% render 'add-to-cart-button',
-              add_to_cart_text: 'add',
-              class: 'button button--primary cart-upsells-product-form__add-button',
-              can_add_to_cart: variant_to_use.available,
-              product: product
-            %}
-          </div>
-        {%- endform -%}
-      </div>
-    </product-form-component>
-  </div>
-</div>
+  {%- if product.available -%}
+    {% render 'quick-add',
+      product: product,
+      section_id: 'section-rendering-product-card',
+      block: blank
+    %}
+  {%- endif -%}
+</product-card>
 
 {% stylesheet %}
   .cart-upsells-product-card {
@@ -517,15 +73,19 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-2xs);
+    gap: var(--gap-3xs);
+    align-items: center;
+    text-align: center;
   }
 
   .cart-upsells-product-card__media {
     position: relative;
     width: 100%;
+    max-width: 80px;
     aspect-ratio: 1 / 1;
     overflow: hidden;
     flex-shrink: 0;
+    margin: 0 auto;
   }
 
   .cart-upsells-product-card__image {
@@ -540,11 +100,14 @@
     flex-direction: column;
     gap: var(--gap-3xs);
     min-height: 0;
+    width: 100%;
+    align-items: center;
+    text-align: center;
   }
 
   .cart-upsells-product-card__title {
     margin: 0;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: var(--font-weight-normal);
     line-height: 1.2;
     display: -webkit-box;
@@ -552,6 +115,7 @@
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-align: center;
   }
 
   .cart-upsells-product-card__price {
@@ -564,244 +128,48 @@
     font-weight: var(--font-weight-medium);
   }
 
-  .cart-upsells-product-card__form {
+  /* Override product-card__link positioning for cart upsells */
+  .cart-upsells-product-card .product-card__link {
+    position: static;
+    inset: auto;
+  }
+
+  /* Quick-add component styling for cart upsells */
+  .cart-upsells-product-card .quick-add {
+    position: static;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-end;
     margin-top: var(--gap-2xs);
     flex-shrink: 0;
-    display: flex;
-    gap: var(--gap-2xs);
-    align-items: stretch;
-  }
-
-  .cart-upsells-product-form__actions {
-    display: flex;
-    gap: var(--gap-2xs);
-    align-items: stretch;
-    flex: 1;
-    min-width: 0;
-  }
-
-  .cart-upsells-product-form__variant-selector {
-    flex-shrink: 0;
-    width: auto;
-    min-width: fit-content;
-  }
-
-  .cart-upsells-product-form__variant-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.125rem;
-    padding: 0.25rem 0.375rem;
-    border: var(--style-border-width-inputs) solid var(--color-input-border);
-    border-radius: var(--style-border-radius-inputs);
-    background-color: var(--color-input-background);
-    color: var(--color-input-text);
-    font-size: 0.625rem;
-    line-height: 1.2;
-    cursor: pointer;
-    height: 100%;
-    min-width: auto;
-    transition: border-color var(--animation-speed) var(--animation-easing),
-                background-color var(--animation-speed) var(--animation-easing);
-    position: relative;
-    z-index: 10;
-    pointer-events: auto;
-    text-align: center;
-  }
-
-  .cart-upsells-product-form__variant-button:hover {
-    border-color: var(--color-input-border-hover, var(--color-input-border));
-    background-color: var(--color-input-background-hover, var(--color-input-background));
-  }
-
-  .cart-upsells-product-form__variant-button .svg-wrapper {
-    width: var(--icon-size-xs);
-    height: var(--icon-size-xs);
-    flex-shrink: 0;
-  }
-
-  .cart-upsells-product-form__variant-label {
-    flex: 0 0 auto;
-    text-align: center;
-    line-height: 1.2;
-    text-transform: lowercase;
-  }
-
-  .cart-upsells-product-form__button {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .cart-upsells-product-form__add-button {
     width: 100%;
+    pointer-events: auto;
+    cursor: default;
+  }
+
+  .cart-upsells-product-card .quick-add__button {
+    display: grid !important;
+    width: 100%;
+    max-width: 100px;
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
     line-height: 1.2;
-  }
-
-  /* Variant Dialog */
-  .cart-upsells-variant-dialog {
-    max-width: 90vw;
-    width: 100%;
-    max-width: 400px;
-    padding: 0;
-    border: none;
-    border-radius: var(--style-border-radius);
-    background: var(--color-background);
-  }
-
-  .cart-upsells-variant-dialog__content {
-    display: flex;
-    flex-direction: column;
-    max-height: 80vh;
-  }
-
-  .cart-upsells-variant-dialog__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--padding-md);
-    border-bottom: var(--style-border-width) solid var(--color-border);
-  }
-
-  .cart-upsells-variant-dialog__title {
-    margin: 0;
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-medium);
-    flex: 1;
-  }
-
-  .cart-upsells-variant-dialog__close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--padding-2xs);
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    color: var(--color-text);
-    margin-left: var(--margin-sm);
-  }
-
-  .cart-upsells-variant-dialog__close .svg-wrapper {
-    width: var(--icon-size-sm);
-    height: var(--icon-size-sm);
-  }
-
-  .cart-upsells-variant-dialog__body {
-    padding: var(--padding-md);
-    overflow-y: auto;
-    flex: 1;
-  }
-
-  .cart-upsells-variant-dialog__body .variant-picker {
-    pointer-events: auto;
-  }
-
-  .cart-upsells-variant-dialog__body .variant-option {
-    margin-bottom: var(--margin-md);
-  }
-
-  .cart-upsells-variant-dialog__body .variant-option--hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .cart-upsells-variant-dialog__body .variant-option--buttons {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-xs);
-    margin: 0;
-    padding: 0;
-    border: none;
-  }
-
-  .cart-upsells-variant-dialog__body .variant-option--buttons legend {
-    padding: 0;
-    margin-bottom: var(--margin-xs);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-  }
-
-  .cart-upsells-variant-dialog__body .variant-option__buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--gap-xs);
-  }
-
-  .cart-upsells-variant-dialog__body .variant-option__button-label {
-    display: inline-flex;
-    align-items: center;
-    padding: var(--padding-xs) var(--padding-sm);
-    border: var(--style-border-width-inputs) solid var(--color-input-border);
+    position: relative;
     border-radius: var(--style-border-radius-inputs);
-    background-color: var(--color-input-background);
-    color: var(--color-input-text);
-    font-size: var(--font-size-sm);
-    cursor: pointer;
-    transition: border-color var(--animation-speed) var(--animation-easing),
-                background-color var(--animation-speed) var(--animation-easing);
+    margin: 0 auto;
   }
 
-  .cart-upsells-variant-dialog__body .variant-option__button-label:hover {
-    border-color: var(--color-input-border-hover, var(--color-input-border));
-    background-color: var(--color-input-background-hover, var(--color-input-background));
+  @media screen and (min-width: 750px) {
+    .cart-upsells-product-card .quick-add__button {
+      display: grid !important;
+    }
   }
 
-  .cart-upsells-variant-dialog__body .variant-option__button-label input[type="radio"] {
-    margin: 0;
-    margin-right: var(--margin-2xs);
-    cursor: pointer;
+  .cart-upsells-product-card .quick-add__button--choose {
+    display: grid !important;
   }
 
-  .cart-upsells-variant-dialog__body .variant-option__button-label input[type="radio"]:checked + span {
-    font-weight: var(--font-weight-medium);
-  }
-
-  .cart-upsells-variant-dialog__body .variant-option__button-label:has(input[type="radio"]:checked) {
-    border-color: var(--color-foreground);
-    background-color: var(--color-background);
-  }
-
-  .cart-upsells-variant-dialog__body .variant-option__button-label:has(input[type="radio"]:disabled) {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .cart-upsells-variant-dialog__body .variant-option__sold-out {
-    color: var(--color-text-secondary, var(--color-text));
-    font-size: 0.875em;
-  }
-
-  .cart-upsells-variant-dialog__footer {
-    padding: var(--padding-md);
-    border-top: var(--style-border-width) solid var(--color-border);
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .cart-upsells-variant-dialog__footer .button {
-    min-width: 100px;
-  }
-
-  /* Hide Color and other non-Size options visually */
-  .cart-upsells-product-form__variant-picker .variant-option--hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  .cart-upsells-product-card .quick-add__button--add {
+    display: grid !important;
   }
 {% endstylesheet %}

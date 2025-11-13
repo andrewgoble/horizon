@@ -54,9 +54,31 @@ export class AnchoredPopoverComponent extends Component {
    * Component initialization - sets up event listeners for resize and popover toggle events.
    */
   connectedCallback() {
-    super.connectedCallback();
+    // Check if required refs are present before initializing
+    // This prevents errors when content is dynamically loaded
+    try {
+      super.connectedCallback();
+    } catch (error) {
+      // If required refs are missing, remove this element to prevent errors
+      if (error.name === 'MissingRefError') {
+        console.warn('AnchoredPopoverComponent: Missing required refs, removing element', this);
+        this.remove();
+        return;
+      }
+      throw error;
+    }
+
     const popover = /** @type {HTMLElement} */ (this.refs.popover);
-    popover?.addEventListener('beforetoggle', (event) => {
+    const trigger = /** @type {HTMLElement} */ (this.refs.trigger);
+    
+    // Double-check refs exist before setting up listeners
+    if (!popover || !trigger) {
+      console.warn('AnchoredPopoverComponent: Required refs not found after initialization, removing element', this);
+      this.remove();
+      return;
+    }
+
+    popover.addEventListener('beforetoggle', (event) => {
       const evt = /** @type {ToggleEvent} */ (event);
       this.#updatePosition();
       window[evt.newState === 'open' ? 'addEventListener' : 'removeEventListener']('resize', this.#resizeListener);

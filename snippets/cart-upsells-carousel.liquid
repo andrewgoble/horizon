@@ -11,12 +11,12 @@
   assign slide_count = 0
   
   # products parameter contains ProductDrop objects from product_list setting (not handles)
-  # Build array of slide HTML strings
+  # Build array of slide HTML strings, only including products that are in stock
   assign list_items = blank
   if products != blank
-    # Iterate directly over product objects
+    # Iterate directly over product objects and filter for available products
     for product in products limit: max_products
-      if product != blank
+      if product != blank and product.available
         assign slide_count = slide_count | plus: 1
         capture slide_html
           echo '<div class="cart-upsells__product">'
@@ -63,7 +63,7 @@
 
 <div
   class="cart-upsells__carousel resource-list__carousel"
-  style="--gutter-slide-width: var(--padding-md); --slide-width-max: calc((100% - (2 * var(--gutter-slide-width))) / 3); --column-count: 3; --resource-list-column-gap: var(--gap-md);"
+  style="--gutter-slide-width: var(--padding-sm); --slide-width-max: calc((100% - (2 * var(--gutter-slide-width))) / 3); --column-count: 3; --resource-list-column-gap: var(--gap-sm);"
 >
   {% render 'slideshow',
     ref: 'cartUpsellsCarousel',
@@ -82,7 +82,7 @@
   .cart-upsells__carousel {
     --slide-width-max: calc((100% - (2 * var(--gutter-slide-width))) / 3);
     --column-count: 3;
-    --resource-list-column-gap: var(--gap-md);
+    --resource-list-column-gap: var(--gap-sm);
   }
 
   .cart-upsells__carousel .cart-upsells__slide {
@@ -100,6 +100,19 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  /* Adjust slideshow arrow positioning */
+  .cart-upsells__carousel slideshow-arrows {
+    padding-inline: var(--padding-lg);
+  }
+
+  .cart-upsells__carousel slideshow-arrows .slideshow-control--previous {
+    margin-left: calc(-1 * var(--padding-lg));
+  }
+
+  .cart-upsells__carousel slideshow-arrows .slideshow-control--next {
+    margin-right: calc(-1 * var(--padding-lg));
   }
 {% endstylesheet %}
 

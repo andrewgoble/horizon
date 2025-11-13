@@ -28,7 +28,7 @@
       data-template-product-match="true"
     {% endif %}
     {{ block.shopify_attributes }}
-    {% if request.visual_preview_mode %}
+    {% if request.visual_preview_mode %} 
       data-shopify-visual-preview
     {% endif %}
   >
@@ -51,6 +51,14 @@
             assign option_id_attribute = 'data-option-id="' | append: fieldset_id | append: '"'
             assign longest_value = 0
           endif
+
+          # Sort size options in the correct order (XXS, XS, S, M, L, XL, XXL, etc.)
+          assign option_name_lower = product_option.name | downcase
+          assign is_size_option = false
+          if option_name_lower == 'size'
+            assign is_size_option = true
+            assign size_order = 'XXS|XS|S|M|L|XL|XXL|XXXL|4XL|5XL|6XL|7XL|8XL|9XL|10XL' | split: '|'
+          endif
         -%}
 
         {%- if variant_style == 'swatch' or block_settings.variant_style == 'buttons' -%}
@@ -64,52 +72,200 @@
                 <span class="variant-option__swatch-value">{{ product_option.selected_value }}</span>
               {%- endif %}
             </legend>
-            {%- for product_option_value in product_option.values -%}
-              {% if product_option_value.size > longest_value and option_id_attribute %}
-                {% assign longest_value = product_option_value.size %}
-              {% endif %}
-              <label class="variant-option__button-label{% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}">
-                <input
-                  type="radio"
-                  name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
-                  value="{{ product_option_value | escape }}"
-                  aria-label="{{ product_option_value.name }}"
-                  {% if product_option_value.available == false %}
-                    aria-disabled="true"
-                  {% endif %}
-                  data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
-                  data-option-value-id="{{ product_option_value.id }}"
-                  data-option-available="{{ product_option_value.available }}"
-                  data-connected-product-url="{{ product_option_value.product_url }}"
-                  {% if product_option_value.variant.id %}
-                    data-variant-id="{{ product_option_value.variant.id }}"
-                  {% endif %}
-                  {% if product_option_value.selected %}
-                    checked
-                  {% endif %}
-                >
-                {% if variant_style == 'swatch' %}
-                  {% liquid
-                    assign featured_media = product_option_value.variant.featured_media
-
-                    # If the variant has no featured media, and we have a combined listing product, then fall back to
-                    # using the featured media of the child product that is linked to this option value.
-                    if featured_media == blank and product_option_value.product_url
-                      assign featured_media = product_option_value.variant.product.featured_media
+            {%- if is_size_option -%}
+              {%- comment -%} Render size options in the correct order {%- endcomment -%}
+              {%- assign rendered_values = '' -%}
+              {%- assign index_counter = 0 -%}
+              {%- for size in size_order -%}
+                {%- for product_option_value in product_option.values -%}
+                  {%- liquid
+                    assign value_normalized = product_option_value | strip | replace: 'Extra Extra Small', 'XXS' | replace: 'Extra Small', 'XS' | replace: 'Small', 'S' | replace: 'Medium', 'M' | replace: 'Large', 'L' | replace: 'Extra L', 'XL' | replace: 'Extra XL', 'XXL'
+                    assign value_rendered = false
+                    if rendered_values != ''
+                      assign rendered_check = rendered_values | split: '|||'
+                      for rendered_value in rendered_check
+                        if rendered_value == product_option_value
+                          assign value_rendered = true
+                          break
+                        endif
+                      endfor
                     endif
-                  %}
+                  -%}
+                  {%- if value_normalized == size and value_rendered == false -%}
+                    {%- if product_option_value.size > longest_value and option_id_attribute %}
+                      {% assign longest_value = product_option_value.size %}
+                    {% endif %}
+                    <label class="variant-option__button-label{% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}">
+                      <input
+                        type="radio"
+                        name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
+                        value="{{ product_option_value | escape }}"
+                        aria-label="{{ product_option_value.name }}"
+                        {% if product_option_value.available == false %}
+                          aria-disabled="true"
+                        {% endif %}
+                        data-input-id="{{ product_option.position }}-{{ index_counter }}"
+                        data-option-value-id="{{ product_option_value.id }}"
+                        data-option-available="{{ product_option_value.available }}"
+                        data-connected-product-url="{{ product_option_value.product_url }}"
+                        {% if product_option_value.variant.id %}
+                          data-variant-id="{{ product_option_value.variant.id }}"
+                        {% endif %}
+                        {% if product_option_value.selected %}
+                          checked
+                        {% endif %}
+                      >
+                      {% if variant_style == 'swatch' %}
+                        {% liquid
+                          assign featured_media = product_option_value.variant.featured_media
 
-                  {% render 'swatch',
-                    swatch: product_option_value.swatch,
-                    variant_image: featured_media,
-                    mode: 'unscaled'
-                  %}
-                {% else %}
-                  <span class="variant-option__button-label__text">{{ product_option_value | strip | replace: 'Extra Small', 'XS' | replace: 'Small', 'S' | replace: 'Medium', 'M' | replace: 'Large', 'L' | replace: 'Extra L', 'XL' | replace: 'Extra XL', 'XXL'  }}</span>
+                          # If the variant has no featured media, and we have a combined listing product, then fall back to
+                          # using the featured media of the child product that is linked to this option value.
+                          if featured_media == blank and product_option_value.product_url
+                            assign featured_media = product_option_value.variant.product.featured_media
+                          endif
+                        %}
+
+                        {% render 'swatch',
+                          swatch: product_option_value.swatch,
+                          variant_image: featured_media,
+                          mode: 'unscaled'
+                        %}
+                      {% else %}
+                        <span class="variant-option__button-label__text">{{ product_option_value | strip | replace: 'Extra Small', 'XS' | replace: 'Small', 'S' | replace: 'Medium', 'M' | replace: 'Large', 'L' | replace: 'Extra L', 'XL' | replace: 'Extra XL', 'XXL'  }}</span>
+                      {% endif %}
+                      {% render 'strikethrough-variant', product_option: product_option_value %}
+                    </label>
+                    {%- liquid
+                      if rendered_values == ''
+                        assign rendered_values = product_option_value
+                      else
+                        assign rendered_values = rendered_values | append: '|||' | append: product_option_value
+                      endif
+                      assign index_counter = index_counter | plus: 1
+                    -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endfor -%}
+              {%- comment -%} Render any remaining values that weren't in the predefined order {%- endcomment -%}
+              {%- for product_option_value in product_option.values -%}
+                {%- liquid
+                  assign value_rendered = false
+                  if rendered_values != ''
+                    assign rendered_check = rendered_values | split: '|||'
+                    for rendered_value in rendered_check
+                      if rendered_value == product_option_value
+                        assign value_rendered = true
+                        break
+                      endif
+                    endfor
+                  endif
+                -%}
+                {%- unless value_rendered -%}
+                  {%- if product_option_value.size > longest_value and option_id_attribute %}
+                    {% assign longest_value = product_option_value.size %}
+                  {% endif %}
+                  <label class="variant-option__button-label{% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}">
+                    <input
+                      type="radio"
+                      name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
+                      value="{{ product_option_value | escape }}"
+                      aria-label="{{ product_option_value.name }}"
+                      {% if product_option_value.available == false %}
+                        aria-disabled="true"
+                      {% endif %}
+                      data-input-id="{{ product_option.position }}-{{ index_counter }}"
+                      data-option-value-id="{{ product_option_value.id }}"
+                      data-option-available="{{ product_option_value.available }}"
+                      data-connected-product-url="{{ product_option_value.product_url }}"
+                      {% if product_option_value.variant.id %}
+                        data-variant-id="{{ product_option_value.variant.id }}"
+                      {% endif %}
+                      {% if product_option_value.selected %}
+                        checked
+                      {% endif %}
+                    >
+                    {% if variant_style == 'swatch' %}
+                      {% liquid
+                        assign featured_media = product_option_value.variant.featured_media
+
+                        # If the variant has no featured media, and we have a combined listing product, then fall back to
+                        # using the featured media of the child product that is linked to this option value.
+                        if featured_media == blank and product_option_value.product_url
+                          assign featured_media = product_option_value.variant.product.featured_media
+                        endif
+                      %}
+
+                      {% render 'swatch',
+                        swatch: product_option_value.swatch,
+                        variant_image: featured_media,
+                        mode: 'unscaled'
+                      %}
+                    {% else %}
+                      <span class="variant-option__button-label__text">{{ product_option_value | strip | replace: 'Extra Small', 'XS' | replace: 'Small', 'S' | replace: 'Medium', 'M' | replace: 'Large', 'L' | replace: 'Extra L', 'XL' | replace: 'Extra XL', 'XXL'  }}</span>
+                    {% endif %}
+                    {% render 'strikethrough-variant', product_option: product_option_value %}
+                  </label>
+                  {%- liquid
+                    if rendered_values == ''
+                      assign rendered_values = product_option_value
+                    else
+                      assign rendered_values = rendered_values | append: '|||' | append: product_option_value
+                    endif
+                    assign index_counter = index_counter | plus: 1
+                  -%}
+                {%- endunless -%}
+              {%- endfor -%}
+            {%- else -%}
+              {%- comment -%} Render non-size options in their original order {%- endcomment -%}
+              {%- for product_option_value in product_option.values -%}
+                {% if product_option_value.size > longest_value and option_id_attribute %}
+                  {% assign longest_value = product_option_value.size %}
                 {% endif %}
-                {% render 'strikethrough-variant', product_option: product_option_value %}
-              </label>
-            {%- endfor -%}
+                <label class="variant-option__button-label{% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}">
+                  <input
+                    type="radio"
+                    name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
+                    value="{{ product_option_value | escape }}"
+                    aria-label="{{ product_option_value.name }}"
+                    {% if product_option_value.available == false %}
+                      aria-disabled="true"
+                    {% endif %}
+                    data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
+                    data-option-value-id="{{ product_option_value.id }}"
+                    data-option-available="{{ product_option_value.available }}"
+                    data-connected-product-url="{{ product_option_value.product_url }}"
+                    {% if product_option_value.variant.id %}
+                      data-variant-id="{{ product_option_value.variant.id }}"
+                    {% endif %}
+                    {% if product_option_value.selected %}
+                      checked
+                    {% endif %}
+                  >
+                  {% if variant_style == 'swatch' %}
+                    {% liquid
+                      assign featured_media = product_option_value.variant.featured_media
+
+                      # If the variant has no featured media, and we have a combined listing product, then fall back to
+                      # using the featured media of the child product that is linked to this option value.
+                      if featured_media == blank and product_option_value.product_url
+                        assign featured_media = product_option_value.variant.product.featured_media
+                      endif
+                    %}
+
+                    {% render 'swatch',
+                      swatch: product_option_value.swatch,
+                      variant_image: featured_media,
+                      mode: 'unscaled'
+                    %}
+                  {% else %}
+                    <span class="variant-option__button-label__text">{{ product_option_value | strip | replace: 'Extra Small', 'XS' | replace: 'Small', 'S' | replace: 'Medium', 'M' | replace: 'Large', 'L' | replace: 'Extra L', 'XL' | replace: 'Extra XL', 'XXL'  }}</span>
+                  {% endif %}
+                  {% render 'strikethrough-variant', product_option: product_option_value %}
+                </label>
+              {%- endfor -%}
+            {%- endif -%}
             {% if option_id_attribute %}
               {% style %}
                 [data-option-id="{{ fieldset_id }}"] {
@@ -148,24 +304,116 @@
                 name="options[{{ product_option.name | escape }}]"
                 class="variant-option__select"
               >
-                {%- for product_option_value in product_option.values -%}
-                  <option
-                    value="{{ product_option_value | escape }}"
-                    data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
-                    data-option-value-id="{{ product_option_value.id }}"
-                    data-variant-id="{{ product_option_value.variant.id }}"
-                    data-connected-product-url="{{ product_option_value.product_url }}"
-                    {% if product_option_value.selected %}
-                      selected="selected"
-                    {% endif %}
-                  >
-                    {% if product_option_value.available == false %}
-                      {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
-                    {% else %}
-                      {{ product_option_value | escape }}
-                    {% endif %}
-                  </option>
-                {%- endfor -%}
+                {%- if is_size_option -%}
+                  {%- comment -%} Render size options in the correct order {%- endcomment -%}
+                  {%- assign rendered_values_dropdown = '' -%}
+                  {%- assign index_counter_dropdown = 0 -%}
+                  {%- for size in size_order -%}
+                    {%- for product_option_value in product_option.values -%}
+                      {%- liquid
+                        assign value_normalized = product_option_value | strip | replace: 'Extra Extra Small', 'XXS' | replace: 'Extra Small', 'XS' | replace: 'Small', 'S' | replace: 'Medium', 'M' | replace: 'Large', 'L' | replace: 'Extra L', 'XL' | replace: 'Extra XL', 'XXL'
+                        assign value_rendered = false
+                        if rendered_values_dropdown != ''
+                          assign rendered_check = rendered_values_dropdown | split: '|||'
+                          for rendered_value in rendered_check
+                            if rendered_value == product_option_value
+                              assign value_rendered = true
+                              break
+                            endif
+                          endfor
+                        endif
+                      -%}
+                      {%- if value_normalized == size and value_rendered == false -%}
+                        <option
+                          value="{{ product_option_value | escape }}"
+                          data-input-id="{{ product_option.position }}-{{ index_counter_dropdown }}"
+                          data-option-value-id="{{ product_option_value.id }}"
+                          data-variant-id="{{ product_option_value.variant.id }}"
+                          data-connected-product-url="{{ product_option_value.product_url }}"
+                          {% if product_option_value.selected %}
+                            selected="selected"
+                          {% endif %}
+                        >
+                          {% if product_option_value.available == false %}
+                            {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
+                          {% else %}
+                            {{ product_option_value | escape }}
+                          {% endif %}
+                        </option>
+                        {%- liquid
+                          if rendered_values_dropdown == ''
+                            assign rendered_values_dropdown = product_option_value
+                          else
+                            assign rendered_values_dropdown = rendered_values_dropdown | append: '|||' | append: product_option_value
+                          endif
+                          assign index_counter_dropdown = index_counter_dropdown | plus: 1
+                        -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endfor -%}
+                  {%- comment -%} Render any remaining values that weren't in the predefined order {%- endcomment -%}
+                  {%- for product_option_value in product_option.values -%}
+                    {%- liquid
+                      assign value_rendered = false
+                      if rendered_values_dropdown != ''
+                        assign rendered_check = rendered_values_dropdown | split: '|||'
+                        for rendered_value in rendered_check
+                          if rendered_value == product_option_value
+                            assign value_rendered = true
+                            break
+                          endif
+                        endfor
+                      endif
+                    -%}
+                    {%- unless value_rendered -%}
+                      <option
+                        value="{{ product_option_value | escape }}"
+                        data-input-id="{{ product_option.position }}-{{ index_counter_dropdown }}"
+                        data-option-value-id="{{ product_option_value.id }}"
+                        data-variant-id="{{ product_option_value.variant.id }}"
+                        data-connected-product-url="{{ product_option_value.product_url }}"
+                        {% if product_option_value.selected %}
+                          selected="selected"
+                        {% endif %}
+                      >
+                        {% if product_option_value.available == false %}
+                          {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
+                        {% else %}
+                          {{ product_option_value | escape }}
+                        {% endif %}
+                      </option>
+                      {%- liquid
+                        if rendered_values_dropdown == ''
+                          assign rendered_values_dropdown = product_option_value
+                        else
+                          assign rendered_values_dropdown = rendered_values_dropdown | append: '|||' | append: product_option_value
+                        endif
+                        assign index_counter_dropdown = index_counter_dropdown | plus: 1
+                      -%}
+                    {%- endunless -%}
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- comment -%} Render non-size options in their original order {%- endcomment -%}
+                  {%- for product_option_value in product_option.values -%}
+                    <option
+                      value="{{ product_option_value | escape }}"
+                      data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
+                      data-option-value-id="{{ product_option_value.id }}"
+                      data-variant-id="{{ product_option_value.variant.id }}"
+                      data-connected-product-url="{{ product_option_value.product_url }}"
+                      {% if product_option_value.selected %}
+                        selected="selected"
+                      {% endif %}
+                    >
+                      {% if product_option_value.available == false %}
+                        {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
+                      {% else %}
+                        {{ product_option_value | escape }}
+                      {% endif %}
+                    </option>
+                  {%- endfor -%}
+                {%- endif -%}
               </select>
               <svg
                 aria-hidden="true"

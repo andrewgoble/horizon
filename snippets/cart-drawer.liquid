@@ -109,15 +109,17 @@
               assign cart_upsells_max_products = settings.cart_upsells_max_products | default: 9
               
               # product_list setting returns an array of ProductDrop objects, not handles
-              # Check if we have products by trying to iterate
+              # Check if we have products that are in stock by iterating
               assign show_cart_upsells = false
-              assign products_count = 0
+              assign available_products_count = 0
               if cart_upsells_products != blank
-                # Count products by iterating
+                # Count only available (in-stock) products
                 for product in cart_upsells_products
-                  assign products_count = products_count | plus: 1
+                  if product != blank and product.available
+                    assign available_products_count = available_products_count | plus: 1
+                  endif
                 endfor
-                if products_count > 0
+                if available_products_count > 0
                   assign show_cart_upsells = true
                 endif
               endif
