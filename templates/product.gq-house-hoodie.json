@@ -478,13 +478,53 @@
                   "block_order": [
                     "text_BPjrHN"
                   ]
+                },
+                "accordion_row_p3FQ94": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "GQ Members: Save Extra 25% Sitewide 👇",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_8GAcnF": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>It's our biggest sale of the year, and you can save 25% extra with code <strong>GQ25</strong> at checkout! Add some of these matching items below to your cart.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_8GAcnF"
+                  ]
                 }
               },
               "block_order": [
                 "accordion_row_DgAWBc",
                 "accordion_row_tUHfpb",
                 "accordion_row_NYxFGV",
-                "accordion_row_bHzQkY"
+                "accordion_row_bHzQkY",
+                "accordion_row_p3FQ94"
               ]
             }
           },
@@ -514,13 +554,39 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h4>Pair it With</h4>",
+            "text": "<h4>Special GQ Offer</h4>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
             "type_preset": "rte",
             "font": "var(--font-primary--family)",
             "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_VXY9VH": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>GQ Box Members can shop our Black Friday Sale and save an <strong>extra 25%</strong> with code <strong>GQ25! </strong>All Orders Ship Free</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -617,25 +683,53 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "text_F9izwa": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Save Extra 25% with code GQ25!</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.75rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "card-gallery",
             "product_title",
-            "price"
+            "price",
+            "text_F9izwa"
           ]
         }
       },
       "block_order": [
-        "header"
+        "header",
+        "text_VXY9VH"
       ],
       "settings": {
         "product": "{{ closest.product }}",
         "recommendation_type": "complementary",
-        "layout_type": "carousel",
+        "layout_type": "grid",
         "carousel_on_mobile": true,
-        "max_products": 4,
-        "columns": 3,
+        "max_products": 8,
+        "columns": 4,
         "mobile_columns": "2",
         "columns_gap": 8,
         "rows_gap": 12,
