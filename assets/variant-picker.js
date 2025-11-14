@@ -41,7 +41,8 @@ export default class VariantPicker extends Component {
     const isOnProductPage =
       this.dataset.templateProductMatch === 'true' &&
       !event.target.closest('product-card') &&
-      !event.target.closest('quick-add-dialog');
+      !event.target.closest('quick-add-dialog') &&
+      !this.closest('swatches-variant-picker-component');
 
     // Morph the entire main content for combined listings child products, because changing the product
     // might also change other sections depending on recommendations, metafields, etc.
@@ -163,7 +164,18 @@ export default class VariantPicker extends Component {
         if (!textContent) return;
 
         if (shouldMorphMain) {
-          this.updateMain(html);
+          const fallbackToVariantPicker = this.updateMain(html);
+          
+          // If updateMain fell back to updating just the variant picker, dispatch the event
+          if (fallbackToVariantPicker && this.selectedOptionId) {
+            this.dispatchEvent(
+              new VariantUpdateEvent(JSON.parse(textContent), this.selectedOptionId, {
+                html,
+                productId: this.dataset.productId ?? '',
+                newProduct: fallbackToVariantPicker,
+              })
+            );
+          }
         } else {
           const newProduct = this.updateVariantPicker(html);
 
@@ -230,16 +242,24 @@ export default class VariantPicker extends Component {
   /**
    * Re-renders the entire main content.
    * @param {Document} newHtml - The new HTML.
+   * @returns {NewProduct | undefined} Information about the new product if it has changed and we fell back to variant picker update, otherwise undefined.
    */
   updateMain(newHtml) {
     const main = document.querySelector('main');
     const newMain = newHtml.querySelector('main');
 
+    // If the response is a section fragment (no main element), fall back to updating just the variant picker
     if (!main || !newMain) {
+      // Check if this is a section fragment response - if so, just update the variant picker
+      const newVariantPickerSource = newHtml.querySelector(this.tagName.toLowerCase());
+      if (newVariantPickerSource) {
+        return this.updateVariantPicker(newHtml);
+      }
       throw new Error('No new main source found');
     }
 
     morph(main, newMain);
+    return undefined;
   }
 
   /**
