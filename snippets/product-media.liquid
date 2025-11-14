@@ -130,7 +130,7 @@
     {% endcase %}
   {% endunless %}
 
-  {% if media.alt contains "wear" and media.alt contains "modelsizing" %} 
+  {% if media.alt contains "wear" and media.alt contains "modelsizing" and template.name == 'product' %} 
     <div class="product-media__model-sizes">
       {% assign models_sizing = media.alt | split: ' | '  %}
       {% assign counter = 0 %}
@@ -258,4 +258,6 @@
   .many-sizing-items {
     margin: 0;
   }
+
+
 {% endstylesheet %}

@@ -9,6 +9,8 @@ export class QuickAddComponent extends Component {
   #abortController = null;
   /** @type {Map<string, Element>} */
   #cachedContent = new Map();
+  /** @type {MutationObserver | null} */
+  #popoverObserver = null;
 
   get productPageUrl() {
     const productCard = /** @type {import('./product-card').ProductCard | null} */ (this.closest('product-card'));
@@ -50,6 +52,8 @@ export class QuickAddComponent extends Component {
 
     mediaQueryLarge.removeEventListener('change', this.#closeQuickAddModal);
     this.#abortController?.abort();
+    this.#popoverObserver?.disconnect();
+    this.#popoverObserver = null;
   }
 
   /**
@@ -59,31 +63,42 @@ export class QuickAddComponent extends Component {
   handleClick = async (event) => {
     event.preventDefault();
 
-    const currentUrl = this.productPageUrl;
+    try {
+      const currentUrl = this.productPageUrl;
 
-    // Check if we have cached content for this URL
-    let productGrid = this.#cachedContent.get(currentUrl);
+      if (!currentUrl) {
+        console.warn('Quick-add: No product URL available');
+        return;
+      }
 
-    if (!productGrid) {
-      // Fetch and cache the content
-      const html = await this.fetchProductPage(currentUrl);
-      if (html) {
-        const gridElement = html.querySelector('[data-product-grid-content]');
-        if (gridElement) {
-          // Cache the cloned element to avoid modifying the original
-          productGrid = /** @type {Element} */ (gridElement.cloneNode(true));
-          this.#cachedContent.set(currentUrl, productGrid);
+      // Check if we have cached content for this URL
+      let productGrid = this.#cachedContent.get(currentUrl);
+
+      if (!productGrid) {
+        // Fetch and cache the content
+        const html = await this.fetchProductPage(currentUrl);
+        if (html) {
+          const gridElement = html.querySelector('[data-product-grid-content]');
+          if (gridElement) {
+            // Cache the cloned element to avoid modifying the original
+            productGrid = /** @type {Element} */ (gridElement.cloneNode(true));
+            this.#cachedContent.set(currentUrl, productGrid);
+          }
         }
       }
-    }
 
-    if (productGrid) {
-      // Use a fresh clone from the cache
-      const freshContent = /** @type {Element} */ (productGrid.cloneNode(true));
-      await this.updateQuickAddModal(freshContent);
-    }
+      if (productGrid) {
+        // Use a fresh clone from the cache
+        const freshContent = /** @type {Element} */ (productGrid.cloneNode(true));
+        await this.updateQuickAddModal(freshContent);
+      }
 
-    this.#openQuickAddModal();
+      this.#openQuickAddModal();
+    } catch (error) {
+      console.error('Quick-add error:', error);
+      // Still try to open the modal even if there was an error
+      this.#openQuickAddModal();
+    }
   };
 
   /** @param {QuickAddDialog} dialogComponent */
@@ -156,34 +171,115 @@ export class QuickAddComponent extends Component {
 
     if (!productGrid || !modalContent) return;
 
-    if (isMobileBreakpoint()) {
-      const productDetails = productGrid.querySelector('.product-details');
-      if (!productDetails) return;
-      const productFormComponent = productGrid.querySelector('product-form-component');
-      const variantPicker = productGrid.querySelector('variant-picker');
-      const productPrice = productGrid.querySelector('product-price');
-      const productTitle = document.createElement('a');
-      productTitle.textContent = this.dataset.productTitle || '';
+    try {
+      if (isMobileBreakpoint()) {
+        const productDetails = productGrid.querySelector('.product-details');
+        if (!productDetails) return;
+        const productFormComponent = productGrid.querySelector('product-form-component');
+        const variantPicker = productGrid.querySelector('variant-picker');
+        const productPrice = productGrid.querySelector('product-price');
+        const productTitle = document.createElement('a');
+        productTitle.textContent = this.dataset.productTitle || '';
 
-      // Make product title as a link to the product page
-      productTitle.href = this.productPageUrl;
+        // Make product title as a link to the product page
+        productTitle.href = this.productPageUrl;
 
-      if (!productFormComponent || !variantPicker || !productPrice || !productTitle) return;
+        if (!productFormComponent || !variantPicker || !productPrice || !productTitle) return;
 
-      const productHeader = document.createElement('div');
-      productHeader.classList.add('product-header');
+        const productHeader = document.createElement('div');
+        productHeader.classList.add('product-header');
 
-      productHeader.appendChild(productTitle);
-      productHeader.appendChild(productPrice);
-      productGrid.appendChild(productHeader);
-      productGrid.appendChild(variantPicker);
-      productGrid.appendChild(productFormComponent);
-      productDetails.remove();
+        productHeader.appendChild(productTitle);
+        productHeader.appendChild(productPrice);
+        productGrid.appendChild(productHeader);
+        productGrid.appendChild(variantPicker);
+        productGrid.appendChild(productFormComponent);
+        productDetails.remove();
+      }
+
+      morph(modalContent, productGrid);
+
+      // Clean up any invalid anchored-popover components that might have been added
+      // This prevents MissingRefError when content is dynamically loaded
+      this.#cleanupInvalidPopovers(modalContent);
+
+      // Set up a MutationObserver to catch any anchored-popover components added later
+      this.#observeForInvalidPopovers(modalContent);
+
+      this.#syncVariantSelection(modalContent);
+    } catch (error) {
+      console.error('Error updating quick-add modal:', error);
+    }
+  }
+
+  /**
+   * Removes any anchored-popover-component elements that are missing required refs
+   * @param {Element} container - The container to search for invalid popovers
+   */
+  #cleanupInvalidPopovers(container) {
+    const popoverComponents = container.querySelectorAll('anchored-popover-component');
+    popoverComponents.forEach((component) => {
+      // Check for refs using ref attribute (as per Component class implementation)
+      const trigger = component.querySelector('[ref="trigger"]');
+      const popover = component.querySelector('[ref="popover"]');
+      
+      if (!trigger || !popover) {
+        console.warn('Quick-add: Removing invalid anchored-popover-component missing required refs', component);
+        component.remove();
+      }
+    });
+  }
+
+  /**
+   * Sets up a MutationObserver to watch for anchored-popover components added dynamically
+   * @param {Element} container - The container to observe
+   */
+  #observeForInvalidPopovers(container) {
+    // Disconnect previous observer if it exists
+    if (this.#popoverObserver) {
+      this.#popoverObserver.disconnect();
     }
 
-    morph(modalContent, productGrid);
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            const element = /** @type {Element} */ (node);
+            
+            // Check if the added node is an anchored-popover-component
+            if (element.tagName === 'ANCHORED-POPOVER-COMPONENT') {
+              const trigger = element.querySelector('[ref="trigger"]');
+              const popover = element.querySelector('[ref="popover"]');
+              
+              if (!trigger || !popover) {
+                console.warn('Quick-add: Removing invalid anchored-popover-component added dynamically', element);
+                element.remove();
+              }
+            }
+            
+            // Also check for anchored-popover-components within the added node
+            const popoverComponents = element.querySelectorAll('anchored-popover-component');
+            popoverComponents.forEach((component) => {
+              const trigger = component.querySelector('[ref="trigger"]');
+              const popover = component.querySelector('[ref="popover"]');
+              
+              if (!trigger || !popover) {
+                console.warn('Quick-add: Removing invalid anchored-popover-component found in added content', component);
+                component.remove();
+              }
+            });
+          }
+        });
+      });
+    });
 
-    this.#syncVariantSelection(modalContent);
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+    });
+
+    // Store observer reference for cleanup
+    this.#popoverObserver = observer;
   }
 
   /**
@@ -234,21 +330,31 @@ class QuickAddDialog extends DialogComponent {
    * @param {CartUpdateEvent} event - The cart update event
    */
   handleCartUpdate = (event) => {
-    if (event.detail.data.didError) return;
-    this.closeDialog();
+    try {
+      if (event?.detail?.data?.didError) return;
+      this.closeDialog();
+    } catch (error) {
+      console.error('Error handling cart update:', error);
+    }
   };
 
   #updateProductTitleLink = (/** @type {CustomEvent} */ event) => {
-    const anchorElement = /** @type {HTMLAnchorElement} */ (
-      event.detail.data.html?.querySelector('.view-product-title a')
-    );
-    const viewMoreDetailsLink = /** @type {HTMLAnchorElement} */ (this.querySelector('.view-product-title a'));
-    const mobileProductTitle = /** @type {HTMLAnchorElement} */ (this.querySelector('.product-header a'));
+    try {
+      if (!event?.detail?.data) return;
 
-    if (!anchorElement) return;
+      const anchorElement = /** @type {HTMLAnchorElement} */ (
+        event.detail.data.html?.querySelector('.view-product-title a')
+      );
+      const viewMoreDetailsLink = /** @type {HTMLAnchorElement} */ (this.querySelector('.view-product-title a'));
+      const mobileProductTitle = /** @type {HTMLAnchorElement} */ (this.querySelector('.product-header a'));
 
-    if (viewMoreDetailsLink) viewMoreDetailsLink.href = anchorElement.href;
-    if (mobileProductTitle) mobileProductTitle.href = anchorElement.href;
+      if (!anchorElement) return;
+
+      if (viewMoreDetailsLink) viewMoreDetailsLink.href = anchorElement.href;
+      if (mobileProductTitle) mobileProductTitle.href = anchorElement.href;
+    } catch (error) {
+      console.error('Error updating product title link:', error);
+    }
   };
 
   #handleDialogClose = () => {

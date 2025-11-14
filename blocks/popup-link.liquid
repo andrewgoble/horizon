@@ -44,6 +44,15 @@
     top: var(--margin-2xs);
   }
 
+  .popup-link__button {
+    text-transform: capitalize;
+    letter-spacing: normal;
+  }
+
+  .popup-link__inner .page-title {
+    display: none;
+  }
+
   .popup-link__content {
     box-shadow: var(--shadow-popover);
     border: var(--style-border-popover);
@@ -54,7 +63,7 @@
     max-height: var(--modal-max-height);
 
     @media screen and (min-width: 750px) {
-      padding: var(--padding-5xl);
+      padding: var(--padding-xl);
     }
   }
 

@@ -2084,10 +2084,30 @@ deferred-media[class] :is(.deferred-media__poster-button img, .deferred-media__p
   }
 }
 
+.price-container > * {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--margin-xs);
+}
+
 .price,
 .compare-at-price,
 .unit-price {
   white-space: nowrap;
+}
+
+.saving-percent {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--padding-2xs) var(--padding-xs);
+  border-radius: var(--style-border-radius-pills);
+  font-size: 12px;
+  color: var(--color-white);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .unit-price {
@@ -4289,4 +4309,8 @@ text-component {
 
 .ig-progress-bar {
   max-width: 335px !important;
+}
+
+.product-grid__item .swatch {
+  --max-swatch-size: 20px;
 }

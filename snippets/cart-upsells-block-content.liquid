@@ -1,0 +1,66 @@
+{%- doc -%}
+  Renders the cart upsells content - extracted from block for reuse
+{%- enddoc -%}
+
+{% liquid
+  assign block_settings = block.settings
+  assign products = block_settings.product_list
+  
+  if products == blank or products.size == 0
+    assign has_products = false
+  else
+    assign has_products = true
+  endif
+%}
+
+{% if has_products %}
+  <div
+    class="cart-upsells"
+    {{ block.shopify_attributes }}
+  >
+    {% if block_settings.title != blank %}
+      <div class="cart-upsells__header">
+        <h3 class="cart-upsells__title h4">
+          {{ block_settings.title }}
+        </h3>
+      </div>
+    {% endif %}
+
+    <div class="cart-upsells__carousel-wrapper">
+      {% render 'cart-upsells-carousel',
+        products: products,
+        max_products: block_settings.max_products
+      %}
+    </div>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .cart-upsells {
+    width: 100%;
+    padding: var(--padding-lg) var(--cart-drawer-padding);
+    border-top: var(--style-border-width) solid var(--color-border);
+    background-color: var(--color-background);
+  }
+
+  @media screen and (min-width: 750px) {
+    .cart-upsells {
+      padding: var(--padding-lg) var(--cart-drawer-padding-desktop);
+      padding-bottom: 0;
+    }
+  }
+
+  .cart-upsells__header {
+    margin-bottom: var(--margin-md);
+  }
+
+  .cart-upsells__title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+  }
+
+  .cart-upsells__carousel-wrapper {
+    width: 100%;
+  }
+{% endstylesheet %}
+

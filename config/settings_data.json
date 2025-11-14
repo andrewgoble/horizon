@@ -58,9 +58,18 @@
     "pills_border_radius": 8,
     "cart_type": "drawer",
     "auto_open_cart_drawer": true,
+    "cart_upsells_products": [
+      "arcade-jamtee",
+      "black-chilluxe-jogger",
+      "black-floof-pant",
+      "black-black-tie-jambys",
+      "black-longsleeve-jamtee",
+      "black-pajambys-top"
+    ],
     "show_add_discount_code": false,
     "show_accelerated_checkout_buttons": false,
     "cart_thumbnail_border_radius": 8,
+    "drawer_border": "none",
     "icon_stroke": "thin",
     "input_border_width": 1,
     "inputs_border_radius": 8,

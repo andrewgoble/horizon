@@ -7,7 +7,12 @@
 {%- enddoc -%}
 
 {% liquid
-  assign product_form_id = 'QuickAdd-ProductForm-' | append: product.id | append: '-' | append: block.id
+  if block != blank and block.id != blank
+    assign block_id_value = block.id
+  else
+    assign block_id_value = product.id
+  endif
+  assign product_form_id = 'QuickAdd-ProductForm-' | append: product.id | append: '-' | append: block_id_value
   assign add_to_cart_text = 'actions.add' | t
 
   # Logic to determine which variant to use (matching swatch selection logic from product-card)

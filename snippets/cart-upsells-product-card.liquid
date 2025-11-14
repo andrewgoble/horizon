@@ -1,0 +1,175 @@
+{%- doc -%}
+  Renders a compact product card with add to cart form for cart upsells.
+  Uses quick-add-component to open the quick-add-dialog for variant selection.
+
+  @param {object} product - The product object
+{%- enddoc -%}
+
+<product-card
+  class="product-card cart-upsells-product-card"
+  data-product-id="{{ product.id }}"
+  data-product-variants-size="{{ product.variants.size }}"
+>
+  <a
+    href="{{ product.url }}"
+    class="cart-upsells-product-card__link product-card__link"
+    ref="productCardLink"
+  >
+    <span class="visually-hidden">
+      {{ product.title }}
+    </span>
+    <div class="cart-upsells-product-card__media">
+      {% if product.featured_image %}
+      {% liquid
+        assign image_alt = product.featured_image.alt | escape
+      %}
+      {{
+        product.featured_image
+        | image_url: width: 300
+        | image_tag: loading: 'lazy', alt: image_alt, class: 'cart-upsells-product-card__image'
+      }}
+      {% endif %}
+    </div>
+    <div class="cart-upsells-product-card__content">
+      <h4 class="cart-upsells-product-card__title">
+        {{ product.title | escape }}
+      </h4>
+      <div class="cart-upsells-product-card__price">
+        {% liquid
+          assign selected_variant = product.selected_or_first_available_variant
+          assign price = selected_variant.price
+          if product.handle == closest.product.handle and settings.currency_code_enabled_product_pages
+            assign price = price | money_with_currency
+          elsif product.handle != closest.product.handle and settings.currency_code_enabled_product_cards
+            assign price = price | money_with_currency
+          else
+            assign price = price | money
+          endif
+        %}
+        <span class="price">{{ price }}</span>
+      </div>
+    </div>
+  </a>
+
+  {%- if product.available -%}
+    {% render 'quick-add',
+      product: product,
+      section_id: 'section-rendering-product-card',
+      block: blank
+    %}
+  {%- endif -%}
+</product-card>
+
+{% stylesheet %}
+  .cart-upsells-product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .cart-upsells-product-card__link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-3xs);
+    align-items: center;
+    text-align: center;
+  }
+
+  .cart-upsells-product-card__media {
+    position: relative;
+    width: 100%;
+    max-width: 80px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin: 0 auto;
+  }
+
+  .cart-upsells-product-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cart-upsells-product-card__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-3xs);
+    min-height: 0;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cart-upsells-product-card__title {
+    margin: 0;
+    font-size: 11px;
+    font-weight: var(--font-weight-normal);
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .cart-upsells-product-card__price {
+    font-size: 0.75rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .cart-upsells-product-card__price .price {
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* Override product-card__link positioning for cart upsells */
+  .cart-upsells-product-card .product-card__link {
+    position: static;
+    inset: auto;
+  }
+
+  /* Quick-add component styling for cart upsells */
+  .cart-upsells-product-card .quick-add {
+    position: static;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: var(--gap-2xs);
+    flex-shrink: 0;
+    width: 100%;
+    pointer-events: auto;
+    cursor: default;
+  }
+
+  .cart-upsells-product-card .quick-add__button {
+    display: grid !important;
+    width: 100%;
+    max-width: 100px;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    line-height: 1.2;
+    position: relative;
+    border-radius: var(--style-border-radius-inputs);
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cart-upsells-product-card .quick-add__button {
+      display: grid !important;
+    }
+  }
+
+  .cart-upsells-product-card .quick-add__button--choose {
+    display: grid !important;
+  }
+
+  .cart-upsells-product-card .quick-add__button--add {
+    display: grid !important;
+  }
+{% endstylesheet %}

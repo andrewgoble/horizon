@@ -1,0 +1,37 @@
+{%- doc -%}
+  Renders a carousel of product upsells in the cart drawer with add to cart forms.
+  Shows 3 products at a time with variant selection dropdowns.
+{%- enddoc -%}
+
+{% render 'cart-upsells-block-content', block: block %}
+
+{% schema %}
+{
+  "name": "Cart upsells",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Products",
+      "limit": 12
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Maximum products to show",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 9
+    }
+  ]
+}
+{% endschema %}
+

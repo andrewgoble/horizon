@@ -1803,6 +1803,34 @@
         "visible_if": "{{ settings.cart_type == 'drawer' }}"
       },
       {
+        "type": "header",
+        "content": "Cart upsells"
+      },
+      {
+        "type": "text",
+        "id": "cart_upsells_title",
+        "label": "Upsells heading",
+        "default": "You may also like",
+        "info": "Heading displayed above the upsells carousel in the cart drawer"
+      },
+      {
+        "type": "product_list",
+        "id": "cart_upsells_products",
+        "label": "Upsells products",
+        "limit": 12,
+        "info": "Select products to show in the cart drawer upsells carousel"
+      },
+      {
+        "type": "range",
+        "id": "cart_upsells_max_products",
+        "label": "Maximum products to show",
+        "min": 3,
+        "max": 12,
+        "step": 1,
+        "default": 9,
+        "info": "Maximum number of products to display in the upsells carousel"
+      },
+      {
         "type": "checkbox",
         "id": "show_cart_note",
         "label": "t:settings.seller_note",
