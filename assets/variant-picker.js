@@ -41,8 +41,7 @@ export default class VariantPicker extends Component {
     const isOnProductPage =
       this.dataset.templateProductMatch === 'true' &&
       !event.target.closest('product-card') &&
-      !event.target.closest('quick-add-dialog') &&
-      !this.closest('swatches-variant-picker-component');
+      !event.target.closest('quick-add-dialog');
 
     // Morph the entire main content for combined listings child products, because changing the product
     // might also change other sections depending on recommendations, metafields, etc.
@@ -131,13 +130,12 @@ export default class VariantPicker extends Component {
       }
     }
 
-    // If variant-picker is a child of quick-add-component or swatches-variant-picker-component, or has data-section-id, we need to append section_id to the URL
-    const sectionId = this.dataset.sectionId || (this.closest('quick-add-component') || this.closest('swatches-variant-picker-component') ? 'section-rendering-product-card' : null);
-    if (sectionId) {
+    // If variant-picker is a child of quick-add-component or swatches-variant-picker-component, we need to append section_id=section-rendering-product-card to the URL
+    if (this.closest('quick-add-component') || this.closest('swatches-variant-picker-component')) {
       if (productUrl?.includes('?')) {
         productUrl = productUrl.split('?')[0];
       }
-      return `${productUrl}?section_id=${sectionId}&${params.join('&')}`;
+      return `${productUrl}?section_id=section-rendering-product-card&${params.join('&')}`;
     }
     return `${productUrl}?${params.join('&')}`;
   }
@@ -164,18 +162,7 @@ export default class VariantPicker extends Component {
         if (!textContent) return;
 
         if (shouldMorphMain) {
-          const fallbackToVariantPicker = this.updateMain(html);
-          
-          // If updateMain fell back to updating just the variant picker, dispatch the event
-          if (fallbackToVariantPicker && this.selectedOptionId) {
-            this.dispatchEvent(
-              new VariantUpdateEvent(JSON.parse(textContent), this.selectedOptionId, {
-                html,
-                productId: this.dataset.productId ?? '',
-                newProduct: fallbackToVariantPicker,
-              })
-            );
-          }
+          this.updateMain(html);
         } else {
           const newProduct = this.updateVariantPicker(html);
 
@@ -242,24 +229,16 @@ export default class VariantPicker extends Component {
   /**
    * Re-renders the entire main content.
    * @param {Document} newHtml - The new HTML.
-   * @returns {NewProduct | undefined} Information about the new product if it has changed and we fell back to variant picker update, otherwise undefined.
    */
   updateMain(newHtml) {
     const main = document.querySelector('main');
     const newMain = newHtml.querySelector('main');
 
-    // If the response is a section fragment (no main element), fall back to updating just the variant picker
     if (!main || !newMain) {
-      // Check if this is a section fragment response - if so, just update the variant picker
-      const newVariantPickerSource = newHtml.querySelector(this.tagName.toLowerCase());
-      if (newVariantPickerSource) {
-        return this.updateVariantPicker(newHtml);
-      }
       throw new Error('No new main source found');
     }
 
     morph(main, newMain);
-    return undefined;
   }
 
   /**
