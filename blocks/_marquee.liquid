@@ -19,7 +19,7 @@
     --marquee-direction: {{ block_settings.movement_direction }};
     {%- if block_settings.transparent_background == true -%}background-color: transparent;{%- endif -%}
   "
-  data-speed-factor="20"
+  data-speed-factor="{{ block_settings.speed_factor | default: 20 }}"
   data-movement-direction="{{ block_settings.movement_direction }}"
 >
   <div
@@ -182,6 +182,20 @@
       "step": 1,
       "unit": "px",
       "default": 24
+    },
+    {
+      "type": "header",
+      "content": "t:content.animation"
+    },
+    {
+      "type": "range",
+      "id": "speed_factor",
+      "label": "t:settings.speed",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "default": 20,
+      "info": "t:info.marquee_speed"
     }
   ],
   "presets": [
