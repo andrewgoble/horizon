@@ -262,6 +262,7 @@
             "popup_link_JGm84M": {
               "type": "popup-link",
               "name": "t:names.popup_link",
+              "disabled": true,
               "settings": {
                 "behavior": "drawer",
                 "heading": "Unisex Size Guide",
@@ -1171,6 +1172,7 @@
         "padding-block-start": 24,
         "padding-block-end": 24,
         "gap_between_elements": 50,
+        "speed_factor": 20,
         "css_class": ""
       }
     },
