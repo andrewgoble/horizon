@@ -345,7 +345,7 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Basics",
-                    "open_by_default": true,
+                    "open_by_default": false,
                     "icon": "none",
                     "width": 20
                   },
@@ -444,7 +444,7 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Final Sale",
-                    "open_by_default": true,
+                    "open_by_default": false,
                     "icon": "none",
                     "width": 20
                   },
@@ -483,7 +483,7 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "GQ Members: Save Extra 25% Sitewide 👇",
-                    "open_by_default": false,
+                    "open_by_default": true,
                     "icon": "none",
                     "width": 20
                   },
@@ -952,6 +952,7 @@
         "padding-block-start": 24,
         "padding-block-end": 24,
         "gap_between_elements": 50,
+        "speed_factor": 20,
         "css_class": ""
       }
     },
