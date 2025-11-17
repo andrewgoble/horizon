@@ -59,16 +59,15 @@
     "cart_type": "drawer",
     "auto_open_cart_drawer": true,
     "cart_upsells_products": [
-      "arcade-jamtee",
-      "black-chilluxe-jogger",
-      "black-floof-pant",
-      "black-black-tie-jambys",
-      "black-longsleeve-jamtee",
-      "black-pajambys-top"
+      "black-house-socks",
+      "floofsocks-grayblack",
+      "black-black-long-jambys",
+      "gray-black-jambys-basketball-short"
     ],
-    "show_add_discount_code": false,
+    "cart_upsells_max_products": 6,
+    "show_add_discount_code": true,
     "show_accelerated_checkout_buttons": false,
-    "cart_thumbnail_border_radius": 8,
+    "cart_thumbnail_border_radius": 12,
     "drawer_border": "none",
     "icon_stroke": "thin",
     "input_border_width": 1,

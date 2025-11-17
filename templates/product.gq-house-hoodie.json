@@ -80,7 +80,7 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 32,
+            "gap": 28,
             "sticky_details_desktop": true,
             "inherit_color_scheme": true,
             "color_scheme": "",
@@ -91,10 +91,10 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "padding-block-start": 20,
-            "padding-block-end": 20,
+            "padding-block-start": 10,
+            "padding-block-end": 10,
             "padding-inline-start": 0,
-            "padding-inline-end": 10
+            "padding-inline-end": 0
           },
           "blocks": {
             "group": {
@@ -554,7 +554,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h4>Special GQ Offer</h4>",
+            "text": "<h4>GQ Box Special Offers</h4>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -580,7 +580,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>GQ Box Members can shop our Black Friday Sale and save an <strong>extra 25%</strong> with code <strong>GQ25! </strong>All Orders Ship Free</p>",
+            "text": "<p>It's our biggest sale of the year, and even bigger for GQ Box Members. Save an <strong>extra 25%</strong> with code <strong>GQ25!</strong></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
