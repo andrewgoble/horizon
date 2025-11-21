@@ -65,7 +65,7 @@
       "gray-black-jambys-basketball-short"
     ],
     "cart_upsells_max_products": 6,
-    "show_add_discount_code": true,
+    "show_add_discount_code": false,
     "show_accelerated_checkout_buttons": false,
     "cart_thumbnail_border_radius": 12,
     "drawer_border": "none",
