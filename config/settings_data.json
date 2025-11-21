@@ -59,9 +59,9 @@
     "cart_type": "drawer",
     "auto_open_cart_drawer": true,
     "cart_upsells_products": [
-      "black-house-socks",
-      "floofsocks-grayblack",
+      "black-hugby-1",
       "black-black-long-jambys",
+      "gray-black-long-jambys",
       "gray-black-jambys-basketball-short"
     ],
     "cart_upsells_max_products": 6,
