@@ -18,8 +18,8 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<a href=\"https://www.jambys.com/collections/all-products\" title=\"https://www.jambys.com/collections/all-products\"><span style=\"text-decoration:underline\"><strong>Early Access: Shop our Biggest Sale of the Year Early!</strong></span></a>",
-            "link": "",
+            "text": "<span style=\"text-decoration:underline\"><strong>It's On: Shop the Black Friday Sale! </strong></span>",
+            "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
             "desktop_weight": "",
