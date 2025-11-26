@@ -527,11 +527,25 @@
     @media screen and (min-width: 750px) {
       padding: var(--padding-xs) var(--variant-option-padding-inline);
     }
+
+    @media (max-width: 749px) {
+      flex: 0 0 auto;
+      min-width: auto;
+      max-width: fit-content;
+      padding-block: 6px;
+      padding-inline: 10px;
+      min-height: auto;
+    }
   }
 
   .variant-option__button-label__text {
     text-align: left;
     text-wrap: auto;
+
+    @media (max-width: 749px) {
+      font-size: 11px !important;
+      line-height: 1.2 !important;
+    }
   }
 
   .variant-option--equal-width-buttons {

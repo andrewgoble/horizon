@@ -66,7 +66,7 @@
       "black-longsleeve-jamtee",
       "black-pajambys-top"
     ],
-    "show_add_discount_code": false,
+    "show_add_discount_code": true,
     "show_accelerated_checkout_buttons": false,
     "cart_thumbnail_border_radius": 8,
     "drawer_border": "none",
