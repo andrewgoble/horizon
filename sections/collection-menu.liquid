@@ -1,0 +1,278 @@
+{% liquid
+  assign collection_menu_metafield = collection.metafields.custom.collection_menu
+  assign collection_list = null
+  assign has_collections = false
+
+  if collection_menu_metafield != blank
+    if collection_menu_metafield.value != blank
+      assign collection_list = collection_menu_metafield.value
+    else
+      assign collection_list = collection_menu_metafield
+    endif
+  elsif section.settings.collection_list != blank
+    assign collection_list = section.settings.collection_list
+  endif
+
+  if collection_list != blank
+    for collection_item in collection_list limit: 1
+      if collection_item != blank
+        assign has_collections = true
+      endif
+      break
+    endfor
+  endif
+%}
+
+{% if has_collections %}
+  <div class="section-background color-{{ section.settings.color_scheme }}"></div>
+  <div
+    class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    <nav
+      class="collection-menu"
+      aria-label="Collection navigation"
+    >
+      <div
+        class="collection-menu__container"
+        style="
+          --button-text-color: {{ section.settings.button_text_color }};
+          --button-background-color: {{ section.settings.button_background_color }};
+          --button-hover-text-color: {{ section.settings.button_hover_text_color | default: section.settings.button_text_color }};
+          --button-hover-background-color: {{ section.settings.button_hover_background_color | default: section.settings.button_background_color }};
+          --button-active-text-color: {{ section.settings.button_active_text_color | default: section.settings.button_text_color }};
+          --button-active-background-color: {{ section.settings.button_active_background_color | default: section.settings.button_background_color }};
+          justify-content: {{ section.settings.alignment }};
+        "
+      >
+        {% for collection_item in collection_list %}
+          {% liquid
+            assign item_title = collection_item.title
+            assign is_current = false
+
+            if collection_item.id == collection.id
+              assign is_current = true
+            endif
+          %}
+
+          <a
+            href="{{ collection_item.url }}"
+            class="collection-menu__button{% if is_current %} collection-menu__button--active{% endif %}"
+            {% if is_current %}
+              aria-current="page"
+            {% endif %}
+          >
+            {{ item_title }}
+          </a>
+        {% endfor %}
+      </div>
+    </nav>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .collection-menu {
+    width: 100%;
+  }
+
+  .collection-menu__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 749px) {
+    .collection-menu {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      width: 100%;
+    }
+
+    .collection-menu::-webkit-scrollbar {
+      display: none;
+    }
+
+    .collection-menu__container {
+      flex-wrap: nowrap;
+      gap: var(--gap-sm);
+      min-width: max-content;
+      padding-inline: var(--page-width-padding-inline, 1rem);
+    }
+  }
+
+  .collection-menu__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    text-decoration: none;
+    border-radius: 100px;
+    font-family: var(--font-paragraph--family);
+    font-size: 11px;
+    text-transform: uppercase;
+    transition: background-color var(--animation-speed, 0.2s) var(--animation-easing, ease),
+                color var(--animation-speed, 0.2s) var(--animation-easing, ease);
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+  }
+
+  .collection-menu__button:hover {
+    background-color: var(--button-hover-background-color);
+    color: var(--button-hover-text-color);
+  }
+
+  .collection-menu__button:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  .collection-menu__button--active {
+    background-color: var(--button-active-background-color);
+    color: var(--button-active-text-color);
+  }
+
+  .collection-menu__button--active:hover {
+    background-color: var(--button-active-background-color);
+    color: var(--button-active-text-color);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.collection_menu",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "collection_list",
+      "id": "collection_list",
+      "label": "t:settings.collection_list"
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:options.page"
+        },
+        {
+          "value": "full-width",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.center"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:options.right"
+        }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "header",
+      "content": "t:content.button_colors"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "t:settings.text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "t:settings.background",
+      "default": "#36409a"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "t:settings.hover_text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background_color",
+      "label": "t:settings.hover_background",
+      "default": "#2a2f7a"
+    },
+    {
+      "type": "color",
+      "id": "button_active_text_color",
+      "label": "t:settings.active_text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_active_background_color",
+      "label": "t:settings.active_background",
+      "default": "#000f9f"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.collection_menu",
+      "category": "t:categories.collections"
+    }
+  ]
+}
+{% endschema %}
+

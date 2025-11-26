@@ -79,13 +79,6 @@
                 {{ 'content.product_information' | t }}
               </th>
               <th
-                id="quantity"
-                scope="col"
-                role="columnheader"
-              >
-                {{ 'content.quantity' | t }}
-              </th>
-              <th
                 id="productTotal"
                 scope="col"
                 role="columnheader"
@@ -177,13 +170,16 @@
                     <dl class="cart-items__variants">
                       {%- if item.product.has_only_default_variant == false and item.item_components.size == 0 -%}
                         {%- for option in item.options_with_values -%}
-                          <div class="cart-items__variant">
-                            <dt class="visually-hidden">{{ option.name }}:</dt>
-                            <dd>
-                              {{- option.value -}}
-                              {%- if forloop.last != true %},&nbsp;{% endif -%}
-                            </dd>
-                          </div>
+                          {% assign option_name_downcase = option.name | downcase %}
+                          {%- unless option_name_downcase == 'color' -%}
+                            <div class="cart-items__variant">
+                              <dt class="visually-hidden">{{ option.name }}:</dt>
+                              <dd>
+                                {{- option.value -}}
+                                {%- if forloop.last != true %},&nbsp;{% endif -%}
+                              </dd>
+                            </div>
+                          {%- endunless -%}
                         {%- endfor -%}
                       {%- endif -%}
 
@@ -249,58 +245,6 @@
                     {% endif %}
                   </div>
                   {% endcomment %}
-
-                </td>
-                <td
-                  class="cart-items__quantity"
-                  role="cell"
-                  headers="quantity"
-                >
-                  {% # Here I want to pass some arguments to the quantity block so it knows which value should the input be set to. Though quantity block could be a snippet instead %}
-                  {% assign can_update_quantity = item.instructions.can_update_quantity
-                    | default: true, allow_false: true
-                  %}
-                  {% render 'quantity-selector',
-                    product: item.product,
-                    in_cart_quantity: item.quantity,
-                    line_index: item.index,
-                    min: 0,
-                    class: 'cart-primary-typography',
-                    can_update_quantity: can_update_quantity
-                  %}
-
-                  <button
-                    class="button button--tertiary cart-items__remove"
-                    type="button"
-                    aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
-                    on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
-                    {% assign can_remove = item.instructions.can_remove | default: true, allow_false: true %}
-                    {% if can_remove == false %}
-                      hidden
-                    {% endif %}
-                  >
-                    {{- 'icon-delete.svg' | inline_asset_content -}}
-                    <span class="visually-hidden">Remove</span>
-                  </button>
-                </td>
-                <td
-                  class="cart-items__error hidden"
-                  role="cell"
-                  ref="cartItemErrorContainer-{{ item.index | plus: 1 }}"
-                  headers="quantity"
-                >
-                  <div
-                    class="cart-item__error"
-                    role="alert"
-                  >
-                    <span class="svg-wrapper">
-                      {{- 'icon-error.svg' | inline_asset_content -}}
-                    </span>
-                    <small
-                      class="cart-item__error-text cart-primary-typography"
-                      ref="cartItemError-{{ item.index | plus: 1 }}"
-                    ></small>
-                  </div>
                 </td>
                 <td
                   class="cart-items__price cart-secondary-typography"
@@ -322,6 +266,54 @@
                       {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
                     </div>
                   {%- endif -%}
+
+                  <div class="cart-items__quantity">
+                    {% # Here I want to pass some arguments to the quantity block so it knows which value should the input be set to. Though quantity block could be a snippet instead %}
+                    {% assign can_update_quantity = item.instructions.can_update_quantity
+                      | default: true, allow_false: true
+                    %}
+                    {% render 'quantity-selector',
+                      product: item.product,
+                      in_cart_quantity: item.quantity,
+                      line_index: item.index,
+                      min: 0,
+                      class: 'cart-primary-typography',
+                      can_update_quantity: can_update_quantity
+                    %}
+
+                    <button
+                      class="button button--tertiary cart-items__remove"
+                      type="button"
+                      aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
+                      on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
+                      {% assign can_remove = item.instructions.can_remove | default: true, allow_false: true %}
+                      {% if can_remove == false %}
+                        hidden
+                      {% endif %}
+                    >
+                      {{- 'icon-delete.svg' | inline_asset_content -}}
+                      <span class="visually-hidden">Remove</span>
+                    </button>
+                  </div>
+                </td>
+                <td
+                  class="cart-items__error hidden"
+                  role="cell"
+                  ref="cartItemErrorContainer-{{ item.index | plus: 1 }}"
+                  headers="productTotal"
+                >
+                  <div
+                    class="cart-item__error"
+                    role="alert"
+                  >
+                    <span class="svg-wrapper">
+                      {{- 'icon-error.svg' | inline_asset_content -}}
+                    </span>
+                    <small
+                      class="cart-item__error-text cart-primary-typography"
+                      ref="cartItemError-{{ item.index | plus: 1 }}"
+                    ></small>
+                  </div>
                 </td>
               </tr>
             {% endfor %}
@@ -361,8 +353,7 @@
     grid-template-columns: clamp(2.5rem, 15cqi, 7.5rem) minmax(0, 1fr) minmax(var(--cart-item-price-width), auto);
     grid-template-areas:
       'media details price'
-      'media quantity price'
-      'media error error';
+      'media details error';
     column-gap: var(--gap-md);
     align-items: start;
     padding-bottom: var(--cart-items-gap);
@@ -448,7 +439,6 @@
   }
 
   .cart-items__quantity {
-    grid-area: quantity;
     margin-block-start: var(--margin-xs);
     display: flex;
     align-items: center;
@@ -553,20 +543,11 @@
     .cart-items__table-row {
       --cart-item-price-width: 6rem;
 
-      grid-template-columns: 7.5rem 1fr 1fr minmax(var(--cart-item-price-width), auto);
+      grid-template-columns: 7.5rem 1fr minmax(var(--cart-item-price-width), auto);
       grid-template-rows: min-content 1fr;
       grid-template-areas:
-        'media details quantity price'
-        'media details error error';
-    }
-
-    .cart-items__quantity,
-    .cart-items__price {
-      grid-area: initial;
-    }
-
-    .cart-items__quantity {
-      margin-top: 0;
+        'media details price'
+        'media details error';
     }
 
     .cart-items__price {

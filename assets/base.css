@@ -2090,6 +2090,12 @@ deferred-media[class] :is(.deferred-media__poster-button img, .deferred-media__p
   gap: var(--margin-xs);
 }
 
+@media screen and (max-width: 749px) {
+  .price-container > * {
+    font-size: 15px
+  }
+}
+
 .price,
 .compare-at-price,
 .unit-price {
@@ -3765,6 +3771,8 @@ slideshow-arrows {
   &[position='center'] {
     justify-content: space-between;
     align-items: center;
+    left: 10px;
+    right: 10px;
   }
 }
 
@@ -4313,4 +4321,9 @@ text-component {
 
 .product-grid__item .swatch {
   --max-swatch-size: 20px;
+}
+
+.pdp-icons {
+  margin-top: -30px;
+  margin-bottom: -15px;
 }
