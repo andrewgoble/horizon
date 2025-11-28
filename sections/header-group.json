@@ -26,7 +26,7 @@
             "desktop_letter_spacing": "tight",
             "desktop_case": "none",
             "mobile_font": "var(--font-body--family)",
-            "mobile_font_size": "0.75rem",
+            "mobile_font_size": "0.875rem",
             "mobile_weight": "",
             "mobile_letter_spacing": "tight",
             "mobile_case": "none"
@@ -36,7 +36,7 @@
         "announcement_T4f8H9": {
           "type": "_announcement",
           "settings": {
-            "text": "<strong>Free Shipping $85+ & Free Returns Always</strong>",
+            "text": "<a href=\"https://www.jambys.com/collections/sale\" title=\"https://www.jambys.com/collections/sale\"><strong>Friday Only: Special One-Day Lightning Deals</strong></a>",
             "link": "",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
@@ -44,7 +44,7 @@
             "desktop_letter_spacing": "normal",
             "desktop_case": "none",
             "mobile_font": "var(--font-body--family)",
-            "mobile_font_size": "0.75rem",
+            "mobile_font_size": "0.875rem",
             "mobile_weight": "",
             "mobile_letter_spacing": "tight",
             "mobile_case": "none"
@@ -54,7 +54,7 @@
         "announcement_438RQH": {
           "type": "_announcement",
           "settings": {
-            "text": "<a href=\"/pages/reviews\" title=\"Reviews\"><strong>10,000 5-Star Reviews</strong></a>",
+            "text": "<a href=\"https://www.jambys.com/collections/sale\" title=\"https://www.jambys.com/collections/sale\"><strong>Free Shipping $85+ & Free Returns Always</strong></a>",
             "link": "",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
@@ -62,7 +62,7 @@
             "desktop_letter_spacing": "normal",
             "desktop_case": "none",
             "mobile_font": "var(--font-body--family)",
-            "mobile_font_size": "0.75rem",
+            "mobile_font_size": "0.875rem",
             "mobile_weight": "",
             "mobile_letter_spacing": "tight",
             "mobile_case": "none"
