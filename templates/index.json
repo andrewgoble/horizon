@@ -57,7 +57,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>The Black Friday Sale</h1>",
+                "text": "<h1>Cyber Monday Sale</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
