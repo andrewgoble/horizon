@@ -83,7 +83,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h6>Shop our biggest sale ever and <strong>save up to 70%</strong> on your new favorite loungewear</h6>",
+                "text": "<h6>It's your last day to <strong>save up to 70%</strong> on your new favorite loungewear</h6>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
