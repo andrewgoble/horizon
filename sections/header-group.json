@@ -36,7 +36,7 @@
         "announcement_T4f8H9": {
           "type": "_announcement",
           "settings": {
-            "text": "<a href=\"https://www.jambys.com/collections/sale\" title=\"https://www.jambys.com/collections/sale\"><strong>Friday Only: Special One-Day Lightning Deals</strong></a>",
+            "text": "<a href=\"https://www.jambys.com/collections/sale\" title=\"https://www.jambys.com/collections/sale\"><strong>Cyber Monday: Special One-Day Lightning Deals</strong></a>",
             "link": "",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
