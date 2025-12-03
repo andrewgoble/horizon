@@ -57,7 +57,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>Last Chance!</h1>",
+                "text": "<h1>Performance <em>Inactivewear</em></h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -83,7 +83,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h6>It's your last day to <strong>save up to 70%</strong> on your new favorite loungewear</h6>",
+                "text": "<h6>Cloudlike comfort engineered for maximum relaxation.</h6>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
