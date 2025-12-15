@@ -1,0 +1,238 @@
+
+<style>
+    #WS--{{ section.id }}.hidden {
+    display: none !important;
+  }
+</style>
+
+<script
+  type="application/json"
+  data-section-id="{{ section.id }}"
+  data-section-type="html-area"
+></script>
+
+<section
+  id="WS--{{ section.id }}"
+  class="
+    WS--{{ section.id }} hidden wndr-sxn__faq wndr-sxn__section
+    wndr-sxn__custom-html-html
+    wndr-sxn__custom-html-html-width-{{ section.settings.width }}
+  "
+>
+  {% for block in section.blocks %}
+    <article
+      class="
+        wndr-sxn__custom-html-html-block
+        wndr-sxn__custom-html-html-heading-{{ block.settings.heading_size }}
+        {%- if block.settings.text_alignment != blank -%}
+          wndr-sxn__custom-html-html-alignment-{{ block.settings.text_alignment }}
+        {%- endif -%}
+      "
+      {{ block.shopify_attributes }}
+    >
+        {% if block.settings.section_html != blank %}
+          <div class="wndr-sxn__custom-html-html-content rte">
+            {{ block.settings.section_html }}
+          </div>
+        {% endif %}
+    </article>
+  {% endfor %}
+</section>
+
+<script data-wndr-sxn-js="{{ section.id }}" defer>
+
+  const showWhen = '{{ section.settings.show_when }}'
+  const targetID = 'WS--{{ section.id }}'
+  
+  function showSection() {
+     document.getElementById(targetID)?.classList.remove('hidden')
+  }
+
+  function hideSection() {
+     document.getElementById(targetID)?.classList.add('hidden')
+  }
+
+  function setDisplay(event){
+
+  if( showWhen === 'always'){
+      showSection()
+      return
+    }
+
+    const hasShipments = event?.detail?.shipments?.length > 0;
+    const hasDelivered = event?.detail?.shipments?.filter(
+      s => s?.statusDetails?.status === 'DELIVERED'
+    ).length > 0
+    
+    if( showWhen === 'show_when_no_shipments' && !hasShipments){
+        showSection()
+        return
+    }
+    if( showWhen === 'show_when_no_shipments' && hasShipments){
+        hideSection()
+        return
+    }
+
+    if( showWhen === 'show_when_any_shipments' && hasShipments) {
+        showSection()
+        return
+    }
+    
+    if( showWhen === 'show_when_has_non_delivered_shipments' && hasShipments && !hasDelivered){
+        showSection()
+        return
+    }
+    if( showWhen === 'show_when_has_non_delivered_shipments' && (!hasShipments || hasDelivered)){
+        hideSection()
+        return
+    }
+    
+    if( showWhen === 'show_when_has_a_delivered_shipment' && hasDelivered){
+        showSection()
+        return
+    }
+    if( showWhen === 'show_when_has_a_delivered_shipment' && !hasDelivered){
+        hideSection()
+        return
+    }
+  }
+
+  window.addEventListener('shopify:section:load', function (e) {
+    const section = document.querySelector(`#WS--${e.detail.sectionId}`);
+
+    // Load external JS file
+    const sectionJS = document.querySelector(`[data-wndr-sxn-js="${e.detail.sectionId}"]`);
+    const sectionExternalJS = document.querySelector(`[data-wndr-sxn-external-js="${e.detail.sectionId}"]`);
+
+    const loadJavaScriptBlock = () => {
+      if (sectionJS) {
+        const sectionScript = sectionJS.innerHTML;
+        const newScript = document.createElement('script');
+        const inlineScript = document.createTextNode(sectionScript);
+        newScript.appendChild(inlineScript);
+        section.appendChild(newScript);
+      }
+    }
+
+    if (sectionExternalJS) {
+      const newScript = document.createElement('script');
+      const externalPath = sectionExternalJS.src;
+      newScript.src = externalPath;
+      section.appendChild(newScript);
+      newScript.onload = () => {
+        loadJavaScriptBlock();
+      }
+    } else {
+      loadJavaScriptBlock();
+    }
+  });
+
+  window.addEventListener('wonderment:app_loaded', (event) => {
+    setDisplay()
+  })
+  
+  if(showWhen !== 'always') {
+    
+      window.addEventListener('wonderment:shipments_loaded', setDisplay)
+      
+      // Trigger search preview that will enable section visibility when selected in the editor
+      window.addEventListener('shopify:section:select', function (e) {
+      // if not current instance ignore
+      if(e.detail.sectionId !== '{{ section.id }}'){
+        return
+      }
+      let search = 'preview'
+      if (showWhen === 'show_when_no_shipments') {
+        search = ''
+      } else if(showWhen === 'show_when_has_non_delivered_shipments') {
+        search = 'preview-transit'
+      } else if(showWhen === 'show_when_has_a_delivered_shipment') {
+        search = 'preview'
+      }
+      window.wonderment?.searchPreview?.(search)
+    })
+  }
+
+</script>
+{% schema %}
+{
+  "name": "📦 Custom HTML",
+  "class": "wndr-sxn__custom-html-html-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_when",
+      "label": "Dynamic Display",
+      "default": "always",
+      "info": "Display based on shipment availability and status. Choose when to display it: Always, when no search results, when no delivered shipments, or when at least one shipment is delivered.",
+      "options": [
+        {
+          "value": "always",
+          "label": "Always show"
+        },
+        {
+          "value": "show_when_no_shipments",
+          "label": "Show When No Shipments available"
+        },
+        {
+          "value": "show_when_any_shipments",
+          "label": "Show when Shipments available"
+        },
+        {
+          "value": "show_when_has_non_delivered_shipments",
+          "label": "Show When No Delivered Shipments available"
+        },
+        {
+          "value": "show_when_has_a_delivered_shipment",
+          "label": "Show When Delievered Shipment available"
+        }
+      ]
+    },
+    {
+      "id": "width",
+      "type": "select",
+      "label": "Section width",
+      "options": [
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        },
+        {
+          "value": "full-width",
+          "label": "Full width"
+        }
+      ],
+      "default": "regular"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "html",
+      "name": "Raw HTML",
+      "settings": [
+        {
+          "type": "html",
+          "id": "section_html",
+          "label": "HTML",
+          "default": "<p>Here goes your Custom HTML code</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "📦 Custom HTML",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "html"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

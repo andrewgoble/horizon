@@ -1,0 +1,200 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "track_your_order_heading": {
+      "type": "wonderment-custom-html",
+      "blocks": {
+        "track_your_order": {
+          "type": "html",
+          "settings": {
+            "section_html": "<style>\n  .wndr-sx--heading {\n    font-size: 2.5rem;\n    text-align: center;\n  }\n  .wonderment-ab-container > div > form {\n     margin-top: 20px;\n  }\n  .tp-form-header.tp-search-header {\n    display: none !important;\n  }\n</style>\n<h2 class=\"wndr-sx--heading\">Track your order</h2>"
+          }
+        }
+      },
+      "block_order": [
+        "track_your_order"
+      ],
+      "settings": {
+        "show_when": "always",
+        "width": "regular"
+      }
+    },
+    "main": {
+      "type": "apps",
+      "blocks": {
+        "wonderment": {
+          "type": "shopify://apps/wonderment/blocks/wonderBlock/89d63369-6ee7-4097-ac41-8229c6f90001",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "wonderment"
+      ],
+      "settings": {}
+    },
+    "hero": {
+      "type": "wonderment-hero",
+      "disabled": true,
+      "settings": {
+        "width_override": true,
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "faq": {
+      "type": "wonderment-faq",
+      "blocks": {
+        "faq-getting-started": {
+          "type": "section_heading",
+          "settings": {
+            "title": "Getting started"
+          }
+        },
+        "product-where-made-question": {
+          "type": "question",
+          "settings": {
+            "title": "Where are your products manufactured?",
+            "text": "<p>We are a local company and all merchandise is made with love here in Toronto, Canada.</p>"
+          }
+        },
+        "sizes-question": {
+          "type": "question",
+          "settings": {
+            "title": "How do your sizes work?",
+            "text": "<p>Please take a look at our size chart for more information and how to take accurate measurements.</p>"
+          }
+        },
+        "shipping-heading": {
+          "type": "section_heading",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
+        "when-shipping-question": {
+          "type": "question",
+          "settings": {
+            "title": "When will my order ship?",
+            "text": "<p>Usually in 1-2 business days</p>"
+          }
+        },
+        "when-arriving-question": {
+          "type": "question",
+          "settings": {
+            "title": "When will my order arrive?",
+            "text": "<p>Usually in 3-10 business days</p>"
+          }
+        },
+        "ship-international-question": {
+          "type": "question",
+          "settings": {
+            "title": "Do you ship internationally?",
+            "text": "<p>Currently we are only shipping to USA and Canada.</p>"
+          }
+        },
+        "shipping-cost-question": {
+          "type": "question",
+          "settings": {
+            "title": "How much is shipping?",
+            "text": "<p>If you spend over $100, shipping is always free. For any other purchases, shipping will be calculated at checkout.</p>"
+          }
+        },
+        "return-policy-question": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "text": "<p>Merchandise that is unworn and in the original packaging can be returned within 30 days with the packing slip included with the product.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq-getting-started",
+        "product-where-made-question",
+        "sizes-question",
+        "shipping-heading",
+        "when-shipping-question",
+        "when-arriving-question",
+        "ship-international-question",
+        "shipping-cost-question",
+        "return-policy-question"
+      ],
+      "disabled": true,
+      "settings": {
+        "show_answers": false,
+        "text_size": 100,
+        "alignment": "center",
+        "text_color": "#121212",
+        "background_color": "linear-gradient(184deg, rgba(255, 255, 255, 1) 7%, rgbargba(255, 255, 255, 1) 94%)",
+        "border_color": "#121212",
+        "base_width": 80,
+        "max_width": "",
+        "inner_padding": 100,
+        "outer_margin": 0,
+        "custom_css": "",
+        "mobile_custom_css": "",
+        "override_theme_font": false,
+        "heading_font": "serif",
+        "main_font": "sans-serif"
+      }
+    },
+    "rebuy": {
+      "type": "wonderment-rebuy",
+      "settings": {
+        "rebuy-widget-id": ""
+      }
+    },
+    "fairing": {
+      "type": "wonderment-fairing",
+      "disabled": true,
+      "settings": {
+        "fairing-key": "",
+        "fairing-padding-tb": 10,
+        "fairing-padding-lr": 10,
+        "fairing-border-color": "#000000",
+        "fairing-border-size": 0,
+        "fairing-border-radius": 0,
+        "fairing-title-text-align": "center",
+        "fairing-title-margin-top": 20,
+        "fairing-title-margin-bottom": 20,
+        "fairing-title-max-width": 100,
+        "fairing-response-border-color": "#000000",
+        "fairing-response-border-size": 0,
+        "fairing-response-border-radius": 0,
+        "fairing-response-padding": 5,
+        "fairing-responses-margin": 20
+      }
+    },
+    "kno": {
+      "type": "wonderment-kno",
+      "disabled": true,
+      "settings": {
+        "shop-key": "",
+        "survey-id": ""
+      }
+    }
+  },
+  "order": [
+    "track_your_order_heading",
+    "main",
+    "hero",
+    "faq",
+    "rebuy",
+    "fairing",
+    "kno"
+  ]
+}

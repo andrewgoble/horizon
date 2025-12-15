@@ -1,0 +1,312 @@
+
+{%- comment -%}
+  {
+    "Name": "Fairing for Wonderment",
+    "Version": "1.04 | Updated Sept 5 2024"
+  }
+{%- endcomment -%}
+
+{%- style  -%}
+  .content-box {
+    max-width: fit-content;
+    margin: 0px auto;
+    padding: {{section.settings.fairing-padding-tb}}px {{section.settings.fairing-padding-lr}}px;
+    border: {{ section.settings.fairing-border-color}} {{ section.settings.fairing-border-size }}px solid;
+    border-radius:{{ section.settings.fairing-border-radius }}px ;
+  }
+  .enquire-survey__title {
+    margin-top: {{ section.settings.fairing-title-margin-bottom }}px;
+    margin-bottom: {{ section.settings.fairing-title-margin-bottom }}px;
+    max-width: {{ section.settings.fairing-title-max-width }}%;
+    text-align: {{ section.settings.fairing-title-text-align }};
+  }
+  .fairing__responses {
+    margin: 0 {{ section.settings.fairing-responses-margin}}px;
+    border: {{ section.settings.fairing-border-color}} {{ section.settings.fairing-border-size }}px solid;
+    border-radius:{{ section.settings.fairing-border-radius }}px ;
+  }
+  .fairing__response {
+    padding: {{ section.settings.fairing-response-padding }}px 0;
+  }
+  .fairing__other-response {
+    padding-left:5px;
+  }
+  .btn {
+    position: relative;
+    margin: 0 auto;
+    display: grid;
+    flex-wrap: wrap;
+    align-content: center;
+  }
+    
+{%- endstyle -%} 
+  
+  
+<script type="text/javascript">
+  window.FairingConfig = { source:"Wonderment" };
+  function waitForElm(selector) {
+  return new Promise((resolve) => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
+    const observer = new MutationObserver((mutations) => {
+      if (document.querySelector(selector)) {
+        resolve(document.querySelector(selector));
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  });
+}
+waitForElm(".fairing__action--submit").then(() => {
+  document
+    .getElementsByClassName("fairing__action--submit")[0]
+    .classList.add("button");
+});
+function ensureHash(str) {
+    if (str.charAt(0) !== '#') {
+        return '#' + str;
+    }
+    return str;
+}
+ 
+
+  document.addEventListener('wonderment:shipments_loaded', function(event) {
+  let orderNumber = event.shipments[0].order.name;
+  let target = document.getElementsByClassName('wndr-fairing-container')
+  if(!target) return
+  let container = document.createElement('div');
+  container.className = 'os-order-number';
+
+  container.innerHTML = `Order ${ensureHash(orderNumber)}`;
+  
+    container.style = 'opacity: 0; height:0;'
+  target?.[0]?.appendChild(container);
+  let orderNameContainer = document.createElement('div');
+  orderNameContainer.dataset.postPurchaseSurvey = ''
+  target?.[0]?.appendChild?.(orderNameContainer);
+  
+  var tag = document.createElement("script");
+  tag.src = "https://app.fairing.co/shopify/survey-script.js?k={{section.settings.fairing-key}}";
+  document.getElementsByTagName("head")[0].appendChild(tag);
+  })
+</script>
+
+<div class="wndr-fairing-container"></div>
+
+{% schema %}
+{
+  "name": "📦 Fairing",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Fairing Question Stream | v1.03"
+    },
+    {
+      "type": "paragraph",
+      "content": "Get more actionable insights in a week than most survey tools produce in a year."
+    },
+    {
+      "type": "paragraph",
+      "content": "Use our zero-party data platform to make decisions 10x faster, and build your own competitive advantage."
+    },
+    {
+      "type": "paragraph",
+      "content": "[Learn more about Fairing](https://www.fairing.co) or view our [documentation](https://help.wonderment.com/en/articles/4434561)."
+    },
+    {
+      "type": "paragraph",
+      "content": "Making changes in these settings may require you to save and reload the page before you can see them."
+    },
+    {
+      "type": "text",
+      "id": "fairing-key",
+      "label": "Fairing API Key",
+      "info": "Add your Publishable Key under API Credentials found in your [Fairing account](https://app.fairing.co/shopify/account)."
+    },
+    {
+      "type": "header",
+      "content": "Fairing Content Styling"
+    },
+    {
+      "type": "paragraph",
+      "content": "Adjust the spacing and style the border around all Fairing content."
+    },
+	{
+      "type": "range",
+      "id": "fairing-padding-tb",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Top and bottom content padding",
+      "default": 10
+	},
+    {
+      "type": "range",
+      "id": "fairing-padding-lr",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Left and right content padding",
+      "default": 10
+	},
+    {
+      "type": "color",
+      "id": "fairing-border-color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "fairing-border-size",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border size",
+      "default": 0
+	},
+        {
+      "type": "range",
+      "id": "fairing-border-radius",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+	},
+    {
+      "type": "header",
+      "content": "Fairing Title Styling"
+    },
+    {
+      "type": "paragraph",
+      "content": "Style the title of Fairing questions."
+    },
+    {
+      "type": "select",
+      "id": "fairing-title-text-align",
+      "label": "Title alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "justify",
+          "label": "Justify"
+        }
+      ],
+    "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "fairing-title-margin-top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top margin for title",
+      "default": 20
+	},
+    {
+      "type": "range",
+      "id": "fairing-title-margin-bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom margin for title",
+      "default": 20
+	},
+    {
+      "type": "range",
+      "id": "fairing-title-max-width",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Title width",
+      "default": 100
+	},
+    {
+      "type": "header",
+      "content": "Fairing Response Styling"
+    },
+    {
+      "type": "paragraph",
+      "content": "Adjust the spacing and style the border around Fairing responses."
+    },
+    {
+      "type": "color",
+      "id": "fairing-response-border-color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "fairing-response-border-size",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border size",
+      "default": 0
+	},
+    {
+      "type": "range",
+      "id": "fairing-response-border-radius",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 0
+	},
+    {
+      "type": "range",
+      "id": "fairing-response-padding",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding between responses",
+      "default": 5
+	},
+    {
+      "type": "range",
+      "id": "fairing-responses-margin",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margin depth for sides of responses container",
+      "default": 20
+	}  
+  ],
+"presets": [
+    {
+      "name": "📦 Fairing"
+    }
+  ]
+}
+{% endschema %}
+{% stylesheet %}
+{% endstylesheet %}
+{% javascript %}
+{% endjavascript %}

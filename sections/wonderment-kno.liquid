@@ -1,0 +1,97 @@
+
+{%- comment -%}
+  {
+    "Name": "Kno for Wonderment",
+    "Version": "1.0 | May 2nd 2023"
+  }
+{%- endcomment -%}
+
+<style>
+  .wndr-kno-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<script type="text/javascript">
+  function waitForElm(selector) {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+        const observer = new MutationObserver(mutations => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
+  }
+
+  document.addEventListener('wonderment:shipments_loaded', function(event) {
+    const shipments = event?.shipments || []
+    const urlParams = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    if (shipments.length < 1) {
+      return
+    }
+
+    if(!shipments[0]?.order?.id){
+      console.warn(`wonderment: No id found for order with name "${order?.name}"`)
+    }
+    window.Shopify.checkout =  window.Shopify.checkout || {}
+
+    window.Shopify.checkout.order_id = shipments[0].order?.id;
+    const knowScriptEl = document.createElement('script')
+    knowScriptEl.src = "https://www.knocdn.com/v1/embed.js?id={{ section.settings.shop-key }}";
+    document.getElementById('wonder-kno-script').appendChild(knowScriptEl);
+    // if ?beta=col move the kno survey to the image block
+    if(urlParams.beta !== 'col') {
+      return
+    }
+    waitForElm('.kno-app')
+      .then(()=> {
+        // to make sure it fills its container
+        document.querySelector('.kno-app').style.maxWidth = '100%'
+        document.querySelector('.kno-app').style.height = '100%'
+        document.querySelector(".wndr--image-block-container")
+          .replaceChildren(
+            document.querySelector(".wndr-kno-container")
+          );
+      });
+  });
+</script>
+<div id="wonder-kno-script"></div>
+<div class="wndr-kno-container">
+  <div id="wonder-kno"></div>
+</div>
+{% schema %}
+ {
+   "name": "📦 Wondersection Kno",
+    "tag": "section",
+    "settings": [
+    {
+       "type" : "text",
+       "id": "shop-key",
+       "label": "Kno Shop Key"
+    },
+    {
+       "type": "text",
+       "id": "survey-id",
+       "label": "Survey ID"
+    }
+ ],
+"presets": [
+   {
+     "name": "📦 Wondersection Kno"
+   }
+ ]
+ }
+{% endschema %}
