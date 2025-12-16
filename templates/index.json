@@ -1159,7 +1159,7 @@
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
+            "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 31,
             "width": "fit-content",
@@ -1183,7 +1183,7 @@
             "overlay_style": "solid",
             "gradient_direction": "to top",
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 10,
             "padding-inline-start": 10,
             "padding-inline-end": 10,
             "css_class": ""
