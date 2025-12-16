@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<span style=\"text-decoration:underline\"><strong>🌲 Order Tonight for Guaranteed Delivery!🌲</strong></span>",
+            "text": "<span style=\"text-decoration:underline\"><strong>🌲 Order Tonight with Expedited Shipping !🌲</strong></span>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
