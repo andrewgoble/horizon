@@ -19,7 +19,7 @@
           "name": "t:names.announcement",
           "settings": {
             "text": "<span style=\"text-decoration:underline\"><strong>🍸 Shop the New Years Sale 🍸</strong></span>",
-            "link": "https://www.jambys.com/products/digital-gift-card",
+            "link": "https://www.jambys.com/collections/sale",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
             "desktop_weight": "",
