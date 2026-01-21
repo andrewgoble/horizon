@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<span style=\"text-decoration:underline\"><strong>🍸 Shop the New Years Sale 🍸</strong></span>",
+            "text": "<span style=\"text-decoration:underline\"><strong>As Seen in: GQ, WSJ, NYT</strong></span>",
             "link": "https://www.jambys.com/collections/sale",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
