@@ -19,7 +19,7 @@
           "name": "t:names.announcement",
           "settings": {
             "text": "<span style=\"text-decoration:underline\"><strong>Two free gifts waiting in your cart when you add a product! - from the Jambys founders</strong></span>",
-            "link": "https://www.jambys.com/collections/all-products?page=2",
+            "link": "https://www.jambys.com/collections/all-products?page=1",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
             "desktop_weight": "",
