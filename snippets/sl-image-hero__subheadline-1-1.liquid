@@ -1,0 +1,73 @@
+{% liquid
+  assign text_color = ''
+  if block.settings.text_color != 'rgba(0,0,0,0)' and block.settings.text_color != 'transparent'
+    assign text_color = block.settings.text_color
+  else
+    if section.settings.image_position == 'background'
+      assign text_color = 'white'
+    endif
+  endif
+
+  assign font_size = block.settings.text_size
+  assign line_height = '120%'
+  assign mobile_font_size = block.settings.mobile_text_size
+  assign mobile_line_height = '120%'
+%}
+
+{% style %}
+  {% if block.settings.devices == 'mobile' %}
+    @media screen and (min-width: 768px) {
+      #shoplift--{{ block.id }} {
+        display: none !important;
+      }
+    }
+  {% elsif block.settings.devices == 'desktop' %}
+    @media screen and (max-width: 767px) {
+      #shoplift--{{ block.id }} {
+        display: none !important;
+      }
+    }
+  {% endif %}
+
+  #shoplift--{{ block.id }} div.image-hero__subheadline {
+    font-size: {{ font_size }}px;
+    line-height: {{ line_height }};
+    margin: 0;
+    padding-top: {{ block.settings.top_padding }}px;
+    padding-bottom: {{ block.settings.bottom_padding }}px;
+    {% if text_color != '' %}
+      color: {{ text_color}};
+    {% endif %}
+  }
+
+  #shoplift--{{ block.id }} div.image-hero__subheadline p {
+    margin: 0;
+    display: inline;
+    margin-right: 10px;
+    color: currentColor;
+  }
+
+  @media screen and (max-width: 767px) {
+    #shoplift--{{ block.id }} div.image-hero__subheadline {
+      font-size: {{ mobile_font_size }}px;
+      line-height: {{ mobile_line_height }};
+      padding-top: {{ block.settings.mobile_top_padding }}px;
+      padding-bottom: {{ block.settings.mobile_bottom_padding }}px;
+    }
+  }
+{% endstyle %}
+
+<div id="shoplift--{{ block.id }}" class="shoplift-{{ section.id }}--block sl-block" {{ block.shopify_attributes }}>
+  <div class="image-hero__subheadline sl-font-style--{{ block.settings.font_style }}">
+    {% unless block.settings.text == "" %}
+      {% if block.settings.strike_text != blank %}
+        {% assign strike_text = '<s>' | append: block.settings.strike_text | append: '</s>' %}
+        {{ block.settings.text | replace: block.settings.strike_text, strike_text }}
+      {% else %}
+        {{ block.settings.text }}
+      {% endif %}
+    {% else %}
+      (Subheadline text is empty)
+    {% endunless %}
+  </div>
+</div>

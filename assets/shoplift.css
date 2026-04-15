@@ -1,0 +1,124 @@
+.sl-brandstyle-019d9281-5df6-7ebc-9f7b-73548f715595 .sl-font-style--title {
+font-family: "sofia-pro";
+font-weight: 700;
+font-style: normal;
+}
+.sl-brandstyle-019d9281-5df6-7ebc-9f7b-73548f715595 .sl-font-style--body {
+font-family: "sofia-pro";
+font-weight: 400;
+font-style: normal;
+}
+.sl-brandstyle-019d9281-5df6-7ebc-9f7b-73548f715595 .sl-font-style--button {
+font-family: "sofia-pro";
+font-weight: 400;
+font-style: normal;
+}
+.sl-brandstyle-019d9281-5df6-7ebc-9f7b-73548f715595 .sl-font-style--label {
+font-family: "sofia-pro";
+font-weight: 400;
+font-style: normal;
+text-transform: uppercase;
+}
+.sl-pattern-019d9281-5e1f-7c32-a162-5d22b307cf65 {
+background-color: #ffffff;
+border-style: none;
+--sl-gv-bg-color: #ffffff;
+--sl-gv-btn-txt-color: #ffffff;
+--sl-gv-btn-bg-color: #36409a;
+--sl-gv-btn-radius: 8px;
+}
+.sl-pattern-019d9281-5e1f-7c32-a162-5d22b307cf65 .sl-font-style--title { color: #36409a; }
+.sl-pattern-019d9281-5e1f-7c32-a162-5d22b307cf65 .sl-font-style--body { color: #36409a; }
+.sl-pattern-019d9281-5e1f-7c32-a162-5d22b307cf65 .sl-font-style--button { color: #ffffff; }
+.sl-pattern-019d9281-5e1f-7c32-a162-5d22b307cf65 .sl-font-style--label { color: #36409a; }
+.sl-pattern-019d9281-5e1f-7c32-a162-5d22b307cf65 .sl-button--brand-style {
+color: #ffffff;
+background-color: #36409a;
+}
+.sl-pattern-019d9281-5e1f-7c32-a162-5d22b307cf65 .sl-button--border-radius { border-radius: 8px; }
+.sl-pattern-019d9281-5ead-7dba-aa16-d200d651ecbe {
+background-color: #ecebff;
+border-style: none;
+--sl-gv-bg-color: #ecebff;
+--sl-gv-btn-txt-color: #36409a;
+--sl-gv-btn-bg-color: #ecebff;
+}
+.sl-pattern-019d9281-5ead-7dba-aa16-d200d651ecbe .sl-font-style--title { color: #36409a; }
+.sl-pattern-019d9281-5ead-7dba-aa16-d200d651ecbe .sl-font-style--body { color: #36409a; }
+.sl-pattern-019d9281-5ead-7dba-aa16-d200d651ecbe .sl-font-style--button { color: #36409a; }
+.sl-pattern-019d9281-5ead-7dba-aa16-d200d651ecbe .sl-font-style--label { color: #36409a; }
+.sl-pattern-019d9281-5ead-7dba-aa16-d200d651ecbe .sl-button--brand-style {
+color: #36409a;
+background-color: #ecebff;
+}
+.sl-pattern-019d9281-5eac-72a6-b4f0-b7dff9920515 {
+background-color: #bdbaf6;
+border-style: none;
+--sl-gv-bg-color: #bdbaf6;
+--sl-gv-btn-bg-color: #bdbaf6;
+}
+.sl-pattern-019d9281-5eac-72a6-b4f0-b7dff9920515 .sl-font-style--title { color: #000000; }
+.sl-pattern-019d9281-5eac-72a6-b4f0-b7dff9920515 .sl-font-style--body { color: #000000; }
+.sl-pattern-019d9281-5eac-72a6-b4f0-b7dff9920515 .sl-font-style--label { color: #000000; }
+.sl-pattern-019d9281-5eac-72a6-b4f0-b7dff9920515 .sl-button--brand-style {
+background-color: #bdbaf6;
+}
+.sl-pattern-019d9281-5ead-711d-8ece-bee6b2e470e0 {
+background-color: #ffffff;
+border-style: none;
+--sl-gv-bg-color: #ffffff;
+--sl-gv-btn-txt-color: #36409a;
+--sl-gv-btn-bg-color: #ffffff;
+}
+.sl-pattern-019d9281-5ead-711d-8ece-bee6b2e470e0 .sl-font-style--title { color: #36409a; }
+.sl-pattern-019d9281-5ead-711d-8ece-bee6b2e470e0 .sl-font-style--body { color: #36409a; }
+.sl-pattern-019d9281-5ead-711d-8ece-bee6b2e470e0 .sl-font-style--button { color: #36409a; }
+.sl-pattern-019d9281-5ead-711d-8ece-bee6b2e470e0 .sl-font-style--label { color: #36409a; }
+.sl-pattern-019d9281-5ead-711d-8ece-bee6b2e470e0 .sl-button--brand-style {
+color: #36409a;
+background-color: #ffffff;
+}
+.sl-pattern-019d9281-5eae-77ad-bf8c-1bdfee4a803c {
+background-color: #f3f4fa;
+border-style: none;
+--sl-gv-bg-color: #f3f4fa;
+--sl-gv-btn-txt-color: #36409a;
+--sl-gv-btn-bg-color: #ecebff;
+--sl-gv-btn-radius: 40px;
+}
+.sl-pattern-019d9281-5eae-77ad-bf8c-1bdfee4a803c .sl-font-style--title { color: #36409a; }
+.sl-pattern-019d9281-5eae-77ad-bf8c-1bdfee4a803c .sl-font-style--body { color: #36409a; }
+.sl-pattern-019d9281-5eae-77ad-bf8c-1bdfee4a803c .sl-font-style--button { color: #36409a; }
+.sl-pattern-019d9281-5eae-77ad-bf8c-1bdfee4a803c .sl-font-style--label { color: #36409a; }
+.sl-pattern-019d9281-5eae-77ad-bf8c-1bdfee4a803c .sl-button--brand-style {
+color: #36409a;
+background-color: #ecebff;
+}
+.sl-pattern-019d9281-5eae-77ad-bf8c-1bdfee4a803c .sl-button--border-radius { border-radius: 40px; }
+.sl-pattern-019d9281-5eae-7cda-bd50-f7b9e8f0ef4e {
+background-color: #f3f4fa;
+border-style: none;
+--sl-gv-bg-color: #f3f4fa;
+--sl-gv-btn-txt-color: #ffffff;
+--sl-gv-btn-bg-color: #f3f4fa;
+}
+.sl-pattern-019d9281-5eae-7cda-bd50-f7b9e8f0ef4e .sl-font-style--title { color: #ffffff; }
+.sl-pattern-019d9281-5eae-7cda-bd50-f7b9e8f0ef4e .sl-font-style--body { color: #ffffff; }
+.sl-pattern-019d9281-5eae-7cda-bd50-f7b9e8f0ef4e .sl-font-style--button { color: #ffffff; }
+.sl-pattern-019d9281-5eae-7cda-bd50-f7b9e8f0ef4e .sl-font-style--label { color: #ffffff; }
+.sl-pattern-019d9281-5eae-7cda-bd50-f7b9e8f0ef4e .sl-button--brand-style {
+color: #ffffff;
+background-color: #f3f4fa;
+}
+.sl-pattern-019d9281-5eae-70ae-8c04-e59a45fa1a43 {
+background-color: #ffffff;
+border-style: none;
+--sl-gv-bg-color: #ffffff;
+--sl-gv-btn-bg-color: #ffffff;
+}
+.sl-pattern-019d9281-5eae-70ae-8c04-e59a45fa1a43 .sl-font-style--title { color: #000000; }
+.sl-pattern-019d9281-5eae-70ae-8c04-e59a45fa1a43 .sl-font-style--body { color: #000000; }
+.sl-pattern-019d9281-5eae-70ae-8c04-e59a45fa1a43 .sl-font-style--label { color: #000000; }
+.sl-pattern-019d9281-5eae-70ae-8c04-e59a45fa1a43 .sl-button--brand-style {
+background-color: #ffffff;
+}
