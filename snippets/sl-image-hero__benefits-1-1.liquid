@@ -1,0 +1,160 @@
+{% liquid
+  case block.settings.text_size
+  when 'large'
+    assign font_size = "16px"
+    assign icon_size = '18px'
+  when 'medium'
+    assign font_size = "14px"
+    assign icon_size = '16px'
+  when 'small'
+    assign font_size = "12px"
+    assign icon_size = '14px'
+  endcase
+
+  case block.settings.mobile_text_size
+  when 'large'
+    assign mobile_font_size = "16px"
+    assign mobile_icon_size = '18px'
+  when 'medium'
+    assign mobile_font_size = "14px"
+    assign mobile_icon_size = '16px'
+  when 'small'
+    assign mobile_font_size = "12px"
+    assign mobile_icon_size = '14px'
+  else
+    assign mobile_font_size = font_size
+    assign mobile_icon_size = icon_size
+  endcase
+
+  assign filled_benefits = 0
+  if block.settings.first_text != empty
+    assign filled_benefits = 1 | plus: filled_benefits
+  endif
+  if block.settings.second_text != empty
+    assign filled_benefits = 1 | plus: filled_benefits
+  endif
+  if block.settings.third_text != empty
+    assign filled_benefits = 1 | plus: filled_benefits
+  endif
+  if block.settings.fourth_text != empty
+    assign filled_benefits = 1 | plus: filled_benefits
+  endif
+
+  assign custom_color = ''
+  if block.settings.text_color != 'rgba(0,0,0,0)' and block.settings.text_color != 'transparent'
+    assign custom_color = block.settings.text_color
+  else
+    if section.settings.image_position == 'background'
+      assign custom_color = 'white'
+    endif
+  endif
+
+  assign custom_icon_color = ''
+  if block.settings.icon_color != 'rgba(0,0,0,0)' and block.settings.icon_color != 'transparent'
+    assign custom_icon_color = block.settings.icon_color
+  else
+    if section.settings.image_position == 'background'
+      assign custom_icon_color = 'white'
+    endif
+  endif
+%}
+
+<style>
+  {% if block.settings.devices == 'mobile' %}
+    @media screen and (min-width: 768px) {
+      #shoplift--{{ block.id }}--benefits {
+        display: none !important;
+      }
+    }
+  {% elsif block.settings.devices == 'desktop' %}
+    @media screen and (max-width: 767px) {
+      #shoplift--{{ block.id }}--benefits {
+        display: none !important;
+      }
+    }
+  {% endif %}
+
+  #shoplift--{{ block.id }}--benefits {
+    padding-top: {{ block.settings.top_padding }}px;
+    padding-bottom: {{ block.settings.bottom_padding }}px;
+  }
+
+  @media (max-width: 767px) {
+    #shoplift--{{ block.id }}--benefits {
+      padding-top: {{ block.settings.mobile_top_padding }}px;
+      padding-bottom: {{ block.settings.mobile_bottom_padding }}px;
+    }
+  }
+
+  #shoplift--{{ block.id }}--benefits ul {
+    padding: 0;
+    margin: 0;
+    {% if block.settings.benefits_layout == "stacked" %}
+      display: inline-grid;
+    {% else %}
+      display: inline-flex;
+      flex-wrap: wrap;
+    {% endif %}
+    column-gap: 10px;
+  }
+
+  #shoplift--{{ block.id }}--benefits li {
+    display: flex;
+    list-style-type: none;
+    font-size:  {{ font_size }};
+    align-items: center;
+  }
+  #shoplift--{{ block.id }}--benefits li i {
+    margin-right: 0.25em;
+    font-size: {{ icon_size }};
+    {% if custom_icon_color != '' %}
+      color: {{ custom_icon_color }};
+    {% endif %}
+  }
+  #shoplift--{{ block.id }}--benefits li span {
+    {% if custom_color != '' %}
+      color: {{ custom_color }};
+  {% endif %}
+  }
+
+  #shoplift--{{ block.id }}--benefits p {
+    margin: 0;
+  }
+
+@media screen and (max-width: 767px) {
+  #shoplift--{{ block.id }}--benefits ul {
+    {% case block %}
+    {% when "match_desktop" %}
+    {% when "stacked" %}
+      display: inline-grid;
+    {% when "adjacent" %}
+      display: inline-flex;
+    {% endcase %}
+    flex-direction: column;
+    gap: 0;
+  }
+  #shoplift--{{ block.id }}--benefits li {
+    font-size: {{ mobile_font_size }};
+  }
+  #shoplift--{{ block.id }}--benefits li i {
+    font-size: {{ mobile_icon_size }};
+  }
+}
+</style>
+
+<div id="shoplift--{{ block.id }}--benefits" class="shoplift-{{ section.id }}--block sl-block sl-font-style--{{ block.settings.font_style }}" {{ block.shopify_attributes }}>
+  <ul>
+    {% if filled_benefits == 0 %}
+    <li>(Benefits block is missing text: {{ filled_benefits }}{% if block.settings.first_text != empty %} aaa{% endif %})</li>
+    {% endif %}
+    {% unless block.settings.first_text == empty %}
+    <li>{% if block.settings.first_icon_name != empty %}<i class="uil uil-{{ block.settings.first_icon_name }}"></i>{% endif %}<span>{{ block.settings.first_text }}</span></li>
+    {% endunless %}
+    {% unless block.settings.second_text == empty %}
+    <li>{% if block.settings.second_icon_name != empty %}<i class="uil uil-{{ block.settings.second_icon_name }}"></i>{% endif %}<span>{{ block.settings.second_text }}</span></li>
+    {% endunless %}
+    {% unless block.settings.third_text == empty %}
+    <li>{% if block.settings.third_icon_name != empty %}<i class="uil uil-{{ block.settings.third_icon_name }}"></i>{% endif %}<span>{{ block.settings.third_text }}</span></li>
+    {% endunless %}
+  </ul>
+</div>

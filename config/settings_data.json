@@ -59,16 +59,15 @@
     "cart_type": "drawer",
     "auto_open_cart_drawer": true,
     "cart_upsells_products": [
-      "arcade-jamtee",
-      "black-chilluxe-jogger",
-      "black-floof-pant",
-      "black-black-tie-jambys",
-      "black-longsleeve-jamtee",
-      "black-pajambys-top"
+      "black-hugby-1",
+      "black-black-long-jambys",
+      "gray-black-long-jambys",
+      "gray-black-jambys-basketball-short"
     ],
-    "show_add_discount_code": true,
+    "cart_upsells_max_products": 6,
+    "show_add_discount_code": false,
     "show_accelerated_checkout_buttons": false,
-    "cart_thumbnail_border_radius": 8,
+    "cart_thumbnail_border_radius": 12,
     "drawer_border": "none",
     "icon_stroke": "thin",
     "input_border_width": 1,
@@ -179,6 +178,18 @@
       },
       "10384935893930344104": {
         "type": "shopify://apps/seoant-redirects/blocks/brokenlink-404/cc7b1996-e567-42d0-8862-356092041863",
+        "disabled": false,
+        "settings": {}
+      },
+      "18228966181090706294": {
+        "type": "shopify://apps/selleasy/blocks/app-embed/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+        "disabled": false,
+        "settings": {
+          "storefrontAccessToken": ""
+        }
+      },
+      "8605505498557855500": {
+        "type": "shopify://apps/bogos-io-free-gift/blocks/app-embed/0432bba6-720a-4e95-be5a-b868386f7aa6",
         "disabled": false,
         "settings": {}
       }

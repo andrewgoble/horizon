@@ -1,0 +1,2309 @@
+<div class='sl-brandstyle-019d9281-5df6-7ebc-9f7b-73548f715595'>
+<div class='sl-pattern-019d9281-5e1f-7c32-a162-5d22b307cf65{{ section.settings.pattern_select }} sl-pattern-{{ section.settings.pattern_select }}'>
+{{ 'shoplift.css' | asset_url | stylesheet_tag }}
+{{ 'https://unicons.iconscout.com/release/v4.0.0/css/line.css' | stylesheet_tag }}
+
+{% liquid
+  assign image = section.settings.image
+  assign image_class = 'shoplift-image-alignment--' | append: section.id
+  assign mobile_image_class = image_class | append: " shoplift-hero-image-mobile"
+
+  if section.settings.mobile_image and section.settings.mobile_image != empty
+    assign image_class = image_class | append: " shoplift-hero-image-desktop"
+  endif
+
+  case section.settings.section_height
+    when 'small'
+      assign height_vh = 40
+      assign mobile_height_vh = 40
+      assign height_padding = 24
+      assign mobile_height_padding = 16
+    when 'medium'
+      assign height_vh = 60
+      assign mobile_height_vh = 60
+      assign height_padding = 32
+      assign mobile_height_padding = 24
+    when 'large'
+      assign height_vh = 80
+      assign mobile_height_vh = 80
+      assign height_padding = 64
+      assign mobile_height_padding = 48
+    when 'xlarge'
+      assign height_vh = 100
+      assign mobile_height_vh = 100
+      assign height_padding = 128
+      assign mobile_height_padding = 80
+  endcase
+
+  case section.settings.mobile_section_height
+    when 'small'
+      assign mobile_height_vh = 40
+      assign mobile_height_padding = 16
+    when 'medium'
+      assign mobile_height_vh = 60
+      assign mobile_height_padding = 24
+    when 'large'
+      assign mobile_height_vh = 80
+      assign mobile_height_padding = 48
+    when 'xlarge'
+      assign mobile_height_vh = 100
+      assign mobile_height_padding = 80
+  endcase
+
+  case section.settings.section_width
+    when 'small'
+      assign width_padding = 25
+      assign mobile_width_padding = 15
+    when 'medium'
+      assign width_padding = 15
+      assign mobile_width_padding = 10
+    when 'large'
+      assign width_padding = 5
+      assign mobile_width_padding = 5
+  endcase
+
+  case section.settings.mobile_image_position
+    when 'match_desktop'
+      case section.settings.image_position
+        when 'right'
+        assign mobile_image_position = "split"
+        when 'left'
+        assign mobile_image_position = "split"
+        when 'background'
+        assign mobile_image_position = "background"
+      endcase
+    when 'background'
+      assign mobile_image_position = "background"
+    when 'split'
+      assign mobile_image_position = "split"
+  endcase
+
+  case section.settings.content_position
+    when "top_left"
+      assign text_alignment = "start"
+    when "middle_left"
+      assign text_alignment = "start"
+    when "bottom_left"
+      assign text_alignment = "start"
+    when "top_center"
+      assign text_alignment = "center"
+    when "middle_center"
+      assign text_alignment = "center"
+    when "bottom_center"
+      assign text_alignment = "center"
+    when "top_right"
+      assign text_alignment = "end"
+    when "middle_right"
+      assign text_alignment = "end"
+    when "bottom_right"
+      assign text_alignment = "end"
+  endcase
+
+  if section.settings.mobile_content_position == "match"
+    assign mobile_content_position = section.settings.content_position
+  else
+    assign mobile_content_position = section.settings.mobile_content_position
+  endif
+
+  case mobile_content_position
+    when "top_left"
+      assign mobile_text_alignment = "start"
+    when "middle_left"
+      assign mobile_text_alignment = "start"
+    when "bottom_left"
+      assign mobile_text_alignment = "start"
+    when "top_center"
+      assign mobile_text_alignment = "center"
+    when "middle_center"
+      assign mobile_text_alignment = "center"
+    when "bottom_center"
+      assign mobile_text_alignment = "center"
+    when "top_right"
+      assign mobile_text_alignment = "end"
+    when "middle_right"
+      assign mobile_text_alignment = "end"
+    when "bottom_right"
+      assign mobile_text_alignment = "end"
+  endcase
+
+  assign anchor_button_bottom = empty
+%}
+
+<style>
+
+  .shoplift--{{ section.id }}.sl-section {
+    position: relative;
+    {% if section.settings.image_position == 'left' or section.settings.image_position == 'right' %}
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    {% else %}
+      display: flex;
+    {% endif %}
+
+    {% if section.settings.background_color != 'rgba(0,0,0,0)' and section.settings.background_color != 'transparent' %}
+      background-color: {{ section.settings.background_color }};
+    {% endif %}
+
+    {% if section.settings.border_color != 'rgba(0,0,0,0)' and section.settings.border_color != 'transparent' %}
+      border-color: {{ section.settings.border_color }};
+    {% endif %}
+
+    {% unless section.settings.section_border == 'brand_style' %}
+      {% case section.settings.section_border %}
+        {% when 'none' %}
+          border-width: 0;
+        {% when 'bottom' %}
+          border-width: 0 0 1px 0;
+          border-style: solid;
+        {% when 'all' %}
+          border-width: 1px;
+          border-style: solid;
+      {% endcase %}
+    {% endunless %}
+  }
+
+  {% if section.settings.devices == 'mobile' %}
+    @media screen and (min-width: 768px) {
+      .shoplift--{{ section.id }} {
+        display: none !important;
+      }
+    }
+
+  {% elsif section.settings.devices == 'desktop' %}
+    @media screen and (max-width: 768px) {
+      .shoplift--{{ section.id }} {
+        display: none !important;
+      }
+    }
+  {% endif %}
+
+  .shoplift--{{ section.id }}--content {
+    display: flex;
+    text-align: {{ text_alignment }};
+    flex: 1;
+    z-index: 0;
+  }
+
+  .shoplift-alignment--{{ section.id }} {
+    {% if text_alignment != 'right' %}
+      margin-right: auto;
+    {% endif %}
+    {% if text_alignment != 'left' %}
+      margin-left: auto;
+    {% endif %}
+  }
+
+  @media screen and (min-width: 768px) {
+    {% if section.settings.image_position == 'right' %}
+      .shoplift--{{ section.id }}--content {
+        grid-row: 1;
+        grid-column: 1;
+      }
+    {% endif %}
+  }
+
+  .shoplift-image-alignment--{{ section.id }} {
+    {% if image.aspect_ratio >= 1 %}
+      width: 100%;
+    {% else %}
+      width: {{ image.aspect_ratio | times: 100 }}%;
+    {% endif %}
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media screen and (min-width: 768px) {
+    .shoplift--{{ section.id }}--image {
+      display: grid;
+      padding: {{ section.settings.image_padding | default: 0 }}px;
+      overflow: hidden;
+      {% if section.settings.image_position == "background" %}
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      {% endif %}
+    }
+    {% if section.settings.image_position == "background" %}
+      .shoplift--{{ section.id }}--image:before {
+        background-color: #000;
+        opacity: {{ section.settings.image_overlay_opacity | times: 0.01 }};
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: '';
+        display: block;
+      }
+    {% endif %}
+  }
+
+  .shoplift--{{ section.id }}--content {
+    {% if section.settings.image_position == "background" %}
+      width: 100%;
+    {% endif %}
+    {% case section.settings.content_position %}
+      {% when "top_left" %}
+        align-items: start;
+        justify-content: start;
+      {% when "top_center" %}
+        align-items: start;
+        justify-content: center;
+      {% when "top_right" %}
+        align-items: start;
+        justify-content: end;
+      {% when "middle_left" %}
+        align-items: center;
+        justify-content: start;
+      {% when "middle_center" %}
+        align-items: center;
+        justify-content: center;
+      {% when "middle_right" %}
+        align-items: center;
+        justify-content: end;
+      {% when "bottom_left" %}
+        align-items: end;
+        justify-content: start;
+      {% when "bottom_center" %}
+        align-items: end;
+        justify-content: center;
+      {% when "bottom_right" %}
+        align-items: end;
+        justify-content: end;
+    {% endcase %}
+  }
+
+  .shoplift--{{ section.id }}--content-inner {
+    max-width: 1024px;
+    min-height: 350px;
+    gap: 10px;
+    display: grid;
+    {% case section.settings.content_position %}
+    {% when "top_left" %}
+      padding: 24px {{ width_padding | times: 2 | minus: 5 }}% {{ height_padding | times: 2 | minus: 24 }}px 5%;
+    {% when "top_center" %}
+      padding: 24px {{ width_padding }}% {{ height_padding | times: 2 | minus: 24 }}px;
+    {% when "top_right" %}
+      padding: 24px 5% {{ height_padding | times: 2 | minus: 24 }}px {{ width_padding | times: 2 | minus: 5 }}%;
+    {% when "middle_left" %}
+      padding: {{ height_padding }}px {{ width_padding | times: 2 | minus: 5 }}% {{ height_padding }}px 5%;
+    {% when "middle_center" %}
+      padding: {{ height_padding }}px {{ width_padding }}%;
+    {% when "middle_right" %}
+      padding: {{ height_padding }}px 5% {{ height_padding }}px {{ width_padding | times: 2 | minus: 5 }}%;
+    {% when "bottom_left" %}
+      padding: {{ height_padding | times: 2 | minus: 24 }}px {{ width_padding | times: 2 | minus: 5 }}% 24px 5%;
+    {% when "bottom_center" %}
+      padding: {{ height_padding | times: 2 | minus: 24 }}px {{ width_padding }}% 24px;
+    {% when "bottom_right" %}
+      padding: {{ height_padding | times: 2 | minus: 24 }}px 5% 24px {{ width_padding | times: 2 | minus: 5 }}%;
+    {% endcase %}
+  }
+
+  .shoplift--{{ section.id }} .shoplift-hero-image-mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    {% if section.settings.content_position != mobile_content_position %}
+    .shoplift--{{ section.id }}--content {
+      {% if mobile_image_position == "background" %}
+        width: 100%;
+      {% endif %}
+
+      {% case mobile_content_position %}
+        {% when "top_left" %}
+          align-items: start;
+          justify-content: start;
+        {% when "top_center" %}
+          align-items: start;
+          justify-content: center;
+        {% when "top_right" %}
+          align-items: start;
+          justify-content: end;
+        {% when "middle_left" %}
+          align-items: center;
+          justify-content: start;
+        {% when "middle_center" %}
+          align-items: center;
+          justify-content: center;
+        {% when "middle_right" %}
+          align-items: center;
+          justify-content: end;
+        {% when "bottom_left" %}
+          align-items: end;
+          justify-content: start;
+        {% when "bottom_center" %}
+          align-items: end;
+          justify-content: center;
+        {% when "bottom_right" %}
+          align-items: end;
+          justify-content: end;
+      {% endcase %}
+    }
+    {% endif %}
+
+    .shoplift--{{ section.id }}--content {
+      overflow: hidden;
+      padding: 0;
+      min-height: unset;
+    }
+
+    .shoplift--{{ section.id }}--content-inner {
+        {% case mobile_content_position %}
+          {% when "top_left" %}
+            padding: {{ mobile_height_padding }}px {{ mobile_width_padding | times: 2 | minus: 5 }}% {{ mobile_height_padding | times: 2 }}px 5%;
+          {% when "top_center" %}
+            padding: {{ mobile_height_padding }}px {{ mobile_width_padding }}% {{ mobile_height_padding | times: 2 }}px;
+          {% when "top_right" %}
+            padding: {{ mobile_height_padding }}px 5% {{ mobile_height_padding | times: 2 }}px {{ mobile_width_padding | times: 2 | minus: 5 }}%;
+          {% when "middle_left" %}
+            padding: {{ mobile_height_padding }}px {{ mobile_width_padding | times: 2 | minus: 5 }}% {{ mobile_height_padding }}px 5%;
+          {% when "middle_center" %}
+            padding: {{ mobile_height_padding }}px {{ mobile_width_padding }}%;
+          {% when "middle_right" %}
+            padding: {{ mobile_height_padding }}px 5% {{ mobile_height_padding }}px {{ mobile_width_padding | times: 2 | minus: 5 }}%;
+          {% when "bottom_left" %}
+            padding: {{ mobile_height_padding | times: 2 }}px {{ mobile_width_padding | times: 2 | minus: 5 }}% {{ mobile_height_padding }}px 5%;
+          {% when "bottom_center" %}
+            padding: {{ mobile_height_padding | times: 2 }}px {{ mobile_width_padding }}% {{ mobile_height_padding }}px;
+          {% when "bottom_right" %}
+            padding: {{ mobile_height_padding | times: 2 }}px 5% {{ mobile_height_padding }}px {{ mobile_width_padding | times: 2 | minus: 5 }}%;
+        {% endcase %}
+      margin: 0;
+      min-height: auto;
+    }
+
+    .shoplift--{{ section.id }}--image {
+      padding: {{ section.settings.mobile_image_padding | default: 0 }}px;
+      min-height: 300px;
+
+      {% if mobile_image_position == "background" %}
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      {% endif %}
+    }
+
+    {% if mobile_image_position == "background" %}
+      .shoplift--{{ section.id }}--image:before {
+        background-color: #000;
+        opacity: {{ section.settings.mobile_image_overlay_opacity | times: 0.01 }};
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: '';
+        display: block;
+      }
+    {% endif %}
+
+    {% if mobile_text_alignment != text_alignment %}
+      .shoplift--{{ section.id }}--content {
+        text-align: {{ mobile_text_alignment }}
+      }
+    {% endif %}
+
+    .shoplift--{{ section.id }}.stacked {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .shoplift--{{ section.id }} .shoplift-hero-image-mobile {
+      display: block;
+    }
+
+    .shoplift--{{ section.id }} .shoplift-hero-image-desktop {
+      display: none;
+    }
+  }
+</style>
+
+{% capture sl--imagesection %}
+  {% if image and image != empty %}
+    {{ image
+      | image_url:
+        width: 1500
+      | image_tag:
+        class: image_class,
+        alt: image.alt,
+        tabindex: "-1",
+        loading: 'lazy',
+        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+      | escape
+    }}
+  {% else %}
+    {{ 'lifestyle-2' | placeholder_svg_tag: image_class }}
+  {% endif %}
+  {% if section.settings.mobile_image and section.settings.mobile_image != empty %}
+    {{ section.settings.mobile_image
+      | image_url:
+        width: 1500
+      | image_tag:
+        class: mobile_image_class,
+        alt: section.settings.mobile_image.alt,
+        tabindex: "-1",
+        loading: 'lazy',
+        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+      | escape
+    }}
+  {% endif %}
+{% endcapture %}
+
+{% capture sl--imagewithtext_contents %}
+  <div class="shoplift--{{ section.id }}--content-inner">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {% when 'headline' %}
+          {% render 'sl-image-hero__headline-1-1',
+            section: section,
+            block: block
+          %}
+
+        {% when 'subheadline' %}
+          {% render 'sl-image-hero__subheadline-1-1',
+            section: section,
+            block: block
+          %}
+
+        {% when 'overline' %}
+          {% render 'sl-image-hero__overline-1-1',
+            section: section,
+            block: block
+          %}
+
+        {% when 'button' %}
+          {% if block.settings.anchor_bottom == true -%}
+            {%- assign anchor_button_bottom = block -%}
+            {% render 'sl-image-hero__button-1-1',
+              section: section,
+              class: 'sl-image-hero__anchor--desktop',
+              block: block
+            %}
+          {%- else -%}
+            {% render 'sl-image-hero__button-1-1',
+              section: section,
+              block: block
+            %}
+          {%- endif %}
+
+        {% when 'reviews' %}
+          {% render 'sl-image-hero__reviews-1-1',
+            section: section,
+            block: block
+          %}
+
+        {% when 'benefits' %}
+          {% render 'sl-image-hero__benefits-1-1',
+            section: section,
+            block: block
+          %}
+        
+        {% when 'countdown' %}
+          {% render 'sl-image-hero__countdown-1-1',
+            section: section,
+            block: block
+          %}
+
+        {% when '@app' %}
+          {% render block,
+           section: section,
+           block: block
+        %}
+      {%- endcase -%}
+    {%- endfor -%}
+
+    {% if anchor_button_bottom != empty %}
+      {% render 'sl-image-hero__button-1-1',
+        section: section,
+        class: 'sl-image-hero__anchor--mobile',
+        block: anchor_button_bottom
+      %}
+    {% endif %}
+  </div>
+{% endcapture %}
+
+<section id="shoplift--{{ section.id }}"  class="shoplift--{{ section.id }} stacked sl-section">
+  <div class="shoplift--{{ section.id }}--image">
+    {{ sl--imagesection }}
+  </div>
+  <div class='shoplift--{{ section.id }}--content'>
+    {{ sl--imagewithtext_contents }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "⚡ Image hero 1.1",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "select",
+      "label": "Show on",
+      "id": "devices",
+      "options": [
+        {
+          "value": "all",
+          "label": "All Devices"
+        },
+        {
+          "value": "mobile",
+          "label": "Mobile Only"
+        },
+        {
+          "value": "desktop",
+          "label": "Desktop Only"
+        }
+      ],
+      "default": "all"
+    },
+    {
+      "type": "image_picker",
+      "label": "Section image",
+      "id": "image"
+    },
+    {
+      "type": "select",
+      "label": "Image layout",
+      "id": "image_position",
+      "options": [
+        {
+          "value": "background",
+          "label": "Background image"
+        },
+        {
+          "value": "right",
+          "label": "Split image right"
+        },
+        {
+          "value": "left",
+          "label": "Split image left"
+        }
+      ],
+      "default": "background"
+    },
+    {
+      "type": "range",
+      "label": "Background overlay opacity",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 30
+    },
+  {
+          "type": "select",
+          "id": "pattern_select",
+          "label": "Pattern",
+          "info": "To edit your color schemes, visit your Brand Styles settings",
+          "options": [
+{
+                "value":"019d9281-5e1f-7c32-a162-5d22b307cf65",
+                "label": "Content Pattern 1"
+            },
+{
+                "value":"019d9281-5eac-72a6-b4f0-b7dff9920515",
+                "label": "Content Pattern 2"
+            },
+{
+                "value":"019d9281-5ead-711d-8ece-bee6b2e470e0",
+                "label": "Highlight Pattern 1"
+            },
+{
+                "value":"019d9281-5ead-7dba-aa16-d200d651ecbe",
+                "label": "Content Pattern 3"
+            },
+{
+                "value":"019d9281-5eae-70ae-8c04-e59a45fa1a43",
+                "label": "Highlight Pattern 2"
+            },
+{
+                "value":"019d9281-5eae-77ad-bf8c-1bdfee4a803c",
+                "label": "Product Pattern 2"
+            },
+{
+                "value":"019d9281-5eae-7cda-bd50-f7b9e8f0ef4e",
+                "label": "Product Pattern 1"
+            }
+]},
+
+    {
+      "type": "select",
+      "label": "Section height",
+      "id": "section_height",
+      "options": [
+        {
+          "value": "xlarge",
+          "label": "XLarge"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        }
+      ],
+      "default": "xlarge"
+    },
+    {
+      "type": "select",
+      "label": "Section width",
+      "id": "section_width",
+      "options": [
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "label": "Content position",
+      "id": "content_position",
+      "options": [
+        {
+          "value": "top_left",
+          "label": "Top left"
+        },
+        {
+          "value": "top_center",
+          "label": "Top center"
+        },
+        {
+          "value": "top_right",
+          "label": "Top right"
+        },
+        {
+          "value": "middle_left",
+          "label": "Middle left"
+        },
+        {
+          "value": "middle_center",
+          "label": "Middle center"
+        },
+        {
+          "value": "middle_right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom_left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom_center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom_right",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "middle_center"
+    },
+    {
+      "type": "select",
+      "label": "Section border",
+      "id": "section_border",
+      "options": [
+        {
+            "value": "brand_style",
+            "label": "Match Brand Styles"
+        },
+        {
+          "value": "none",
+          "label": "Don't show border"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "all",
+          "label": "All"
+        }
+      ],
+      "default": "brand_style"
+    },
+    {
+      "type": "header",
+      "content": "MOBILE"
+    },
+    {
+      "type": "image_picker",
+      "label": "Mobile image",
+      "id": "mobile_image"
+    },
+    {
+      "type": "select",
+      "label": "Image layout",
+      "id": "mobile_image_position",
+      "options": [
+        {
+          "value": "match_desktop",
+          "label": "Match desktop"
+        },
+        {
+          "value": "background",
+          "label": "Background image"
+        },
+        {
+          "value": "split",
+          "label": "Split image on top"
+        }
+      ],
+      "default": "match_desktop"
+    },
+    {
+      "type": "range",
+      "label": "Image overlay opacity",
+      "id": "mobile_image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "label": "Section height",
+      "id": "mobile_section_height",
+      "options": [
+        {
+          "value": "match",
+          "label": "Match desktop"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        }
+      ],
+      "default": "match"
+    },
+    {
+      "type": "select",
+      "label": "Content position",
+      "id": "mobile_content_position",
+      "options": [
+        {
+          "value": "match",
+          "label": "Match Desktop"
+        },
+        {
+          "value": "top_left",
+          "label": "Top left"
+        },
+        {
+          "value": "top_center",
+          "label": "Top center"
+        },
+        {
+          "value": "top_right",
+          "label": "Top right"
+        },
+        {
+          "value": "middle_left",
+          "label": "Middle left"
+        },
+        {
+          "value": "middle_center",
+          "label": "Middle center"
+        },
+        {
+          "value": "middle_right",
+          "label": "Middle right"
+        },
+        {
+          "value": "bottom_left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom_center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "bottom_right",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "match"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "transparent"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "headline",
+      "name": "Headline",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "label": "Show on",
+          "id": "devices",
+          "options": [
+            {
+              "value": "all",
+              "label": "All Devices"
+            },
+            {
+              "value": "mobile",
+              "label": "Mobile Only"
+            },
+            {
+              "value": "desktop",
+              "label": "Desktop Only"
+            }
+          ],
+          "default": "all"
+        },
+        {
+          "type": "richtext",
+          "label": "Headline text",
+          "id": "text",
+          "default": "<p>A great headline explains the value you provide</p>"
+        },
+        {
+          "type": "text",
+          "label": "Strikethrough text",
+          "id": "strike_text",
+          "info": "Strike through specific text in your message for sale prices"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "min": 12,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "label": "Text size",
+          "default": 48
+        },
+        {
+          "type": "select",
+          "label": "Font style",
+          "id": "font_style",
+          "options": [
+            {
+              "value": "title",
+              "label": "Title"
+            },
+            {
+              "value": "body",
+              "label": "Body"
+            },
+            {
+              "value": "button",
+              "label": "Button"
+            },
+            {
+              "value": "label",
+              "label": "Label"
+            }
+          ],
+          "default": "title"
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "MOBILE"
+        },
+        {
+          "type": "range",
+          "id": "mobile_text_size",
+          "min": 12,
+          "max": 60,
+          "step": 2,
+          "unit": "px",
+          "label": "Text size",
+          "default": 32
+        },
+        {
+          "type": "range",
+          "id": "mobile_top_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "mobile_bottom_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+            "type": "header",
+            "content": "Custom Colors",
+            "info": "These color pickers allow you to deviate from your Brand Styles color schemes. To revert to a preset color scheme, remove the hex code below."
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Headline text",
+          "default": "transparent"
+        }
+      ]
+    },
+    {
+      "type": "subheadline",
+      "name": "Subheadline",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "label": "Show on",
+          "id": "devices",
+          "options": [
+            {
+              "value": "all",
+              "label": "All Devices"
+            },
+            {
+              "value": "mobile",
+              "label": "Mobile Only"
+            },
+            {
+              "value": "desktop",
+              "label": "Desktop Only"
+            }
+          ],
+          "default": "all"
+        },
+        {
+          "type": "richtext",
+          "label": "Subheadline text",
+          "id": "text",
+          "default": "<p>A great subheadline explains how you provide this value.</p>"
+        },
+        {
+          "type": "text",
+          "label": "Strikethrough text",
+          "id": "strike_text",
+          "info": "Strike through specific text in your message for sale prices"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "min": 12,
+          "max": 80,
+          "step": 2,
+          "unit": "px",
+          "label": "Text size",
+          "default": 20
+        },
+        {
+          "type": "select",
+          "label": "Font style",
+          "id": "font_style",
+          "options": [
+            {
+              "value": "title",
+              "label": "Title"
+            },
+            {
+              "value": "body",
+              "label": "Body"
+            },
+            {
+              "value": "button",
+              "label": "Button"
+            },
+            {
+              "value": "label",
+              "label": "Label"
+            }
+          ],
+          "default": "body"
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "MOBILE"
+        },
+        {
+          "type": "range",
+          "id": "mobile_text_size",
+          "min": 10,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Text size",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "mobile_top_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "mobile_bottom_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+            "type": "header",
+            "content": "Custom Colors",
+            "info": "These color pickers allow you to deviate from your Brand Styles color schemes. To revert to a preset color scheme, remove the hex code below."
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "transparent"
+        }
+      ]
+    },
+    {
+      "type": "overline",
+      "name": "Overline",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "label": "Show on",
+          "id": "devices",
+          "options": [
+            {
+              "value": "all",
+              "label": "All Devices"
+            },
+            {
+              "value": "mobile",
+              "label": "Mobile Only"
+            },
+            {
+              "value": "desktop",
+              "label": "Desktop Only"
+            }
+          ],
+          "default": "all"
+        },
+        {
+          "type": "richtext",
+          "label": "Overline text",
+          "id": "text",
+          "default": "<p>Callout text</p>"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "min": 12,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Text size",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "unit": "%",
+          "label": "Letter spacing",
+          "default": 3
+        },
+        {
+          "type": "select",
+          "label": "Font style",
+          "id": "font_style",
+          "options": [
+            {
+              "value": "title",
+              "label": "Title"
+            },
+            {
+              "value": "body",
+              "label": "Body"
+            },
+            {
+              "value": "button",
+              "label": "Button"
+            },
+            {
+              "value": "label",
+              "label": "Label"
+            }
+          ],
+          "default": "label"
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+          "type": "select",
+          "label": "Overline style",
+          "id": "badge_style",
+          "options": [
+            {
+              "value": "filled",
+              "label": "Filled"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "text",
+              "label": "Text"
+            }
+          ],
+          "default": "outline"
+        },
+        {
+          "type": "select",
+          "label": "Overline rounding",
+          "id": "badge_rounding",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "semi_round",
+              "label": "Semi round"
+            },
+            {
+              "value": "round",
+              "label": "Round"
+            }
+          ],
+          "default": "round"
+        },
+        {
+          "type": "header",
+          "content": "MOBILE"
+        },
+        {
+          "type": "range",
+          "id": "mobile_text_size",
+          "min": 10,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Text size",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "mobile_top_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "mobile_bottom_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Custom colors",
+          "info": "These color pickers allow you to deviate from your brand kit color schemes. To revert to a preset color scheme, remove the hex code below."
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "badge_color",
+          "label": "Badge color",
+          "default": "transparent"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "label": "Show on",
+          "id": "devices",
+          "options": [
+            {
+              "value": "all",
+              "label": "All Devices"
+            },
+            {
+              "value": "mobile",
+              "label": "Mobile Only"
+            },
+            {
+              "value": "desktop",
+              "label": "Desktop Only"
+            }
+          ],
+          "default": "all"
+        },
+        {
+          "type": "select",
+          "label": "Button size",
+          "id": "button_size",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "select",
+          "label": "Button rounding",
+          "id": "button_rounding",
+          "options": [
+            {
+              "value": "brand_style",
+              "label": "Match Brand Styles"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "semi_round",
+              "label": "Semi round"
+            },
+            {
+              "value": "round",
+              "label": "Round"
+            }
+          ],
+          "default": "brand_style"
+        },
+        {
+          "type": "select",
+          "label": "Font style",
+          "id": "font_style",
+          "options": [
+            {
+              "value": "title",
+              "label": "Title"
+            },
+            {
+              "value": "body",
+              "label": "Body"
+            },
+            {
+              "value": "button",
+              "label": "Button"
+            },
+            {
+              "value": "label",
+              "label": "Label"
+            }
+          ],
+          "default": "button"
+        },
+        {
+          "type": "select",
+          "label": "Button icon position",
+          "id": "icon_position",
+          "options": [
+            {
+              "value": "right",
+              "label": "Right"
+            },
+            {
+              "value": "left",
+              "label": "Left"
+            }
+          ],
+          "default": "right"
+        },
+        {
+          "type": "select",
+          "label": "Button hover effect",
+          "id": "hover_effect",
+          "options": [
+            {
+              "value": "brand_style",
+              "label": "Match Brand Styles"
+            },
+            {
+              "value": "icon",
+              "label": "Show icon"
+            },
+            {
+              "value": "colorshift",
+              "label": "Change color + show icon"
+            }
+          ],
+          "default": "brand_style"
+        },
+        {
+          "type": "text",
+          "label": "Primary button text",
+          "id": "button_text",
+          "default": "Shop now"
+        },
+        {
+          "type": "select",
+          "label": "Primary button style",
+          "id": "button_style",
+          "options": [
+            {
+              "value": "brand_style",
+              "label": "Match Brand Styles"
+            },
+            {
+              "value": "solid",
+              "label": "Solid"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "underline",
+              "label": "Underline"
+            }
+          ],
+          "default": "brand_style"
+        },
+        {
+          "type": "url",
+          "label": "Primary button link",
+          "id": "button_link"
+        },
+        {
+          "type": "text",
+          "label": "Primary button icon",
+          "id": "icon_name",
+          "default": "icon-name",
+          "placeholder": "icon-name",
+          "info": "To add an icon, copy the icon name from the [Unicons library](https://iconscout.com/unicons/explore/line)"
+        },
+        {
+          "type": "text",
+          "label": "Primary button subtext",
+          "id": "button_subtext",
+          "default": "Use subtext to explain conditions or terms"
+        },
+        {
+          "type": "text",
+          "label": "Secondary button text",
+          "id": "second_button_text",
+          "default": "Learn more"
+        },
+        {
+          "type": "select",
+          "label": "Secondary button style",
+          "id": "second_button_style",
+          "options": [
+            {
+              "value": "brand_style",
+              "label": "Match Brand Styles"
+            },
+            {
+              "value": "solid",
+              "label": "Solid"
+            },
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "underline",
+              "label": "Underline"
+            }
+          ],
+          "default": "outline"
+        },
+        {
+          "type": "url",
+          "label": "Secondary button link",
+          "id": "second_button_link"
+        },
+        {
+          "type": "text",
+          "label": "Secondary button icon",
+          "id": "second_icon_name",
+          "default": "icon-name",
+          "placeholder": "icon-name",
+          "info": "To add an icon, copy the icon name from the [Unicons library](https://iconscout.com/unicons/explore/line)"
+        },
+        {
+          "type": "header",
+          "content": "MOBILE"
+        },
+        {
+          "type": "select",
+          "label": "Button size",
+          "id": "mobile_button_size",
+          "options": [
+            {
+              "value": "match",
+              "label": "Match desktop"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ],
+          "default": "match"
+        },
+        {
+          "type": "select",
+          "label": "Button width",
+          "id": "mobile_button_width",
+          "options": [
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "wide",
+              "label": "Wide"
+            }
+          ],
+          "default": "wide"
+        },
+        {
+          "type": "checkbox",
+          "label": "Anchor at the section bottom",
+          "id": "anchor_bottom",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Custom colors",
+          "info": "These color pickers allow you to deviate from your brand kit color schemes. To revert to a preset color scheme, remove the hex code below."
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button color",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Button text color",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "button_hover_color",
+          "label": "Button hover color",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "text_hover_color",
+          "label": "Button hover text color",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "subtext_color",
+          "label": "Button subtext color",
+          "default": "transparent"
+        }
+      ]
+    },
+    {
+      "type": "reviews",
+      "name": "Reviews",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "label": "Show on",
+          "id": "devices",
+          "options": [
+            {
+              "value": "all",
+              "label": "All Devices"
+            },
+            {
+              "value": "mobile",
+              "label": "Mobile Only"
+            },
+            {
+              "value": "desktop",
+              "label": "Desktop Only"
+            }
+          ],
+          "default": "all"
+        },
+        {
+          "type": "range",
+          "label": "Star rating",
+          "id": "stars",
+          "min": 1,
+          "max": 5,
+          "default": 5,
+          "step": 0.5
+        },
+        {
+          "type": "text",
+          "id": "reviews_text",
+          "label": "Reviews text",
+          "default": "15,000+ 5 Star Reviews"
+        },
+        {
+          "type": "select",
+          "label": "Reviews size",
+          "id": "text_size",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "select",
+          "label": "Font style",
+          "id": "font_style",
+          "options": [
+            {
+              "value": "title",
+              "label": "Title"
+            },
+            {
+              "value": "body",
+              "label": "Body"
+            },
+            {
+              "value": "button",
+              "label": "Button"
+            },
+            {
+              "value": "label",
+              "label": "Label"
+            }
+          ],
+          "default": "body"
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "MOBILE"
+        },
+        {
+          "type": "select",
+          "label": "Reviews size",
+          "id": "mobile_text_size",
+          "options": [
+            {
+              "value": "match",
+              "label": "Match desktop"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ],
+          "default": "match"
+        },
+        {
+          "type": "range",
+          "id": "mobile_top_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "mobile_bottom_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+            "type": "header",
+            "content": "Custom Colors",
+            "info": "Use custom colors to override Brand Style defaults. Remove color codes to return to Brand Style defaults."
+        },
+        {
+          "type": "color",
+          "id": "stars_color",
+          "label": "Stars color"
+        },
+        {
+          "type": "color",
+          "id": "reviews_color",
+          "label": "Text color"
+        }
+      ]
+    },
+    {
+      "type": "benefits",
+      "name": "Benefits",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "label": "Show on",
+          "id": "devices",
+          "options": [
+            {
+              "value": "all",
+              "label": "All Devices"
+            },
+            {
+              "value": "mobile",
+              "label": "Mobile Only"
+            },
+            {
+              "value": "desktop",
+              "label": "Desktop Only"
+            }
+          ],
+          "default": "all"
+        },
+        {
+          "type": "select",
+          "label": "Benefits size",
+          "id": "text_size",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "select",
+          "label": "Benefits layout",
+          "id": "benefits_layout",
+          "options": [
+            {
+              "value": "stacked",
+              "label": "Stacked"
+            },
+            {
+              "value": "adjacent",
+              "label": "Adjacent"
+            }
+          ],
+          "default": "adjacent"
+        },
+        {
+          "type": "select",
+          "label": "Font style",
+          "id": "font_style",
+          "options": [
+            {
+              "value": "title",
+              "label": "Title"
+            },
+            {
+              "value": "body",
+              "label": "Body"
+            },
+            {
+              "value": "button",
+              "label": "Button"
+            },
+            {
+              "value": "label",
+              "label": "Label"
+            }
+          ],
+          "default": "body"
+        },
+        {
+          "type": "text",
+          "label": "First benefit text",
+          "id": "first_text",
+          "default": "Free shipping"
+        },
+        {
+          "type": "text",
+          "label": "First benefit icon",
+          "id": "first_icon_name",
+          "default": "truck",
+          "placeholder": "icon-name",
+          "info": "To add an icon, copy the icon namer from the [Unicons library](https://iconscout.com/unicons/explore/line)"
+        },
+        {
+          "type": "text",
+          "label": "Second benefit text",
+          "id": "second_text",
+          "default": "Free returns"
+        },
+        {
+          "type": "text",
+          "label": "Second benefit icon",
+          "id": "second_icon_name",
+          "default": "box",
+          "placeholder": "icon-name",
+          "info": "To add an icon, copy the icon namer from the [Unicons library](https://iconscout.com/unicons/explore/line)"
+        },
+        {
+          "type": "text",
+          "label": "Third benefit text",
+          "id": "third_text",
+          "default": "Satisfaction guaranteed"
+        },
+        {
+          "type": "text",
+          "label": "Third benefit icon",
+          "id": "third_icon_name",
+          "default": "star",
+          "placeholder": "icon-name",
+          "info": "To add an icon, copy the icon namer from the [Unicons library](https://iconscout.com/unicons/explore/line)"
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "MOBILE"
+        },
+        {
+          "type": "select",
+          "label": "Benefits size",
+          "id": "mobile_text_size",
+          "options": [
+            {
+              "value": "match",
+              "label": "Match desktop"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ],
+          "default": "match"
+        },
+        {
+          "type": "select",
+          "label": "Benefits layout",
+          "id": "mobile_benefits_layout",
+          "options": [
+            {
+              "value": "stacked",
+              "label": "Stacked"
+            },
+            {
+              "value": "adjacent",
+              "label": "Adjacent"
+            },
+            {
+              "value": "match",
+              "label": "Match Desktop"
+            }
+          ],
+          "default": "stacked"
+        },
+        {
+          "type": "range",
+          "id": "mobile_top_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "mobile_bottom_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "CUSTOM COLORS",
+          "info": "These color pickers allow you to deviate from your brand kit color schemes.  To revert to a preset color scheme, remove the hex code below"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon color",
+          "default": "transparent"
+        }
+      ]
+    },
+    {
+      "type": "countdown",
+      "name": "Countdown Timer",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "label": "Show on",
+          "id": "devices",
+          "options": [
+            {
+              "value": "all",
+              "label": "All Devices"
+            },
+            {
+              "value": "mobile",
+              "label": "Mobile Only"
+            },
+            {
+              "value": "desktop",
+              "label": "Desktop Only"
+            }
+          ],
+          "default": "all"
+        },
+        {
+          "type": "text",
+          "label": "Timer countdown date",
+          "id": "countdown_date",
+          "default": "2025-12-31",
+          "info": "Enter your date in YYYY-MM-DD format. Save to refresh the editor and preview."
+        },
+        {
+          "type": "text",
+          "label": "Timer countdown time",
+          "id": "countdown_time",
+          "default": "12:00 AM -05:00",
+          "info": "Please use the following format HH:MM AM/PM +/-00:00 to define the exact time and timezone. For example, use 12:00 AM -05:00 to define midnight, Eastern Time (ET). Save to refresh the editor and preview."
+        },
+        {
+          "type": "select",
+          "label": "Timer size",
+          "id": "timer_size",
+          "options": [
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "select",
+          "label": "Timer background rounding",
+          "id": "rounding",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "rounded",
+              "label": "Rounded"
+            },
+            {
+              "value": "circle",
+              "label": "Circle"
+            },
+            {
+              "value": "no_background",
+              "label": "No Background"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "select",
+          "label": "Timer font style",
+          "id": "number_font_style",
+          "options": [
+            {
+              "value": "title",
+              "label": "Title"
+            },
+            {
+              "value": "body",
+              "label": "Body"
+            },
+            {
+              "value": "button",
+              "label": "Button"
+            },
+            {
+              "value": "label",
+              "label": "Label"
+            }
+          ],
+          "default": "body"
+        },
+        {
+          "type": "select",
+          "label": "Label font style",
+          "id": "label_font_style",
+          "options": [
+            {
+              "value": "title",
+              "label": "Title"
+            },
+            {
+              "value": "body",
+              "label": "Body"
+            },
+            {
+              "value": "button",
+              "label": "Button"
+            },
+            {
+              "value": "label",
+              "label": "Label"
+            }
+          ],
+          "default": "label"
+        },
+        {
+          "type": "range",
+          "id": "top_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "bottom_padding",
+          "min": 0,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "MOBILE"
+        },
+        {
+          "type": "select",
+          "label": "Timer size",
+          "id": "mobile_timer_size",
+          "options": [
+            {
+              "value": "match",
+              "label": "Match desktop"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "small",
+              "label": "Small"
+            }
+          ],
+          "default": "match"
+        },
+        {
+          "type": "range",
+          "id": "mobile_top_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Top padding",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "mobile_bottom_padding",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Bottom padding",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Custom colors",
+          "info": "Use custom colors to override Brand Style defaults. Remove color codes to return to Brand Style defaults."
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "number_color",
+          "label": "Number color",
+          "default": "transparent"
+        },
+        {
+          "type": "color",
+          "id": "label_color",
+          "label": "Label color",
+          "default": "transparent"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "⚡ Image hero 1.1",
+      "blocks": [
+        {
+          "type": "overline"
+        },
+        {
+          "type": "headline"
+        },
+        {
+          "type": "button",
+          "settings": {
+            "button_subtext": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+</div>
+</div>

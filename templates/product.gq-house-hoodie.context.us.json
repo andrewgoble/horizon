@@ -8,7 +8,7 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "footer-group.json",
+  "parent": "product.gq-house-hoodie.json",
   "context": {
     "market": "us"
   },

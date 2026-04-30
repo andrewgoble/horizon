@@ -1,0 +1,115 @@
+{% liquid
+
+  assign text_color = ''
+  if block.settings.text_color != 'rgba(0,0,0,0)' and block.settings.text_color != 'transparent'
+    assign text_color = block.settings.text_color
+  else
+    if section.settings.image_position == 'background'
+      assign text_color = 'white'
+    endif
+  endif
+
+  if block.settings.badge_color != 'rgba(0,0,0,0)' and block.settings.badge_color != 'transparent'
+    assign badge_color = block.settings.badge_color
+  else
+    assign badge_color = 'transparent'
+  endif
+
+  assign font_size = block.settings.text_size | append: 'px'
+  assign vertical_padding = block.settings.text_size | times: 0.4
+  assign horizontal_padding = block.settings.text_size | times: 0.8
+  assign padding_size = vertical_padding | append: 'px ' | append: horizontal_padding | append: 'px'
+  assign mobile_font_size = block.settings.mobile_text_size | append: 'px'
+  assign mobile_vertical_padding = block.settings.mobile_text_size | times: 0.4
+  assign mobile_horizontal_padding = block.settings.mobile_text_size | times: 0.8
+  assign mobile_padding_size = mobile_vertical_padding | append: 'px ' | append: mobile_horizontal_padding | append: 'px'
+
+  assign letter_spacing = block.settings.letter_spacing | times:block.settings.text_size | divided_by: 100.0 | append: 'px'
+
+  case block.settings.badge_rounding
+  when 'none'
+    assign border_radius = "0"
+    assign mobile_border_radius = "0"
+  when 'semi_round'
+    assign border_radius = '4px'
+    assign mobile_border_radius = '4px'
+  when 'round'
+    assign border_radius = '40px'
+    assign mobile_border_radius = "40px"
+  endcase
+
+  case block.settings.badge_style
+    when 'text'
+      assign border = ''
+    when 'underline'
+      assign border = 'border-width: 1px; border-style: none none solid; border-color: ' | append: badge_color | append: ';'
+      assign border_radius = 0
+      assign mobile_border_radius = 0
+    when 'outline'
+      assign border = 'border: 1px solid currentColor;'
+  endcase
+  %}
+
+
+
+<style>
+  {% if block.settings.devices == 'mobile' %}
+    @media screen and (min-width: 768px) {
+      #shoplift--{{ block.id }} {
+        display: none !important;
+      }
+    }
+  {% elsif block.settings.devices == 'desktop' %}
+    @media screen and (max-width: 767px) {
+      #shoplift--{{ block.id }} {
+        display: none !important;
+      }
+    }
+  {% endif %}
+
+  #shoplift--{{ block.id }} {
+    padding-top: {{ block.settings.top_padding }}px;
+    padding-bottom: {{ block.settings.bottom_padding }}px;
+  }
+
+  @media (max-width: 767px) {
+    #shoplift--{{ block.id }} {
+      padding-top: {{ block.settings.mobile_top_padding }}px;
+      padding-bottom: {{ block.settings.mobile_bottom_padding }}px;
+    }
+  }
+
+  #shoplift--{{ block.id }} span.image-hero__overline {
+    text-transform: uppercase;
+    font-size: {{ font_size }};
+    line-height: 1;
+    display: inline-block;
+    padding: {{ padding_size }};
+    {% if text_color != '' %}
+      color: {{ text_color}};
+    {% endif %}
+    letter-spacing: {{ letter_spacing }};
+    {% if block.settings.badge_style == 'filled' %}
+      background-color: {{ badge_color }};
+    {% endif %}
+      border-radius: {{ border_radius }};
+    {{border}}
+  }
+
+  #shoplift--{{ block.id }} span.image-hero__overline p {
+    margin: 0;
+    color: currentColor;
+  }
+
+  @media screen and (max-width: 767px) {
+    #shoplift--{{ block.id }} span.image-hero__overline {
+      font-size: {{ mobile_font_size }};
+      padding: {{ mobile_padding_size }};
+      border-radius: {{ mobile_border_radius }};
+    }
+  }
+</style>
+
+<div id="shoplift--{{ block.id }}" class="sl-block" {{ block.shopify_attributes }}>
+  <span class="image-hero__overline shoplift-badge-{{ block.id }} sl-font-style--{{ block.settings.font_style }}">{{ block.settings.text }}</span>
+</div>

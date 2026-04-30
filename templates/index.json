@@ -57,7 +57,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>The Black Friday Sale</h1>",
+                "text": "<h1>Performance <em>Inactivewear</em></h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -83,7 +83,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h6>Shop the biggest sale of the year early and <strong>save up to 70%</strong> on your new favorite loungewear</h6>",
+                "text": "<h6>Ridiculously comfortable loungewear made from premium fabrics.</h6>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -997,7 +997,7 @@
       },
       "name": "t:names.products_carousel",
       "settings": {
-        "collection": "bestsellers",
+        "collection": "all-products",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 6,
@@ -1159,7 +1159,7 @@
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
+            "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 31,
             "width": "fit-content",
@@ -1183,9 +1183,9 @@
             "overlay_style": "solid",
             "gradient_direction": "to top",
             "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
+            "padding-block-end": 10,
+            "padding-inline-start": 10,
+            "padding-inline-end": 10,
             "css_class": ""
           },
           "blocks": {

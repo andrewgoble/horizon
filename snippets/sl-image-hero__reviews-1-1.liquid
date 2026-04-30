@@ -1,0 +1,154 @@
+{% liquid
+  case block.settings.text_size
+    when 'xlarge'
+      assign font_size = '20px'
+      assign icon_size = '20px'
+    when 'large'
+      assign font_size = '16px'
+      assign icon_size = '18px'
+    when 'medium'
+      assign font_size = '14px'
+      assign icon_size = '16px'
+    when 'small'
+      assign font_size = '12px'
+      assign icon_size = '14px'
+  endcase
+
+  case block.settings.mobile_text_size
+    when 'xlarge'
+      assign mobile_font_size = '20px'
+      assign mobile_icon_size = '20px'
+    when 'large'
+      assign mobile_font_size = '16px'
+      assign mobile_icon_size = '18px'
+    when 'medium'
+      assign mobile_font_size = '14px'
+      assign mobile_icon_size = '16px'
+    when 'small'
+      assign mobile_font_size = '12px'
+      assign mobile_icon_size = '14px'
+    else
+      assign mobile_font_size = font_size
+      assign mobile_icon_size = icon_size
+  endcase
+
+  assign stars_color = ''
+  if block.settings.stars_color != 'rgba(0,0,0,0)' and block.settings.stars_color != 'transparent' and block.settings.stars_color != empty
+    assign stars_color = block.settings.stars_color
+  else
+    if section.settings.image_position == 'background'
+      assign stars_color = 'white'
+    endif
+  endif
+
+  assign reviews_color = ''
+  if block.settings.reviews_color != 'rgba(0,0,0,0)' and block.settings.reviews_color != 'transparent' and block.settings.reviews_color != empty
+    assign reviews_color = block.settings.reviews_color
+  else
+    if section.settings.image_position == 'background'
+      assign reviews_color = 'white'
+    endif
+  endif
+%}
+
+{% style %}
+  {% if block.settings.devices == 'mobile' %}
+    @media screen and (min-width: 768px) {
+      #shoplift--{{ block.id }} {
+        display: none !important;
+      }
+    }
+  {% elsif block.settings.devices == 'desktop' %}
+    @media screen and (max-width: 767px) {
+      #shoplift--{{ block.id }} {
+        display: none !important;
+      }
+    }
+  {% endif %}
+
+  #shoplift--{{ block.id }} {
+    padding-top: {{ block.settings.top_padding }}px;
+    padding-bottom: {{ block.settings.bottom_padding }}px;
+  }
+
+  @media (max-width: 767px) {
+    #shoplift--{{ block.id }} {
+      padding-top: {{ block.settings.mobile_top_padding }}px;
+      padding-bottom: {{ block.settings.mobile_bottom_padding }}px;
+    }
+  }
+
+  .shoplift--{{  block.id }}--stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    vertical-align: middle;
+  }
+
+  .shoplift--{{  block.id }}--stars svg {
+    width: {{ icon_size }};
+    height: {{ icon_size }};
+    background: transparent !important;
+    {% if stars_color != '' %}
+      color: {{ stars_color }};
+    {% endif %}
+    margin-right: 0.125em;
+  }
+
+  .shoplift--{{ block.id }}--text {
+    font-size: {{ font_size }};
+    padding-left: 8px;
+    vertical-align: middle;
+  }
+
+  {% if reviews_color != '' %}
+    #shoplift--{{ block.id }} span.shoplift--{{ block.id }}--text {
+      color: {{ reviews_color }};
+    }
+  {% endif %}
+
+  @media screen and (max-width: 767px) {
+    .shoplift--{{ block.id }}--text {
+      font-size: {{ mobile_font_size }};
+    }
+
+    #shoplift--{{ block.id }} {
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .shoplift--{{  block.id }}--stars svg {
+      width: {{ mobile_icon_size }};
+    }
+  }
+{% endstyle %}
+
+
+<div id="shoplift--{{ block.id }}" class="sl-block" {{ block.shopify_attributes }}>
+  <span class="shoplift--{{ block.id }}--stars sl-font-style--{{ block.settings.font_style }}">
+    {% assign full_stars = block.settings.stars | floor %}
+    {% assign filled_stars = block.settings.stars | ceil %}
+    {% assign empty_stars = 5 | minus: filled_stars %}
+    {% for i in (1..full_stars) %}
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+        <path d="M10 15.2701L16.18 19.0001L14.54 11.9701L20 7.24006L12.81 6.62006L10 6.10352e-05L7.19 6.62006L0 7.24006L5.45 11.9701L3.82 19.0001L10 15.2701Z" fill="currentColor"/>
+      </svg>
+    {% endfor %}
+    {% if block.settings.stars != full_stars %}
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+        <path d="M10 13.4001V4.10006L11.71 8.13006L16.09 8.50006L12.77 11.3901L13.76 15.6701L10 13.4001ZM20 7.24006L12.81 6.63006L10 6.10352e-05L7.19 6.63006L0 7.24006L5.45 11.9701L3.82 19.0001L10 15.2701L16.18 19.0001L14.54 11.9701L20 7.24006Z" fill="currentColor"/>
+      </svg>
+    {% endif %}
+    {% if block.settings.stars <= 4 and empty_stars > 0 %}
+    {% for i in (1..empty_stars) %}
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+        <path d="M10 13.39L6.24 15.66L7.23 11.38L3.91 8.5L8.29 8.13L10 4.09L11.71 8.13L16.09 8.5L12.77 11.38L13.76 15.66L10 13.39ZM20 7.24L12.81 6.63L10 0L7.19 6.63L0 7.24L5.45 11.97L3.82 19L10 15.27L16.18 19L14.54 11.97L20 7.24Z" fill="currentColor"/>
+      </svg>
+    {% endfor %}
+    {% endif %}
+  </span>
+  <span class="shoplift--{{ block.id }}--text sl-font-style--{{ block.settings.font_style }}">
+    {{ block.settings.reviews_text }}
+  </span>
+</div>

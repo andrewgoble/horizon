@@ -1,0 +1,192 @@
+
+<div class="wndr-loop-returns-wrapper">
+  <a
+    class="wndr-loop-returns-button link {{ section.settings.button_class | default: '' }}"
+    rel="nofollow"
+    target="_blank"
+  >
+    {{ section.settings.button_text }}
+  </a>
+</div>
+<style>
+.wndr-loop-returns-wrapper {
+  text-align: center;
+  margin: 16px auto;
+  width: fit-content;
+}
+
+.wndr-loop-returns-button {
+  display: none;
+  width: fit-content;
+  margin: 0 auto;
+  color: {{ section.settings.button_color | default: 'currentColor' }};
+  background-color: {{ section.settings.button_background_color | default: 'inherit' }};
+
+  {% if section.settings.button_size == 'small' %}
+    padding: 8px 16px;
+    font-size: 14px;
+  {% elsif section.settings.button_size == 'medium' %}
+    padding: 12px 24px;
+    font-size: 16px;
+  {% elsif section.settings.button_size == 'large' %}
+    padding: 16px 32px;
+    font-size: 20px;
+  {% endif %}
+
+  {% if section.settings.is_rounded_button %}
+    border-radius: 32px;
+  {% endif %}
+
+  {% if request.design_mode %}
+    display: block;
+  {% endif %}
+}
+</style>
+
+{% schema %}
+{
+  "name": "Loop - Wonderment",
+  "class": "wndr-loop-button",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Text",
+      "default": "Start A Return"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Background color"
+    },
+    {
+      "type": "radio",
+      "id": "button_size",
+      "label": "Size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_rounded_button",
+      "label": "Rounded corners",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_class",
+      "label": "HTML Classes (Advanced)"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Loop - Wonderment",
+      "settings": {
+        "button_text": "Start A Return",
+        "button_size": "small",
+        "is_rounded_button": false
+      },
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
+
+<script defer>
+function initiateLoop() {
+  window.addEventListener('wonderment:shipments_loaded', (event) => {
+    const orderName = event?.detail?.shipments?.[0]?.order?.name
+    let token = ''
+    let email = ''
+    let phone = ''
+
+    if (typeof window != 'undefined') {
+      const url = new URL(window.location.href);
+      // Use URLSearchParams to parse out the parameters
+      const params = new URLSearchParams(url.search);
+      token = params.get('t');
+      const jsonStr = atob(token)
+      try {
+        const json = JSON.parse(jsonStr)
+        email = json?.email
+        phone = json?.phone
+      } catch (error) {
+        console.error(error)
+        return ''
+      }
+    }
+    try {
+      loopRequest({ orderName, email, phone })
+    } catch (error) {
+      console.error(error)
+    }
+  })
+
+  function loadTestButton(event) {
+    const loopButton = document.querySelector('.wndr-loop-returns-button')
+    loopButton.href = '/'
+    loopButton.style.display = 'block'
+  }
+  window.addEventListener('shopify:inspector:activate', loadTestButton)
+  window.addEventListener('shopify:section:load', loadTestButton)
+  window.addEventListener('shopify:section:select', loadTestButton)
+}
+// Default options are marked with *
+async function loopRequest(data) {
+  const orderName = data.orderName
+  const email = data.email
+  const phone = data.phone
+  const query = `
+    query loop($input: LoopDeepLinkInput!) {
+      loopDeepLink(input: $input)
+    }
+  `;
+  const response = await fetch('/apps/wonderment/graphql', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        query,
+        variables: {
+            input: {
+                orderName,
+                email,
+                phone
+             }
+         }
+    }),
+  });
+  const json = await response.json(); // parses JSON response into native JavaScript objects
+  const loopLink = json?.data?.loopDeepLink || ''
+  // bail out early if we don't have a link
+  if (!loopLink) return ''
+  // set the link and display the button
+  const loopButton = document.querySelector('.wndr-loop-returns-button')
+  loopButton.href = loopLink
+  loopButton.style.display = 'block'
+  return loopLink
+}
+
+initiateLoop()
+
+</script>

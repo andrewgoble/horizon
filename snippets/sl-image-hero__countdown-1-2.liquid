@@ -1,0 +1,295 @@
+{% liquid
+  assign using_date = block.settings.countdown_date_year | append: '-' | append: block.settings.countdown_date_month | append: '-' | append: block.settings.countdown_date_day
+  if block.settings.countdown_date_year == blank or block.settings.countdown_date_month == blank or block.settings.countdown_date_day == blank
+    assign invalid_date = true
+    assign using_date = "invalid"
+  endif
+
+    assign time = block.settings.countdown_time_hour | append: ':' | append: block.settings.countdown_time_minute | append: ' ' | append: block.settings.countdown_time_minute_am_pm | append: ' ' | append: block.settings.countdown_time_minute_timezone
+    if block.settings.countdown_time_hour == blank or block.settings.countdown_time_minute == blank or block.settings.countdown_time_minute_am_pm == blank or block.settings.countdown_time_minute_timezone == blank
+        assign time = '0:00'
+    else
+        assign timezone = ""
+        if time contains "+" or time contains "-"
+            if time contains "+"
+                assign offsetSign = "+"
+            else
+                assign offsetSign = "-"
+            endif
+            assign timezone = time | split: offsetSign | last
+            assign time = time | split: offsetSign | first
+        endif
+        assign hour = time | split: ':' | first
+        assign minute = time | replace: ' ', '' | replace: 'PM', '' | replace: 'AM', '' | split: ':' | last
+        if time contains 'AM'
+            if hour == "12"
+                assign hour = "00"
+            endif
+        else
+            if hour != "12"
+                assign hour = hour | plus: 12
+            endif
+        endif
+        assign time = hour | append: ':' | append: minute | append: offsetSign | append: timezone
+    endif
+
+  if block.settings.background_color != 'rgba(0,0,0,0)' and block.settings.background_color != 'transparent'
+    assign background_color = block.settings.background_color
+  else
+    assign background_color = 'transparent'
+  endif
+  
+  if block.settings.rounding == 'no_background'
+    assign background_color = 'transparent'
+  endif
+
+  assign number_color = ''
+  if block.settings.number_color != 'rgba(0,0,0,0)' and block.settings.number_color != 'transparent'
+    assign number_color = block.settings.number_color
+  else
+    if section.settings.image_position == 'background' and background_color == 'transparent'
+      assign number_color = 'white'
+    endif
+  endif
+
+  assign label_color = ''
+  if block.settings.label_color != 'rgba(0,0,0,0)' and block.settings.label_color != 'transparent'
+    assign label_color = block.settings.label_color
+  else
+    if section.settings.image_position == 'background'
+      assign label_color = 'white'
+    endif
+  endif
+
+  case block.settings.timer_size
+    when 'large'
+      assign font_size = '32px'
+      assign label_size = '16px'
+    when 'medium'
+      assign font_size = '24px'
+      assign label_size = '14px'
+    when 'small'
+      assign font_size = '18px'
+      assign label_size = '12px'
+  endcase
+
+  case block.settings.mobile_timer_size
+    when 'large'
+      assign mobile_font_size = '32px'
+      assign mobile_label_size = '16px'
+    when 'medium'
+      assign mobile_font_size = '24px'
+      assign mobile_label_size = '14px'
+    when 'small'
+      assign mobile_font_size = '18px'
+      assign mobile_label_size = '12px'
+    else
+      assign mobile_font_size = font_size
+      assign mobile_label_size = label_size
+  endcase
+
+  case block.settings.rounding
+    when 'none'
+      assign border_radius = 0
+    when 'rounded'
+      case block.settings.timer_size
+        when 'large'
+          assign border_radius = '8px'
+        when 'medium'
+          assign border_radius = '6px'
+        when 'small'
+          assign border_radius = '4px'
+      endcase
+    when 'circle'
+      assign border_radius = "40px"
+    when 'no_background'
+      assign border_radius = 0
+  endcase
+
+  assign mobile_border_radius = border_radius
+  if block.settings.rounding == 'rounded'
+    case block.settings.mobile_timer_size
+      when 'large'
+        assign mobile_border_radius = '8px'
+      when 'medium'
+        assign mobile_border_radius = '6px'
+      when 'small'
+        assign mobile_border_radius = '4px'
+    endcase
+  endif
+  %}
+
+<style>
+  {% if block.settings.devices == 'mobile' %}
+    @media screen and (min-width: 768px) {
+      .shoplift--{{ block.id }} {
+        display: none !important;
+      }
+    }
+  {% elsif block.settings.devices == 'desktop' %}
+    @media screen and (max-width: 767px) {
+      .shoplift--{{ block.id }} {
+        display: none !important;
+      }
+    }
+  {% endif %}
+
+  #shoplift--{{ block.id }} {
+    padding-top: {{ block.settings.top_padding }}px;
+    padding-bottom: {{ block.settings.bottom_padding }}px;
+  }
+
+  @media (max-width: 767px) {
+    #shoplift--{{ block.id }} {
+      padding-top: {{ block.settings.mobile_top_padding }}px;
+      padding-bottom: {{ block.settings.mobile_bottom_padding }}px;
+    }
+  }
+
+  .shoplift--{{ block.id }}--timer {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+
+    {% case block.settings.timer_size %}
+    {% when 'large' %}
+      max-width: 1000px;
+    {% when 'medium' %}
+      max-width: 800px;
+    {% when 'small' %}
+      max-width: 400px;
+    {% endcase %}
+  }
+
+  .shoplift--{{ block.id }}--timer-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 5px;
+  }
+
+  .shoplift--{{ block.id }}--timer-block span {
+    display: grid;
+    flex: 1 0 auto;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .shoplift--{{ block.id }}--timer-block-num {
+    background-color: {{ background_color }};
+    border-radius: {{ border_radius }};
+    font-size: {{ font_size }};
+    padding: 16px;
+    {% if number_color != '' %}
+      color: {{ number_color }}
+    {% endif %}
+  }
+
+  .shoplift--{{ block.id }}--timer-block-num span.timer-block-text {
+    {% if number_color != '' %}
+      color: {{ number_color }}
+    {% endif %}
+  }
+
+  .shoplift--{{ block.id }}--timer-block span.shoplift--{{ block.id }}--timer-block-unit {
+    text-transform: uppercase;
+    margin-top: 8px;
+    font-size: {{ label_size }};
+    {% if label_color != '' %}
+      color: {{ label_color }}
+    {% endif %}
+  }
+
+  @media screen and (max-width: 767px) {
+    .shoplift--{{ block.id }}--timer-block {
+    }
+
+    .shoplift--{{ block.id }}--timer-block-num {
+      font-size: {{ mobile_font_size }};
+      border-radius: {{mobile_border_radius}};
+    }
+
+    .shoplift--{{ block.id }}--timer-block span.shoplift--{{ block.id }}--timer-block-unit {
+      font-size: {{ mobile_label_size }};
+    }
+  }
+</style>
+
+  <div id="shoplift--{{ block.id }}" class="shoplift--{{ block.id }} sl-block" {{ block.shopify_attributes }}>
+    <div class="shoplift--{{ block.id }}--timer" id="lk-timer-{{ section.id }}-{{ block.id }}"{% if request.design_mode %} data-timer-date="{{ using_date }} {{ time }}"{%endif%}>
+      <div class="shoplift--{{ block.id }}--timer-block">
+        <div class="shoplift--{{ block.id }}--timer-block-num">
+          <span class="timer-block-text js-timer-{{ section.id }}-{{ block.id }}-days sl-font-style--{{ block.settings.number_font_style }}">00</span>
+        </div>
+        <span class="shoplift--{{ block.id }}--timer-block-unit sl-font-style--{{ block.settings.label_font_style }}">Days</span>
+      </div>
+      <div class="shoplift--{{ block.id }}--timer-block">
+        <div class="shoplift--{{ block.id }}--timer-block-num">
+          <span class="timer-block-text js-timer-{{ section.id }}-{{ block.id }}-hours sl-font-style--{{ block.settings.number_font_style }}">00</span>
+        </div>
+        <span class="shoplift--{{ block.id }}--timer-block-unit sl-font-style--{{ block.settings.label_font_style }}">Hrs</span>
+      </div>
+      <div class="shoplift--{{ block.id }}--timer-block">
+        <div class="shoplift--{{ block.id }}--timer-block-num">
+          <span class="timer-block-text js-timer-{{ section.id }}-{{ block.id }}-minutes sl-font-style--{{ block.settings.number_font_style }}">00</span>
+        </div>
+        <span class="shoplift--{{ block.id }}--timer-block-unit sl-font-style--{{ block.settings.label_font_style }}">Mins</span>
+      </div>
+      <div class="shoplift--{{ block.id }}--timer-block">
+        <div class="shoplift--{{ block.id }}--timer-block-num">
+          <span class="timer-block-text js-timer-{{ section.id }}-{{ block.id }}-seconds sl-font-style--{{ block.settings.number_font_style }}">00</span>
+        </div>
+        <span class="shoplift--{{ block.id }}--timer-block-unit sl-font-style--{{ block.settings.label_font_style }}">Secs</span>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    let imageheroCountdown = new Date('{{ using_date }} {{ time }}').getTime();
+    function initTimer() {
+        if (Number.isNaN(imageheroCountdown)) {
+          console.log("Timer is invalid: {{- using_date -}} -> " + imageheroCountdown);
+          document.querySelector('.js-timer-{{ section.id }}-{{ block.id }}-days').innerText = "00";
+          document.querySelector('.js-timer-{{ section.id }}-{{ block.id }}-hours').innerText = "00";
+          document.querySelector('.js-timer-{{ section.id }}-{{ block.id }}-minutes').innerText = "00";
+          document.querySelector('.js-timer-{{ section.id }}-{{ block.id }}-seconds').innerText = "00";
+          return;
+        }
+        const second = 1000,
+              minute = second * 60,
+              hour = minute * 60,
+              day = hour * 24;
+
+        let setCountdownTimerOnInterval = () => {
+            const now = new Date().getTime();
+            const diff = imageheroCountdown - now;
+
+            let days = Math.floor(diff / (day));
+            let hours = Math.floor((diff % (day)) / (hour))
+            let minutes = Math.floor((diff % (hour)) / (minute));
+            let seconds = Math.floor((diff % (minute)) / second);
+            document.querySelector('.js-timer-{{ section.id }}-{{ block.id }}-days').innerText = days < 0 ? "00" : ('0' + days).slice(-2);
+            document.querySelector('.js-timer-{{ section.id }}-{{ block.id }}-hours').innerText = hours < 0 ? "00" : ('0' + hours).slice(-2);
+            document.querySelector('.js-timer-{{ section.id }}-{{ block.id }}-minutes').innerText = minutes < 0 ? "00" : ('0' + minutes).slice(-2);
+            document.querySelector('.js-timer-{{ section.id }}-{{ block.id }}-seconds').innerText = seconds < 0 ? "00" : ('0' + seconds).slice(-2);
+            if (diff <= 0) {
+                document.querySelector('#shoplift--{{ block.id }}').style.display = 'none';
+                }
+        };
+        let intervalId = setInterval(setCountdownTimerOnInterval, second);
+        let cleanupHandler = null;
+        function cleanup() {
+            console.log("Cleaning up");
+            clearInterval(intervalId);
+        }
+        document.addEventListener("shopify:section:unload", () => cleanup());
+        setCountdownTimerOnInterval();
+    }
+    initTimer();
+    document.addEventListener("shopify:section:load", () => {
+        const dateAttribute = document.querySelector("#lk-timer-{{ section.id }}-{{ block.id }}").attributes["data-timer-date"].value;
+        imageheroCountdown = new Date(dateAttribute).getTime();
+        initTimer();
+    });
+  </script>

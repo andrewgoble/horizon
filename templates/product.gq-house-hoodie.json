@@ -80,7 +80,7 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 32,
+            "gap": 28,
             "sticky_details_desktop": true,
             "inherit_color_scheme": true,
             "color_scheme": "",
@@ -91,10 +91,10 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "padding-block-start": 20,
-            "padding-block-end": 20,
+            "padding-block-start": 10,
+            "padding-block-end": 10,
             "padding-inline-start": 0,
-            "padding-inline-end": 10
+            "padding-inline-end": 0
           },
           "blocks": {
             "group": {
@@ -251,6 +251,7 @@
                     },
                     "review_QhdEwM": {
                       "type": "review",
+                      "disabled": true,
                       "settings": {
                         "stars_style": "shaded",
                         "show_number": true,
@@ -345,7 +346,7 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Basics",
-                    "open_by_default": true,
+                    "open_by_default": false,
                     "icon": "none",
                     "width": 20
                   },
@@ -369,6 +370,45 @@
                   },
                   "block_order": [
                     "page_mCfamk"
+                  ]
+                },
+                "accordion_row_p3FQ94": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "GQ Box: Save Extra 25% Sitewide 👇",
+                    "open_by_default": true,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_8GAcnF": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>GQ Box Members can save an 25% <strong>sitewide</strong> with code <strong>GQ25</strong> at checkout! </p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_8GAcnF"
                   ]
                 },
                 "accordion_row_tUHfpb": {
@@ -444,7 +484,7 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Final Sale",
-                    "open_by_default": true,
+                    "open_by_default": false,
                     "icon": "none",
                     "width": 20
                   },
@@ -478,61 +518,27 @@
                   "block_order": [
                     "text_BPjrHN"
                   ]
-                },
-                "accordion_row_p3FQ94": {
-                  "type": "_accordion-row",
-                  "settings": {
-                    "heading": "GQ Members: Save Extra 25% Sitewide 👇",
-                    "open_by_default": false,
-                    "icon": "none",
-                    "width": 20
-                  },
-                  "blocks": {
-                    "text_8GAcnF": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p>It's our biggest sale of the year, and you can save 25% extra with code <strong>GQ25</strong> at checkout! Add some of these matching items below to your cart.</p>",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "var(--color-foreground)",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "text_8GAcnF"
-                  ]
                 }
               },
               "block_order": [
                 "accordion_row_DgAWBc",
+                "accordion_row_p3FQ94",
                 "accordion_row_tUHfpb",
                 "accordion_row_NYxFGV",
-                "accordion_row_bHzQkY",
-                "accordion_row_p3FQ94"
+                "accordion_row_bHzQkY"
               ]
+            },
+            "selleasy_lb_upsell_widget_bl_dEcbRe": {
+              "type": "shopify://apps/selleasy/blocks/lb-upsell-widget-bl/790c1a03-a71f-4bc1-9869-00dad526d3c2",
+              "settings": {}
             }
           },
           "block_order": [
             "group",
             "variant_picker",
             "buy_buttons",
-            "accordion_wdcG69"
+            "accordion_wdcG69",
+            "selleasy_lb_upsell_widget_bl_dEcbRe"
           ]
         }
       },
@@ -554,7 +560,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h4>Special GQ Offer</h4>",
+            "text": "<h4>GQ Box Special Offers</h4>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -580,7 +586,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>GQ Box Members can shop our Black Friday Sale and save an <strong>extra 25%</strong> with code <strong>GQ25! </strong>All Orders Ship Free</p>",
+            "text": "<p>It's our biggest sale of the year, and even bigger for GQ Box Members. Save an <strong>extra 25%</strong> with code <strong>GQ25!</strong></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -757,6 +763,7 @@
       "block_order": [
         "junip_junip_product_review_eRzWMk"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -952,6 +959,7 @@
         "padding-block-start": 24,
         "padding-block-end": 24,
         "gap_between_elements": 50,
+        "speed_factor": 20,
         "css_class": ""
       }
     },
@@ -1205,6 +1213,36 @@
         "padding-block-end": 48,
         "css_class": ""
       }
+    },
+    "17638489133c2a71f1": {
+      "type": "_blocks",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
@@ -1214,6 +1252,7 @@
     "175836978583d1f44f",
     "section_R6VfKV",
     "marquee_M4Mtib",
-    "section_WeJpHM"
+    "section_WeJpHM",
+    "17638489133c2a71f1"
   ]
 }

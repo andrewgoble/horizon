@@ -1,0 +1,375 @@
+{% liquid
+  case block.settings.button_size
+    when 'large'
+      assign font_size = '16px'
+      assign padding_size = '15px 32px'
+    when 'medium'
+      assign font_size = '14px'
+      assign padding_size = '13px 24px'
+    when 'small'
+      assign font_size = '12px'
+      assign padding_size = '9.5px 16px'
+  endcase
+
+  case block.settings.mobile_button_size
+    when 'large'
+      assign mobile_font_size = '16px'
+      assign mobile_padding_size = '15px 32px'
+    when 'medium'
+      assign mobile_font_size = '14px'
+      assign mobile_padding_size = '13px 24px'
+    when 'small'
+      assign mobile_font_size = '12px'
+      assign mobile_padding_size = '9.5px 16px'
+    else
+      assign mobile_font_size = '12px'
+      assign mobile_padding_size = '9.5px 16px'
+  endcase
+
+  case block.settings.button_rounding
+    when 'none'
+      assign border_radius = "0"
+      assign mobile_border_radius = "0"
+    when 'semi_round'
+      case block.settings.button_size
+        when 'large'
+          assign border_radius = '8px'
+        when 'medium'
+          assign border_radius = '6px'
+        when 'small'
+          assign border_radius = '4px'
+      endcase
+      case block.settings.mobile_button_size
+        when 'large'
+          assign mobile_border_radius = '8px'
+        when 'medium'
+          assign mobile_border_radius = '6px'
+        when 'small'
+          assign mobile_border_radius = '4px'
+        else
+          assign mobile_border_radius = border_radius
+      endcase
+    when 'round'
+      assign border_radius = "40px"
+      assign mobile_border_radius = "40px"
+  endcase
+
+  case block.settings.button_style
+    when 'text'
+      assign border = ''
+    when 'underline'
+      assign border = 'border: 0;'
+    when 'outline'
+      assign border = 'border: 1px solid currentColor;'
+  endcase
+
+  assign second_border_radius = border_radius
+  assign second_mobile_border_radius = mobile_border_radius
+
+  case block.settings.second_button_style
+    when 'primary'
+      assign second_border = border
+    when 'text'
+      assign second_border = ''
+    when 'underline'
+      assign second_border = 'border: 0;'
+    when 'outline'
+      assign second_border = 'border: 1px solid currentColor;'
+  endcase
+  %}
+
+<style>
+  {% if block.settings.devices == 'mobile' %}
+    @media screen and (min-width: 768px) {
+      .shoplift--{{ block.id }} {
+        display: none;
+      }
+    }
+  {% elsif block.settings.devices == 'desktop' %}
+    @media screen and (max-width: 767px) {
+      .shoplift--{{ block.id }} {
+        display: none;
+      }
+    }
+  {% endif %}
+
+  .shoplift--button--{{ block.id }}.shoplift--button--primary {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: {{ padding_size }};
+    font-size: {{ font_size }};
+    width: 100%;
+
+    {% unless block.settings.button_rounding == 'brand_style' %}
+      border-radius: {{ border_radius }};
+    {% endunless %}
+
+    {% unless block.settings.button_style == "brand_style" %}
+      {{ border }}
+    {% endunless %}
+
+    {% if block.settings.button_style == 'underline' %}
+      text-decoration: underline;
+    {% endif %}
+  }
+
+  .shoplift--button--{{ block.id }}.shoplift--button--secondary {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: {{ padding_size }};
+    font-size: {{ font_size }};
+    width: 100%;
+    
+    {% unless block.settings.button_rounding == 'brand_style' %}
+      border-radius: {{ second_border_radius }};
+    {% endunless %}
+
+    {% unless block.settings.second_button_style == "brand_style" %}
+      {{ second_border }}
+    {% endunless %}
+
+    {% if block.settings.second_button_style == 'underline' %}
+      text-decoration: underline;
+    {% endif %}
+  }
+
+  .shoplift--subtext--{{ block.id }} {
+    text-align: center;
+  }
+
+  .sl--buttons-wrapper--{{ block.id }} {
+    display: inline-grid;
+    gap: 20px;
+    {% if block.settings.second_button_text != empty %}
+      grid-template-columns: 1fr 1fr;
+    {% else %}
+      grid-template-columns: 1fr;
+    {% endif %}
+  }
+
+  .shoplift--button--{{ block.id }} .uil {
+    {% case block.settings.icon_position %}
+      {% when 'left' %}
+        margin-right: 0.25em;
+      {% when 'right' %}
+        margin-left: 0.25em;
+    {% endcase %}
+  }
+
+  {% unless block.settings.hover_effect == "brand_style" %}
+    {% if block.settings.hover_effect == "icon" %}
+      .shoplift--button--{{ block.id }} .uil {
+        transition: opacity ease-in 0.2s;
+        opacity: 0.5;
+      }
+      .shoplift--button--{{ block.id }}:hover .uil {
+        opacity: 1;
+      }
+    {% else %}
+      .shoplift--button--{{ block.id }} .uil {
+        transition: opacity ease-in 0.2s;
+        opacity: 0.5;
+      }
+      .shoplift--button--{{ block.id }}:hover .uil {
+        opacity: 1;
+      }
+      .shoplift--button--{{ block.id }} {
+        transition: filter ease-in 0.2s;
+      }
+      .shoplift--button--{{ block.id }}:hover {
+        filter: brightness(90%) saturate(110%);
+      }
+    {% endif %}
+  {% endunless %}
+
+  .shoplift--subtext--{{ block.id }} {
+    font-size: 12px;
+    line-height: 1;
+    margin-top: 8px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .shoplift--button--{{ block.id }} {
+      padding: {{ mobile_padding_size }};
+      font-size: {{ mobile_font_size }};
+    }
+
+    .sl--buttons-wrapper--{{ block.id }} {
+      {% if block.settings.mobile_button_width == 'wide' %}
+      grid-template-columns: 1fr;
+      {% endif %}
+      width: 100%;
+      gap: 10px;
+    }
+
+    {% if block.settings.mobile_button_width == 'wide' %}
+      .shoplift--button--{{ block.id }} {
+        width: 100%;
+      }
+    {% else %}
+      .shoplift--button--{{ block.id }}.sl-button {
+        width: auto;
+      }
+    {% endif %}
+  }
+
+  {% if block.settings.button_color != 'rgba(0,0,0,0)' and block.settings.button_color != 'transparent' %}
+    {% if block.settings.button_style == 'brand_style' or block.settings.button_style == 'solid' %}
+      .shoplift--{{ block.id }} .shoplift--button--primary.sl-button {
+        background-color: {{ block.settings.button_color }};
+      }
+    {% endif %}
+    {% if block.settings.button_style == 'outline' or block.settings.button_style == 'text' %}
+      .shoplift--{{ block.id }} .shoplift--button--primary.sl-button {
+        border-color: {{ block.settings.button_color }};
+        color: {{ block.settings.button_color }};
+      }
+    {% endif %}
+    {% if block.settings.button_style == 'underline' %}
+      .shoplift--{{ block.id }} .shoplift--button--primary.sl-button {
+        color: {{ block.settings.button_color }};
+      }
+    {% endif %}
+    {% if block.settings.second_button_style == 'brand_style' or block.settings.second_button_style == 'solid' %}
+      .shoplift--{{ block.id }} .shoplift--button--secondary.sl-button {
+        background-color: {{ block.settings.button_color }};
+      }
+    {% endif %}
+    {% if block.settings.second_button_style == 'outline' or block.settings.second_button_style == 'text' %}
+      .shoplift--{{ block.id }} .shoplift--button--secondary.sl-button {
+        border-color: {{ block.settings.button_color }};
+        color: {{ block.settings.button_color }};
+      }
+    {% endif %}
+    {% if block.settings.second_button_style == 'underline' %}
+      .shoplift--{{ block.id }} .shoplift--button--secondary.sl-button {
+        color: {{ block.settings.button_color }};
+      }
+    {% endif %}
+  {% endif %}
+
+  {% if block.settings.button_hover_color != 'rgba(0,0,0,0)' and block.settings.button_hover_color != 'transparent' %}
+    {% if block.settings.button_style == 'brand_style' or block.settings.button_style == 'solid' %}
+      .shoplift--{{ block.id }} .shoplift--button--primary.sl-button:hover {
+        background-color: {{ block.settings.button_hover_color }};
+      }
+    {% endif %}
+    {% if block.settings.button_style == 'underline' %}
+      .shoplift--{{ block.id }} .shoplift--button--primary.sl-button:hover {
+        color: {{ block.settings.button_hover_color }};
+      }
+    {% endif %}
+    {% if block.settings.second_button_style == 'brand_style' or block.settings.second_button_style == 'solid' %}
+      .shoplift--{{ block.id }} .shoplift--button--secondary.sl-button:hover {
+        background-color: {{ block.settings.button_hover_color }};
+      }
+    {% endif %}
+    {% if block.settings.second_button_style == 'underline' %}
+      .shoplift--{{ block.id }} .shoplift--button--secondary.sl-button:hover {
+        color: {{ block.settings.button_hover_color }};
+      }
+    {% endif %}
+  {% endif %}
+
+  {% if block.settings.text_color != 'rgba(0,0,0,0)' and block.settings.text_color != 'transparent' %}
+    {% if block.settings.button_style == 'brand_style' or block.settings.button_style == 'solid' %}
+      .shoplift--{{ block.id }} .shoplift--button--primary.sl-button {
+        color: {{ block.settings.text_color }};
+      }
+    {% endif %}
+    {% if block.settings.button_style == 'outline' or block.settings.button_style == 'text' %}
+      .shoplift--{{ block.id }} .shoplift--button--primary.sl-button:hover {
+        background-color: {{ block.settings.button_color }};
+        color: {{ block.settings.text_color }};
+      }
+    {% endif %}
+    {% if block.settings.second_button_style == 'brand_style' or block.settings.second_button_style == 'solid' %}
+      .shoplift--{{ block.id }} .shoplift--button--secondary.sl-button {
+        color: {{ block.settings.text_color }};
+      }
+    {% endif %}
+    {% if block.settings.second_button_style == 'outline' or block.settings.second_button_style == 'text' %}
+      .shoplift--{{ block.id }} .shoplift--button--secondary.sl-button:hover {
+        background-color: {{ block.settings.button_color }};
+        color: {{ block.settings.text_color }};
+      }
+    {% endif %}
+  {% endif %}
+
+  {% if block.settings.text_hover_color != 'rgba(0,0,0,0)' and block.settings.text_hover_color != 'transparent' %}
+    {% if block.settings.button_style == 'brand_style' or block.settings.button_style == 'solid' %}
+      .shoplift--{{ block.id }} .shoplift--button--primary.sl-button:hover {
+        color: {{ block.settings.text_hover_color }};
+      }
+    {% endif %}
+    {% if block.settings.second_button_style == 'brand_style' or block.settings.second_button_style == 'solid' %}
+      .shoplift--{{ block.id }} .shoplift--button--secondary.sl-button:hover {
+        color: {{ block.settings.text_hover_color }};
+      }
+    {% endif %}
+  {% endif %}
+
+  {% if block.settings.subtext_color != 'rgba(0,0,0,0)' and block.settings.subtext_color != 'transparent' %}
+    .shoplift--{{ block.id }} .shoplift--subtext--{{ block.id }} {
+      color: {{ block.settings.subtext_color }};
+    }
+  {% else %}
+    .shoplift--{{ block.id }} .shoplift--subtext--{{ block.id }} {
+      {% if section.settings.image_position == 'background' %}
+        color: white;
+      {% endif %}
+    }
+  {% endif %}
+  
+  .sl-image-hero__anchor--mobile {
+    display: none;
+  }
+  
+  @media (max-width: 767px) {
+    .sl-image-hero__anchor--desktop {
+      display: none;
+    }
+    
+    .sl-image-hero__anchor--mobile {
+      display: block;
+    }
+  }
+</style>
+
+  <div class='shoplift--{{ block.id }} sl-block {{ class }}' {{ block.shopify_attributes }}>
+    <div class='sl--buttons-wrapper--{{ block.id }}'>
+      <div>
+        <a class="shoplift--button--{{ block.id }} sl-button shoplift--button--primary sl-font-style--{{ block.settings.font_style }} {% if block.settings.button_style == 'brand_style' %}sl-button--brand-style{% endif %}{% if block.settings.button_rounding == 'brand_style' and block.settings.button_style != 'underline' %} sl-button--border-radius{% endif %}" href="{{ block.settings.button_link }}">
+          {% if block.settings.icon_position == 'left'%}
+            <i class="uil uil-{{ block.settings.icon_name }}"></i>
+          {% endif %}
+          {{ block.settings.button_text }}
+          {% if block.settings.icon_position == 'right'%}
+            <i class="uil uil-{{ block.settings.icon_name }}"></i>
+          {% endif %}
+        </a>
+        {% unless block.settings.button_subtext == "" %}
+        <div class='shoplift--subtext--{{ block.id }}'>
+          <span>{{ block.settings.button_subtext }}</span>
+        </div>
+        {% endunless %}
+      </div>
+      {% if block.settings.second_button_text != empty %}
+        <div>
+          <a class="shoplift--button--{{ block.id }} sl-button shoplift--button--secondary sl-font-style--{{ block.settings.font_style }} {% if block.settings.second_button_style == 'brand_style' %}sl-button--brand-style{% endif %}{% if block.settings.button_rounding == 'brand_style' and block.settings.second_button_style != 'underline' %} sl-button--border-radius{% endif %}" href="{{ block.settings.second_button_link }}">
+            {% if block.settings.icon_position == 'left'%}
+              <i class="uil uil-{{ block.settings.second_icon_name }}"></i>
+            {% endif %}
+            {{ block.settings.second_button_text }}
+            {% if block.settings.icon_position == 'right'%}
+              <i class="uil uil-{{ block.settings.second_icon_name }}"></i>
+            {% endif %}
+          </a>
+        </div>
+      {% endif%}
+    </div>
+  </div>
