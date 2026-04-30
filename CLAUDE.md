@@ -13,7 +13,6 @@ Only update main via the ship workflow below.
 ### BANNED commands — Never run under any circumstances
 - **`shopify theme publish`** — makes a theme live instantly, no exceptions
 - **`git push origin main` directly** — ship workflow only (see below)
-- **Shopify editor changes to live theme** — without pulling first and committing drift
 
 ### Shopify admin changes — require per-change written approval
 Session-level blanket approval does NOT apply:
@@ -32,41 +31,31 @@ Session-level blanket approval does NOT apply:
 - Local path: `~/Projects/jambys-theme/`
 
 ## Branch model
-- `develop` — all development. Push freely. Connected to Shopify shadow theme.
-- `main` — LIVE. Shopify auto-deploys on every push.
+- `develop` — all development. Push freely. Shopify auto-deploys to shadow theme via GitHub integration.
+- `main` — LIVE. Shopify auto-deploys to jambys.com via GitHub integration.
 - `backup/YYYY-MM-DD` — created from main before every ship.
 
-## ⚠️ Shopify editor saves commits to git
+## ⚠️ Shopify editor saves commit to git
 When anyone edits the live or develop themes in the Shopify editor, Shopify
 automatically commits those changes back to the connected GitHub branch.
 These appear as "Update from Shopify for theme horizon/develop" commits.
-Always run the session-start drift check to catch them before working.
+Always pull before working to catch them.
 
 ## Ship workflow
 1. Verify changes on Shopify develop theme (connected to `develop` branch)
-2. Pull latest main first: `git checkout main && git pull origin main`
-3. Create backup: `git checkout -b backup/YYYY-MM-DD && git push origin backup/YYYY-MM-DD`
+2. Pull latest: `git checkout main && git pull origin main && git checkout develop && git pull origin develop`
+3. Create backup: `git checkout main && git checkout -b backup/YYYY-MM-DD && git push origin backup/YYYY-MM-DD`
 4. Merge: `git checkout main && git merge develop && git push origin main`
 5. Verify on jambys.com. Return to `develop`.
-
-## Develop theme (Shopify shadow theme)
-Already connected to `develop` branch via GitHub integration. Last saved Nov 26 2025.
-To get the theme ID: Shopify admin → Themes → click ••• on "horizon/develop" → Copy theme ID.
-Update here when found: `DEVELOP_THEME_ID=`
 
 ---
 
 ## Session Start — Every Session
 
 ```bash
-# On develop branch — drift check for Shopify editor saves
-shopify theme pull --store jambys-chillwear --theme DEVELOP_THEME_ID --path .
-git diff
-```
-
-If `git diff` is non-empty: commit before other work:
-```bash
-git add -A && git commit -m "Theme drift: <what changed>"
+# On develop — catch any Shopify editor saves
+git checkout develop && git pull origin develop
+git log --oneline -5
 ```
 
 Load MCP if doing Liquid work:
@@ -115,20 +104,8 @@ Always:
 ## CLI Reference
 
 ```bash
-# Dev locally (develop theme)
-shopify theme dev --store jambys-chillwear --path .
-
-# Push to develop/shadow theme only — confirm theme ID first
-shopify theme push --store jambys-chillwear --theme DEVELOP_THEME_ID --path .
-
-# Pull (drift check)
-shopify theme pull --store jambys-chillwear --theme DEVELOP_THEME_ID --path .
-
-# Lint
+# Lint only (no auth needed)
 shopify theme check --path .
-
-# List all themes + IDs
-shopify theme list --store jambys-chillwear
 ```
 
 ---
