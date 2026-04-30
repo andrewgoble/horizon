@@ -7,7 +7,7 @@ Maintenance and improvement of Jambys' live Horizon theme at jambys.com.
 ## LIVE SITE GUARDRAILS — HARD STOPS
 
 ### Deploy workflow — ONLY correct method
-All dev work on `preview` branch. `git push origin main` deploys live instantly.
+All dev work on `develop` branch. `git push origin main` deploys live instantly.
 Only update main via the ship workflow below.
 
 ### BANNED commands — Never run under any circumstances
@@ -32,34 +32,35 @@ Session-level blanket approval does NOT apply:
 - Local path: `~/Projects/jambys-theme/`
 
 ## Branch model
-- `preview` — all development. Push freely.
+- `develop` — all development. Push freely. Connected to Shopify shadow theme.
 - `main` — LIVE. Shopify auto-deploys on every push.
 - `backup/YYYY-MM-DD` — created from main before every ship.
 
-## ⚠️ Shopify auto-updates
-Shopify pushes Horizon theme updates directly to `main` via the fork relationship.
-This means `main` can change without any action on our part. Always pull `main`
-before starting ship workflow to avoid merge conflicts or overwriting upstream changes.
+## ⚠️ Shopify editor saves commits to git
+When anyone edits the live or develop themes in the Shopify editor, Shopify
+automatically commits those changes back to the connected GitHub branch.
+These appear as "Update from Shopify for theme horizon/develop" commits.
+Always run the session-start drift check to catch them before working.
 
 ## Ship workflow
-1. Verify changes on Shopify preview theme (connected to `preview` branch by Andrew)
+1. Verify changes on Shopify develop theme (connected to `develop` branch)
 2. Pull latest main first: `git checkout main && git pull origin main`
 3. Create backup: `git checkout -b backup/YYYY-MM-DD && git push origin backup/YYYY-MM-DD`
-4. Merge: `git checkout main && git merge preview && git push origin main`
-5. Verify on jambys.com. Return to `preview`.
+4. Merge: `git checkout main && git merge develop && git push origin main`
+5. Verify on jambys.com. Return to `develop`.
 
-## Preview theme
-**NOT YET CONNECTED.** Andrew connects `preview` branch to a Shopify shadow theme
-via Shopify admin → Themes → Add theme → Connect from GitHub → select `preview` branch.
-Update the ID here when done: `PREVIEW_THEME_ID=`
+## Develop theme (Shopify shadow theme)
+Already connected to `develop` branch via GitHub integration. Last saved Nov 26 2025.
+To get the theme ID: Shopify admin → Themes → click ••• on "horizon/develop" → Copy theme ID.
+Update here when found: `DEVELOP_THEME_ID=`
 
 ---
 
 ## Session Start — Every Session
 
 ```bash
-# On preview branch — drift check
-shopify theme pull --store jambys-chillwear --theme PREVIEW_THEME_ID --path .
+# On develop branch — drift check for Shopify editor saves
+shopify theme pull --store jambys-chillwear --theme DEVELOP_THEME_ID --path .
 git diff
 ```
 
@@ -114,14 +115,14 @@ Always:
 ## CLI Reference
 
 ```bash
-# Dev locally (preview theme)
+# Dev locally (develop theme)
 shopify theme dev --store jambys-chillwear --path .
 
-# Push to preview/shadow theme only — confirm theme ID first
-shopify theme push --store jambys-chillwear --theme PREVIEW_THEME_ID --path .
+# Push to develop/shadow theme only — confirm theme ID first
+shopify theme push --store jambys-chillwear --theme DEVELOP_THEME_ID --path .
 
 # Pull (drift check)
-shopify theme pull --store jambys-chillwear --theme PREVIEW_THEME_ID --path .
+shopify theme pull --store jambys-chillwear --theme DEVELOP_THEME_ID --path .
 
 # Lint
 shopify theme check --path .
