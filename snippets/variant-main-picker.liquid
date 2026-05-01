@@ -491,6 +491,8 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       padding-bottom: 2px;
+      max-width: 100%;
+      gap: 6px;
 
       &::-webkit-scrollbar {
         display: none;
@@ -579,6 +581,7 @@
     display: block;
     flex-basis: auto;
     min-height: auto;
+    overflow: visible;
   }
 
   .variant-option__button-label:has(:checked) {
