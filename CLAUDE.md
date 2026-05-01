@@ -31,9 +31,13 @@ Session-level blanket approval does NOT apply:
 - Local path: `~/Projects/jambys-theme/`
 
 ## Branch model
-- `develop` — all development. Push freely. Shopify auto-deploys to shadow theme via GitHub integration.
+- `develop` — all development. Push freely. Shopify auto-deploys to **preview theme** via GitHub integration.
 - `main` — LIVE. Shopify auto-deploys to jambys.com via GitHub integration.
 - `backup/YYYY-MM-DD` — created from main before every ship.
+
+## Browser
+- **Always use the Jambys Chrome browser profile** for Shopify admin and preview theme verification.
+- Switching browsers: use `switch_browser` MCP tool — broadcast goes to all Chrome instances with the extension. Andrew clicks "Connect" in the Jambys browser.
 
 ## ⚠️ Shopify editor saves commit to git
 When anyone edits the live or develop themes in the Shopify editor, Shopify
