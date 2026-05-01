@@ -1,17 +1,17 @@
 ## Current State
-
-Session 1 audit complete. preview branch set up with CLAUDE.md, .gitignore, pre-push hook.
-Preview theme NOT yet connected to Shopify (Andrew to do manually).
-Key findings: mobile Lighthouse 31/100, size selector regression identified (57de4dd).
+**Last session:** 2026-04-30 — S2: Branch consolidation + size selector fix + main→develop sync
+**Next:**
+- Verify mobile size selector fix on shadow theme (check shadow theme on mobile)
+- Typekit font-display:swap — Adobe Fonts dashboard, no code needed
+- Third-party JS audit (GTM duplicates, Alia, Loop Returns eager loading)
+**Branch:** develop / clean
 
 ## Next Session Kickoff
-
-Mode: `shallow`
-First action: Check if Andrew connected preview branch to Shopify shadow theme
-(update PREVIEW_THEME_ID in CLAUDE.md). Then pick a fix to start:
-  Option A: Size selector fix (snippets/variant-main-picker.liquid lines 533–546) — quick win
-  Option B: Typekit font-display:swap — 5-min change in Adobe Fonts dashboard, no code
-  Option C: Review and remove unused third-party scripts (GTM duplicates, etc.)
+**Mode:** shallow
+**First action:** Verify size selector fix on shadow theme on mobile, then pick next perf win (Typekit swap or third-party JS audit)
+**Open questions:** none
+**Decisions pending:** none
+**Ready plan:** none
 
 ---
 
@@ -40,3 +40,27 @@ First action: Check if Andrew connected preview branch to Shopify shadow theme
 3. Third-party JS bloat — GTM duplicates, Alia, Loop Returns loading eagerly
 4. Console errors / MissingRefError in anchored-popover-component
 5. No hero image preload (LCP: 6.0s mobile)
+
+---
+
+## Session 2 — 2026-04-30
+
+### Accomplished
+- Discovered `develop` branch already existed and was connected to Shopify shadow theme (Graft Studio Nov 26 2025 work)
+- Migrated all work from `preview` to `develop` via cherry-pick (8 commits)
+- Rewrote CLAUDE.md: GitHub-only workflow (no Shopify CLI push/pull needed), correct branch names
+- Deleted `preview` branch (local + origin)
+- Fixed mobile size selector: removed Graft Studio's `font-size: 11px !important` + `min-width/height: auto` overrides from `snippets/variant-main-picker.liquid` (bug was live on jambys.com since Nov 26 2025)
+- Merged `main` into `develop` — pulled in 80 commits of live content (announcement bar, etc.) so shadow theme matches live site
+
+### Files Modified
+| File | Changes |
+|------|---------|
+| `CLAUDE.md` | Rewrote: GitHub-only workflow, removed CLI push/pull, removed theme ID placeholder |
+| `snippets/variant-main-picker.liquid` | Removed Graft Studio mobile overrides shrinking size selector |
+| `snippets/shoplift.liquid` | Conflict resolved (timestamp only) — took main's version |
+
+### Next Steps
+- [ ] Verify size selector fix on shadow theme (mobile)
+- [ ] Typekit font-display:swap (Adobe Fonts dashboard — no code)
+- [ ] Third-party JS audit — GTM duplicates, Alia, Loop Returns
