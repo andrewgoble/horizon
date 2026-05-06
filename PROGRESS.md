@@ -1,11 +1,11 @@
 ## Current State
-**Last session:** 2026-05-05 — S4: Pushed develop to origin (preview theme now has S3 fixes)
+**Last session:** 2026-05-06 — S5: Brief session, no changes — confirmed next steps
 **Next:**
 - Verify S3 fixes on preview theme (scroll containment, swatch stroke, 3XL peek) — Jambys Chrome browser
 - Ship develop → main if verified
 - Typekit font-display:swap (Adobe Fonts dashboard — no code)
 - Third-party JS audit — GTM duplicates, Alia, Loop Returns
-**Branch:** develop / clean
+**Branch:** develop / 1 commit ahead of origin (S4+S5 /done commits unpushed)
 
 ## Next Session Kickoff
 **Mode:** shallow
@@ -107,6 +107,23 @@
 
 ### Files Modified
 _(none — push only)_
+
+### Next Steps
+- [ ] Verify S3 fixes on preview theme (Jambys Chrome browser, mobile view)
+- [ ] Ship develop → main if verified
+- [ ] Typekit font-display:swap (Adobe Fonts dashboard)
+- [ ] Third-party JS audit — GTM duplicates, Alia, Loop Returns
+
+---
+
+## 2026-05-06 — Session 5: Brief session — no changes
+
+### Accomplished
+- Resumed project, confirmed next steps (preview theme verification + ship to main)
+- No code changes this session
+
+### Files Modified
+_(none)_
 
 ### Next Steps
 - [ ] Verify S3 fixes on preview theme (Jambys Chrome browser, mobile view)
