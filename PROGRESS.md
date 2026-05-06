@@ -1,11 +1,11 @@
 ## Current State
-**Last session:** 2026-05-01 — S3: Mobile size selector scroll + swatch stroke fix
+**Last session:** 2026-05-05 — S4: Pushed develop to origin (preview theme now has S3 fixes)
 **Next:**
-- Verify all fixes on preview theme (scroll containment, swatch stroke, peek at 3XL)
-- Ship to main if verified
+- Verify S3 fixes on preview theme (scroll containment, swatch stroke, 3XL peek) — Jambys Chrome browser
+- Ship develop → main if verified
 - Typekit font-display:swap (Adobe Fonts dashboard — no code)
 - Third-party JS audit — GTM duplicates, Alia, Loop Returns
-**Branch:** develop / CLAUDE.md uncommitted (to be committed)
+**Branch:** develop / clean
 
 ## Next Session Kickoff
 **Mode:** shallow
@@ -95,4 +95,21 @@
 - [ ] Verify all fixes on preview theme (Jambys Chrome browser, mobile emulation)
 - [ ] Ship develop → main if verified
 - [ ] Typekit font-display:swap (Adobe Fonts dashboard — no code)
+- [ ] Third-party JS audit — GTM duplicates, Alia, Loop Returns
+
+---
+
+## Session 4 — 2026-05-05
+
+### Accomplished
+- Resumed project — found develop was 1 commit ahead of origin from S3
+- Pushed develop to origin (`git push origin develop`) — GitHub integration deploying S3 fixes to preview theme
+
+### Files Modified
+_(none — push only)_
+
+### Next Steps
+- [ ] Verify S3 fixes on preview theme (Jambys Chrome browser, mobile view)
+- [ ] Ship develop → main if verified
+- [ ] Typekit font-display:swap (Adobe Fonts dashboard)
 - [ ] Third-party JS audit — GTM duplicates, Alia, Loop Returns
