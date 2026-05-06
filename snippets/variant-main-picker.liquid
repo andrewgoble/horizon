@@ -486,16 +486,32 @@
     border: none;
 
     @media (max-width: 749px) {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding-bottom: 2px;
-      max-width: 100%;
-      gap: 6px;
+      &:not(.variant-option--swatches) {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+        max-width: 100%;
+        gap: 6px;
 
-      &::-webkit-scrollbar {
-        display: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      &.variant-option--swatches {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-block: calc(var(--focus-outline-width) + var(--focus-outline-offset));
+        max-width: 100%;
+        gap: 6px;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
     }
   }
