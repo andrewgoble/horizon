@@ -1,15 +1,15 @@
 ## Current State
-**Last session:** 2026-05-06 — S5: Brief session, no changes — confirmed next steps
+**Last session:** 2026-05-07 — S6: Extended mobile horizontal scroll to color swatches — 4-commit debug chain
 **Next:**
-- Verify S3 fixes on preview theme (scroll containment, swatch stroke, 3XL peek) — Jambys Chrome browser
+- Verify latest swatch fix on preview: scroll works, ring shows fully, correct spacing (gap-sm)
 - Ship develop → main if verified
 - Typekit font-display:swap (Adobe Fonts dashboard — no code)
 - Third-party JS audit — GTM duplicates, Alia, Loop Returns
-**Branch:** develop / 1 commit ahead of origin (S4+S5 /done commits unpushed)
+**Branch:** develop / clean (up to date with origin)
 
 ## Next Session Kickoff
-**Mode:** shallow
-**First action:** Open Jambys Chrome browser → preview theme → product with sizes on mobile → verify scroll stays in row, swatch stroke shows fully, 3XL peeks. If good, ship to main.
+**Mode:** execute
+**First action:** Open preview theme in Jambys Chrome browser → House Shorts PDP → mobile width → verify: swatches scroll horizontally, selection ring shows fully top+bottom, correct spacing between circles. If good, run ship workflow: backup/YYYY-MM-DD → merge develop → main → push.
 **Open questions:** none
 **Decisions pending:** none
 **Ready plan:** none
@@ -63,8 +63,6 @@
 
 ### Next Steps
 - [x] Verify size selector fix on preview theme (mobile) — carried into S3
-- [ ] Typekit font-display:swap (Adobe Fonts dashboard — no code)
-- [ ] Third-party JS audit — GTM duplicates, Alia, Loop Returns
 
 ---
 
@@ -72,13 +70,12 @@
 
 ### Accomplished
 - Pushed S2 commit to origin/develop (was 1 commit ahead)
-- Fixed mobile size selector layout: switched to horizontal scroll (Option A) — `flex-wrap: nowrap` + `overflow-x: auto` + `scrollbar-width: none`
+- Fixed mobile size selector layout: switched to horizontal scroll — `flex-wrap: nowrap` + `overflow-x: auto` + `scrollbar-width: none`
 - Fixed whole-page scroll: added `max-width: 100%` to contain scroll within the row
-- Fixed swatch outline clipping: `overflow-x: auto` was applied to the color row too (both share `.variant-option--buttons`), implicitly clipping `overflow-y` and cropping the selection stroke on 3 sides. Fixed with `:not(.variant-option--swatches)` selector.
+- Fixed swatch outline clipping: `overflow-x: auto` was applied to color row too (both share `.variant-option--buttons`), implicitly clipping `overflow-y` and cropping stroke on 3 sides. Fixed with `:not(.variant-option--swatches)` selector.
 - Tightened mobile gap to `6px` so 3XL peeks into view hinting at scroll
 - Added `overflow: visible` to `.variant-option__button-label--has-swatch` for full stroke display
-- Updated CLAUDE.md: "shadow theme" → "preview theme" throughout, added Jambys Chrome browser profile rule
-- Corrected session workflow: always use Jambys Chrome browser for preview theme verification
+- Updated CLAUDE.md: "shadow theme" → "preview theme", added Jambys Chrome browser profile rule
 
 ### Files Modified
 | File | Changes |
@@ -86,47 +83,50 @@
 | `snippets/variant-main-picker.liquid` | Horizontal scroll, gap tighten, swatch overflow fix, :not() scoping |
 | `CLAUDE.md` | "preview theme" terminology, Jambys Chrome browser note |
 
-### Commits
-- `ff3dd57` fix: horizontal scroll for size buttons on mobile
-- `5cbc6d2` fix: contain size scroll to row, tighter gap, swatch outline unclipped
-- `977b7ac` fix: exclude swatch row from overflow-x scroll (was clipping color stroke)
-
-### Next Steps
-- [ ] Verify all fixes on preview theme (Jambys Chrome browser, mobile emulation)
-- [ ] Ship develop → main if verified
-- [ ] Typekit font-display:swap (Adobe Fonts dashboard — no code)
-- [ ] Third-party JS audit — GTM duplicates, Alia, Loop Returns
-
 ---
 
 ## Session 4 — 2026-05-05
 
 ### Accomplished
-- Resumed project — found develop was 1 commit ahead of origin from S3
-- Pushed develop to origin (`git push origin develop`) — GitHub integration deploying S3 fixes to preview theme
+- Pushed develop to origin — S3 fixes deploying to preview theme
 
 ### Files Modified
 _(none — push only)_
-
-### Next Steps
-- [ ] Verify S3 fixes on preview theme (Jambys Chrome browser, mobile view)
-- [ ] Ship develop → main if verified
-- [ ] Typekit font-display:swap (Adobe Fonts dashboard)
-- [ ] Third-party JS audit — GTM duplicates, Alia, Loop Returns
 
 ---
 
 ## 2026-05-06 — Session 5: Brief session — no changes
 
 ### Accomplished
-- Resumed project, confirmed next steps (preview theme verification + ship to main)
+- Confirmed next steps (preview theme verification + ship to main)
 - No code changes this session
 
+---
+
+## 2026-05-07 — Session 6: Mobile swatch horizontal scroll
+
+### Accomplished
+- Extended mobile horizontal scroll to color swatches (was excluded via `:not(.variant-option--swatches)`)
+- Debugged 3 cascading issues over 4 commits:
+  1. **Outline clipping top/bottom** — `overflow-x: auto` forces `overflow-y: hidden`; fixed with `padding-block: 8px` (outline paints within padding box)
+  2. **Circles shrinking** — swatch labels had `flex-shrink: 1` (default); size buttons have `flex: 0 0 ...` but swatches only override `flex-basis`. Fixed with `flex-shrink: 0` on `.variant-option__button-label--has-swatch` in mobile scroll context
+  3. **Cramped swatches** — hardcoded `gap: 6px` from size rule was applied to swatches; restored `gap: var(--gap-sm)` (0.7rem / 11.2px)
+- Used browser JS inspection (`getComputedStyle`) to confirm computed values during debugging
+- Shopify webhook stalled mid-session (34min gap) — pushed 3× before sync resumed
+
 ### Files Modified
-_(none)_
+| File | Changes |
+|------|---------|
+| `snippets/variant-main-picker.liquid` | Mobile swatch scroll: padding-block, flex-shrink, gap (4 commits) |
+
+### Commits
+- `4f8b0e1` Mobile: extend horizontal scroll to color swatches (same as sizes)
+- `9ae4691` fix: swatch scroll — padding-block to prevent outline clipping on overflow-x
+- `9c1f155` fix: flex-shrink: 0 on swatch labels in mobile scroll
+- `13369c4` fix: swatch scroll — restore gap-sm, increase padding-block to 8px for outline clearance
 
 ### Next Steps
-- [ ] Verify S3 fixes on preview theme (Jambys Chrome browser, mobile view)
+- [ ] Verify latest swatch fix on preview (scroll + ring + spacing)
 - [ ] Ship develop → main if verified
-- [ ] Typekit font-display:swap (Adobe Fonts dashboard)
+- [ ] Typekit font-display:swap (Adobe Fonts dashboard — no code)
 - [ ] Third-party JS audit — GTM duplicates, Alia, Loop Returns
