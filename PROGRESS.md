@@ -1,15 +1,16 @@
 ## Current State
-**Last session:** 2026-05-07 — S6: Extended mobile horizontal scroll to color swatches — 4-commit debug chain
+**Last session:** 2026-05-11 — S7: Shipped swatch fix to main, Heatmap removed, full JS/Lighthouse audit
 **Next:**
-- Verify latest swatch fix on preview: scroll works, ring shows fully, correct spacing (gap-sm)
-- Ship develop → main if verified
-- Typekit font-display:swap (Adobe Fonts dashboard — no code)
-- Third-party JS audit — GTM duplicates, Alia, Loop Returns
-**Branch:** develop / clean (up to date with origin)
+- Heatmap: uninstall app from Shopify Admin (Andrew — removes app embed)
+- GA4 duplicate: open GTM-PFQG442, delete GA4 tag if present (fires to G-RGWNX60RXQ)
+- Duplicate FB pixel: check if FB pixel in GTM AND as native Shopify pixel — remove one
+- Typekit font-display:swap (Adobe Fonts dashboard — kit hxg4nit)
+- Alia: contact for async/deferred bundle option
+**Branch:** develop / clean
 
 ## Next Session Kickoff
-**Mode:** execute
-**First action:** Open preview theme in Jambys Chrome browser → House Shorts PDP → mobile width → verify: swatches scroll horizontally, selection ring shows fully top+bottom, correct spacing between circles. If good, run ship workflow: backup/YYYY-MM-DD → merge develop → main → push.
+**Mode:** shallow
+**First action:** Confirm admin cleanup done (Heatmap uninstall, GTM GA4 audit, FB pixel dedup) then re-run Lighthouse to measure improvement
 **Open questions:** none
 **Decisions pending:** none
 **Ready plan:** none
@@ -126,7 +127,35 @@ _(none — push only)_
 - `13369c4` fix: swatch scroll — restore gap-sm, increase padding-block to 8px for outline clearance
 
 ### Next Steps
-- [ ] Verify latest swatch fix on preview (scroll + ring + spacing)
-- [ ] Ship develop → main if verified
+- [x] Verify latest swatch fix on preview (scroll + ring + spacing)
+- [x] Ship develop → main if verified
 - [ ] Typekit font-display:swap (Adobe Fonts dashboard — no code)
-- [ ] Third-party JS audit — GTM duplicates, Alia, Loop Returns
+- [x] Third-party JS audit — GTM duplicates, Alia, Loop Returns
+
+---
+
+## 2026-05-11 — Session 7: Ship to main + JS audit + Heatmap removal
+
+### Accomplished
+- Verified S6 swatch fix on preview theme: ring fully visible all sides, gap 11.2px, flex-shrink 0, overflow-x auto — all confirmed via `getComputedStyle`
+- Ran ship workflow: created `backup/2026-05-07`, merged develop → main (fast-forward, 7 files), pushed to origin/main — live on jambys.com
+- Full third-party JS audit via live network scan + PSI: identified Alia (4,851ms), duplicate FB pixel, GTM+gtag GA4 double-load, Heatmap (940ms, 3x loads), Loop Returns (112KB on every PDP)
+- Lighthouse scores: mobile 30 (LCP 7.7s, TBT 1,890ms, TTI 30.9s) / desktop 56
+- Removed Heatmap.com inline script from `layout/theme.liquid` — committed + pushed to develop
+- Explained Sofia Pro / Sofia Sans font picker workaround (Adobe Fonts loads real font; picker uses standard placeholder)
+
+### Files Modified
+| File | Changes |
+|------|---------|
+| `layout/theme.liquid` | Removed Heatmap.com inline script (~940ms JS execution, loaded 3×) |
+
+### Commits
+- `bc3a4ed` perf: remove Heatmap.com script (940ms JS execution, 3x loads)
+
+### Next Steps
+- [ ] Heatmap: uninstall app in Shopify Admin (removes app embed — script still loads without this)
+- [ ] GTM audit: open GTM-PFQG442, delete GA4 tag firing to G-RGWNX60RXQ (Shopify native pixel handles GA4)
+- [ ] FB pixel dedup: remove one instance (GTM tag vs native Shopify pixel)
+- [ ] Typekit font-display:swap — Adobe Fonts dashboard, kit hxg4nit
+- [ ] Alia: contact for async/deferred loading option
+- [ ] Re-run Lighthouse after admin cleanup to measure improvement
