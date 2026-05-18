@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<span style=\"text-decoration:underline\"><strong>Free Long Jambys ($88 retail) at $150 AND Free House Hoodie ($88 retail) at $250!</strong></span>",
+            "text": "<span style=\"text-decoration:underline\"><strong>Get to chose a Free Long Jambys ($88 retail) at $150 in cart</strong></span>",
             "link": "https://www.jambys.com/products/black-black?variant=31290532429909",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
