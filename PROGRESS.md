@@ -1,11 +1,13 @@
 ## Current State
-**Last session:** 2026-05-11 — S7: Shipped swatch fix to main, Heatmap removed, full JS/Lighthouse audit
+**Last session:** 2026-05-19 — S8: Cart drawer upsells removed, toggle added, wired to Shopify Recommendations API
 **Next:**
+- Enable upsells toggle + configure complementary products in Search & Discovery when ready
 - Heatmap: uninstall app from Shopify Admin (Andrew — removes app embed)
 - GA4 duplicate: open GTM-PFQG442, delete GA4 tag if present (fires to G-RGWNX60RXQ)
 - Duplicate FB pixel: check if FB pixel in GTM AND as native Shopify pixel — remove one
 - Typekit font-display:swap (Adobe Fonts dashboard — kit hxg4nit)
 - Alia: contact for async/deferred bundle option
+- Re-run Lighthouse after admin cleanup to measure improvement
 **Branch:** develop / clean
 
 ## Next Session Kickoff
@@ -155,6 +157,42 @@ _(none — push only)_
 ### Next Steps
 - [ ] Heatmap: uninstall app in Shopify Admin (removes app embed — script still loads without this)
 - [ ] GTM audit: open GTM-PFQG442, delete GA4 tag firing to G-RGWNX60RXQ (Shopify native pixel handles GA4)
+- [ ] FB pixel dedup: remove one instance (GTM tag vs native Shopify pixel)
+- [ ] Typekit font-display:swap — Adobe Fonts dashboard, kit hxg4nit
+- [ ] Alia: contact for async/deferred loading option
+- [ ] Re-run Lighthouse after admin cleanup to measure improvement
+
+---
+
+## 2026-05-19 — Session 8: Cart drawer upsells — remove, toggle, Shopify Recommendations API
+
+### Accomplished
+- Removed "You may also like" static product carousel from cart drawer (`snippets/cart-drawer.liquid`) — shipped to main
+- Added `enable_cart_upsells` checkbox to theme settings (`config/settings_schema.json`) — default off
+- Replaced static curated product list with Shopify Recommendations API: tries `intent=complementary` first, falls back to `intent=related` if no results (`assets/cart-upsells.js`)
+- Removed bad `collections.all` fallback from `sections/cart-upsells.liquid`
+- Loaded `cart-upsells.js` via `<script type="module">` in cart drawer snippet
+- Cart drawer now renders `<cart-upsells>` custom element keyed on `cart.items.first.product_id`
+- All 3 changes shipped to main; toggle is off so no visible change on live site
+
+### Files Modified
+| File | Changes |
+|------|---------|
+| `snippets/cart-drawer.liquid` | Removed static upsells block + CSS; added `<cart-upsells>` element + script load |
+| `assets/cart-upsells.js` | Refactored to complementary→related fallback via `#fetchIntent()` |
+| `sections/cart-upsells.liquid` | Removed `collections.all` fallback — only renders real recommendations |
+| `config/settings_schema.json` | Added `enable_cart_upsells` checkbox (default: false) |
+
+### Commits
+- `3b17f04` feat: remove cart drawer "You may also like" upsells module
+- `70de3ac` feat: add enable_cart_upsells toggle to theme settings
+- `5be9807` feat: cart drawer upsells now use Shopify Recommendations API
+
+### Next Steps
+- [ ] Configure complementary products in Shopify Admin → Apps → Search & Discovery → Product recommendations → Complementary products
+- [ ] Toggle on `enable_cart_upsells` in Theme Settings → Cart and verify in preview
+- [ ] Heatmap: uninstall app in Shopify Admin
+- [ ] GTM audit: open GTM-PFQG442, delete GA4 tag firing to G-RGWNX60RXQ
 - [ ] FB pixel dedup: remove one instance (GTM tag vs native Shopify pixel)
 - [ ] Typekit font-display:swap — Adobe Fonts dashboard, kit hxg4nit
 - [ ] Alia: contact for async/deferred loading option
