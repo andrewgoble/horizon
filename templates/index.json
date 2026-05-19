@@ -25,7 +25,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 20,
             "width": "custom",
             "custom_width": 40,
             "width_mobile": "fill",
@@ -53,11 +53,37 @@
             "css_class": "jambys-hero-content"
           },
           "blocks": {
+            "text_4G9RbR": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<h5><strong>No plans? Perfect!</strong></h5>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "tight",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 20,
+                "padding-inline-end": 20
+              },
+              "blocks": {}
+            },
             "text_QEqxjn": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>Performance <em>Inactivewear</em></h1>",
+                "text": "<h1>The Memorial Day Weekend Sale</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -83,7 +109,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h6>Ridiculously comfortable loungewear made from premium fabrics.</h6>",
+                "text": "<p>Up to 70% off + a free gift on orders $150+.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -102,6 +128,21 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 20,
                 "padding-inline-end": 20
+              },
+              "blocks": {}
+            },
+            "button_yMiYym": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "Shop the Sale",
+                "link": "shopify://collections/mdwsale",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "width": "fit-content",
+                "custom_width": 37,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100
               },
               "blocks": {}
             },
@@ -328,28 +369,14 @@
                 "group_tCWCjz",
                 "group_xCLJfV"
               ]
-            },
-            "button_yMiYym": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "SHOP NOW",
-                "link": "shopify://collections/mdwsale",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "width": "fit-content",
-                "custom_width": 37,
-                "width_mobile": "custom",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
             }
           },
           "block_order": [
+            "text_4G9RbR",
             "text_QEqxjn",
             "text_gktyq3",
-            "group_kUcrRr",
-            "button_yMiYym"
+            "button_yMiYym",
+            "group_kUcrRr"
           ]
         },
         "group_mV7jLL": {
@@ -397,7 +424,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/home-page-new-photo.jpg",
+                "image": "shopify://shop_images/Hero_Image_1.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
@@ -439,7 +466,7 @@
         "section_width": "page-width",
         "section_height": "small",
         "section_height_custom": 50,
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
