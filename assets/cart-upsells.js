@@ -19,68 +19,23 @@ class CartUpsells extends HTMLElement {
    * Load product recommendations based on cart items
    */
   async #loadRecommendations() {
-    const { productId, url, maxProducts, sectionId } = this.dataset;
+    const { productId, url } = this.dataset;
 
     if (!productId || !url) {
       this.hidden = true;
       return;
     }
 
-    const intent = 'complementary';
-    const fetchUrl = `${url}&product_id=${productId}&section_id=${sectionId || 'cart-upsells'}&intent=${intent}`;
-    const cacheKey = fetchUrl;
-
-    // Check cache first
-    if (this.#cachedRecommendations[cacheKey]) {
-      this.#renderProducts(this.#cachedRecommendations[cacheKey]);
-      return;
-    }
-
-    // Show loading state
     const loadingEl = this.querySelector('.cart-upsells__loading');
     const contentEl = this.querySelector('.cart-upsells__content');
     if (loadingEl) loadingEl.hidden = false;
     if (contentEl) contentEl.hidden = true;
 
-    // Abort any existing fetch
-    this.#activeFetch?.abort();
-    this.#activeFetch = new AbortController();
-
     try {
-      const response = await fetch(fetchUrl, {
-        signal: this.#activeFetch.signal,
-      });
-
-      if (!response.ok) {
-        throw new Error(`Server returned ${response.status}`);
+      let products = await this.#fetchIntent('complementary');
+      if (products.length === 0) {
+        products = await this.#fetchIntent('related');
       }
-
-      const html = await response.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-
-      // Extract product cards from the rendered HTML
-      // The section returns resource-card elements
-      const productCards = Array.from(doc.querySelectorAll('.resource-card'));
-      
-      if (productCards.length === 0) {
-        this.hidden = true;
-        return;
-      }
-
-      const products = productCards.map((card) => {
-        const link = card.querySelector('a[href*="/products/"]');
-        const productId = link?.href.match(/\/products\/([^/?]+)/)?.[1];
-        return {
-          id: productId,
-          html: card.outerHTML,
-        };
-      });
-
-      // Cache the results
-      this.#cachedRecommendations[cacheKey] = products;
-
-      // Render products
       this.#renderProducts(products);
     } catch (error) {
       if (error.name !== 'AbortError') {
@@ -88,9 +43,37 @@ class CartUpsells extends HTMLElement {
         this.hidden = true;
       }
     } finally {
-      this.#activeFetch = null;
       if (loadingEl) loadingEl.hidden = true;
     }
+  }
+
+  async #fetchIntent(intent) {
+    const { productId, url, sectionId } = this.dataset;
+    const fetchUrl = `${url}&product_id=${productId}&section_id=${sectionId || 'cart-upsells'}&intent=${intent}`;
+
+    if (this.#cachedRecommendations[fetchUrl]) {
+      return this.#cachedRecommendations[fetchUrl];
+    }
+
+    this.#activeFetch?.abort();
+    this.#activeFetch = new AbortController();
+
+    const response = await fetch(fetchUrl, { signal: this.#activeFetch.signal });
+    if (!response.ok) throw new Error(`Server returned ${response.status}`);
+
+    const html = await response.text();
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const productCards = Array.from(doc.querySelectorAll('.resource-card'));
+
+    const products = productCards.map((card) => {
+      const link = card.querySelector('a[href*="/products/"]');
+      const productId = link?.href.match(/\/products\/([^/?]+)/)?.[1];
+      return { id: productId, html: card.outerHTML };
+    });
+
+    this.#cachedRecommendations[fetchUrl] = products;
+    this.#activeFetch = null;
+    return products;
   }
 
   /**

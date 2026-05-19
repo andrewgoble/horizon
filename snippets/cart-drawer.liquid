@@ -13,6 +13,11 @@
   type="module"
   fetchpriority="low"
 ></script>
+<script
+  src="{{ 'cart-upsells.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
 
 <cart-drawer-component
   class="cart-drawer"
@@ -102,41 +107,26 @@
               {% render 'cart-products' %}
             </scroll-hint>
 
-            {%- if settings.enable_cart_upsells -%}
-              {%- liquid
-                assign cart_upsells_products = settings.cart_upsells_products
-                assign cart_upsells_title = settings.cart_upsells_title
-                assign cart_upsells_max_products = settings.cart_upsells_max_products | default: 9
-                assign show_cart_upsells = false
-                assign available_products_count = 0
-                if cart_upsells_products != blank
-                  for product in cart_upsells_products
-                    if product != blank and product.available
-                      assign available_products_count = available_products_count | plus: 1
-                    endif
-                  endfor
-                  if available_products_count > 0
-                    assign show_cart_upsells = true
-                  endif
-                endif
-              -%}
-              {%- if show_cart_upsells -%}
-                <div class="cart-upsells">
-                  {% if cart_upsells_title != blank %}
-                    <div class="cart-upsells__header">
-                      <h3 class="cart-upsells__title h4">
-                        {{ cart_upsells_title }}
-                      </h3>
-                    </div>
-                  {% endif %}
-                  <div class="cart-upsells__carousel-wrapper">
-                    {% render 'cart-upsells-carousel',
-                      products: cart_upsells_products,
-                      max_products: cart_upsells_max_products
-                    %}
+            {%- if settings.enable_cart_upsells and cart.items.first -%}
+              <cart-upsells
+                class="cart-upsells"
+                data-product-id="{{ cart.items.first.product_id }}"
+                data-url="/recommendations/products?"
+                data-section-id="cart-upsells"
+                data-max-products="{{ settings.cart_upsells_max_products | default: 6 }}"
+              >
+                {%- if settings.cart_upsells_title != blank -%}
+                  <div class="cart-upsells__header">
+                    <h3 class="cart-upsells__title h4">
+                      {{ settings.cart_upsells_title }}
+                    </h3>
                   </div>
+                {%- endif -%}
+                <div class="cart-upsells__loading" hidden>
+                  <span class="visually-hidden">{{ 'accessibility.loading' | t }}</span>
                 </div>
-              {%- endif -%}
+                <div class="cart-upsells__content" hidden></div>
+              </cart-upsells>
             {%- endif -%}
 
             <div
