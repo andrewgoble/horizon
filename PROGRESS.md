@@ -1,20 +1,18 @@
 ## Current State
-**Last session:** 2026-05-19 — S8: Cart drawer upsells removed, toggle added, wired to Shopify Recommendations API
+**Last session:** 2026-05-19 — S9: Full theme audit + Shoplift/Heatmap removal (code cleaned, apps need admin uninstall)
 **Next:**
-- Enable upsells toggle + configure complementary products in Search & Discovery when ready
-- Heatmap: uninstall app from Shopify Admin (Andrew — removes app embed)
+- Uninstall Heatmap + Shoplift in Shopify admin (`/admin/apps`) if not done
 - GA4 duplicate: open GTM-PFQG442, delete GA4 tag if present (fires to G-RGWNX60RXQ)
 - Duplicate FB pixel: check if FB pixel in GTM AND as native Shopify pixel — remove one
 - Typekit font-display:swap (Adobe Fonts dashboard — kit hxg4nit)
-- Alia: contact for async/deferred bundle option
 - Re-run Lighthouse after admin cleanup to measure improvement
-**Branch:** develop / clean
+**Branch:** develop / clean (pushed, preview theme deploying)
 
 ## Next Session Kickoff
 **Mode:** shallow
-**First action:** Confirm admin cleanup done (Heatmap uninstall, GTM GA4 audit, FB pixel dedup) then re-run Lighthouse to measure improvement
+**First action:** Confirm Heatmap + Shoplift uninstalled in admin, then run Lighthouse to measure improvement
 **Open questions:** none
-**Decisions pending:** none
+**Decisions pending:** Replo templates (12 pages) — keep or delete? Wonderment — still in use?
 **Ready plan:** none
 
 ---
@@ -197,3 +195,33 @@ _(none — push only)_
 - [ ] Typekit font-display:swap — Adobe Fonts dashboard, kit hxg4nit
 - [ ] Alia: contact for async/deferred loading option
 - [ ] Re-run Lighthouse after admin cleanup to measure improvement
+
+---
+
+## 2026-05-19 — Session 9: Full audit + Shoplift/Heatmap cleanup
+
+### Accomplished
+- Full third-party script audit of jambys-theme
+- Identified Heatmap (app ScriptTag, `sid=600`) as primary Lighthouse drag — confirmed for uninstall
+- Identified Shoplift as A/B testing app injected via `snippets/shoplift.liquid`
+- Removed `{% render 'shoplift' %}` from `layout/theme.liquid`
+- Removed duplicate/hardcoded Typekit `preconnect` + `stylesheet` from `theme.liquid` (was firing unconditionally; `fonts.liquid` already handles it conditionally via settings)
+- Identified additional theme inventory: 12 Replo page templates, 2 Wonderment sections, 16 Replo snippet chunks — noted for future review
+- Pushed cleanup commit to develop; preview theme auto-deploying
+
+### Files Modified
+| File | Changes |
+|------|---------|
+| `layout/theme.liquid` | Removed Shoplift render block + duplicate Typekit font load (11 lines removed) |
+
+### Commits
+- `32a8495` cleanup: remove Shoplift render + deduplicate Typekit font load
+
+### Next Steps
+- [ ] Uninstall Heatmap app in Shopify Admin (removes ScriptTag + all heatmap.com network calls)
+- [ ] Uninstall Shoplift app in Shopify Admin (code already removed from theme)
+- [ ] GTM audit: open GTM-PFQG442, delete GA4 tag firing to G-RGWNX60RXQ
+- [ ] FB pixel dedup: check GTM vs native Shopify pixel — remove one
+- [ ] Typekit font-display:swap — Adobe Fonts dashboard, kit hxg4nit
+- [ ] Replo templates: audit 12 Replo page templates (check in Shopify Admin → Pages) — delete if not live
+- [ ] Re-run Lighthouse after Heatmap + Shoplift uninstalled to measure improvement
