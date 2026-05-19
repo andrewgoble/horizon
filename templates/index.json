@@ -334,7 +334,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "SHOP NOW",
-                "link": "shopify://collections/all-products",
+                "link": "shopify://collections/mdwsale",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "width": "fit-content",
