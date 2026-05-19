@@ -1807,6 +1807,12 @@
         "content": "Cart upsells"
       },
       {
+        "type": "checkbox",
+        "id": "enable_cart_upsells",
+        "label": "Show upsells in cart drawer",
+        "default": false
+      },
+      {
         "type": "text",
         "id": "cart_upsells_title",
         "label": "Upsells heading",
