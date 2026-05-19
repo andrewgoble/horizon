@@ -489,6 +489,7 @@
         "text_JMMRcP": {
           "type": "text",
           "name": "t:names.heading",
+          "disabled": true,
           "settings": {
             "text": "<h4>As featured in</h4>",
             "width": "fit-content",
