@@ -4,11 +4,6 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
-<!-- Start of Shoplift scripts -->
-{% render 'shoplift' %}
-<!-- End of Shoplift scripts -->
-
-
     {%- render 'stylesheets' -%}
 
 {%- if settings.favicon != blank -%}
@@ -28,12 +23,6 @@
     >
 
     {%- render 'meta-tags' -%}
-    
-    <!-- Adobe Typekit Fonts -->
-    <link rel="preconnect" href="https://use.typekit.net">
-    <link rel="preconnect" href="https://p.typekit.net">
-    <link rel="stylesheet" href="https://use.typekit.net/hxg4nit.css">
-    
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
