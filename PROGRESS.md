@@ -1,19 +1,20 @@
 ## Current State
-**Last session:** 2026-05-19 — S9: Full theme audit + Shoplift/Heatmap removal (code cleaned, apps need admin uninstall)
+**Last session:** 2026-05-24 — S10: PSI + full code audit (4 parallel Opus agents) + T1 deletion sweep (-11,853 LOC)
 **Next:**
-- Uninstall Heatmap + Shoplift in Shopify admin (`/admin/apps`) if not done
-- GA4 duplicate: open GTM-PFQG442, delete GA4 tag if present (fires to G-RGWNX60RXQ)
-- Duplicate FB pixel: check if FB pixel in GTM AND as native Shopify pixel — remove one
-- Typekit font-display:swap (Adobe Fonts dashboard — kit hxg4nit)
-- Re-run Lighthouse after admin cleanup to measure improvement
-**Branch:** develop / clean (pushed, preview theme deploying)
+- T2: fix 29 `CaptureOnContentForBlock` errors across 9 `blocks/_*.liquid` files
+- T2: add `{{ block.shopify_attributes }}` to 14 public block roots
+- T3 perf: preload + eager + fetchpriority on homepage LCP hero (`blocks/image.liquid:36-50`)
+- T3 perf: async-load Typekit CSS (`snippets/fonts.liquid:16`) + `font-display: swap` overrides
+- DECIDE: Rivo loyalty templates — delete or reinstall app blocks? (11 JSONMissingBlock errors)
+- DECIDE: redirect chain (jambys.com → www) — 1-way door, ~780ms mobile savings
+**Branch:** develop / clean (S10 commits pushed, preview theme deploying)
 
 ## Next Session Kickoff
-**Mode:** shallow
-**First action:** Confirm Heatmap + Shoplift uninstalled in admin, then run Lighthouse to measure improvement
+**Mode:** execute
+**First action:** Execute T2 from `docs/audits/2026-05-23-full-audit-S10.md` — fix 29 `CaptureOnContentForBlock` in `blocks/_blog-post-card.liquid`, `_collection-card.liquid`, `_collection-link.liquid`, `_featured-product.liquid`, `_product-card-gallery.liquid` (+4 others). Rewrite `content_for 'block'` calls to emit directly instead of inside `{% capture %}`. Then add `{{ block.shopify_attributes }}` to 14 public blocks.
 **Open questions:** none
-**Decisions pending:** Replo templates (12 pages) — keep or delete? Wonderment — still in use?
-**Ready plan:** none
+**Decisions pending:** Rivo loyalty templates (delete or reinstall app blocks); redirect chain primary-domain fix (1-way door); Replo active templates fate (12 page templates still live with deprecated `{% include %}`)
+**Ready plan:** `docs/audits/2026-05-23-full-audit-S10.md` — 35-item backlog sorted into T1-T6 tiers (T1 done, T2 next)
 
 ---
 
@@ -225,3 +226,51 @@ _(none — push only)_
 - [ ] Typekit font-display:swap — Adobe Fonts dashboard, kit hxg4nit
 - [ ] Replo templates: audit 12 Replo page templates (check in Shopify Admin → Pages) — delete if not live
 - [ ] Re-run Lighthouse after Heatmap + Shoplift uninstalled to measure improvement
+
+---
+
+## 2026-05-24 — Session 10: PSI audit + 4-agent code audit + T1 deletion sweep
+
+### Accomplished
+- **Speed audit**: 10 PageSpeed Insights v5 audits across 5 URLs (home, navy-mint, gray-lavender-jamtee, glacier-jamtee, cart) × mobile+desktop. Results: mobile 30-42, desktop 50-62. Worst: Glacier mobile LCP 11.3s / TBT 1,570ms / 5.9MB. Universal finding: redirect chain costs 780ms on every mobile page (5,050ms aggregated). Delta vs 2026-04-30 home baseline: +8 mobile / +1 desktop (S9 Heatmap/Shoplift cleanup paid off — TBT down 65%).
+- **Full code audit** via 4 parallel Opus Explore agents (Structure / Quality / Performance / Accessibility). 485 theme-check errors baseline; identified 35-item prioritized backlog across T1-T6 tiers.
+- **T1 deletion sweep**: removed 38 files / 11,853 LOC of orphan code:
+  - 17 unused Replo section shells (`sections/replo-*.liquid`)
+  - 5 inactive Shoplift sections (`sections/sl-*.liquid`)
+  - 9 orphan Shoplift snippets (`snippets/sl-*.liquid`)
+  - 2 unused Wonderment sections (loop, starter)
+  - 3 orphan files: `sections/cart-upsells.liquid`, `snippets/cart-upsells.liquid` (alias), `snippets/filters-toggle.liquid`
+  - `temp/` Shopify editor scratch directory
+- **Bug fix**: `sections/header.liquid:49,53,57` — three `content_for 'block'` calls all used id `'header-menu'`. Per Shopify first-write-wins, mobile menu + nav-bar variants could render empty on cold cache. Renamed to `header-menu` / `header-menu-mobile` / `header-menu-navbar`.
+- **Theme check**: 689 → 508 total offenses (-26%). Warnings 204 → 67 (-67%). `UniqueStaticBlockId` + `UnsupportedDocTag` errors eliminated.
+
+### Files Modified
+| File | Changes |
+|------|---------|
+| `docs/audits/2026-05-23-lighthouse-S10.md` | New — PSI audit, 5 URLs × mobile+desktop, delta vs 2026-04-30 baseline |
+| `docs/audits/2026-05-23-full-audit-S10.md` | New — 6-section consolidated code audit + 35-item T1-T6 backlog |
+| `sections/header.liquid` | Fixed 3 duplicate `header-menu` static block ids |
+| `sections/replo-*.liquid` (17 files) | Deleted (orphan) |
+| `sections/sl-*.liquid` (5 files) | Deleted (Shoplift orphan) |
+| `snippets/sl-*.liquid` (9 files) | Deleted (Shoplift orphan) |
+| `sections/wonderment-{loop,starter}.liquid` | Deleted (unused) |
+| `sections/cart-upsells.liquid` + `snippets/cart-upsells.liquid` + `snippets/filters-toggle.liquid` | Deleted (orphan) |
+| `temp/` | Deleted (Shopify editor scratch) |
+
+### Methodology notes
+- Speed audit: PSI v5 REST API, key from `~/Projects/growth-hq/.env.local` (`PAGESPEED_API_KEY`). Raw JSON cached at `/tmp/jambys-psi/` — re-run via `/tmp/jambys-psi.sh`.
+- Code audit: 4 Opus Explore agents dispatched in parallel single message, ~6-7 min wall-clock each. `shopify theme check --path .` (132K lines, 485e / 204w) fed as input to Quality agent.
+
+### QA gate
+- ⚠️ Preview theme **NOT visually QA'd** this session — Shopify admin iframe blocked Claude-in-Chrome from extracting develop preview URL. Andrew declined paste-URL flow when offered. Deletions are zero-reference files (cross-checked across templates/, sections/, snippets/, blocks/, layout/), and header.liquid change is a mechanical id rename — low risk. Smoke-test deferred to S11 before any T2 changes merge.
+
+### Next Steps
+- [ ] T2: 29 `CaptureOnContentForBlock` fixes across 9 blocks (`blocks/_blog-post-card.liquid`, `_collection-card.liquid`, `_collection-link.liquid`, `_featured-product.liquid`, `_product-card-gallery.liquid`, +4 more)
+- [ ] T2: `{{ block.shopify_attributes }}` on 14 public blocks (`blocks/{button,collection-card,collection-title,contact-form,custom-liquid,jumbo-text,page-content,page,product-card,product-description,product-title,quantity,text,variant-picker}.liquid`)
+- [ ] T2: add missing `accessibility.loading` key to `locales/en.default.json`
+- [ ] T3 perf: `blocks/image.liquid:36-50` LCP hero preload + eager + fetchpriority
+- [ ] T3 perf: `snippets/fonts.liquid:16` async Typekit + `font-display: swap` overrides in `base.css`
+- [ ] T3 perf: cap image widths at 1920 (drop `2560`, `3840` from `sections/hero.liquid:10` + `blocks/image.liquid:38`)
+- [ ] DECIDE: Rivo loyalty templates — delete or reinstall app blocks?
+- [ ] DECIDE: redirect chain primary-domain fix (1-way door, ~780ms mobile)
+- [ ] Visual QA preview theme on home + 3 PDPs + cart drawer + mobile menu before any S11 merge to main
