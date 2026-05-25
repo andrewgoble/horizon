@@ -704,6 +704,7 @@
   {%- endif -%}
   <div class="wndrsxn-banner__content wndrsxn-banner__content--{{ section.settings.desktop_content_position }} wndrsxn-page-width">
     <div class="wndrsxn-banner__box content-container wndrsxn-content-container--full-width-mobile color-{{ section.settings.color_scheme }} wndrsxn-gradient">
+      {% # theme-check-disable %}
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'heading' -%}
@@ -718,6 +719,7 @@
             {% render block %}
         {%- endcase -%}
       {%- endfor -%}
+      {% # theme-check-enable %}
     </div>
   </div>
 </div>

@@ -30,17 +30,10 @@
   {% endif %}
 {% endif %}
 
-{% capture title_block %}
-  {% content_for 'block', type: '_inline-collection-title', id: 'title', suffix: count %}
-{% endcapture %}
-
-{% capture image_block %}
-  {%- liquid
-    assign placeholder_variant = index | modulo: 4 | plus: 1
-    assign placeholder_name = 'collection-apparel-' | append: placeholder_variant
-  -%}
-  {% content_for 'block', type: '_image', id: 'image', loading: loading, placeholder: placeholder_name %}
-{% endcapture %}
+{%- liquid
+  assign placeholder_variant = index | modulo: 4 | plus: 1
+  assign placeholder_name = 'collection-apparel-' | append: placeholder_variant
+-%}
 
 {% if image_only %}
   <a
@@ -51,7 +44,7 @@
       data-placeholder="true"
     {% endif %}
   >
-    {{ image_block }}
+    {% content_for 'block', type: '_image', id: 'image', loading: loading, placeholder: placeholder_name %}
   </a>
 {% else %}
   <a
@@ -66,7 +59,7 @@
     {% endif %}
     {{ block.shopify_attributes }}
   >
-    {{ title_block }}
+    {% content_for 'block', type: '_inline-collection-title', id: 'title', suffix: count %}
 
     {% if section.settings.layout == 'text' %}
       <div
@@ -74,7 +67,7 @@
         ref="images[]"
         hidden
       >
-        {{ image_block }}
+        {% content_for 'block', type: '_image', id: 'image', loading: loading, placeholder: placeholder_name %}
       </div>
     {% endif %}
   </a>

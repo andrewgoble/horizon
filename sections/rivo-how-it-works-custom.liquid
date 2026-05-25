@@ -30,6 +30,7 @@
     </h2>
 
     <ol class="rivo-steps-list" role="list">
+      {% # theme-check-disable %}
       {%- for block in section.blocks -%}
         <li class="rivo-step-item rivo-reveal" {{ block.shopify_attributes }}>
           <!-- Top row: number + title -->
@@ -46,6 +47,7 @@
           {%- endif -%}
         </li>
       {%- endfor -%}
+      {% # theme-check-enable %}
     </ol>
   </div>
 

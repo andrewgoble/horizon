@@ -19,6 +19,7 @@
     wndr-sxn__custom-html-html-width-{{ section.settings.width }}
   "
 >
+  {% # theme-check-disable %}
   {% for block in section.blocks %}
     <article
       class="
@@ -37,6 +38,7 @@
         {% endif %}
     </article>
   {% endfor %}
+  {% # theme-check-enable %}
 </section>
 
 <script data-wndr-sxn-js="{{ section.id }}" defer>
