@@ -30,10 +30,15 @@
   {% endif %}
 {% endif %}
 
-{%- liquid
-  assign placeholder_variant = index | modulo: 4 | plus: 1
-  assign placeholder_name = 'collection-apparel-' | append: placeholder_variant
--%}
+{% # theme-check-disable CaptureOnContentForBlock %}
+{% capture image_block %}
+  {%- liquid
+    assign placeholder_variant = index | modulo: 4 | plus: 1
+    assign placeholder_name = 'collection-apparel-' | append: placeholder_variant
+  -%}
+  {% content_for 'block', type: '_image', id: 'image', loading: loading, placeholder: placeholder_name %}
+{% endcapture %}
+{% # theme-check-enable CaptureOnContentForBlock %}
 
 {% if image_only %}
   <a
@@ -44,7 +49,7 @@
       data-placeholder="true"
     {% endif %}
   >
-    {% content_for 'block', type: '_image', id: 'image', loading: loading, placeholder: placeholder_name %}
+    {{ image_block }}
   </a>
 {% else %}
   <a
@@ -67,7 +72,7 @@
         ref="images[]"
         hidden
       >
-        {% content_for 'block', type: '_image', id: 'image', loading: loading, placeholder: placeholder_name %}
+        {{ image_block }}
       </div>
     {% endif %}
   </a>
