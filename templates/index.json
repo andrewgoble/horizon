@@ -424,7 +424,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Hero_Image_1.jpg",
+                "image": "shopify://shop_images/1.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
