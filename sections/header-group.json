@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>20% Sitewide PLUS free gifts over $150 and $250</strong>",
+            "text": "<strong>20% Off Sitewide PLUS free gifts over $150</strong>",
             "link": "https://www.jambys.com/collections/mdwsale?page=1",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
