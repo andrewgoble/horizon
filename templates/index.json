@@ -53,99 +53,6 @@
             "css_class": "jambys-hero-content"
           },
           "blocks": {
-            "text_4G9RbR": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<h5><strong>No plans? Perfect!</strong></h5>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 20,
-                "padding-inline-end": 20
-              },
-              "blocks": {}
-            },
-            "text_QEqxjn": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h1>The Memorial Day Weekend Sale</h1>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 20,
-                "padding-inline-end": 20
-              },
-              "blocks": {}
-            },
-            "text_gktyq3": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>Up to 70% off + a free gift on orders $150+.</p>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 20,
-                "padding-inline-end": 20
-              },
-              "blocks": {}
-            },
-            "button_yMiYym": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "Shop the Sale",
-                "link": "shopify://collections/mdwsale",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "width": "fit-content",
-                "custom_width": 37,
-                "width_mobile": "custom",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            },
             "group_kUcrRr": {
               "type": "group",
               "name": "Stars",
@@ -155,11 +62,11 @@
                 "content_direction": "row",
                 "vertical_on_mobile": true,
                 "horizontal_alignment": "center",
-                "vertical_alignment": "center",
+                "vertical_alignment": "flex-end",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 0,
+                "gap": 10,
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -369,14 +276,80 @@
                 "group_tCWCjz",
                 "group_xCLJfV"
               ]
+            },
+            "text_QEqxjn": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h1><strong>Meet Dune.</strong></h1>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "4.5rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 20,
+                "padding-inline-end": 20
+              },
+              "blocks": {}
+            },
+            "text_gktyq3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Dune is here. The color of slow mornings and nowhere to be. Available now in all our core products.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "loose",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 60,
+                "padding-inline-end": 60
+              },
+              "blocks": {}
+            },
+            "button_yMiYym": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "Shop Now",
+                "link": "shopify://products/dune-black-jambys",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "width": "fit-content",
+                "custom_width": 37,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "text_4G9RbR",
+            "group_kUcrRr",
             "text_QEqxjn",
             "text_gktyq3",
-            "button_yMiYym",
-            "group_kUcrRr"
+            "button_yMiYym"
           ]
         },
         "group_mV7jLL": {
@@ -424,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/1.jpg",
+                "image": "shopify://shop_images/Image_Option_1_85b72cdb-c40a-49d3-b141-d9f89cfee685.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
