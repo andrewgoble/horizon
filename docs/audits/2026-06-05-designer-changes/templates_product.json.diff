@@ -1,0 +1,32 @@
+--- jambys-main-head/templates/product.json	2026-06-05 12:10:58
++++ jambys-live-snapshot-2026-06-05/templates/product.json	2026-06-05 12:10:47
+@@ -945,7 +945,7 @@
+       ],
+       "settings": {
+         "product": "{{ closest.product }}",
+-        "recommendation_type": "complementary",
++        "recommendation_type": "related",
+         "layout_type": "carousel",
+         "carousel_on_mobile": true,
+         "max_products": 4,
+@@ -958,8 +958,8 @@
+         "section_width": "page-width",
+         "gap": 20,
+         "color_scheme": "scheme-1",
+-        "padding-block-start": 16,
+-        "padding-block-end": 16
++        "padding-block-start": 50,
++        "padding-block-end": 50
+       }
+     },
+     "175836978583d1f44f": {
+@@ -970,7 +970,8 @@
+           "settings": {
+             "product": "{{product}}",
+             "title": "Customer Reviews",
+-            "alignment": "center"
++            "alignment": "center",
++            "sortOrder": "mostRecent"
+           }
+         }
+       },
