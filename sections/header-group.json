@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>Free Shipping on orders $85+</strong>",
+            "text": "<strong>20% off when you add 3 of ANY product in your cart</strong>",
             "link": "https://www.jambys.com/collections/mdwsale?page=1",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
