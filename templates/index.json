@@ -281,11 +281,11 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1><strong>Meet Dune.</strong></h1>",
+                "text": "<h1><strong>Feels like wearing clouds.</strong></h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
-                "type_preset": "custom",
+                "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "4.5rem",
                 "line_height": "normal",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Dune is here. The color of slow mornings and nowhere to be. Available now in all our core products.</p>",
+                "text": "<p>Stay in. Float around. Repeat.<br/>Jambys & JamTee in Clouds/Navy. <br/>Just dropped.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Image_Option_1_85b72cdb-c40a-49d3-b141-d9f89cfee685.jpg",
+                "image": "shopify://shop_images/Image_Option_1_0e57b2e7-fc8d-4943-9b08-31f05c80d372.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
