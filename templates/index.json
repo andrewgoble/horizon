@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Image_Option_1_0e57b2e7-fc8d-4943-9b08-31f05c80d372.jpg",
+                "image": "shopify://shop_images/Image_Option_1.png",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
