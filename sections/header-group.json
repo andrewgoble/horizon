@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>20% off when you add 3 of ANY product in your cart</strong>",
+            "text": "<strong>30% off sitewide. Everything. No code needed.</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
