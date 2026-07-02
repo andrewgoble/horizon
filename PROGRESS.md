@@ -1,18 +1,45 @@
 ## Current State
-**Last session:** 2026-07-02 — S32: Cart upsells bug fixed and shipped to jambys.com
+**Last session:** 2026-07-02 — S33: Full audit + sync investigation — develop greenlit to ship
 **Next:**
-- develop is 13 commits ahead of main (S8–S12 accumulated work: Adobe Fonts, dead code cleanup, header fix) — review and ship or defer
-- Shopify→GitHub sync silence since 2026-05-19 still unresolved (DECISIONS-PENDING)
-- T3 perf carryover: LCP preload + font-display swap + width cap
-- Ricardo QA loop if he has sent finished customizer work
-**Branch:** main / clean (develop 13 commits ahead)
+- Ship develop→main (S8–S12: Adobe Fonts, dead code cleanup, Typekit fix, T2 fixes, cart upsells)
+- Quick wins from audit: `mobile_quick_add: true`, `show_variant_image: true` in settings_data.json
+- Delete 24 dead sections (Replo/Shoplift/Wonderment) from develop before or after ship
+- Get preview link from Shopify admin to verify before shipping
+**Branch:** main / clean (develop 14 commits ahead, reconciled)
 
 ## Next Session Kickoff
-**Mode:** shallow
-**First action:** Brief on develop vs main gap (S8–S12 changes) — decide whether to ship accumulated develop work or defer. Then pick from: sync investigation, Ricardo QA, T3 perf.
+**Mode:** execute
+**First action:** Get preview theme link (Shopify admin → Online Store → Themes → develop theme → Preview), verify S8–S12 changes on preview, then run ship workflow (develop→main). After ship: set `mobile_quick_add: true` and `show_variant_image: true` in settings_data.json.
 **Open questions:** none
-**Decisions pending:** Rivo loyalty templates (delete or reinstall app blocks?); redirect chain primary-domain fix; Shopify→GitHub sync silent since 2026-05-19
-**Ready plan:** `docs/audits/2026-05-23-full-audit-S10.md` — T3 perf carryover
+**Decisions pending:** Rivo loyalty templates (delete or reinstall app blocks?); redirect chain primary-domain fix; delete dead sections before or after shipping?
+**Ready plan:** `docs/audits/2026-05-23-full-audit-S10.md` — T3 perf carryover (lower priority now that Typekit is fixed in develop)
+
+---
+
+## 2026-07-02 — Session 33: Full Audit + Sync Investigation
+
+### Accomplished
+- Ran comprehensive Horizon v2.1.5 audit (fork agent): sections, assets, snippets, CrUX, UX
+- Identified 24 dead sections (Replo campaigns, Shoplift, Wonderment) + 9 orphan snippets + 1 dead asset (`jambys-brand.css`)
+- Found render-blocking Typekit CSS hardcoded in `layout/theme.liquid:33-35` — already fixed in develop (S11 removed it)
+- Top 5 UX improvements ranked: (1) Typekit already done, (2) mobile quick-add, (3) size guide, (4) variant images on cards, (5) delete dead sections
+- Investigated Shopify→GitHub sync: main sync is HEALTHY (last commit June 29). Develop sync stopped April 15 but develop merged main on June 30 — fully reconciled, no data loss
+- Confirmed develop→main merge is safe and clean — greenlit to ship
+
+### Files Modified
+None — investigation session only.
+
+### Evidence
+- Audit findings in session conversation (fork agent output)
+- `git log --grep="Shopify"` confirmed main sync healthy through June 29
+- `git diff main develop --name-only` showed clean reconciliation
+
+### Next Steps
+- [ ] Verify S8–S12 changes on Shopify preview/develop theme
+- [ ] Ship develop→main (ship workflow)
+- [ ] Set `mobile_quick_add: true` + `show_variant_image: true` in settings_data.json
+- [ ] Delete 24 dead sections from develop
+- [ ] Add size guide accordion to product page (Shopify admin, no code)
 
 ---
 
