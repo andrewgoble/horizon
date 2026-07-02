@@ -1,19 +1,18 @@
 ## Current State
-**Last session:** 2026-05-11 — S7: Shipped swatch fix to main, Heatmap removed, full JS/Lighthouse audit
+**Last session:** 2026-07-02 — S32: Cart upsells bug fixed and shipped to jambys.com
 **Next:**
-- Heatmap: uninstall app from Shopify Admin (Andrew — removes app embed)
-- GA4 duplicate: open GTM-PFQG442, delete GA4 tag if present (fires to G-RGWNX60RXQ)
-- Duplicate FB pixel: check if FB pixel in GTM AND as native Shopify pixel — remove one
-- Typekit font-display:swap (Adobe Fonts dashboard — kit hxg4nit)
-- Alia: contact for async/deferred bundle option
-**Branch:** develop / clean
+- develop is 13 commits ahead of main (S8–S12 accumulated work: Adobe Fonts, dead code cleanup, header fix) — review and ship or defer
+- Shopify→GitHub sync silence since 2026-05-19 still unresolved (DECISIONS-PENDING)
+- T3 perf carryover: LCP preload + font-display swap + width cap
+- Ricardo QA loop if he has sent finished customizer work
+**Branch:** main / clean (develop 13 commits ahead)
 
 ## Next Session Kickoff
 **Mode:** shallow
-**First action:** Confirm admin cleanup done (Heatmap uninstall, GTM GA4 audit, FB pixel dedup) then re-run Lighthouse to measure improvement
+**First action:** Brief on develop vs main gap (S8–S12 changes) — decide whether to ship accumulated develop work or defer. Then pick from: sync investigation, Ricardo QA, T3 perf.
 **Open questions:** none
-**Decisions pending:** none
-**Ready plan:** none
+**Decisions pending:** Rivo loyalty templates (delete or reinstall app blocks?); redirect chain primary-domain fix; Shopify→GitHub sync silent since 2026-05-19
+**Ready plan:** `docs/audits/2026-05-23-full-audit-S10.md` — T3 perf carryover
 
 ---
 
@@ -159,3 +158,30 @@ _(none — push only)_
 - [ ] Typekit font-display:swap — Adobe Fonts dashboard, kit hxg4nit
 - [ ] Alia: contact for async/deferred loading option
 - [ ] Re-run Lighthouse after admin cleanup to measure improvement
+
+---
+
+## 2026-07-02 — Session 32: Cart Upsells Fix — compact cards shipped to main
+
+### Accomplished
+- Diagnosed root cause: `sections/cart-upsells.liquid` deleted from develop in S10 cleanup but survived on main (S8 version) — it used `resource-card` with `image_aspect_ratio: '4 / 5'` causing massive portrait images in the cart drawer
+- Fixed `sections/cart-upsells.liquid`: recreated with `cart-upsells-product-card` (80px square) instead of `resource-card`
+- Fixed `assets/cart-upsells.js`: selector `.resource-card` → `.cart-upsells-product-card`; moved cache to module level (survives Horizon's element replacement on cart re-render); added `observedAttributes` + `attributeChangedCallback` for re-fetch on product change
+- QA'd on preview theme (ID: 130174517333) — desktop (1530px) and mobile (390px) confirmed: 6 compact cards, 0 resource-card elements
+- Cherry-picked commit to main (add/add conflict resolved — main had the bugged S8 file); shipped to jambys.com
+
+### Files Modified
+| File | Changes |
+|------|---------|
+| `assets/cart-upsells.js` | Module cache, observedAttributes, attributeChangedCallback, selector fix |
+| `sections/cart-upsells.liquid` | Recreated: render cart-upsells-product-card instead of resource-card |
+
+### Evidence
+- Browser QA: compact cards confirmed on preview theme desktop + mobile
+- Code check: `cardCount: 6`, `resourceCardCount: 0` via JS console
+- Live: https://jambys.com — commit ecf27ff on main
+
+### Next Steps
+- [ ] Decide whether to ship develop→main (13 accumulated commits: S8–S12 Adobe Fonts, dead code cleanup, header fix)
+- [ ] Shopify→GitHub sync investigation (silent since 2026-05-19)
+- [ ] T3 perf carryover (LCP preload + font-display:swap + width cap)
