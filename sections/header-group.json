@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>Free Shipping over $85</strong>",
+            "text": "<strong>Add 3 of any product and get 20% off!</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "0.875rem",
