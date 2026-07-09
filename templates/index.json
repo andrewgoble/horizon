@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Stay in. Float around. Repeat.<br/>Jambys & JamTee in Clouds/Navy. <br/>Just dropped.</p>",
+                "text": "<p>Stay in. Float around. Repeat.<br/>Jambys, JamTee and House Hoodie in Clouds/Navy. Just dropped.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Image_Option_1.png",
+                "image": "shopify://shop_images/Image_Option_4.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
