@@ -380,7 +380,7 @@
                     "image_ratio": "adapt",
                     "width": "fill",
                     "custom_width": 100,
-                    "width_mobile": "fill",
+                    "width_mobile": "custom",
                     "custom_width_mobile": 100,
                     "height": "fit",
                     "border": "none",
