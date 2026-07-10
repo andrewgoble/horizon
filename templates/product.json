@@ -371,6 +371,29 @@
                 "css_class": "pdp-icons"
               },
               "blocks": {
+                "image_4JFyAq": {
+                  "type": "image",
+                  "name": "t:names.image",
+                  "settings": {
+                    "image": "shopify://shop_images/ChatGPT_Image_Jul_10_2026_01_21_05_PM.png",
+                    "link": "shopify://collections/all-products",
+                    "image_ratio": "adapt",
+                    "width": "fill",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fill",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "group_W3aArL": {
                   "type": "group",
                   "name": "t:names.group",
@@ -411,50 +434,7 @@
                     "padding-inline-end": 0,
                     "css_class": ""
                   },
-                  "blocks": {
-                    "icon_PMAX4Y": {
-                      "type": "icon",
-                      "name": "t:names.icon",
-                      "settings": {
-                        "icon": "price_tag",
-                        "image_upload": "shopify://shop_images/Jambys_Guarentee-2_b83ef366-4a0a-4a92-8dcc-59335360783c.png",
-                        "width": 76,
-                        "link": "",
-                        "open_in_new_tab": false
-                      },
-                      "blocks": {}
-                    },
-                    "text_LcawHE": {
-                      "type": "text",
-                      "name": "t:names.text",
-                      "settings": {
-                        "text": "<p>77-Day<br/>Free Trial</p>",
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "custom",
-                        "font": "var(--font-body--family)",
-                        "font_size": "0.875rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "var(--color-foreground)",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "icon_PMAX4Y",
-                    "text_LcawHE"
-                  ]
+                  "blocks": {}
                 },
                 "group_HAwq8D": {
                   "type": "group",
@@ -496,50 +476,7 @@
                     "padding-inline-end": 0,
                     "css_class": ""
                   },
-                  "blocks": {
-                    "icon_KjEqLa": {
-                      "type": "icon",
-                      "name": "t:names.icon",
-                      "settings": {
-                        "icon": "price_tag",
-                        "image_upload": "shopify://shop_images/Jambys_Softness_82025c57-fcf2-48a2-88c8-df9bdb065eed.png",
-                        "width": 76,
-                        "link": "",
-                        "open_in_new_tab": false
-                      },
-                      "blocks": {}
-                    },
-                    "text_FGTkfa": {
-                      "type": "text",
-                      "name": "t:names.text",
-                      "settings": {
-                        "text": "<p>Super-Soft<br/>Fabric</p>",
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "custom",
-                        "font": "var(--font-body--family)",
-                        "font_size": "0.875rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "var(--color-foreground)",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "icon_KjEqLa",
-                    "text_FGTkfa"
-                  ]
+                  "blocks": {}
                 },
                 "group_4UhkNN": {
                   "type": "group",
@@ -581,53 +518,11 @@
                     "padding-inline-end": 0,
                     "css_class": ""
                   },
-                  "blocks": {
-                    "icon_cz4KQj": {
-                      "type": "icon",
-                      "name": "t:names.icon",
-                      "settings": {
-                        "icon": "price_tag",
-                        "image_upload": "shopify://shop_images/Jambys_Unisex_6c7d0739-51b8-46bc-a765-e79ad45e72e8.png",
-                        "width": 76,
-                        "link": "",
-                        "open_in_new_tab": false
-                      },
-                      "blocks": {}
-                    },
-                    "text_rL8Yjx": {
-                      "type": "text",
-                      "name": "t:names.text",
-                      "settings": {
-                        "text": "<p>Unisex Fit</p>",
-                        "width": "fit-content",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "custom",
-                        "font": "var(--font-body--family)",
-                        "font_size": "0.875rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "var(--color-foreground)",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "icon_cz4KQj",
-                    "text_rL8Yjx"
-                  ]
+                  "blocks": {}
                 }
               },
               "block_order": [
+                "image_4JFyAq",
                 "group_W3aArL",
                 "group_HAwq8D",
                 "group_4UhkNN"
