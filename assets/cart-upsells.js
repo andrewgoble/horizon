@@ -22,7 +22,11 @@ class CartUpsells extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === 'data-product-id' && newValue && newValue !== oldValue) {
+    // Skip the initial attribute set on upgrade (oldValue === null); connectedCallback owns the
+    // first load. Reacting to the initial set here would race connectedCallback — both call
+    // #loadRecommendations, and the shared AbortController makes them cancel each other, leaving
+    // the recommendations unrendered on page load. Only respond to genuine post-connect changes.
+    if (name === 'data-product-id' && oldValue !== null && newValue && newValue !== oldValue) {
       const contentEl = this.querySelector('.cart-upsells__content');
       if (contentEl) {
         contentEl.innerHTML = '';
