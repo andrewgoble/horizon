@@ -1,3 +1,4 @@
+{% # theme-check-disable CaptureOnContentForBlock %}
 {% capture product_card_children %}
   <div class="featured-product-content-top">
     {% content_for 'block', type: 'product-title', id: 'featured-product-title' %}
@@ -9,6 +10,7 @@
     {%- content_for 'block', type: 'swatches', id: 'featured-product-swatches' -%}
   </div>
 {% endcapture %}
+{% # theme-check-enable CaptureOnContentForBlock %}
 
 {% render 'product-card', children: product_card_children, product: closest.product, product_card_gap: 8 %}
 

@@ -1,0 +1,11 @@
+--- jambys-main-head/sections/header-group.json	2026-06-05 12:10:58
++++ jambys-live-snapshot-2026-06-05/sections/header-group.json	2026-06-05 12:10:44
+@@ -18,7 +18,7 @@
+           "type": "_announcement",
+           "name": "t:names.announcement",
+           "settings": {
+-            "text": "<strong>Spend $150 → Free Long Jambys. Spend $250 → Free Long Jambys AND Free House Hoodie</strong>",
++            "text": "<strong>20% Off Sitewide PLUS free gifts over $150</strong>",
+             "link": "https://www.jambys.com/collections/mdwsale?page=1",
+             "desktop_font": "var(--font-body--family)",
+             "desktop_font_size": "0.875rem",

@@ -1,22 +1,5 @@
 {%- assign block_settings = block.settings -%}
 
-{% capture title %}
-  {% content_for 'block', id: 'heading', type: '_heading', text: article.title %}
-{% endcapture %}
-
-{% capture details %}
-  {% content_for 'block',
-    id: 'blog-post-details',
-    type: '_blog-post-info-text',
-    alignment: block_settings.alignment,
-    article: article
-  %}
-{% endcapture %}
-
-{% capture description %}
-  {% content_for 'block', id: 'content', type: '_blog-post-description', article: article %}
-{% endcapture %}
-
 <div
   class="blog-post-card"
   style="--text-align: {{ block_settings.alignment }}"
@@ -30,11 +13,18 @@
   {%- endif -%}
 
   <div class="blog-post-card__content">
-    <a href="{{ article.url }}">{{ title }}</a>
+    <a href="{{ article.url }}">
+      {% content_for 'block', id: 'heading', type: '_heading', text: article.title %}
+    </a>
 
-    {{ details }}
+    {% content_for 'block',
+      id: 'blog-post-details',
+      type: '_blog-post-info-text',
+      alignment: block_settings.alignment,
+      article: article
+    %}
 
-    {{ description }}
+    {% content_for 'block', id: 'content', type: '_blog-post-description', article: article %}
   </div>
 </div>
 

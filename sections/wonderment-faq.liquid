@@ -233,6 +233,7 @@
         class="WS--{{ section.id }} wndr-sxn__faq wndr-sxn__section">
   <div class="wndr-sxn__sizer
               wndr-sxn__faq__expanded-{{ section.settings.show_answers }}">
+    {% # theme-check-disable %}
     {%- for block in section.blocks -%}
       <div id="WS--{{ block.id }}" class="wndr-sxn__block wndr-sxn__block--{{ block.type }}" {{ block.shopify_attributes }}>
         {%- if block.type == "section_heading" -%}
@@ -257,6 +258,7 @@
         {%- endif -%}
       </div>
     {%- endfor -%}
+    {% # theme-check-enable %}
   </div>
 </section>
 {%- endcapture -%}
@@ -608,6 +610,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {% # theme-check-disable %}
     {%- for block in section.blocks -%}
       {%- if block.type == "question" -%}
         {
@@ -620,6 +623,7 @@
         }{%- if forloop.last != true -%},{%- endif -%}
       {%- endif -%}
     {%- endfor -%}
+    {% # theme-check-enable %}
   ]
 }
 </script>

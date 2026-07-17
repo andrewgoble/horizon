@@ -13,7 +13,15 @@
 {%- if settings.use_adobe_fonts and settings.adobe_project_id != blank -%}
   <link rel="preconnect" href="https://use.typekit.net">
   <link rel="preconnect" href="https://p.typekit.net">
-  <link rel="stylesheet" href="https://use.typekit.net/{{ settings.adobe_project_id }}.css">
+  <link
+    rel="preload"
+    href="https://use.typekit.net/{{ settings.adobe_project_id }}.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  >
+  <noscript>
+    <link rel="stylesheet" href="https://use.typekit.net/{{ settings.adobe_project_id }}.css">
+  </noscript>
 {%- endif -%}
 
 {% # theme-check-disable %}

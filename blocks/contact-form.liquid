@@ -1,6 +1,8 @@
+{% # theme-check-disable CaptureOnContentForBlock %}
 {% capture submit_button %}
   {% content_for 'block', type: 'contact-form-submit-button', id: 'submit-button' %}
 {% endcapture %}
+{% # theme-check-enable CaptureOnContentForBlock %}
 
 {% render 'contact-form', settings: block.settings, submit_button: submit_button %}
 

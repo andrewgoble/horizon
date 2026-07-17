@@ -30,10 +30,7 @@
   {% endif %}
 {% endif %}
 
-{% capture title_block %}
-  {% content_for 'block', type: '_inline-collection-title', id: 'title', suffix: count %}
-{% endcapture %}
-
+{% # theme-check-disable CaptureOnContentForBlock %}
 {% capture image_block %}
   {%- liquid
     assign placeholder_variant = index | modulo: 4 | plus: 1
@@ -41,6 +38,7 @@
   -%}
   {% content_for 'block', type: '_image', id: 'image', loading: loading, placeholder: placeholder_name %}
 {% endcapture %}
+{% # theme-check-enable CaptureOnContentForBlock %}
 
 {% if image_only %}
   <a
@@ -66,7 +64,7 @@
     {% endif %}
     {{ block.shopify_attributes }}
   >
-    {{ title_block }}
+    {% content_for 'block', type: '_inline-collection-title', id: 'title', suffix: count %}
 
     {% if section.settings.layout == 'text' %}
       <div

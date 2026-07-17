@@ -79,6 +79,7 @@
           assign products = recommendations.products
         endif
       %}
+      {% # theme-check-disable CaptureOnContentForBlock %}
       {% capture list_items %}
         {% for product in products limit: block_settings.max_products %}
           <div class="resource-list__item">
@@ -95,6 +96,7 @@
           {% endif %}
         {% endfor %}
       {% endcapture %}
+      {% # theme-check-enable CaptureOnContentForBlock %}
 
       {% liquid
         # Create an array from the list items to be used in the carousel

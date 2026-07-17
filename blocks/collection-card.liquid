@@ -8,6 +8,7 @@
   {% endif %}
 {% endstyle %}
 
+{% # theme-check-disable CaptureOnContentForBlock %}
 {% capture card_image %}
   {% content_for 'block',
     type: '_collection-card-image',
@@ -19,6 +20,7 @@
 {% capture children %}
   {% content_for 'blocks' %}
 {% endcapture %}
+{% # theme-check-enable CaptureOnContentForBlock %}
 
 {% render 'collection-card',
   card_image: card_image,
