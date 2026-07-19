@@ -118,3 +118,13 @@ shopify theme check --path .
 - Aspera Horizon patterns: `~/Projects/aspera/theme/sections/`
 - StickyGolf rules: `~/Projects/stickygolf-theme/CLAUDE.md`
 - Design spec: `docs/superpowers/specs/2026-04-30-jambys-theme-project-design.md`
+
+---
+
+## Gotchas
+
+- **Aftersell checkout upsell is dead — Shopify Plus was downgraded to Advanced.** The "Upsell Widget" block still sits in the active checkout profile (Admin → Settings → Checkout → Edit), but Aftersell's checkout-extension placement requires Plus. Aftersell's own dashboard shows a "Shopify Plan Downgrade Detected" banner and $0 checkout revenue (vs. $302 post-purchase / $60 thank-you / $40 Rokt Network over the last 30 days). This is a separate system from the hand-built cart-drawer upsell — don't conflate them when debugging "the upsell isn't working."
+- **Cart-drawer upsell is hand-built, not an app.** `sections/cart-upsells.liquid` + `assets/cart-upsells.js`, pulling from Shopify's Section Rendering / Recommendations API. Fixed twice: S32 (2026-07-02, module-level cache + observedAttributes) and a follow-up race-condition fix S37/S38 (2026-07-17, commit d406960 — `attributeChangedCallback` firing on initial element upgrade raced `connectedCallback` via a shared AbortController, silently killing the render on normal page loads). Full write-up: `learnings-shopify.md` under "Horizon Custom Element Cache."
+- **Footer had a stray literal "ok"** rendering before the copyright line since Sept 2025 (`blocks/_footer-copyright.liquid`) — fixed S35 (2026-07-19, commit 52a0ddc). If you see other odd literal text in shared blocks, check for similar copy-paste artifacts.
+
+Global learnings: `~/.claude/projects/-Users-andrew/memory/learnings/` — relevant when implementing or debugging in documented areas; match `Module:`/`Tags:` (Shopify/Horizon-specific: `learnings-shopify.md`; general debugging process: `learnings-process.md`).
