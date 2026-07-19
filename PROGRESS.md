@@ -1,7 +1,7 @@
 ## Current State
-**Last session:** 2026-07-19 — S35: FAQ made-in-USA fix + footer typo fix + cart-upsell checkout-upsell investigation (misdiagnosed, corrected) — parallel sessions S37/S38 landed the real cart-upsell race-condition fix same day
+**Last session:** 2026-07-19 — S35: FAQ made-in-USA fix + footer typo fix + cart-upsell checkout-upsell investigation (misdiagnosed, corrected). The real cart-upsell race-condition fix (commit d406960) was landed 2026-07-17 by an earlier parallel session — NOT S37/S38, which didn't exist until 07-19
 **Next:**
-- Ship develop→main (S8–S12 + S35 fixes + S37/38 cart-upsells race fix — all reconciled and pushed to origin/develop)
+- Ship develop→main (S8–S12 + S35 fixes + the 07-17 cart-upsells race fix d406960 — all reconciled and pushed to origin/develop)
 - Decide: downgrade Aftersell's app plan (billing $99/mo + usage for a Plus-only checkout placement that can't run on Advanced) or leave as-is
 - Decide: remove the dead "Upsell Widget" block from the checkout profile (Admin → Settings → Checkout → Edit) — cosmetic cleanup, orphaned since the Plus downgrade
 - Quick wins from S33 audit: `mobile_quick_add: true`, `show_variant_image: true` in settings_data.json
@@ -11,7 +11,7 @@
 ## Next Session Kickoff
 **Written:** 2026-07-19 S35
 **Mode:** execute
-**First action:** Get preview theme link (Shopify admin → Online Store → Themes → develop theme → Preview), verify all pending develop commits (S8–S35 + S37/38) on preview, then run ship workflow (develop→main).
+**First action:** Get preview theme link (Shopify admin → Online Store → Themes → develop theme → Preview), verify all pending develop commits (S8–S35 + the 07-17 cart-upsells fix d406960) on preview, then run ship workflow (develop→main).
 **Open questions:**
 - Downgrade Aftersell's app plan now, or leave billing as-is?
 - Remove the orphaned checkout "Upsell Widget" block, or leave it for a future Plus re-upgrade?
@@ -27,14 +27,14 @@
 - Confirmed FAQs are populated via metaobjects (`Admin → Content → Metaobjects → Faqs`); edited the `where-are-jambys-made` entry from "made in China" to "made in the USA" — verified live
 - Found and fixed the same "made in China" copy hardcoded in a Replo landing-page snippet (`snippets/reploChunk.d8b0872f-....liquid`) — commit `8835144`
 - Ran session-hygiene sweep: pruned a dead worktree, deleted 5 local `backup/*` branches (identical to origin copies), merged `origin/main`'s 8 pending Shopify-editor commits into develop
-- Investigated "checkout upsell not working": initially misdiagnosed as Aftersell's checkout-extension being Plus-gated (store downgraded from Plus to Advanced — confirmed via Aftersell's own "Shopify Plan Downgrade Detected" banner, $0 checkout revenue in its dashboard). **Correction from Andrew: the checkout upsell in question is the hand-built cart-drawer system** (`sections/cart-upsells.liquid` / `assets/cart-upsells.js`), not Aftersell. That bug's real root cause was found and fixed by parallel sessions S37/S38 the same day (commit `d406960`): `attributeChangedCallback` firing on initial element upgrade raced `connectedCallback` via a shared AbortController, silently killing the recommendations render on normal page loads (worked fine right after add-to-cart, which is why it looked intermittent). Aftersell finding still stands as a real, separate issue — captured as a project Gotcha.
+- Investigated "checkout upsell not working": initially misdiagnosed as Aftersell's checkout-extension being Plus-gated (store downgraded from Plus to Advanced — confirmed via Aftersell's own "Shopify Plan Downgrade Detected" banner, $0 checkout revenue in its dashboard). **Correction from Andrew: the checkout upsell in question is the hand-built cart-drawer system** (`sections/cart-upsells.liquid` / `assets/cart-upsells.js`), not Aftersell. That bug's real root cause was found and fixed on 2026-07-17 by an earlier parallel session (commit `d406960` — one of the main-checkout sessions that afternoon; NOT S37/S38, which didn't open until 07-19 — I mis-attributed it in the first draft of this entry): `attributeChangedCallback` firing on initial element upgrade raced `connectedCallback` via a shared AbortController, silently killing the recommendations render on normal page loads (worked fine right after add-to-cart, which is why it looked intermittent). Aftersell finding still stands as a real, separate issue — captured as a project Gotcha.
 
 ### Files Modified
 | File | Changes |
 |------|---------|
 | `blocks/_footer-copyright.liquid` | Removed stray literal "ok" before copyright text |
 | `snippets/reploChunk.d8b0872f-72d5-4b50-8cbd-4baa8593b5bd.7.liquid` | "made in China" → "made in the USA" |
-| `assets/cart-upsells.js` | (parallel session S37/38) attributeChangedCallback race fix — see commit d406960 |
+| `assets/cart-upsells.js` | (earlier 07-17 parallel session, commit d406960 — not this session) attributeChangedCallback race fix |
 | Shopify metaobject `where-are-jambys-made` | Answer text updated (admin, no code) |
 | `CLAUDE.md` | Added `## Gotchas` section |
 | `PROGRESS.md` | This entry + Current State/Kickoff refresh |
@@ -45,7 +45,7 @@
 - Aftersell diagnosis evidence: dashboard revenue split (Post-purchase $302 / Thank-you $60 / Checkout $0 / Rokt Network $40, last 30 days), plan page confirms Advanced ($399/mo not Plus)
 
 ### Next Steps
-- [ ] Ship develop→main (all S8–S35 + S37/38 fixes are reconciled and pushed)
+- [ ] Ship develop→main (all S8–S35 + the 07-17 cart-upsells fix are reconciled and pushed)
 - [ ] Decide: downgrade Aftersell's app plan billing, or leave as-is
 - [ ] Decide: remove the orphaned checkout "Upsell Widget" block
 - [ ] Quick wins from S33 audit still pending (mobile_quick_add, show_variant_image)
