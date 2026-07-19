@@ -108,12 +108,18 @@
             </scroll-hint>
 
             {%- if settings.enable_cart_upsells and cart.items.first -%}
+              {%- comment -%}
+                data-skip-subtree-update keeps Horizon's cart-drawer morph (morph.js) from wiping the
+                JS-rendered recommendations on every cart re-render. Element attributes still morph, so
+                data-product-id changes continue to trigger a fresh fetch.
+              {%- endcomment -%}
               <cart-upsells
                 class="cart-upsells"
                 data-product-id="{{ cart.items.first.product_id }}"
                 data-url="/recommendations/products?"
                 data-section-id="cart-upsells"
                 data-max-products="{{ settings.cart_upsells_max_products | default: 6 }}"
+                data-skip-subtree-update
               >
                 {%- if settings.cart_upsells_title != blank -%}
                   <div class="cart-upsells__header">
