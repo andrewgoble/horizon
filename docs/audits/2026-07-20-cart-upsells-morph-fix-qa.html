@@ -1,0 +1,502 @@
+<title>Cart Upsells QA — Before / After</title>
+<style>
+  :root {
+    --bg: #FBFBFE;
+    --surface: #FFFFFF;
+    --surface-2: #F5F5FB;
+    --ink: #1B1B2E;
+    --muted: #6C6C84;
+    --faint: #9A9AB2;
+    --line: #E7E7F1;
+    --brand: #4B49E8;
+    --brand-ink: #2E2CA8;
+    --amber: #EFA63C;
+    --bad: #DC3B45;
+    --bad-bg: #FDECEC;
+    --bad-line: #F3C9CB;
+    --good: #1F9D63;
+    --good-bg: #E7F6EE;
+    --good-line: #BEE6CE;
+    --shadow: 0 1px 2px rgba(27,27,46,.04), 0 12px 32px -12px rgba(27,27,46,.16);
+    --radius: 14px;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F0F17;
+      --surface: #191924;
+      --surface-2: #14141D;
+      --ink: #ECECF6;
+      --muted: #9C9CB4;
+      --faint: #6A6A82;
+      --line: #272736;
+      --brand: #8280FF;
+      --brand-ink: #ADACFF;
+      --amber: #E9A340;
+      --bad: #FF6E75;
+      --bad-bg: #2A1518;
+      --bad-line: #4A2529;
+      --good: #52CD8D;
+      --good-bg: #10241A;
+      --good-line: #244634;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #FBFBFE; --surface: #FFFFFF; --surface-2: #F5F5FB; --ink: #1B1B2E;
+    --muted: #6C6C84; --faint: #9A9AB2; --line: #E7E7F1; --brand: #4B49E8;
+    --brand-ink: #2E2CA8; --amber: #EFA63C; --bad: #DC3B45; --bad-bg: #FDECEC;
+    --bad-line: #F3C9CB; --good: #1F9D63; --good-bg: #E7F6EE; --good-line: #BEE6CE;
+    --shadow: 0 1px 2px rgba(27,27,46,.04), 0 12px 32px -12px rgba(27,27,46,.16);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F0F17; --surface: #191924; --surface-2: #14141D; --ink: #ECECF6;
+    --muted: #9C9CB4; --faint: #6A6A82; --line: #272736; --brand: #8280FF;
+    --brand-ink: #ADACFF; --amber: #E9A340; --bad: #FF6E75; --bad-bg: #2A1518;
+    --bad-line: #4A2529; --good: #52CD8D; --good-bg: #10241A; --good-line: #244634;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -16px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .page {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+    padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 40px) 64px;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; }
+
+  /* ---- header ---- */
+  .eyebrow {
+    font: 600 12px/1 var(--mono);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-size: clamp(28px, 4.4vw, 44px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    text-wrap: balance;
+    margin: 0 0 12px;
+  }
+  h1 .thin { font-weight: 300; color: var(--muted); }
+  .lede {
+    color: var(--muted);
+    font-size: clamp(15px, 1.6vw, 17px);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .metastrip {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 22px;
+  }
+  .tag {
+    font: 600 12px/1 var(--mono);
+    letter-spacing: .02em;
+    padding: 7px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--muted);
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .tag .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--brand); }
+  .tag.good { color: var(--good); border-color: var(--good-line); background: var(--good-bg); }
+  .tag.good .dot { background: var(--good); }
+
+  /* ---- section scaffolding ---- */
+  .section { margin-top: clamp(40px, 6vw, 68px); }
+  .section-head { margin-bottom: 22px; }
+  .section-head h2 {
+    font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--faint); margin: 0;
+    font-family: var(--mono);
+  }
+
+  /* ---- drawer comparison ---- */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 3vw, 28px);
+    align-items: start;
+  }
+  .col-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .verdict {
+    font: 700 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+    padding: 6px 10px; border-radius: 7px;
+  }
+  .verdict.bad { color: var(--bad); background: var(--bad-bg); border: 1px solid var(--bad-line); }
+  .verdict.good { color: var(--good); background: var(--good-bg); border: 1px solid var(--good-line); }
+  .col-head .where { font-size: 13px; color: var(--muted); }
+  .col-head .where b { color: var(--ink); font-weight: 600; }
+
+  /* the drawer mockup */
+  .drawer {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    font-size: 13px;
+  }
+  .drawer__promo {
+    background: var(--amber);
+    color: #2b2410;
+    text-align: center;
+    font-weight: 600;
+    font-size: 11.5px;
+    padding: 7px 10px;
+    letter-spacing: .01em;
+  }
+  .drawer__body { padding: 16px 16px 18px; }
+  .drawer__head {
+    display: flex; align-items: center; gap: 9px;
+    margin-bottom: 16px;
+  }
+  .drawer__head .cart {
+    font-weight: 800; font-size: 20px; letter-spacing: -0.02em; color: var(--brand-ink);
+  }
+  :root[data-theme="dark"] .drawer__head .cart,
+  .drawer__head .cart { color: var(--brand-ink); }
+  .drawer__head .count {
+    font: 600 11px/1 var(--mono);
+    background: var(--surface-2); color: var(--muted);
+    padding: 4px 8px; border-radius: 999px;
+  }
+  .drawer__head .x { margin-left: auto; color: var(--faint); font-size: 16px; }
+
+  .ship { text-align: center; margin-bottom: 16px; }
+  .ship .label { font-size: 10.5px; color: var(--faint); letter-spacing: .06em; text-transform: uppercase; }
+  .ship .bar { height: 6px; border-radius: 999px; background: var(--surface-2); margin: 7px 0; overflow: hidden; }
+  .ship .bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--brand), var(--brand-ink)); border-radius: 999px; }
+  .ship .unlocked { font-size: 11.5px; font-weight: 700; color: var(--brand-ink); }
+
+  .line {
+    display: grid; grid-template-columns: 44px 1fr auto; gap: 11px; align-items: center;
+    padding: 11px 0; border-top: 1px solid var(--line);
+  }
+  .line .thumb {
+    width: 44px; height: 44px; border-radius: 8px;
+    background:
+      radial-gradient(120% 120% at 30% 20%, rgba(255,255,255,.5), transparent 60%),
+      var(--tint, #cfd0e8);
+    border: 1px solid var(--line);
+  }
+  .line .t-name { font-weight: 600; font-size: 12.5px; }
+  .line .t-sub { color: var(--faint); font-size: 11px; }
+  .line .price { font-weight: 600; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  .line .qty {
+    display: inline-flex; align-items: center; gap: 9px;
+    color: var(--muted); font-family: var(--mono); font-size: 11px;
+    margin-top: 4px;
+  }
+  .line .qty span { min-width: 12px; text-align: center; color: var(--ink); }
+
+  .upsells { border-top: 1px solid var(--line); margin-top: 4px; padding-top: 15px; }
+  .upsells__title { font-weight: 800; font-size: 15px; letter-spacing: -0.01em; color: var(--brand-ink); margin-bottom: 13px; }
+
+  /* empty (before) */
+  .empty-slot {
+    min-height: 138px;
+    border: 1.5px dashed var(--bad-line);
+    border-radius: 10px;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 9px, var(--bad-bg) 9px, var(--bad-bg) 18px);
+    display: grid; place-items: center; text-align: center;
+    padding: 12px;
+  }
+  .empty-slot .m { font: 600 11px/1.5 var(--mono); color: var(--bad); }
+  .empty-slot .m small { display:block; color: var(--faint); font-weight: 500; margin-top: 6px; letter-spacing: 0; }
+
+  /* populated (after) */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+  .pcard {
+    border: 1px solid var(--line); border-radius: 10px; padding: 8px; background: var(--surface);
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .pcard .pt {
+    aspect-ratio: 1; border-radius: 7px;
+    background:
+      radial-gradient(120% 120% at 30% 20%, rgba(255,255,255,.55), transparent 60%),
+      var(--tint, #cfd0e8);
+    border: 1px solid var(--line);
+  }
+  .pcard .pn { font-size: 10.5px; font-weight: 600; line-height: 1.25; }
+  .pcard .pp { font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .pcard .padd {
+    margin-top: 2px; border: 1px solid var(--line); border-radius: 6px;
+    text-align: center; font: 700 12px/1 var(--sans); color: var(--brand);
+    padding: 6px 0; background: var(--surface-2);
+  }
+
+  .total { display: flex; align-items: baseline; justify-content: space-between; margin-top: 15px; padding-top: 13px; border-top: 1px solid var(--line); }
+  .total .l { font-size: 12px; color: var(--muted); }
+  .total .v { font-weight: 800; font-size: 17px; font-variant-numeric: tabular-nums; }
+  .checkout { margin-top: 12px; background: var(--brand); color: #fff; text-align: center; font-weight: 700; padding: 12px; border-radius: 10px; font-size: 13.5px; }
+
+  /* evidence chip under drawer */
+  .evi {
+    margin-top: 12px; display: flex; flex-wrap: wrap; gap: 7px;
+  }
+  .chip {
+    font: 500 11px/1 var(--mono);
+    padding: 6px 9px; border-radius: 7px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--muted);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chip b { color: var(--ink); font-weight: 700; }
+  .chip.bad b { color: var(--bad); }
+  .chip.good b { color: var(--good); }
+
+  /* ---- matrix ---- */
+  .matrix-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; min-width: 620px; }
+  thead th {
+    text-align: left; font: 700 11px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase;
+    color: var(--faint); padding: 15px 16px; border-bottom: 1px solid var(--line);
+  }
+  thead th.c { text-align: center; }
+  tbody td { padding: 15px 16px; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 13.5px; }
+  tbody tr:last-child td { border-bottom: none; }
+  td .case { font-weight: 600; }
+  td .case small { display: block; color: var(--muted); font-weight: 400; margin-top: 3px; font-size: 12px; }
+  td.c { text-align: center; white-space: nowrap; }
+  .pill { font: 700 11px/1 var(--mono); padding: 6px 9px; border-radius: 999px; display: inline-block; }
+  .pill.no { color: var(--bad); background: var(--bad-bg); border: 1px solid var(--bad-line); }
+  .pill.yes { color: var(--good); background: var(--good-bg); border: 1px solid var(--good-line); }
+  td.c .note { display: block; font: 500 11px/1.3 var(--mono); color: var(--faint); margin-top: 6px; white-space: normal; }
+
+  /* ---- explainer ---- */
+  .explain { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2.5vw, 22px); }
+  .xcard { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); padding: 20px 20px 22px; box-shadow: var(--shadow); }
+  .xcard h3 { margin: 0 0 10px; font-size: 14px; letter-spacing: .02em; display: flex; align-items: center; gap: 8px; }
+  .xcard.why h3 { color: var(--bad); }
+  .xcard.fix h3 { color: var(--good); }
+  .xcard h3 .ic { width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center; font: 800 12px/1 var(--mono); }
+  .xcard.why h3 .ic { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad-line); }
+  .xcard.fix h3 .ic { background: var(--good-bg); color: var(--good); border: 1px solid var(--good-line); }
+  .xcard p { margin: 0 0 12px; font-size: 13.5px; color: var(--muted); }
+  .xcard p:last-child { margin-bottom: 0; }
+  .xcard code { font-family: var(--mono); font-size: 12px; color: var(--ink); background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+  .codeblock {
+    font-family: var(--mono); font-size: 12px; line-height: 1.5;
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px;
+    padding: 12px 13px; overflow-x: auto; color: var(--ink); margin: 0;
+  }
+  .codeblock .add { color: var(--good); }
+  .codeblock .dim { color: var(--faint); }
+
+  /* ---- ship record ---- */
+  .ship-record {
+    margin-top: clamp(40px, 6vw, 64px);
+    border: 1px solid var(--line); border-radius: var(--radius);
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    padding: 20px clamp(18px, 3vw, 26px);
+    display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: center;
+  }
+  .ship-record .rk { display: flex; flex-direction: column; gap: 3px; }
+  .ship-record .rk .k { font: 600 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .ship-record .rk .v { font: 600 13px/1.2 var(--mono); color: var(--ink); }
+  .ship-record .rk .v.brand { color: var(--brand); }
+
+  footer.note { margin-top: 26px; color: var(--faint); font-size: 12px; text-align: center; }
+
+  @media (max-width: 720px) {
+    .compare, .explain { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
+    .compare .col:nth-child(2) .reveal { animation-delay: .08s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .pcard { animation: pop .5s cubic-bezier(.2,.8,.2,1) both; }
+    .pcard:nth-child(2) { animation-delay: .06s; }
+    .pcard:nth-child(3) { animation-delay: .12s; }
+    @keyframes pop { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+  }
+</style>
+
+<div class="page">
+  <div class="wrap">
+
+    <header>
+      <p class="eyebrow">Jambys · Live QA</p>
+      <h1>Cart upsells: <span class="thin">wiped &rarr; restored</span></h1>
+      <p class="lede">The cart drawer's <b>&ldquo;You may also like&rdquo;</b> recommendations were rendering
+        <b>empty</b> for returning visitors on the live site. Root-caused to Horizon's cart-drawer morph,
+        fixed with a one-line theme change, and verified on the develop preview theme before shipping.</p>
+      <div class="metastrip">
+        <span class="tag"><span class="dot"></span>snippets/cart-drawer.liquid</span>
+        <span class="tag"><span class="dot"></span>commit 6696b10</span>
+        <span class="tag good"><span class="dot"></span>Shipped to live 2026-07-19</span>
+      </div>
+    </header>
+
+    <!-- ============ BEFORE / AFTER ============ -->
+    <section class="section">
+      <div class="section-head"><h2>Same moment, two builds — returning visitor opens the cart</h2></div>
+      <div class="compare">
+
+        <!-- BEFORE -->
+        <div class="col">
+          <div class="col-head">
+            <span class="verdict bad">Before</span>
+            <span class="where"><b>Live</b> · horizon/main</span>
+          </div>
+          <div class="drawer reveal">
+            <div class="drawer__promo">Add 3 of any product and get 20% off!</div>
+            <div class="drawer__body">
+              <div class="drawer__head"><span class="cart">Cart</span><span class="count">2</span><span class="x">&times;</span></div>
+              <div class="ship">
+                <div class="label">Free Shipping</div>
+                <div class="bar"><i></i></div>
+                <div class="unlocked">You've Unlocked Free Shipping!</div>
+              </div>
+              <div class="line" style="--tint:#2b2b33;">
+                <div class="thumb"></div>
+                <div><div class="t-name">Black House Hoodie</div><div class="t-sub">Extra Small</div><div class="qty">&minus; <span>1</span> +</div></div>
+                <div class="price">$88</div>
+              </div>
+              <div class="line" style="--tint:#20222c;">
+                <div class="thumb"></div>
+                <div><div class="t-name">Black Jambys</div><div class="t-sub">Extra Small</div><div class="qty">&minus; <span>1</span> +</div></div>
+                <div class="price">$48</div>
+              </div>
+              <div class="upsells">
+                <div class="upsells__title">You may also like</div>
+                <div class="empty-slot">
+                  <div class="m">— nothing rendered —<small>heading shows, carousel is empty</small></div>
+                </div>
+              </div>
+              <div class="total"><span class="l">Estimated total</span><span class="v">$136.00</span></div>
+              <div class="checkout">Check out</div>
+            </div>
+          </div>
+          <div class="evi">
+            <span class="chip bad"><b>cards: 0</b></span>
+            <span class="chip">contentLen: <b>0</b></span>
+            <span class="chip">fetch: 200 · 247ms <span class="dim">(then wiped)</span></span>
+          </div>
+        </div>
+
+        <!-- AFTER -->
+        <div class="col">
+          <div class="col-head">
+            <span class="verdict good">After</span>
+            <span class="where"><b>Preview</b> · horizon/develop</span>
+          </div>
+          <div class="drawer reveal">
+            <div class="drawer__promo">Add 3 of any product and get 20% off!</div>
+            <div class="drawer__body">
+              <div class="drawer__head"><span class="cart">Cart</span><span class="count">3</span><span class="x">&times;</span></div>
+              <div class="ship">
+                <div class="label">Free Shipping</div>
+                <div class="bar"><i></i></div>
+                <div class="unlocked">You've Unlocked Free Shipping!</div>
+              </div>
+              <div class="line" style="--tint:#2b2b33;">
+                <div class="thumb"></div>
+                <div><div class="t-name">Black House Hoodie</div><div class="t-sub">Extra Small · 3PACK</div><div class="qty">&minus; <span>1</span> +</div></div>
+                <div class="price">$70.40</div>
+              </div>
+              <div class="upsells">
+                <div class="upsells__title">You may also like</div>
+                <div class="cards">
+                  <div class="pcard"><div class="pt" style="--tint:#8a7d5f;"></div><div class="pn">Dune JamTee</div><div class="pp">$58.00</div><div class="padd">Add +</div></div>
+                  <div class="pcard"><div class="pt" style="--tint:#8a93c9;"></div><div class="pn">Navy/Lavender Jambys</div><div class="pp">$48.00</div><div class="padd">Add +</div></div>
+                  <div class="pcard"><div class="pt" style="--tint:#26262e;"></div><div class="pn">Black/Charcoal JamTee</div><div class="pp">$58.00</div><div class="padd">Add +</div></div>
+                </div>
+              </div>
+              <div class="total"><span class="l">Estimated total</span><span class="v">$147.20</span></div>
+              <div class="checkout">Check out</div>
+            </div>
+          </div>
+          <div class="evi">
+            <span class="chip good"><b>cards: 6</b></span>
+            <span class="chip">contentLen: <b>23,790</b></span>
+            <span class="chip">attr: <b>data-skip-subtree-update</b></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ MATRIX ============ -->
+    <section class="section">
+      <div class="section-head"><h2>Three cart flows, tested end-to-end</h2></div>
+      <div class="matrix-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Flow</th>
+              <th class="c">Before (live)</th>
+              <th class="c">After (preview)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="case">Returning visitor<small>Page load with an item already in cart → open drawer</small></div></td>
+              <td class="c"><span class="pill no">EMPTY</span></td>
+              <td class="c"><span class="pill yes">6 CARDS</span></td>
+            </tr>
+            <tr>
+              <td><div class="case">Same-first-item update<small>Increment hoodie qty 1&rarr;2 (badge 3&rarr;4) → Horizon re-renders</small></div></td>
+              <td class="c"><span class="pill no">WIPED</span></td>
+              <td class="c"><span class="pill yes">SURVIVES</span><span class="note">0 content mutations</span></td>
+            </tr>
+            <tr>
+              <td><div class="case">Product change<small>Delete first item → new first product → recs must refresh</small></div></td>
+              <td class="c"><span class="pill yes">WORKED</span></td>
+              <td class="c"><span class="pill yes">REFRESHES</span><span class="note">recs updated, no regression</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ WHY / FIX ============ -->
+    <section class="section">
+      <div class="section-head"><h2>What broke, and the one-line fix</h2></div>
+      <div class="explain">
+        <div class="xcard why">
+          <h3><span class="ic">!</span> Why it broke</h3>
+          <p>Recommendations render <b style="color:var(--ink)">client-side</b> into a content div that the server template leaves empty. Horizon re-renders the cart drawer on every cart change — and during page-load hydration — via <code>morphSection()</code>.</p>
+          <p>The morph diffs the live DOM against the empty server markup and <b style="color:var(--ink)">removes the rendered carousel</b>. The component only reloaded when <code>data-product-id</code> changed, so any update that kept the same first item left the upsells permanently empty.</p>
+        </div>
+        <div class="xcard fix">
+          <h3><span class="ic">&#10003;</span> The fix</h3>
+          <p>Mark the element so Horizon's morph skips its subtree — the same hint the theme already uses elsewhere. Element attributes still morph, so product changes still trigger a fresh fetch.</p>
+          <pre class="codeblock"><span class="dim">&lt;cart-upsells</span>
+  data-product-id="{{ ... }}"
+  <span class="add">data-skip-subtree-update</span>
+<span class="dim">&gt;</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SHIP RECORD ============ -->
+    <div class="ship-record">
+      <div class="rk"><span class="k">Commit</span><span class="v brand">6696b10</span></div>
+      <div class="rk"><span class="k">Verified on</span><span class="v">horizon/develop</span></div>
+      <div class="rk"><span class="k">Shipped</span><span class="v">main · 2026-07-19</span></div>
+      <div class="rk"><span class="k">Backup</span><span class="v">backup/2026-07-19-cart-fix</span></div>
+      <div class="rk"><span class="k">Method</span><span class="v">fast-forward</span></div>
+    </div>
+
+    <footer class="note">Drawer panels are faithful reconstructions of the observed DOM states — metrics (card counts, contentLen, mutation counts) are the real values captured live in the Jambys Chrome session.</footer>
+
+  </div>
+</div>

@@ -1,24 +1,59 @@
 ## Current State
-**Last session:** 2026-07-19 — S35: FAQ made-in-USA fix + footer typo fix + cart-upsell checkout-upsell investigation (misdiagnosed, corrected). The real cart-upsell race-condition fix (commit d406960) was landed 2026-07-17 by an earlier parallel session — NOT S37/S38, which didn't exist until 07-19
+**Last session:** 2026-07-20/23 — S41: shipped develop→main (backup/2026-07-19 tag), then live QA found cart-upsells STILL broken for returning visitors — root-caused a third distinct bug (Horizon `morphSection()` wiping the client-rendered carousel on every cart re-render), fixed with `data-skip-subtree-update` (commit 6696b10), verified live on jambys.com. Reconciled develop↔main (0/0) after pulling in a Shopify-editor commit (`enable_filtering: false` on the collection template).
 **Next:**
-- Ship develop→main (S8–S12 + S35 fixes + the 07-17 cart-upsells race fix d406960 — all reconciled and pushed to origin/develop)
 - Decide: downgrade Aftersell's app plan (billing $99/mo + usage for a Plus-only checkout placement that can't run on Advanced) or leave as-is
 - Decide: remove the dead "Upsell Widget" block from the checkout profile (Admin → Settings → Checkout → Edit) — cosmetic cleanup, orphaned since the Plus downgrade
+- Confirm the 2026-07-20 collection-filtering toggle-off (`templates/collection.json`, via Shopify editor) was intentional — it's now live and in develop, un-investigated
 - Quick wins from S33 audit: `mobile_quick_add: true`, `show_variant_image: true` in settings_data.json
 - Delete 24 dead sections (Replo/Shoplift/Wonderment) from develop before or after ship
-**Branch:** develop / clean, up to date with origin/develop
+- Tighten parallel-session coordination on `main` pushes — this session found 6696b10 had already reached live via a different session under the same push identity, with no record of who/why
+**Branch:** develop / clean, up to date with origin/develop; develop and main fully reconciled (0/0 divergence)
 
 ## Next Session Kickoff
-**Written:** 2026-07-19 S35
-**Mode:** execute
-**First action:** Get preview theme link (Shopify admin → Online Store → Themes → develop theme → Preview), verify all pending develop commits (S8–S35 + the 07-17 cart-upsells fix d406960) on preview, then run ship workflow (develop→main).
+**Written:** 2026-07-23 S41
+**Mode:** shallow
+**First action:** Brief Andrew on the two pending Shopify-admin decisions (Aftersell downgrade, orphaned checkout block) + the un-investigated collection-filtering toggle; no code work queued.
 **Open questions:**
 - Downgrade Aftersell's app plan now, or leave billing as-is?
 - Remove the orphaned checkout "Upsell Widget" block, or leave it for a future Plus re-upgrade?
+- Was turning collection filtering off (2026-07-20, live via editor) intentional?
 **Decisions pending:** Rivo loyalty templates (delete or reinstall app blocks?); redirect chain primary-domain fix; delete dead sections before or after shipping?
 **Ready plan:** `docs/audits/2026-05-23-full-audit-S10.md` — T3 perf carryover (lower priority now that Typekit is fixed in develop)
 
 ---
+
+## 2026-07-20/23 — Session 41: Ship + cart-upsells morph-wipe bug found, fixed, and shipped
+
+### Accomplished
+- Shipped `develop`→`main` (fast-forward `7ffa85b..faca61a`, backup `backup/2026-07-19` tagged from prior live `main` first) — the S8–S35 backlog + the 07-17 cart-upsells race fix (`d406960`) went live
+- Live QA on jambys.com (Jambys Chrome profile) found the cart-upsells "You may also like" carousel was **still empty** for a returning visitor opening the cart with an existing item — a case `d406960` didn't cover
+- Root-caused via live reproduction: Horizon's `morphSection()` (`assets/morph.js`) re-renders the cart drawer on every cart mutation (and initial-load hydration), diffing against the server template — which renders `.cart-upsells__content` empty since recommendations are injected client-side only. The morph deletes the JS-rendered carousel every time. Because the component only reloads on a `data-product-id` change, any cart update that doesn't change the first line item (including first page load, or updating a *different* item's quantity) left it permanently wiped, silently (confirmed via `MutationObserver`: `removed=1, contentLen: 0`, no error)
+- Fixed: added `data-skip-subtree-update` to `<cart-upsells>` in `snippets/cart-drawer.liquid` (commit `6696b10`) — Horizon's morph skips a subtree when both old/new DOM nodes carry that attribute, so the carousel survives re-renders while the element's own attributes (incl. `data-product-id`) still morph, preserving the product-change reload path
+- Verified the fix on the `develop` preview theme (both previously-broken flows: returning-visitor initial load, same-first-item cart update) and confirmed working live on `jambys.com` after tracing that `6696b10` had already reached `main` via a separate session (pushed by the shared `bobbyteenager89` identity, 2026-07-20 03:03 UTC — not this session)
+- Reconciled `develop`↔`main`: pulled `origin/main`'s only new commit (`e53ce2c`, a Shopify-editor change turning off collection filtering, `templates/collection.json`) into `develop` via fast-forward — branches now 0/0
+- Ran `/preflight` + `/smoke-test` (adapted for a Shopify theme — no npm build/Vercel deploy): theme-check clean on changed files, 10/10 sampled live routes 200, 0 console errors, 0 failed network requests, cart-upsells fix confirmed rendering live
+- Captured the full debugging chapter in `learnings-shopify.md` ("Horizon Custom Element Cache" — Follow-up gotcha #2) and the project CLAUDE.md Gotchas
+
+### Files Modified
+| File | Changes |
+|------|---------|
+| `snippets/cart-drawer.liquid` | Added `data-skip-subtree-update` to `<cart-upsells>` + explanatory comment |
+| `templates/collection.json` | Pulled in from `main` (Shopify editor: `enable_filtering` → `false`) — not authored this session |
+| `CLAUDE.md` | Gotchas: cart-drawer-upsell entry updated to a third fix chapter |
+| `~/.claude/projects/-Users-andrew/memory/learnings/learnings-shopify.md` | Follow-up gotcha #2 appended to the Horizon Custom Element Cache entry |
+
+### Evidence
+- Live: https://jambys.com — commit `6696b10` on `main`, cart drawer confirmed rendering "You may also like" for a fresh page load with an existing cart item (screenshot + DOM assertions in-session)
+- Develop preview theme (id 130174517333): both broken flows (returning visitor, same-item cart update) confirmed fixed via `MutationObserver` evidence
+- QA artifact (before/after): https://claude.ai/code/artifact/830e5ee2-c7b9-4b22-beed-3981f5d384bb
+- Preflight/smoke-test: 10/10 sampled routes 200, 0 console errors, 0 failed network requests
+
+### Next Steps
+- [ ] Andrew: Aftersell downgrade decision
+- [ ] Andrew: orphaned checkout "Upsell Widget" block decision
+- [ ] Andrew: confirm the 2026-07-20 collection-filtering toggle-off was intentional
+- [ ] Quick wins from S33 audit (`mobile_quick_add`, `show_variant_image`)
+- [ ] Delete 24 dead sections (Replo/Shoplift/Wonderment) from develop
 
 ## 2026-07-19 — Session 35: FAQ copy fix, footer typo, cart-upsell checkout investigation
 
