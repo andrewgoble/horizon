@@ -551,7 +551,7 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Basics",
-                    "open_by_default": false,
+                    "open_by_default": true,
                     "icon": "none",
                     "width": 20
                   },
@@ -560,7 +560,7 @@
                       "type": "page",
                       "name": "t:names.page",
                       "settings": {
-                        "page": "{{ closest.product.metafields.product.basics_page.value }}",
+                        "page": "jambys-basics",
                         "inherit_color_scheme": true,
                         "color_scheme": "",
                         "background": false,
