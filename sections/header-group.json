@@ -40,7 +40,7 @@
             "text": "<strong>Add 3 of any product and get 20% off!</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
-            "desktop_font_size": "0.875rem",
+            "desktop_font_size": "1rem",
             "desktop_weight": "",
             "desktop_letter_spacing": "tight",
             "desktop_case": "none",
