@@ -560,7 +560,7 @@
                       "type": "page",
                       "name": "t:names.page",
                       "settings": {
-                        "page": "jambys-basics",
+                        "page": "{{ closest.product.metafields.product.basics_page.value }}",
                         "inherit_color_scheme": true,
                         "color_scheme": "",
                         "background": false,
