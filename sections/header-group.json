@@ -14,30 +14,11 @@
     "header_announcements_pLQmqG": {
       "type": "header-announcements",
       "blocks": {
-        "announcement_4X3QDQ": {
-          "type": "_announcement",
-          "name": "Announcement",
-          "settings": {
-            "text": "77-day Comfort Guarantee - if you don't love them, exchange or return for free.",
-            "link": "",
-            "desktop_font": "var(--font-body--family)",
-            "desktop_font_size": "1rem",
-            "desktop_weight": "",
-            "desktop_letter_spacing": "normal",
-            "desktop_case": "none",
-            "mobile_font": "var(--font-body--family)",
-            "mobile_font_size": "",
-            "mobile_weight": "",
-            "mobile_letter_spacing": "tight",
-            "mobile_case": "none"
-          },
-          "blocks": {}
-        },
         "announcement_qBdVqN": {
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>Add 3 of any product and get 20% off!</strong>",
+            "text": "<strong>Prices will increase starting Sunday (8/9) at midnight. Order now to get these prices!</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
@@ -54,7 +35,6 @@
         }
       },
       "block_order": [
-        "announcement_4X3QDQ",
         "announcement_qBdVqN"
       ],
       "name": "t:names.announcement_bar",
