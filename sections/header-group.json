@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>Prices will increase starting Sunday (8/9) at midnight. Order now to get these prices!</strong>",
+            "text": "<strong>Prices will increase starting tonight (8/10) at midnight. Order now to get these prices!</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
