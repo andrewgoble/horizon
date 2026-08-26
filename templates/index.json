@@ -25,7 +25,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 20,
+            "gap": 25,
             "width": "custom",
             "custom_width": 40,
             "width_mobile": "fill",
@@ -281,7 +281,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1><strong>Feels like wearing clouds.</strong></h1>",
+                "text": "<h1>Back in stock. <br/>Now in five.</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Stay in. Float around. Repeat.<br/>Jambys, JamTee and House Hoodie in Clouds/Navy. Just dropped.</p>",
+                "text": "<p>The classics are back — and they brought new friends.<br/>Long Jambys in Black, Navy, Dune, Cerulean & Clouds. <br/>Pick your shade of staying in.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Image_Option_1_4d91f2f5-4b8f-4d01-97dd-eeac771c0116.jpg",
+                "image": "shopify://shop_images/Image_Option_2.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
