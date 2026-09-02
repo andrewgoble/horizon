@@ -281,7 +281,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>Back in stock. <br/>Now in five.</h1>",
+                "text": "<h1>Labor Day. Less labor. More Jambys.</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>The classics are back — and they brought new friends.<br/>Long Jambys in Black, Navy, Dune, Cerulean & Clouds. <br/>Pick your shade of staying in.</p>",
+                "text": "<p>20% off everything, no code needed. And at $150+, a free StayCool JamTee comes along — the coolest way to do absolutely nothing all weekend.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Image_Option_2.jpg",
+                "image": "shopify://shop_images/Hero_Image.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
