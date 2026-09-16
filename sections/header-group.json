@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>Labor Day Weekend Sale is live! 20% off sitewide—no code needed.</strong>",
+            "text": "<strong>Might have left on the 20% sale... automatically applied in cart :)</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
