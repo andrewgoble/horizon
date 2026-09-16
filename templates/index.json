@@ -281,7 +281,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>StayCool is here. <br/>Built to move. <br/>Happiest when you don't.</h1>",
+                "text": "<h1>The No-Sweat <br/>Sweatpant.</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>The new StayCool Jambys and JamTee just dropped. <br/>Spend $150+ and the JamTee's on us.</p>",
+                "text": "<p>All the comfort of sweatpants, <br/>none of the commitment to exercise.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Hero_Image_Option_1.jpg",
+                "image": "shopify://shop_images/Hero_Image_Option_1_2e4dcef3-0b24-48bf-b42f-b8cda561be30.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
