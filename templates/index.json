@@ -281,7 +281,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>The No-Sweat <br/>Sweatpant.</h1>",
+                "text": "<h1>Underwear's more confident cousin.</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>All the comfort of sweatpants, <br/>none of the commitment to exercise.</p>",
+                "text": "<p>Built to be seen. Designed to be forgotten the second you put them on.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Hero_Image_Option_1_2e4dcef3-0b24-48bf-b42f-b8cda561be30.jpg",
+                "image": "shopify://shop_images/Hero_Image_Option_1_2568b3ad-0ada-4b25-9591-ad4ebb1ba574.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
