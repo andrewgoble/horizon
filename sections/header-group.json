@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>Free Shipping at $99, Free CloudLoop JamPolo ($88 Value) at $199 :)</strong>",
+            "text": "<strong>We put pockets on your boxers. Please remain calm.&nbsp;</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
