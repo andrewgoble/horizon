@@ -281,7 +281,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>Underwear's more confident cousin.</h1>",
+                "text": "<h1>Dressed up on the outside.<br/>Jambys on the inside.</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Built to be seen. Designed to be forgotten the second you put them on.</p>",
+                "text": "<p>The JamPolo. Looks ready for work, feels ready for the couch.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -334,7 +334,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Shop Now",
-                "link": "shopify://collections/all-products",
+                "link": "shopify://products/black-jampolo",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "width": "fit-content",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Hero_Image_Option_1_2568b3ad-0ada-4b25-9591-ad4ebb1ba574.jpg",
+                "image": "shopify://shop_images/Hero_Image_1931e326-a7de-45cc-b3f5-6d24a1d04dae.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
