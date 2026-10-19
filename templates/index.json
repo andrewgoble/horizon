@@ -281,7 +281,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>Dressed up on the outside.<br/>Jambys on the inside.</h1>",
+                "text": "<h1>StayCool just got a little more colorful.</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>The JamPolo. Looks ready for work, feels ready for the couch.</p>",
+                "text": "<p>Crimson/Cerulean brings a little boldness.<br/>Royal Blue/Navy goes with just about everything.&nbsp;</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Hero_Image_31846700-678b-48bd-9209-0a8af0f700a9.jpg",
+                "image": "shopify://shop_images/Hero_Image_8c3a8dca-e434-40bd-9307-fe0765d245ca.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
