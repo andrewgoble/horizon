@@ -334,7 +334,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Shop Now",
-                "link": "shopify://collections/staycool",
+                "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "width": "fit-content",
