@@ -1,3 +1,32 @@
+# Jambys Theme: REBRAND BRANCH (`rebrand-2026`)
+
+> **You are on the rebrand branch.** Read `docs/rebrand/HANDOVER.md` before doing anything.
+> The people driving this session (Jack, Ricardo) are not developers. Explain in plain words,
+> make the change, push it, and give them the preview link to check. Do not ask them to read code.
+
+## Hard rules for this branch (a guard in `.claude/hooks/rebrand-guard.sh` also enforces them)
+- Work **only** on `rebrand-2026`. Never check out, merge into, or push to `main`, because `main` is the live site.
+- Never run `shopify theme publish`, `shopify theme push`, or `shopify theme delete`. Never click Publish.
+- Never change Shopify admin settings (apps, checkout, payments, shipping, domains, products). Write them
+  on `docs/rebrand/OFF-THEME-CHECKLIST.md` for Andrew instead.
+- Never force-push, delete branches, `reset --hard`, or `rebase`.
+- If the guard blocks something, stop and tell the user to ask Andrew. Never look for a way around it.
+
+## Every session
+1. `git pull origin rebrand-2026`, then `git fetch origin && git merge origin/main`. This pulls in fixes
+   made on the live site in Shopify's editor. If the merge conflicts in `config/settings_data.json` or a
+   `templates/*.json` file, stop and tell the user to ask Andrew.
+2. Make the change the user asks for. Prefer theme settings and `assets/jambys-rebrand.css` over editing sections.
+3. Run `shopify theme check --path .` if the Shopify CLI is installed (skip silently if not).
+4. Commit with a plain-English message, then run `git push`. Shopify updates the preview theme within about a minute.
+5. Give the user the preview link from `docs/rebrand/HANDOVER.md` and the exact pages to look at.
+
+---
+
+> **Everything below is Andrew's reference for the live-site workflow** (develop/main, shipping).
+> On this branch, the rules above win. The Horizon coding rules below still apply.
+
+
 # Jambys Theme — Project Rules
 
 Maintenance and improvement of Jambys' live Horizon theme at jambys.com.
