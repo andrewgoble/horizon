@@ -3,6 +3,9 @@
 **Date:** 2026-10-28
 **Branch:** `andrew/perf-cro-review` (cut from live `origin/main` @ `26683c5`; separate from `rebrand-2026`)
 **Scope:** Audit and plan only. No theme code, Shopify admin or Intelligems changes were made.
+**Update (same day):** Andrew is handling all Intelligems work (offers, free shipping, post-purchase,
+checkout blocks, A/B tests) separately in Atlas. This theme plan no longer depends on Intelligems.
+Item 2 and the Intelligems parts of items 1, 4 and 5 are marked "→ Atlas".
 **Published page:** https://claude.ai/artifact/FGBVDFCaJeeofSmQBWXUet (same content, plain language; private to Andrew)
 
 ---
@@ -31,8 +34,8 @@ files or settings the `rebrand-2026` branch also changes.
 
 | # | Improvement | Impact | Effort | Risk | Rebrand overlap |
 |---|---|---|---|---|---|
-| 1 | Data-led upsells: cart drawer rules + Intelligems post-purchase | High | M | Low–Med | **Yes**: cart upsell files |
-| 2 | Clean up the free-shipping and discount setup | High | S | Med | No |
+| 1 | Data-led cart drawer upsell rules, built in the theme | High | M | Low–Med | **Yes**: cart upsell files |
+| 2 | Clean up the free-shipping and discount setup (→ Atlas) | High | S | Med | No |
 | 3 | Fix four blank customer pages | Medium | XS | Low | No |
 | 4 | Test mobile quick-add to lift add-to-cart | Med–High | S | Low | **Yes**: `config/settings_data.json` |
 | 5 | Remove dead checkout leftovers from the Plus days | Low–Med | XS | Low | No |
@@ -53,15 +56,16 @@ files or settings the `rebrand-2026` branch also changes.
     chance. Clouds/Navy JamTee and Clouds/Navy Jambys go together 9.9× more often than chance.
   - The drawer today shows Shopify's pinned picks, e.g. Black House Hoodie and Black JamTee for
     Black Jambys. It never offers a second pair, which is the most common multi-item order.
-- **Measure:** Intelligems A/B test. The primary metric is net revenue per visitor. Also track the
-  share of orders that include an upsell item, with conversion rate as a guardrail.
+- **Measure:** Compare 4 weeks before and after in Shopify order data: units per order, the share
+  of orders with 2+ categories, and conversion rate. Put the rules behind a theme on/off setting so
+  Atlas can A/B test them later. The post-purchase offer → Atlas.
 - **Effort:** M. **Risk:** Low–Med. The drawer upsell has been fixed twice, so change the logic
   carefully and fold in the open stale-fetch race fix (`todos/001`).
 - **Rebrand overlap:** **Yes.** The rebrand will restyle `sections/cart-upsells.liquid` and
   `assets/cart-upsells.js` ("restyle, don't restructure"). Keep logic changes in JS and styling in
   CSS, and agree the order with the rebrand.
 
-### 2. Clean up the free-shipping and discount setup
+### 2. Clean up the free-shipping and discount setup (→ Atlas)
 - **What:** One Intelligems personalization, "MDW Weekend", sets shipping and discounts site-wide.
   It was named for Memorial Day, was restarted on Aug 28 and has run for 61 days. It gives free
   shipping at $150 and $30 off at $250, and the cart drawer bar shows it ("Spend $82.00 to get free
@@ -237,8 +241,7 @@ setting any target.
    colorway**, e.g. StayCool Jambys → StayCool JamTee. Evidence: lift 4.4 and 9.9.
 2. **Top only.** The cart has a JamTee but no shorts: offer the matching Jambys shorts. 54% of
    JamTee orders already include them.
-3. **One more pair.** The cart has only shorts and adding one item would reach the free-shipping
-   line: offer a **second colorway in the cart's size**. Evidence: 51.8% of orders are shorts-only,
+3. **One more pair.** The cart has only shorts: offer a **second colorway in the cart's size**. Evidence: 51.8% of orders are shorts-only,
    and the top pairs are two colorways.
 4. **Hoodie.** The cart has a House Hoodie: offer matching Jambys shorts (37% attach).
 5. **Fallback:** today's Shopify complementary picks.
@@ -250,19 +253,18 @@ setting any target.
 - No extra discount in the cart in the first test, to protect margin. A discount is a separate
   test.
 
-**Thresholds:** The free-shipping line comes from whatever Intelligems campaign is live ($150
-today). Rule 3 reads it at runtime and never hard-codes it. Any new number is a test arm, not a
-fact.
+**Thresholds:** None in the theme. The free-shipping line lives in Intelligems ($150 today), which
+is Atlas's job now. Rule 3 doesn't depend on it, so the two can't drift apart.
 
-**Test:** an Intelligems on-site upsell A/B test, with today's drawer as control and these rules
-as the variant.
+**Measure (theme-side, no Intelligems):** 4 weeks before vs after in Shopify order data. An on/off
+setting lets Atlas run a proper A/B test later. The bullets below describe that later Atlas test.
 - Primary metric: net revenue per visitor.
 - Secondary: share of orders with an upsell item, and units per order.
 - Guardrail: conversion rate.
 - At about 140 orders a week, expect it to take several weeks. Run it to Intelligems' estimated
   length.
 
-### Checkout upsells: not available on Advanced
+### Checkout upsells: not available on Advanced (notes for Atlas)
 - **Checked:**
   - Shopify's docs say extensions on the information, shipping and payment steps are **Shopify
     Plus only**.
@@ -272,7 +274,7 @@ as the variant.
   FAQ doesn't say its blocks work there. Ask Intelligems support before planning anything.
 - **Recommendation:** Don't build an in-checkout upsell. Remove the dead ones (item 5).
 
-### Post-purchase upsell: available, with two conditions
+### Post-purchase upsell: available, with two conditions (→ Atlas)
 - **What Intelligems says:** Post-purchase works on every Shopify plan. It needs the Intelligems
   "Unlimited" or "Smart Checkout & Post-Purchase" plan. **Check which plan Jambys is on.**
 - **One app per slot:** Shopify lets only one app own the post-purchase slot. **Aftersell owns it
