@@ -281,7 +281,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>Cold sweats are for horror movies.</h1>",
+                "text": "<h1>Made in the USA.&nbsp;<br/>Worn on the couch.</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>StayCool keeps you cool and dry through every jump scare, candy run, and couch marathon.</p>",
+                "text": "<p>Every Jambys piece is made at our partner factory in the USA. Laser-cut, hand-sewn, and quality-checked individually, just for your order.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Hero_Image_3d3b243d-f682-4e8b-91a4-dfc8716f3e1e.jpg",
+                "image": "shopify://shop_images/Hero_Image_3918b8ba-c4cd-4bbd-bd36-ecc84e116779.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
