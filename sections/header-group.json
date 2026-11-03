@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>This weekend only - early BFCM sale automatically applied in cart :)</strong>",
+            "text": "<strong>This week only - early BFCM sale automatically applied in cart :)</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
