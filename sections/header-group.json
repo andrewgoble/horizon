@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>This week only - early BFCM sale automatically applied in cart :)</strong>",
+            "text": "Give the gift of canceled plans. We’ve never met anyone who didn’t love unwrapping Jambys.&nbsp;",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
