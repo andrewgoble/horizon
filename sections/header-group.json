@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Give the gift of canceled plans. We’ve never met anyone who didn’t love unwrapping Jambys.&nbsp;",
+            "text": "<strong>Give the gift of canceled plans. We’ve never met anyone who didn’t love unwrapping Jambys.&nbsp;</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
