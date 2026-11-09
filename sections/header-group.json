@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>Give the gift of canceled plans. Free Shipping on all orders, $75 off if you spend $300+!</strong>",
+            "text": "<strong>The BEST BFCM of the year deal is live for the next 2 days - 26% off sitewide, EXTRA $75 off at $300, FREE SHIPPING</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
