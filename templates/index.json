@@ -281,7 +281,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>Made in the USA.&nbsp;<br/>Worn on the couch.</h1>",
+                "text": "<h1>Good Things Come to Those Who Sit.</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Every Jambys piece is made at our partner factory in the USA. Laser-cut, hand-sewn, and quality-checked individually, just for your order.</p>",
+                "text": "<p>Early access is live. This is the BEST deal of the holiday season. Get 26% off PLUS $75 off at $300. Your boxers should be worried.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Hero_Image_3918b8ba-c4cd-4bbd-bd36-ecc84e116779.jpg",
+                "image": "shopify://shop_images/Hero_Image_5e0093d6-3149-47de-8a27-436dd3e6399c.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
