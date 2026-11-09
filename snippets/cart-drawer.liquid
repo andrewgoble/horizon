@@ -188,6 +188,68 @@
     overflow: hidden;
   }
 
+  /* Phones: the drawer is the whole screen. The theme caps it at 95vw (header-actions.liquid), which left a
+     strip of the page showing down the left edge. */
+  @media screen and (max-width: 749px) {
+    cart-drawer-component .cart-drawer__dialog.dialog-drawer {
+      width: 100vw;
+      max-width: 100vw;
+      border-left: 0;
+    }
+  }
+
+  /* The close X. The theme pins it to the screen corner (base.css .close-button: position fixed, 16px in), so it
+     sat apart from the "Cart" heading and the drawer's own margin, and the drawer focuses it on open, which drew
+     a ring around it (an oval when the header's flex row squeezed it). Put it in the header row instead: a 44px
+     tinted circle (the whole circle is the touch target) with an 18px X, its edge on the drawer's right margin and
+     its middle level with the heading. */
+  cart-drawer-component .cart-drawer__header .cart-drawer__close-button {
+    position: relative;
+    inset: auto;
+    flex: 0 0 auto;
+    width: var(--minimum-touch-target, 44px);
+    min-width: var(--minimum-touch-target, 44px);
+    height: var(--minimum-touch-target, 44px);
+    margin-inline: auto 0;
+    border-radius: 50%;
+    background-color: rgb(var(--color-foreground-rgb) / 0.08);
+    color: var(--color-foreground);
+    opacity: 1;
+    transition: background-color 0.15s ease;
+  }
+
+  cart-drawer-component .cart-drawer__header .cart-drawer__close-button:hover {
+    background-color: rgb(var(--color-foreground-rgb) / 0.14);
+    opacity: 1;
+  }
+
+  cart-drawer-component .cart-drawer__header .cart-drawer__close-button .svg-wrapper,
+  cart-drawer-component .cart-drawer__header .cart-drawer__close-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* No ring when the drawer itself put focus there: none on touch screens, keyboard focus only elsewhere (desktop
+     Safari also counts the drawer's own focus after a mouse click). */
+  cart-drawer-component .cart-drawer__header .cart-drawer__close-button:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  cart-drawer-component .cart-drawer__header .cart-drawer__close-button:focus-visible {
+    outline-offset: 2px;
+  }
+
+  @media (hover: none) {
+    cart-drawer-component .cart-drawer__header .cart-drawer__close-button:focus-visible {
+      outline: none;
+    }
+
+    /* Safari before 16.4 draws the same ring with ::after (base.css). */
+    cart-drawer-component .cart-drawer__header .cart-drawer__close-button:focus-visible::after {
+      display: none;
+    }
+  }
+
   .cart-drawer__inner {
     height: 100%;
     overflow: hidden;
