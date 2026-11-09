@@ -371,29 +371,6 @@
                 "css_class": "pdp-icons"
               },
               "blocks": {
-                "image_4JFyAq": {
-                  "type": "image",
-                  "name": "t:names.image",
-                  "settings": {
-                    "image": "shopify://shop_images/ChatGPT_Image_Jul_10_2026_01_21_05_PM.png",
-                    "link": "shopify://collections/all-products",
-                    "image_ratio": "adapt",
-                    "width": "fill",
-                    "custom_width": 100,
-                    "width_mobile": "custom",
-                    "custom_width_mobile": 100,
-                    "height": "fit",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_radius": 0,
-                    "padding-block-start": 32,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
                 "group_W3aArL": {
                   "type": "group",
                   "name": "t:names.group",
@@ -522,7 +499,6 @@
                 }
               },
               "block_order": [
-                "image_4JFyAq",
                 "group_W3aArL",
                 "group_HAwq8D",
                 "group_4UhkNN"
@@ -551,7 +527,7 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Basics",
-                    "open_by_default": false,
+                    "open_by_default": true,
                     "icon": "none",
                     "width": 20
                   },
@@ -577,41 +553,11 @@
                     "page_mCfamk"
                   ]
                 },
-                "accordion_row_tUHfpb": {
-                  "type": "_accordion-row",
-                  "settings": {
-                    "heading": "Sizing",
-                    "open_by_default": false,
-                    "icon": "none",
-                    "width": 20
-                  },
-                  "blocks": {
-                    "page_Hw4y4m": {
-                      "type": "page",
-                      "name": "t:names.page",
-                      "settings": {
-                        "page": "{{ closest.product.metafields.global.size_chart.value }}",
-                        "inherit_color_scheme": true,
-                        "color_scheme": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "page_Hw4y4m"
-                  ]
-                },
                 "accordion_row_NYxFGV": {
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Shipping + Returns",
-                    "open_by_default": false,
+                    "open_by_default": true,
                     "icon": "none",
                     "width": 20
                   },
@@ -644,6 +590,36 @@
                   },
                   "block_order": [
                     "text_wxpdtk"
+                  ]
+                },
+                "accordion_row_tUHfpb": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Sizing",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "page_Hw4y4m": {
+                      "type": "page",
+                      "name": "t:names.page",
+                      "settings": {
+                        "page": "{{ closest.product.metafields.global.size_chart.value }}",
+                        "inherit_color_scheme": true,
+                        "color_scheme": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "page_Hw4y4m"
                   ]
                 },
                 "accordion_row_bHzQkY": {
@@ -689,8 +665,8 @@
               },
               "block_order": [
                 "accordion_row_DgAWBc",
-                "accordion_row_tUHfpb",
                 "accordion_row_NYxFGV",
+                "accordion_row_tUHfpb",
                 "accordion_row_bHzQkY"
               ]
             }
