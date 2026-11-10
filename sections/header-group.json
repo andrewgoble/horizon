@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>The BEST BFCM of the year deal is live for the next 3 days - 26% off sitewide, EXTRA $75 off at $300, FREE SHIPPING</strong>",
+            "text": "<strong>For the next 3 days only - 26% off sitewide, EXTRA $75 off at $300, FREE SHIPPING</strong>",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
