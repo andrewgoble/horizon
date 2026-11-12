@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Our biggest sale of the year is live:&nbsp;<br/>26% off the comfiest things you own.&nbsp;<br/>Shop it in whatever you’re already (not) wearing.</p>",
+                "text": "<p>Our biggest sale of the year is live:&nbsp;<br/>26% off the comfiest things you own.&nbsp;Shop it in whatever you’re already (not) wearing.<br/>Automatically applied at checkout.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
