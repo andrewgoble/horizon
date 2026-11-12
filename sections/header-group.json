@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>For the next 5 hours only - 26% off sitewide, EXTRA $75 off at $300, FREE SHIPPING</strong>",
+            "text": "&nbsp;<strong>26% OFF SITEWIDE. ALREADY APPLIED AT CHECKOUT. PLEASE REMAIN SEATED.</strong>&nbsp;",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
