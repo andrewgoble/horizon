@@ -281,7 +281,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>Good Things Come to Those Who Sit.</h1>",
+                "text": "<h1>Black Friday, Reclined.</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>BFCM came early to those who celebrate chilling. 26% off sitewide. Your boxers should be worried.</p>",
+                "text": "<p>Our biggest sale of the year is live:&nbsp;<br/>26% off the comfiest things you own.&nbsp;<br/>Shop it in whatever you’re already (not) wearing.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -397,7 +397,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Hero_Image_5e0093d6-3149-47de-8a27-436dd3e6399c.jpg",
+                "image": "shopify://shop_images/Hero_Image_e540e1cd-71a9-40ed-bde8-31a4594aeb40.jpg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
