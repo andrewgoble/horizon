@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "&nbsp;<strong>26% OFF SITEWIDE. ALREADY APPLIED AT CHECKOUT. PLEASE REMAIN SEATED.</strong>&nbsp;",
+            "text": "&nbsp;<strong>26% OFF SITEWIDE. ALREADY APPLIED. PLEASE REMAIN SEATED.</strong>&nbsp;",
             "link": "https://www.jambys.com/collections/all-products",
             "desktop_font": "var(--font-body--family)",
             "desktop_font_size": "1rem",
