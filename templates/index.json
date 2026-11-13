@@ -307,7 +307,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Our biggest sale of the year is live:&nbsp;<br/>26% off the comfiest things you own.&nbsp;Shop it in whatever you’re already (not) wearing.<br/>Automatically applied at checkout.</p>",
+                "text": "<p><strong>Prices Down. Feet Up.</strong></p><p>26% off sitewide. Our biggest sale of the year, with savings already applied. Put the money you saved toward ordering in.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
